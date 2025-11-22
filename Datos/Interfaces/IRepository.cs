@@ -1,5 +1,4 @@
-﻿using Modelo;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Datos.Interfaces
 {
-    public interface IEmprendimientoRepository : IRepository<Emprendimiento>
+    public interface IRepository<T>
     {
-
+        Task<T?> ObtenerPorIdAsync(int id);
+        Task<List<T>> ListarAsync();
     }
 }

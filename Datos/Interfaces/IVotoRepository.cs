@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Datos.Interfaces
 {
-    public interface IEmprendimientoRepository : IRepository<Emprendimiento>
+    public interface IVotoRepository : IRepository<Voto>
     {
-
     }
 }

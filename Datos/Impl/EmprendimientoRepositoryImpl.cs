@@ -14,7 +14,7 @@ namespace Datos.Impl
         public async Task<List<Emprendimiento>> ListarAsync() => 
             await context.Emprendimientos.ToListAsync();
 
-        public async Task<Emprendimiento?> ObtenerEmprendimientoAsync(int id) =>
+        public async Task<Emprendimiento?> ObtenerPorIdAsync(int id) =>
             await context.Emprendimientos.FirstOrDefaultAsync(e => e.Id == id);
     }
 }
