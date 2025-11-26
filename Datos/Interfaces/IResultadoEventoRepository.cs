@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Datos.Interfaces
 {
-    internal interface IResultadoEventoRepository : IRepository<ResultadoEvento>
+    public interface IResultadoEventoRepository : IRepository<ResultadoEvento>
     {
     }
 }
