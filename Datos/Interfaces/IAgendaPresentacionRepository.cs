@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Datos.Interfaces
 {
-    internal interface IAgendaPresentacionRepository : IRepository<AgendaPresentacion>
+    public interface IAgendaPresentacionRepository : IRepository<AgendaPresentacion>
     {
     }
 }
