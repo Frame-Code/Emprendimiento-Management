@@ -15,7 +15,7 @@ namespace Datos.Impl
             await context.Eventos
                          .ToListAsync();
 
-        public async Task<Evento?> ObtenerEventoAsync(int id) =>
+        public async Task<Evento?> ObtenerPorIdAsync(int id) =>
             await context.Eventos
                          .FirstOrDefaultAsync(e => e.Id == id);
     }

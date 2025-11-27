@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace Datos.Interfaces
 {
-    public interface IEventoRepository
+    public interface IEventoRepository : IRepository<Evento>
     {
-        Task<List<Evento>> ListarAsync();
-        Task<Evento?> ObtenerEventoAsync(int id);
     }
 }

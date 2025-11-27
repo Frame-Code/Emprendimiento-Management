@@ -13,14 +13,14 @@ namespace Datos.Impl
     {
         public async Task<List<Comentario>> ListarAsync() =>
             await context.Comentarios
-            .Include(c => c.Usuario)
-            .Include(c => c.Emprendimiento)
-            .ToListAsync();
+                         .Include(c => c.Usuario)
+                         .Include(c => c.Emprendimiento)
+                         .ToListAsync();
 
-        public async Task<Comentario?> ObtenerComentarioAsync(int id) =>
+        public async Task<Comentario?> ObtenerPorIdAsync(int id) =>
             await context.Comentarios
-            .Include(c => c.Usuario)
-            .Include(c => c.Emprendimiento)
-            .FirstOrDefaultAsync(c => c.Id == id);
+                         .Include(c => c.Usuario)
+                         .Include(c => c.Emprendimiento)
+                         .FirstOrDefaultAsync(c => c.Id == id);
     }
 }

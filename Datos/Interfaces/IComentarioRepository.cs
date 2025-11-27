@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace Datos.Interfaces
 {
-    public interface IComentarioRepository
+    public interface IComentarioRepository : IRepository<Comentario>
     {
-        Task<List<Comentario>> ListarAsync();
-        Task<Comentario?> ObtenerComentarioAsync(int id);
     }
 }
