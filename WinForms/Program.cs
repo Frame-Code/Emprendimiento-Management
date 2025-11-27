@@ -20,8 +20,13 @@ internal static class Program
         ApplicationConfiguration.Initialize();
 
         using var scope = AppHost.Services.CreateScope();
+        
+        var db = scope.ServiceProvider.GetRequiredService<AppContext>();
+        db.Database.Migrate();
+        
         var mainForm = scope.ServiceProvider.GetRequiredService<MainForm>();
-        Application.Run(mainForm);
+        //Application.Run(mainForm);
+        Console.WriteLine("App started");
     }
 
     private static IHostBuilder CreateHostBuilder()
