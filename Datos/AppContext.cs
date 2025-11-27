@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    internal class AppContext(DbContextOptions<AppContext> options) : DbContext
+    public class AppContext(DbContextOptions<AppContext> options) : DbContext(options)
     {
         public DbSet<Emprendimiento> Emprendimientos { get; set; }
         public DbSet<Facultad> Facultades { get; set; }
@@ -61,12 +61,12 @@ namespace Datos
                 b.Property(x => x.LogoPath).HasMaxLength(500);
 
                 // Relaciones
-                b.HasOne(x => x.facultad)
+                b.HasOne(x => x.Facultad)
                     .WithMany()
                     .HasForeignKey(x => x.IdFacultad)
                     .OnDelete(DeleteBehavior.Restrict);
 
-                b.HasOne(x => x.rubroEmprendimieno)
+                b.HasOne(x => x.RubroEmprendimiento)
                     .WithMany()
                     .HasForeignKey(x => x.IdRubroEmprendimiento)
                     .OnDelete(DeleteBehavior.Restrict);
