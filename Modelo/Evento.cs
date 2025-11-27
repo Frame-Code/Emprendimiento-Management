@@ -16,45 +16,6 @@ namespace Modelo
         public string? Ubicacion { get; set; }
 
 
-        // ⭐ Constructor principal
-        public Evento(string nombre, string? descripcion, DateTime inicio, DateTime fin, string? ubicacion)
-        {
-            Nombre = nombre;
-            Descripcion = descripcion;
-            FechaInicio = inicio;
-            FechaFin = fin;
-            Ubicacion = ubicacion;
-        }
-
-        // ⭐ Método 1: Validar si el evento es válido (fecha inicio < fecha fin)
-        public bool EsValido()
-        {
-            return FechaInicio < FechaFin;
-        }
-
-        // ⭐ Método 2: Saber si el evento está ocurriendo ahora
-        public bool EstaEnCurso()
-        {
-            DateTime hoy = DateTime.Now;
-            return hoy >= FechaInicio && hoy <= FechaFin;
-        }
-
-        // ⭐ Método 3: Cambiar fecha del evento
-        public void ActualizarFechas(DateTime nuevaInicio, DateTime nuevaFin)
-        {
-            FechaInicio = nuevaInicio;
-            FechaFin = nuevaFin;
-        }
-
-        // ⭐ Método 4: Mostrar información del evento
-        public string MostrarInfo()
-        {
-            return
-                $" Evento: {Nombre}\n" +
-                $" Descripción: {Descripcion}\n" +
-                $" Ubicación: {Ubicacion}\n" +
-                $" Inicio: {FechaInicio}\n" +
-                $" Fin: {FechaFin}";
-        }
+       
     }
 }
