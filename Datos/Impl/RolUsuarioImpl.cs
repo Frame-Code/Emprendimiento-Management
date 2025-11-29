@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Datos.Impl
 {
-    internal class RolUsuarioImpl(AppContext context) : IRolUsuario
+    internal class RolUsuarioImpl(AppContext context) : IRolUsuarioRepository
     {
         public async Task<List<RolUsuario>> ListarAsync() =>
             await context.RolUsuarios.ToListAsync();

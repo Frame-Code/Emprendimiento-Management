@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Datos.Impl
 {
-    internal class RubroEmpendimientoImpl(AppContext context) : IRubroEmprendimiento
+    internal class RubroEmpendimientoImpl(AppContext context) : IRubroEmprendimientoRepository
     {
         public async Task<List<RubroEmprendimiento>> ListarAsync() =>
             await context.RubrosEmprendimiento.ToListAsync();
