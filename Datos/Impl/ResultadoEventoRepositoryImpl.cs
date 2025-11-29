@@ -19,5 +19,7 @@ namespace Datos.Impl
                          .Include(r => r.CategoriaPremio)
                          .ToListAsync();
 
+        public async Task CreateAsync(ResultadoEvento entity) =>
+            await context.ResultadoEventos.AddAsync(entity);
     }
 }

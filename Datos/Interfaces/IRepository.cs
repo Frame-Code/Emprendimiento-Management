@@ -10,6 +10,6 @@ namespace Datos.Interfaces
     {
         Task<T?> ObtenerPorIdAsync(int id);
         Task<List<T>> ListarAsync();
-
+        Task CreateAsync(T entity);
     }
 }

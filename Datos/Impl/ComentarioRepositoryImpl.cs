@@ -11,6 +11,9 @@ namespace Datos.Impl
 {
     internal class ComentarioRepositoryImpl(AppContext context) : IComentarioRepository
     {
+        public async Task CreateAsync(Comentario entity) =>
+            await context.Comentarios.AddAsync(entity);
+
         public async Task<List<Comentario>> ListarAsync() =>
             await context.Comentarios
                          .Include(c => c.Usuario)

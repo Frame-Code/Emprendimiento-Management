@@ -18,5 +18,8 @@ namespace Datos.Impl
                          .Include(p => p.emprendimiento)
                          .Include(p => p.cargoParticipante)
                          .ToListAsync();
+
+        public async Task CreateAsync(Participante entity) =>
+            await context.Participantes.AddAsync(entity);
     }
 }

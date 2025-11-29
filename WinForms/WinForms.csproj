@@ -18,7 +18,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Controller\Controller.csproj" />
       <ProjectReference Include="..\Datos\Datos.csproj" />
+      <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
     
     <ItemGroup>

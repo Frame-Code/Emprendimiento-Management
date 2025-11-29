@@ -11,7 +11,7 @@ namespace Servicios.Interfaces
     public interface IRegistroEmprendimientoService
     {
         Task<List<RubroEmprendimiento>> ListarRubrosAsync();
-        Task<bool> RegistrarEmprendimientoAsync(RegistroEmprendimientoDto dto);
+        Task<ResponseDto> RegistrarEmprendimientoAsync(RegistroEmprendimientoDto dto);
         Task<List<Facultad>> ListarFacultadesAsync();
     }
 }

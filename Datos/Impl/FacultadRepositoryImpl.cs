@@ -14,5 +14,7 @@ namespace Datos.Impl
             await context.Facultades
                          .ToListAsync();
 
+        public async Task CreateAsync(Facultad entity) =>
+            await context.Facultades.AddAsync(entity);
     }
 }

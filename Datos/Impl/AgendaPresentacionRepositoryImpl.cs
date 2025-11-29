@@ -17,5 +17,9 @@ namespace Datos.Impl
                          .Include(a => a.Evento)
                          .Include(a => a.Emprendimiento)
                          .ToListAsync();
+
+        public async Task CreateAsync(AgendaPresentacion entity) =>
+            await context.AgendaPresentaciones
+                         .AddAsync(entity);
     }
 }

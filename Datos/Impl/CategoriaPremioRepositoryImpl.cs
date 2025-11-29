@@ -13,6 +13,8 @@ namespace Datos.Impl
         public async Task<List<CategoriaPremio>> ListarAsync() =>
             await context.CategoriasPremio
                          .ToListAsync();
-        
+
+        public async Task CreateAsync(CategoriaPremio entity) =>
+            await context.CategoriasPremio.AddAsync(entity);
     }
 }

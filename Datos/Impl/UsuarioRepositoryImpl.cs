@@ -9,8 +9,11 @@ using System.Threading.Tasks;
 
 namespace Datos.Impl
 {
-    internal class UsuarioImpl(AppContext context) : IUsuarioRepository
+    internal class UsuarioRepositoryImpl(AppContext context) : IUsuarioRepository
     {
+        public async Task CreateAsync(Usuario entity) =>
+            await context.Usuarios.AddAsync(entity);
+
         public async Task<List<Usuario>> ListarAsync() =>
             await context.Usuarios.
             Include(u => u.RolUsuario)

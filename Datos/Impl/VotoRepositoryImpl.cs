@@ -11,6 +11,9 @@ namespace Datos.Impl
 {
     internal class VotoRepositoryImpl(AppContext context) : IVotoRepository
     {
+        public async Task CreateAsync(Voto entity) => 
+            await context.Votos.AddAsync(entity);
+
         public async Task<List<Voto>> ListarAsync() =>
             await context.Votos.ToListAsync();
 

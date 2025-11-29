@@ -11,6 +11,9 @@ namespace Datos.Impl
 {
     internal class RubroEmpendimientoImpl(AppContext context) : IRubroEmprendimientoRepository
     {
+        public async Task CreateAsync(RubroEmprendimiento entity) => 
+            await context.RubrosEmprendimiento.AddAsync(entity);
+
         public async Task<List<RubroEmprendimiento>> ListarAsync() =>
             await context.RubrosEmprendimiento.ToListAsync();
 
