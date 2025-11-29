@@ -4,7 +4,7 @@ using Datos.Interfaces;
 
 namespace Datos.Impl
 {
-    internal class AgendaPresentacionRepositoryImpl(AppContext context) : IAgendaPresentacionRepository
+    public class AgendaPresentacionRepositoryImpl(AppContext context) : IAgendaPresentacionRepository
     {
         public async Task<AgendaPresentacion?> ObtenerPorIdAsync(int id) =>
             await context.AgendaPresentaciones
@@ -18,8 +18,11 @@ namespace Datos.Impl
                          .Include(a => a.Emprendimiento)
                          .ToListAsync();
 
-        public async Task CreateAsync(AgendaPresentacion entity) =>
-            await context.AgendaPresentaciones
-                         .AddAsync(entity);
+        public async Task CreateAsync(AgendaPresentacion entity)
+        {
+            await context.AgendaPresentaciones.AddAsync(entity);
+            await context.SaveChangesAsync();
+        }
+            
     }
 }

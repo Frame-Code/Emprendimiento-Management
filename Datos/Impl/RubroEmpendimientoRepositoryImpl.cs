@@ -9,15 +9,19 @@ using System.Threading.Tasks;
 
 namespace Datos.Impl
 {
-    internal class RubroEmpendimientoImpl(AppContext context) : IRubroEmprendimientoRepository
+    public class RubroEmpendimientoRepositoryImpl(AppContext context) : IRubroEmprendimientoRepository
     {
-        public async Task CreateAsync(RubroEmprendimiento entity) => 
+        public async Task CreateAsync(RubroEmprendimiento entity)
+        {
             await context.RubrosEmprendimiento.AddAsync(entity);
+            await context.SaveChangesAsync();
+        }
 
         public async Task<List<RubroEmprendimiento>> ListarAsync() =>
             await context.RubrosEmprendimiento.ToListAsync();
 
         public async Task<RubroEmprendimiento?> ObtenerPorIdAsync(int id) =>
             await context.RubrosEmprendimiento.FirstOrDefaultAsync(rp => rp.Id == id);
+            
     }
 }

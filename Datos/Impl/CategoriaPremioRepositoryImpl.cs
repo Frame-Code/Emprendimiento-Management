@@ -4,7 +4,7 @@ using Datos.Interfaces;
 
 namespace Datos.Impl
 {
-    internal class CategoriaPremioRepositoryImpl(AppContext context) : ICategoriaPremioRepository
+    public class CategoriaPremioRepositoryImpl(AppContext context) : ICategoriaPremioRepository
     {
         public async Task<CategoriaPremio?> ObtenerPorIdAsync(int id) =>
             await context.CategoriasPremio
@@ -14,7 +14,11 @@ namespace Datos.Impl
             await context.CategoriasPremio
                          .ToListAsync();
 
-        public async Task CreateAsync(CategoriaPremio entity) =>
+        public async Task CreateAsync(CategoriaPremio entity)
+        {
             await context.CategoriasPremio.AddAsync(entity);
+            await context.SaveChangesAsync();
+        }
+            
     }
 }

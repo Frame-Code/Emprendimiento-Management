@@ -1,7 +1,14 @@
+using Controller;
+using Datos.Impl;
+using Datos.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Servicios.Impl;
+using Servicios.Interfaces;
+using Shared;
+using WinForms.Views;
 using AppContext = Datos.AppContext;
 
 namespace WinForms;
@@ -19,14 +26,17 @@ internal static class Program
         
         ApplicationConfiguration.Initialize();
 
-        using var scope = AppHost.Services.CreateScope();
+        var services = AppHost.Services;
         
-        var db = scope.ServiceProvider.GetRequiredService<AppContext>();
-        db.Database.Migrate();
-        
-        var mainForm = scope.ServiceProvider.GetRequiredService<MainForm>();
-        //Application.Run(mainForm);
-        Console.WriteLine("App started");
+        using (var scope = services.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<AppContext>();
+            db.Database.Migrate();
+
+            //var mainForm = scope.ServiceProvider.GetRequiredService<MainFormView>();
+            var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
+            Application.Run(registroEmprendimiento);
+        }
     }
 
     private static IHostBuilder CreateHostBuilder()
@@ -46,8 +56,28 @@ internal static class Program
                 services.AddDbContext<AppContext>(options =>
                     options.UseSqlServer(connectionString));
 
-                // Registrar servicios al inyector
-                services.AddScoped<MainForm>();
+                // Repositorios
+                services.AddScoped<IEmprendimientoRepository, EmprendimientoRepositoryImpl>();
+                services.AddScoped<IRubroEmprendimientoRepository, RubroEmpendimientoRepositoryImpl>();
+                services.AddScoped<IVotoRepository, VotoRepositoryImpl>();
+                services.AddScoped<IEventoRepository, EventoRepositoryImpl>();
+                services.AddScoped<IComentarioRepository, ComentarioRepositoryImpl>();
+                services.AddScoped<IRolUsuarioRepository, RolUsuarioRepositoryImpl>();
+                services.AddScoped<ICategoriaPremioRepository, CategoriaPremioRepositoryImpl>();
+                services.AddScoped<IResultadoEventoRepository, ResultadoEventoRepositoryImpl>();
+                services.AddScoped<IAgendaPresentacionRepository, AgendaPresentacionRepositoryImpl>();
+                services.AddScoped<IFacultadRepository, FacultadRepositoryImpl>();
+                
+                // Servicios 
+                services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();
+                
+                // Controllers
+                services.AddScoped<RegistroEmprendimientoController>();
+                
+                // Formularios
+                services.AddScoped<MainFormView>();
+                services.AddScoped<RegistroEmprendimientoView>();
+
             });
     }
 }

@@ -1,7 +1,9 @@
-﻿using Datos.Interfaces;
+﻿using Datos;
+using Datos.Interfaces;
 using Modelo;
 using Servicios.Interfaces;
 using Shared;
+using AppContext = Datos.AppContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Servicios.Impl
 {
-    internal class RegistroEmprendimientoServiceImpl (
+    public class RegistroEmprendimientoServiceImpl (
         IEmprendimientoRepository emprendimientoRepository, 
         IRubroEmprendimientoRepository rubroEmprendimientoRepository,
         IFacultadRepository facultadRepository) : IRegistroEmprendimientoService

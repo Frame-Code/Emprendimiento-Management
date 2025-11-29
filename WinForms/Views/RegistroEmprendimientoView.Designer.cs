@@ -1,6 +1,6 @@
 ﻿namespace WinForms.Views
 {
-    partial class RegistroEmprendimiento
+    partial class RegistroEmprendimientoView
     {
         /// <summary>
         /// Required designer variable.
@@ -69,6 +69,7 @@
             // 
             // CmbFacultad
             // 
+            CmbFacultad.DropDownStyle = ComboBoxStyle.DropDownList;
             CmbFacultad.FormattingEnabled = true;
             CmbFacultad.Location = new Point(627, 112);
             CmbFacultad.Name = "CmbFacultad";
@@ -83,7 +84,7 @@
             label2.Size = new Size(71, 20);
             label2.TabIndex = 4;
             label2.Text = "Nombre: ";
-            // 
+   
             // label3
             // 
             label3.AutoSize = true;
@@ -120,13 +121,14 @@
             // 
             // CmbRubro
             // 
+            CmbRubro.DropDownStyle = ComboBoxStyle.DropDownList;
             CmbRubro.FormattingEnabled = true;
             CmbRubro.Location = new Point(627, 172);
             CmbRubro.Name = "CmbRubro";
             CmbRubro.Size = new Size(339, 28);
             CmbRubro.TabIndex = 10;
             // 
-            // RegistroEmprendimiento
+            // RegistroEmprendimientoView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -141,7 +143,7 @@
             Controls.Add(BtnCrear);
             Controls.Add(TxtNombre);
             Controls.Add(label1);
-            Name = "RegistroEmprendimiento";
+            Name = "RegistroEmprendimientoView";
             Text = "RegistroEmprendimiento";
             Load += RegistroEmprendimiento_Load;
             ResumeLayout(false);

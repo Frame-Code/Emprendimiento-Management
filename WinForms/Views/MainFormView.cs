@@ -1,8 +1,8 @@
 namespace WinForms;
 
-public partial class MainForm : Form
+public partial class MainFormView : Form
 {
-    public MainForm()
+    public MainFormView()
     {
         InitializeComponent();
     }

@@ -5,7 +5,7 @@ using Modelo;
 
 namespace Datos.Impl
 {
-    internal class ResultadoEventoRepositoryImpl(AppContext context) : IResultadoEventoRepository
+    public class ResultadoEventoRepositoryImpl(AppContext context) : IResultadoEventoRepository
     {
         public async Task<ResultadoEvento?> ObtenerPorIdAsync(int id) =>
             await context.ResultadoEventos
@@ -19,7 +19,11 @@ namespace Datos.Impl
                          .Include(r => r.CategoriaPremio)
                          .ToListAsync();
 
-        public async Task CreateAsync(ResultadoEvento entity) =>
+        public async Task CreateAsync(ResultadoEvento entity)
+        {
             await context.ResultadoEventos.AddAsync(entity);
+            await context.SaveChangesAsync();
+        }
+            
     }
 }

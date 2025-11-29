@@ -14,16 +14,16 @@ using WinForms.Views.Util;
 
 namespace WinForms.Views
 {
-    public partial class RegistroEmprendimiento : Form
+    public partial class RegistroEmprendimientoView : Form
     {
         private readonly RegistroEmprendimientoController _controller;
-        public RegistroEmprendimiento(RegistroEmprendimientoController controller)
+        public RegistroEmprendimientoView(RegistroEmprendimientoController controller)
         {
             _controller = controller;
             InitializeComponent();
         }
 
-        private void BtnCrear_Click(object sender, EventArgs e)
+        private async void BtnCrear_Click(object sender, EventArgs e)
         {
             bool isValid = Utils.ValidateStrings(TxtNombre.Text, TxtDescripcion.Text);
             if (!isValid)
@@ -47,7 +47,7 @@ namespace WinForms.Views
                 IdRubroEmprendimiento = idRubro
             };
 
-            var response = _controller.RegistrarEmprendimientoAsync(dto).Result;
+            var response = await _controller.RegistrarEmprendimientoAsync(dto);
             if (!response.IsSuccess)
             {
                 MessageBox.Show("Error:" + response.Message);
@@ -57,10 +57,10 @@ namespace WinForms.Views
             MessageBox.Show("Emprendimiento registrado con exito");
         }
 
-        private void RegistroEmprendimiento_Load(object sender, EventArgs e)
+        private async void RegistroEmprendimiento_Load(object sender, EventArgs e)
         {
-            var listFacultades = _controller.ListarFacultadesAsync().Result;
-            var listRubros = _controller.ListarRubrosAsync().Result;
+            var listFacultades = await _controller.ListarFacultadesAsync();
+            var listRubros = await _controller.ListarRubrosAsync();
 
             var success = Utils.ValidateLists<Facultad>(listFacultades) &&
                           Utils.ValidateLists<RubroEmprendimiento>(listRubros);
@@ -73,10 +73,12 @@ namespace WinForms.Views
             CmbFacultad.DataSource = listFacultades;
             CmbFacultad.DisplayMember = "Nombre";
             CmbFacultad.ValueMember = "Id";
+            CmbFacultad.DropDownStyle = ComboBoxStyle.DropDownList;
 
             CmbRubro.DataSource = listRubros;
             CmbRubro.DisplayMember = "Nombre";
             CmbRubro.ValueMember = "Id";
+            CmbRubro.DropDownStyle = ComboBoxStyle.DropDownList;
         }
     }
 }

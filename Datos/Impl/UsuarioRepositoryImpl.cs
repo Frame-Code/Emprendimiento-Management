@@ -9,10 +9,14 @@ using System.Threading.Tasks;
 
 namespace Datos.Impl
 {
-    internal class UsuarioRepositoryImpl(AppContext context) : IUsuarioRepository
+    public class UsuarioRepositoryImpl(AppContext context) : IUsuarioRepository
     {
-        public async Task CreateAsync(Usuario entity) =>
+        public async Task CreateAsync(Usuario entity)
+        {
             await context.Usuarios.AddAsync(entity);
+            await context.SaveChangesAsync();
+        }
+            
 
         public async Task<List<Usuario>> ListarAsync() =>
             await context.Usuarios.
