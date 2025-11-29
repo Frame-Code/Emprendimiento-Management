@@ -43,7 +43,7 @@ namespace Servicios.Impl
                 IdRubroEmprendimiento = facultad.Id
             };
 
-            //Crear el emprendimiento
+            await emprendimientoRepository.CreateAsync(emprendimiento);
             return new ResponseDto
             {
                 IsSuccess = true,
