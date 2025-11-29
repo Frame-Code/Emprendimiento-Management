@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Datos.Interfaces
 {
-    internal interface IUsuario : IRepository<Usuario>
+    public interface IRubroEmprendimientoRepository : IRepository<RubroEmprendimiento>
     {
+
     }
 }

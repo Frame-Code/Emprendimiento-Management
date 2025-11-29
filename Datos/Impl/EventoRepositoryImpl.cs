@@ -9,14 +9,19 @@ using System.Threading.Tasks;
 
 namespace Datos.Impl
 {
-    internal class EventoRepositoryImpl(AppContext context) : IEventoRepository
+    public class EventoRepositoryImpl(AppContext context) : IEventoRepository
     {
+        public async Task CreateAsync(Evento entity)
+        {
+            await context.Eventos.AddAsync(entity);
+            await context.SaveChangesAsync();
+        }
+            
+
         public async Task<List<Evento>> ListarAsync() =>
-            await context.Eventos
-                         .ToListAsync();
+            await context.Eventos.ToListAsync();
 
         public async Task<Evento?> ObtenerPorIdAsync(int id) =>
-            await context.Eventos
-                         .FirstOrDefaultAsync(e => e.Id == id);
+            await context.Eventos.FirstOrDefaultAsync(e => e.Id == id);
     }
 }

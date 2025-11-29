@@ -9,8 +9,15 @@ using System.Threading.Tasks;
 
 namespace Datos.Impl
 {
-    internal class ComentarioRepositoryImpl(AppContext context) : IComentarioRepository
+    public class ComentarioRepositoryImpl(AppContext context) : IComentarioRepository
     {
+        public async Task CreateAsync(Comentario entity)
+        {
+            await context.Comentarios.AddAsync(entity);
+            await context.SaveChangesAsync();
+        }
+            
+
         public async Task<List<Comentario>> ListarAsync() =>
             await context.Comentarios
                          .Include(c => c.Usuario)

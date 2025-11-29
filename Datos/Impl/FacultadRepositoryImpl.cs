@@ -4,7 +4,7 @@ using Modelo;
 
 namespace Datos.Impl
 {
-    internal class FacultadRepositoryImpl(AppContext context) : IFacultadRepository
+    public class FacultadRepositoryImpl(AppContext context) : IFacultadRepository
     {
         public async Task<Facultad?> ObtenerPorIdAsync(int id)  =>
             await context.Facultades
@@ -14,5 +14,11 @@ namespace Datos.Impl
             await context.Facultades
                          .ToListAsync();
 
+        public async Task CreateAsync(Facultad entity)
+        {
+            await context.Facultades.AddAsync(entity);
+            await context.SaveChangesAsync();
+        }
+            
     }
 }

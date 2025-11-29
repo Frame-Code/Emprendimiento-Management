@@ -9,8 +9,15 @@ using System.Threading.Tasks;
 
 namespace Datos.Impl
 {
-    internal class EmprendimientoRepositoryImpl(AppContext context) : IEmprendimientoRepository
+    public class EmprendimientoRepositoryImpl(AppContext context) : IEmprendimientoRepository
     {
+        public async Task CreateAsync(Emprendimiento entity)
+        {
+            await context.Emprendimientos.AddAsync(entity);
+            await context.SaveChangesAsync();
+        }
+            
+
         public async Task<List<Emprendimiento>> ListarAsync() => 
             await context.Emprendimientos.ToListAsync();
 

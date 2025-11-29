@@ -9,8 +9,15 @@ using System.Threading.Tasks;
 
 namespace Datos.Impl
 {
-    internal class VotoRepositoryImpl(AppContext context) : IVotoRepository
+    public class VotoRepositoryImpl(AppContext context) : IVotoRepository
     {
+        public async Task CreateAsync(Voto entity)
+        {
+            await context.Votos.AddAsync(entity);
+            await context.SaveChangesAsync();
+        }
+            
+
         public async Task<List<Voto>> ListarAsync() =>
             await context.Votos.ToListAsync();
 

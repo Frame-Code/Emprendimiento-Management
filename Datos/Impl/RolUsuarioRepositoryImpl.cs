@@ -9,8 +9,15 @@ using System.Threading.Tasks;
 
 namespace Datos.Impl
 {
-    internal class RolUsuarioImpl(AppContext context) : IRolUsuario
+    public class RolUsuarioRepositoryImpl(AppContext context) : IRolUsuarioRepository
     {
+        public async Task CreateAsync(RolUsuario entity)
+        {
+            await context.RolUsuarios.AddAsync(entity);
+            await context.SaveChangesAsync();
+        }
+            
+
         public async Task<List<RolUsuario>> ListarAsync() =>
             await context.RolUsuarios.ToListAsync();
 
