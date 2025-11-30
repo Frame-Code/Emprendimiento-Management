@@ -13,5 +13,6 @@ namespace Servicios.Interfaces
         Task<List<RubroEmprendimiento>> ListarRubrosAsync();
         Task<ResponseDto> RegistrarEmprendimientoAsync(RegistroEmprendimientoDto dto);
         Task<List<Facultad>> ListarFacultadesAsync();
+        Task<List<EmprendimientoDto>> ListarEmprendimientosAsync();
     }
 }
