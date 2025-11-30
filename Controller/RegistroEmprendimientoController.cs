@@ -1,4 +1,5 @@
-﻿using Modelo;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Modelo;
 using Servicios.Interfaces;
 using Shared;
 
@@ -14,5 +15,8 @@ namespace Controller
 
         public async Task<List<Facultad>> ListarFacultadesAsync() =>
             await registroEmprendimientoService.ListarFacultadesAsync();
+
+        public async Task<List<EmprendimientoDto>> ListarEmprendimientosAsync() =>
+            await registroEmprendimientoService.ListarEmprendimientosAsync();
     }
 }
