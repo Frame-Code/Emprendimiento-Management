@@ -68,17 +68,22 @@ internal static class Program
                 services.AddScoped<IResultadoEventoRepository, ResultadoEventoRepositoryImpl>();
                 services.AddScoped<IAgendaPresentacionRepository, AgendaPresentacionRepositoryImpl>();
                 services.AddScoped<IFacultadRepository, FacultadRepositoryImpl>();
-                
+                services.AddScoped<IParticipanteRepository, ParticipanteRepositoryImpl>();
+                services.AddScoped<ICargoParticipanteRepository, CargoParticipanteRepositoryImpl>();
+
                 // Servicios 
                 services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();
-                
+                services.AddScoped<IParticipanteService, ParticipanteServiceImpl>();
+
                 // Controllers
                 services.AddScoped<RegistroEmprendimientoController>();
-                
+                services.AddScoped<ParticipanteController>();
+
                 // Formularios
                 services.AddScoped<MainFormView>();
                 services.AddScoped<EmprendimientosUc>();
                 services.AddScoped<RegistroEmprendimientoView>();
+                services.AddScoped<DetalleEmprendimientoView>();
 
             });
     }

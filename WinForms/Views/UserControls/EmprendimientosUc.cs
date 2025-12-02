@@ -87,7 +87,19 @@ namespace WinForms.Views
         {
             if (dataGridView1.Columns[e.ColumnIndex].Name == "btnDetalles")
             {
-                MessageBox.Show("presioando");
+                using var scope = _serviceProvider.CreateScope();
+                var form = scope.ServiceProvider.GetRequiredService<DetalleEmprendimientoView>();
+                int idEmprendimiento = (int)dataGridView1.Rows[e.RowIndex].Cells["Id"].Value;
+                var emprendimiento = emprendimientos.FirstOrDefault(emp => emp.Id == idEmprendimiento);
+                if(emprendimiento == null)
+                {
+                    MessageBox.Show("Emprendimiento no encontrado");
+                    return;
+                }
+                await form.Init(emprendimiento.Nombre, emprendimiento.Rubro, emprendimiento?.Descripcion, emprendimiento.Facultad, emprendimiento.Id);
+                form.FormClosed += Form_FormClosed;
+                form.ShowDialog();
+                return;
             }
 
             if (dataGridView1.Columns[e.ColumnIndex].Name == "btnDel")
