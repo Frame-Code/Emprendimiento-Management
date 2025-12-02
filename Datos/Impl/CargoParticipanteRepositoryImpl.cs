@@ -19,6 +19,10 @@ namespace Datos.Impl
             await context.CargosParticipante.AddAsync(entity);
             await context.SaveChangesAsync();
         }
-            
+
+        public Task DeleteByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -24,6 +24,10 @@ namespace Datos.Impl
             await context.ResultadoEventos.AddAsync(entity);
             await context.SaveChangesAsync();
         }
-            
+
+        public Task DeleteByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

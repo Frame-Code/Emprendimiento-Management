@@ -1,4 +1,6 @@
 ﻿using Controller;
+using Microsoft.Extensions.DependencyInjection;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,17 +15,34 @@ namespace WinForms.Views
 {
     public partial class EmprendimientosUc : UserControl
     {
+        private List<EmprendimientoDto> emprendimientos;
         private readonly RegistroEmprendimientoController _controller;
-        public EmprendimientosUc(RegistroEmprendimientoController controller)
+        private readonly IServiceProvider _serviceProvider;
+
+        public EmprendimientosUc(RegistroEmprendimientoController controller, IServiceProvider serviceProvider)
         {
+            emprendimientos = new List<EmprendimientoDto>();
             _controller = controller;
+            _serviceProvider = serviceProvider;
             InitializeComponent();
         }
 
-        private async void EmprendimientosUc_Load(object sender, EventArgs e)
+        //Helpers-------------------------------------------------
+        private async Task Init()
         {
             var listEmprendimientos = await _controller.ListarEmprendimientosAsync();
+            emprendimientos = listEmprendimientos;
+            dataGridView1.DataSource = null;
             dataGridView1.DataSource = listEmprendimientos;
+            LoadButtons();
+        }
+        private void LoadButtons()
+        {
+            if (dataGridView1.Columns["btnDetalles"] != null)
+                dataGridView1.Columns.Remove("btnDetalles");
+
+            if (dataGridView1.Columns["btnDel"] != null)
+                dataGridView1.Columns.Remove("btnDel");
 
             if (dataGridView1.Columns["btnDetalles"] == null)
             {
@@ -48,7 +67,46 @@ namespace WinForms.Views
                 };
                 dataGridView1.Columns.Add(btnAction);
             }
+        }
+
+        //Eventos---------------------------------------------------------
+        private async void EmprendimientosUc_Load(object sender, EventArgs e) => await Init();
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            string filtro = textBox1.Text.Trim().ToLower();
+            var resultado = emprendimientos.Where(emp =>
+                emp.Nombre.Trim().ToLower().Contains(filtro))
+            .ToList();
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = resultado;
+            LoadButtons();
+        }
+
+        private async void datagridview_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "btnDetalles")
+            {
+                MessageBox.Show("presioando");
+            }
+
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "btnDel")
+            {
+                await _controller.DeleteByIdAsync((int)dataGridView1.Rows[e.RowIndex].Cells["Id"].Value);
+                await Init();
+                MessageBox.Show("Emprendimiento eliminado");
+            }
 
         }
+
+        private void BtnNuevo_Click(object sender, EventArgs e)
+        {
+            using var scope = _serviceProvider.CreateScope();
+            var form = scope.ServiceProvider.GetRequiredService<RegistroEmprendimientoView>();
+            form.FormClosed += Form_FormClosed;
+            form.ShowDialog();
+        }
+
+        private async void Form_FormClosed(object? sender, FormClosedEventArgs e) => await Init();
     }
 }

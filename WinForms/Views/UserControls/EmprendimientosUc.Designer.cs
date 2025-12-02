@@ -43,14 +43,16 @@
             BtnNuevo.TabIndex = 2;
             BtnNuevo.Text = "Nuevo emprendimiento";
             BtnNuevo.UseVisualStyleBackColor = true;
+            BtnNuevo.Click += BtnNuevo_Click;
             // 
             // textBox1
             // 
             textBox1.Location = new Point(539, 83);
             textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Escribe aqui para buscar...";
+            textBox1.PlaceholderText = "Escribe aqui para buscar por nombre...";
             textBox1.Size = new Size(521, 27);
             textBox1.TabIndex = 3;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // label1
             // 
@@ -71,6 +73,7 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(1032, 479);
             dataGridView1.TabIndex = 4;
+            dataGridView1.CellContentClick += datagridview_CellContentClick;
             // 
             // EmprendimientosUc
             // 
