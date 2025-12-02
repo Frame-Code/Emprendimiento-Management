@@ -16,7 +16,17 @@ namespace Datos.Impl
             await context.Emprendimientos.AddAsync(entity);
             await context.SaveChangesAsync();
         }
+
+        public async Task DeleteByIdAsync(int id)
+        {
+            var emprendimiento = await ObtenerPorIdAsync(id);
+            if (emprendimiento == null)
+                throw new Exception("No se encontro el id del emprendimiento a eliminar");
             
+            context.Emprendimientos.Remove(emprendimiento);
+            context.SaveChanges();
+            return;
+        }
 
         public async Task<List<Emprendimiento>> ListarAsync() => 
             await context.Emprendimientos

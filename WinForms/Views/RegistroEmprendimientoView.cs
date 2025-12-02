@@ -25,7 +25,7 @@ namespace WinForms.Views
 
         private async void BtnCrear_Click(object sender, EventArgs e)
         {
-            bool isValid = Utils.ValidateStrings(TxtNombre.Text, TxtDescripcion.Text);
+            bool isValid = Utils.ValidateStrings(TxtNombre.Text);
             if (!isValid)
             {
                 MessageBox.Show("Por favor, rellena todos los campos correctamente");

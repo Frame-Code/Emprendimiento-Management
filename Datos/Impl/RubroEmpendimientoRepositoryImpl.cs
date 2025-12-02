@@ -17,6 +17,11 @@ namespace Datos.Impl
             await context.SaveChangesAsync();
         }
 
+        public Task DeleteByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<RubroEmprendimiento>> ListarAsync() =>
             await context.RubrosEmprendimiento.ToListAsync();
 

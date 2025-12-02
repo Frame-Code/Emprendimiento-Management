@@ -14,5 +14,6 @@ namespace Servicios.Interfaces
         Task<ResponseDto> RegistrarEmprendimientoAsync(RegistroEmprendimientoDto dto);
         Task<List<Facultad>> ListarFacultadesAsync();
         Task<List<EmprendimientoDto>> ListarEmprendimientosAsync();
+        Task DeleteByIdAsync(int id);
     }
 }

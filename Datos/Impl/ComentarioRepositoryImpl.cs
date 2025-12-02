@@ -16,7 +16,11 @@ namespace Datos.Impl
             await context.Comentarios.AddAsync(entity);
             await context.SaveChangesAsync();
         }
-            
+
+        public Task DeleteByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task<List<Comentario>> ListarAsync() =>
             await context.Comentarios

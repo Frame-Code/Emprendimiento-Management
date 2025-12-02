@@ -17,6 +17,9 @@ namespace Servicios.Impl
         IRubroEmprendimientoRepository rubroEmprendimientoRepository,
         IFacultadRepository facultadRepository) : IRegistroEmprendimientoService
     {
+        public async Task DeleteByIdAsync(int id) =>
+            await emprendimientoRepository.DeleteByIdAsync(id);
+
         public async Task<List<EmprendimientoDto>> ListarEmprendimientosAsync()
         {
             var emprendimientos = await emprendimientoRepository.ListarAsync();

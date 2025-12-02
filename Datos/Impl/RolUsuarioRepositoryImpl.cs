@@ -16,7 +16,11 @@ namespace Datos.Impl
             await context.RolUsuarios.AddAsync(entity);
             await context.SaveChangesAsync();
         }
-            
+
+        public Task DeleteByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task<List<RolUsuario>> ListarAsync() =>
             await context.RolUsuarios.ToListAsync();

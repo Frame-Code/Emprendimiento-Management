@@ -23,6 +23,10 @@ namespace Datos.Impl
             await context.AgendaPresentaciones.AddAsync(entity);
             await context.SaveChangesAsync();
         }
-            
+
+        public Task DeleteByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
