@@ -12,11 +12,14 @@ using System.Threading.Tasks;
 
 namespace Servicios.Impl
 {
-    public class RegistroEmprendimientoServiceImpl (
-        IEmprendimientoRepository emprendimientoRepository, 
+    public class RegistroEmprendimientoServiceImpl(
+        IEmprendimientoRepository emprendimientoRepository,
         IRubroEmprendimientoRepository rubroEmprendimientoRepository,
         IFacultadRepository facultadRepository) : IRegistroEmprendimientoService
     {
+        public async Task DeleteByIdAsync(int id) =>
+            await emprendimientoRepository.DeleteByIdAsync(id);
+
         public async Task<List<EmprendimientoDto>> ListarEmprendimientosAsync()
         {
             var emprendimientos = await emprendimientoRepository.ListarAsync();
@@ -30,9 +33,9 @@ namespace Servicios.Impl
             }).ToList();
             return dtos;
         }
-            
 
-        public async Task<List<Facultad>> ListarFacultadesAsync() => 
+
+        public async Task<List<Facultad>> ListarFacultadesAsync() =>
             await facultadRepository.ListarAsync();
 
         public async Task<List<RubroEmprendimiento>> ListarRubrosAsync() =>
@@ -43,7 +46,7 @@ namespace Servicios.Impl
             var rubro = await rubroEmprendimientoRepository.ObtenerPorIdAsync(dto.IdRubroEmprendimiento);
             var facultad = await facultadRepository.ObtenerPorIdAsync(dto.IdFacultad);
 
-            if(rubro is null || facultad is null)
+            if (rubro is null || facultad is null)
             {
                 return new ResponseDto
                 {

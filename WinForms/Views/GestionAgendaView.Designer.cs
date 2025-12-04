@@ -38,14 +38,14 @@
             dtFecha = new DateTimePicker();
             groupBox2 = new GroupBox();
             btnAgregarPresentacion = new Button();
-            numericUpDown1 = new NumericUpDown();
-            numOrden = new TextBox();
+            numOrden = new NumericUpDown();
+            txtExpositor = new TextBox();
             label5 = new Label();
             label4 = new Label();
             label6 = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numOrden).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
@@ -134,8 +134,8 @@
             // groupBox2
             // 
             groupBox2.Controls.Add(btnAgregarPresentacion);
-            groupBox2.Controls.Add(numericUpDown1);
             groupBox2.Controls.Add(numOrden);
+            groupBox2.Controls.Add(txtExpositor);
             groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(label4);
             groupBox2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -157,21 +157,21 @@
             btnAgregarPresentacion.UseVisualStyleBackColor = true;
             btnAgregarPresentacion.Click += btnAgregarPresentacion_Click;
             // 
-            // numericUpDown1
-            // 
-            numericUpDown1.Font = new Font("Arial", 12F);
-            numericUpDown1.Location = new Point(107, 116);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(120, 26);
-            numericUpDown1.TabIndex = 7;
-            // 
             // numOrden
             // 
             numOrden.Font = new Font("Arial", 12F);
-            numOrden.Location = new Point(107, 54);
+            numOrden.Location = new Point(107, 116);
             numOrden.Name = "numOrden";
-            numOrden.Size = new Size(182, 26);
-            numOrden.TabIndex = 6;
+            numOrden.Size = new Size(120, 26);
+            numOrden.TabIndex = 7;
+            // 
+            // txtExpositor
+            // 
+            txtExpositor.Font = new Font("Arial", 12F);
+            txtExpositor.Location = new Point(107, 54);
+            txtExpositor.Name = "txtExpositor";
+            txtExpositor.Size = new Size(182, 26);
+            txtExpositor.TabIndex = 6;
             // 
             // label5
             // 
@@ -217,7 +217,7 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numOrden).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -233,11 +233,11 @@
         private Label label3;
         private DateTimePicker dtHora;
         private GroupBox groupBox2;
-        private TextBox numOrden;
+        private TextBox txtExpositor;
         private Label label5;
         private Label label4;
         private Button btnAgregarPresentacion;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown numOrden;
         private Label label6;
     }
 }

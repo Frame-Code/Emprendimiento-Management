@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Controller;
+using Shared;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,13 +11,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinForms.Views.Util;
 
+
+
 namespace WinForms.Views
 {
     public partial class GestionAgendaView : Form
     {
-        public GestionAgendaView()
+        private readonly AgendaController _controller;
+
+        public GestionAgendaView(AgendaController controller)
         {
             InitializeComponent();
+            _controller = controller;
         }
 
         private async void btnGuardarCronograma_Click(object sender, EventArgs e)
@@ -28,16 +35,16 @@ namespace WinForms.Views
                 return;
             }
 
-            var request = new CronogramaRequest
+            var dto = new CronogramaDto
             {
                 Fecha = dtFecha.Value,
                 Hora = dtHora.Value.ToString("HH:mm"),
                 Ubicacion = txtUbicacion.Text
             };
 
-            var result = await _controller.CrearCronogramaAsync(request);
+            var result = await _controller.RegistrarCronogramaAsync(dto);
 
-            if (!result.Success)
+            if (!result.IsSuccess)
             {
                 MessageBox.Show($"Error: {result.Message}");
                 return;
@@ -56,7 +63,7 @@ namespace WinForms.Views
                 return;
             }
 
-            var request = new PresentacionRequest
+            var dto = new PresentacionDto
             {
                 Expositor = txtExpositor.Text,
                 Orden = (int)numOrden.Value,
@@ -65,15 +72,15 @@ namespace WinForms.Views
                 Ubicacion = txtUbicacion.Text
             };
 
-            var result = await _controller.CrearPresentacionAsync(request);
+            var result = await _controller.RegistrarPresentacionAsync(dto);
 
-            if (!result.Success)
+            if (!result.IsSuccess)
             {
                 MessageBox.Show($"Error: {result.Message}");
                 return;
             }
 
-            MessageBox.Show("Presentación registrada.");
+            MessageBox.Show("Presentación registrada correctamente.");
         }
     }
 }
