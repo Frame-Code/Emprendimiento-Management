@@ -9,7 +9,7 @@ namespace Shared
     public class CronogramaDto
     {
         public DateTime Fecha { get; set; }
-        public string Hora { get; set; }
-        public string Ubicacion { get; set; }
+        public string Hora { get; set; } = null!;
+        public string Ubicacion { get; set; } = null!;
     }
 }

@@ -83,6 +83,8 @@ namespace Datos
                 b.Property(x => x.Nombres).IsRequired().HasMaxLength(200);
                 b.Property(x => x.Apellidos).IsRequired().HasMaxLength(200);
                 b.Property(x => x.FotoPath).HasMaxLength(500);
+                b.Property(x => x.NumeroTelefono).IsRequired(). HasMaxLength(15);
+                b.Property(x => x.NumeroIdentificacion).IsRequired().HasMaxLength(15);
 
                 b.HasOne(x => x.emprendimiento)
                     .WithMany()
@@ -93,6 +95,16 @@ namespace Datos
                     .WithMany()
                     .HasForeignKey(x => x.IdCargoParticipante)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                b.HasIndex(pa => new
+                {
+                    pa.NumeroIdentificacion
+                }).IsUnique();
+
+                b.HasIndex(pa => new
+                {
+                    pa.NumeroTelefono
+                }).IsUnique();
             });
 
             // Categorias de premio

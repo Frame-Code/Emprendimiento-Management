@@ -19,6 +19,8 @@ namespace Modelo
                 return $"{Nombres} {Apellidos}";
             }
         }
+        public string NumeroIdentificacion { get; set; } = null!;
+        public string NumeroTelefono { get; set; } = null!;
         public string? FotoPath { get; set; }
         public int IdEmprendimiento { get; set; }
         public Emprendimiento emprendimiento { get; set; } = null!;

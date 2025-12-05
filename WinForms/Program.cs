@@ -34,7 +34,7 @@ internal static class Program
             db.Database.Migrate();
 
             var mainForm = scope.ServiceProvider.GetRequiredService<MainFormView>();
-            Application.Run(mainForm);
+            Application.Run(mainForm); //AQUI PON LA VISTA QUE NECESITAS, 
             //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
             //Application.Run(registroEmprendimiento);
         }
@@ -68,26 +68,35 @@ internal static class Program
                 services.AddScoped<IResultadoEventoRepository, ResultadoEventoRepositoryImpl>();
                 services.AddScoped<IAgendaPresentacionRepository, AgendaPresentacionRepositoryImpl>();
                 services.AddScoped<IFacultadRepository, FacultadRepositoryImpl>();
-                services.AddScoped<ICronogramaRepository, CronogramaRepositoryImpl>();//nuevo
-                services.AddScoped<IPresentacionRepository, PresentacionRepositoryImpl>();//nuevo
+                services.AddScoped<IParticipanteRepository, ParticipanteRepositoryImpl>();
+                services.AddScoped<ICargoParticipanteRepository, CargoParticipanteRepositoryImpl>();
+                // Repositorios (NUEVOS)
+                services.AddScoped<ICronogramaRepository, CronogramaRepositoryImpl>();
+                services.AddScoped<IPresentacionRepository, PresentacionRepositoryImpl>();
 
 
+                //AGREGA LOS REPOSITORIOS, SERVICIOS Y CONTROLADRES QUE AGREGASTE AQUI
                 // Servicios 
                 services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();
-                services.AddScoped<IAgendaService, AgendaServiceImpl>();//nuevo
+                services.AddScoped<IParticipanteService, ParticipanteServiceImpl>();
+                // Servicios (NUEVO)
+                services.AddScoped<IAgendaService, AgendaServiceImpl>();
 
 
                 // Controllers
                 services.AddScoped<RegistroEmprendimientoController>();
-                services.AddScoped<AgendaController>();//nuevo
+                services.AddScoped<ParticipanteController>();
+                // Controladores (NUEVO)
+                services.AddScoped<AgendaController>();
 
 
                 // Formularios
                 services.AddScoped<MainFormView>();
                 services.AddScoped<EmprendimientosUc>();
                 services.AddScoped<RegistroEmprendimientoView>();
-                services.AddScoped<GestionAgendaView>();//nuev
-
+                services.AddScoped<DetalleEmprendimientoView>();
+                // Formularios (NUEVO)
+                services.AddScoped<GestionAgendaView>();
 
             });
     }
