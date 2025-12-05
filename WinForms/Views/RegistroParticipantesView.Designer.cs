@@ -1,6 +1,6 @@
-﻿namespace WinForms.Views.Util
+﻿namespace WinForms.Views
 {
-    partial class RegistroParticipantes
+    partial class RegistroParticipantesView
     {
         /// <summary>
         /// Required designer variable.
@@ -42,7 +42,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(43, 28);
+            label1.Location = new Point(44, 19);
             label1.Name = "label1";
             label1.Size = new Size(699, 45);
             label1.TabIndex = 0;
@@ -51,7 +51,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(43, 120);
+            label2.Location = new Point(44, 116);
             label2.Name = "label2";
             label2.Size = new Size(90, 25);
             label2.TabIndex = 1;
@@ -60,7 +60,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(43, 180);
+            label3.Location = new Point(44, 190);
             label3.Name = "label3";
             label3.Size = new Size(90, 25);
             label3.TabIndex = 2;
@@ -68,49 +68,51 @@
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(139, 117);
+            txtNombre.Location = new Point(140, 116);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(357, 31);
+            txtNombre.Size = new Size(435, 31);
             txtNombre.TabIndex = 3;
             // 
             // txtApellido
             // 
-            txtApellido.Location = new Point(139, 180);
+            txtApellido.Location = new Point(140, 187);
             txtApellido.Name = "txtApellido";
-            txtApellido.Size = new Size(357, 31);
+            txtApellido.Size = new Size(435, 31);
             txtApellido.TabIndex = 4;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(533, 152);
+            label4.Location = new Point(601, 156);
             label4.Name = "label4";
             label4.Size = new Size(143, 25);
             label4.TabIndex = 5;
-            label4.Text = "Cargo o Funcion";
+            label4.Text = "Cargo o Función";
             // 
             // cmbCargo
             // 
             cmbCargo.FormattingEnabled = true;
-            cmbCargo.Location = new Point(682, 152);
+            cmbCargo.Location = new Point(750, 156);
             cmbCargo.Name = "cmbCargo";
-            cmbCargo.Size = new Size(293, 33);
+            cmbCargo.Size = new Size(266, 33);
             cmbCargo.TabIndex = 6;
             // 
             // btnRegistrar
             // 
-            btnRegistrar.Location = new Point(234, 251);
+            btnRegistrar.Location = new Point(256, 294);
             btnRegistrar.Name = "btnRegistrar";
-            btnRegistrar.Size = new Size(574, 38);
+            btnRegistrar.Size = new Size(582, 48);
             btnRegistrar.TabIndex = 7;
-            btnRegistrar.Text = "Registrar Participantes";
+            btnRegistrar.Text = "Regitrar Participante";
+            btnRegistrar.TextImageRelation = TextImageRelation.ImageAboveText;
             btnRegistrar.UseVisualStyleBackColor = true;
+            btnRegistrar.Click += btnRegistrar_Click;
             // 
-            // RegistroParticipantes
+            // RegistroParticipantesView
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1088, 437);
+            ClientSize = new Size(1080, 450);
             Controls.Add(btnRegistrar);
             Controls.Add(cmbCargo);
             Controls.Add(label4);
@@ -119,8 +121,8 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Name = "RegistroParticipantes";
-            Text = "RegistroParticipantes";
+            Name = "RegistroParticipantesView";
+            Text = "RegistroParticipantesView";
             ResumeLayout(false);
             PerformLayout();
         }

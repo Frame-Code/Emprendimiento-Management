@@ -17,7 +17,7 @@ namespace Modelo
             get
             {
                 return $"{Nombres} {Apellidos}";
-            }
+            } 
         }
         public string NumeroIdentificacion { get; set; } = null!;
         public string NumeroTelefono { get; set; } = null!;

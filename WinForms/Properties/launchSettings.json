@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WinForms": {
+      "commandName": "Project",
+      "commandLineArgs": "C:/Users/jordy/source/repos/Emprendimiento-Management/WinForms/bin/Debug/net8.0-windows/WinForms.exe"
+    }
+  }
+}
