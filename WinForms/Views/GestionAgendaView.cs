@@ -23,6 +23,19 @@ namespace WinForms.Views
         {
             InitializeComponent();
             _controller = controller;
+
+            this.Load += GestionAgendaView_Load;
+        }
+
+
+
+        private void GestionAgendaView_Load(object sender, EventArgs e)
+        {
+            // Solo mientras no los traes de BD:
+            cmbExpositor.Items.Add("Emprendimiento A");
+            cmbExpositor.Items.Add("Emprendimiento B");
+            cmbExpositor.Items.Add("Emprendimiento C");
+            cmbExpositor.SelectedIndex = -1;
         }
 
         private async void btnGuardarCronograma_Click(object sender, EventArgs e)
@@ -55,7 +68,7 @@ namespace WinForms.Views
 
         private async void btnAgregarPresentacion_Click(object sender, EventArgs e)
         {
-            bool isValid = Utils.ValidateStrings(txtExpositor.Text);
+            bool isValid = Utils.ValidateStrings(cmbExpositor.Text);
 
             if (!isValid)
             {
@@ -63,10 +76,18 @@ namespace WinForms.Views
                 return;
             }
 
+            // 🔥 OBTENER EL NUEVO ORDEN AUTOMÁTICO
+            var presentaciones = await _controller.ListarPresentacionesAsync();
+            int nuevoOrden = presentaciones.Count + 1;
+
+            // Si quieres mostrarlo en el NumericUpDown
+            numOrden.Value = nuevoOrden;
+
+            // Crear DTO
             var dto = new PresentacionDto
             {
-                Expositor = txtExpositor.Text,
-                Orden = (int)numOrden.Value,
+                Expositor = cmbExpositor.Text,
+                Orden = nuevoOrden,
                 Fecha = dtFecha.Value,
                 Hora = dtHora.Value.ToString("HH:mm"),
                 Ubicacion = txtUbicacion.Text
@@ -80,7 +101,8 @@ namespace WinForms.Views
                 return;
             }
 
-            MessageBox.Show("Presentación registrada correctamente.");
+            MessageBox.Show($"Presentación registrada con orden #{nuevoOrden}");
         }
     }
+
 }

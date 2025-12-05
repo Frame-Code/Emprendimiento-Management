@@ -37,9 +37,9 @@
             label1 = new Label();
             dtFecha = new DateTimePicker();
             groupBox2 = new GroupBox();
+            cmbExpositor = new ComboBox();
             btnAgregarPresentacion = new Button();
             numOrden = new NumericUpDown();
-            txtExpositor = new TextBox();
             label5 = new Label();
             label4 = new Label();
             label6 = new Label();
@@ -133,9 +133,9 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(cmbExpositor);
             groupBox2.Controls.Add(btnAgregarPresentacion);
             groupBox2.Controls.Add(numOrden);
-            groupBox2.Controls.Add(txtExpositor);
             groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(label4);
             groupBox2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -145,6 +145,14 @@
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Orden de Presentaciones";
+            // 
+            // cmbExpositor
+            // 
+            cmbExpositor.FormattingEnabled = true;
+            cmbExpositor.Location = new Point(122, 49);
+            cmbExpositor.Name = "cmbExpositor";
+            cmbExpositor.Size = new Size(140, 28);
+            cmbExpositor.TabIndex = 9;
             // 
             // btnAgregarPresentacion
             // 
@@ -159,19 +167,14 @@
             // 
             // numOrden
             // 
+            numOrden.Enabled = false;
             numOrden.Font = new Font("Arial", 12F);
             numOrden.Location = new Point(107, 116);
+            numOrden.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numOrden.Name = "numOrden";
             numOrden.Size = new Size(120, 26);
             numOrden.TabIndex = 7;
-            // 
-            // txtExpositor
-            // 
-            txtExpositor.Font = new Font("Arial", 12F);
-            txtExpositor.Location = new Point(107, 54);
-            txtExpositor.Name = "txtExpositor";
-            txtExpositor.Size = new Size(182, 26);
-            txtExpositor.TabIndex = 6;
+            numOrden.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // label5
             // 
@@ -233,11 +236,11 @@
         private Label label3;
         private DateTimePicker dtHora;
         private GroupBox groupBox2;
-        private TextBox txtExpositor;
         private Label label5;
         private Label label4;
         private Button btnAgregarPresentacion;
         private NumericUpDown numOrden;
         private Label label6;
+        private ComboBox cmbExpositor;
     }
 }

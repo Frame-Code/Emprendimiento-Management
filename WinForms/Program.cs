@@ -27,14 +27,14 @@ internal static class Program
         ApplicationConfiguration.Initialize();
 
         var services = AppHost.Services;
-        
+
         using (var scope = services.CreateScope())
         {
             var db = scope.ServiceProvider.GetRequiredService<AppContext>();
             db.Database.Migrate();
 
-            var mainForm = scope.ServiceProvider.GetRequiredService<MainFormView>();
-            Application.Run(mainForm); //AQUI PON LA VISTA QUE NECESITAS, 
+            var agenda = scope.ServiceProvider.GetRequiredService < GestionAgendaView>();
+            Application.Run(agenda); //AQUI PON LA VISTA QUE NECESITAS, 
             //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
             //Application.Run(registroEmprendimiento);
         }

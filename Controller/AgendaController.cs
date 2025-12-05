@@ -8,18 +8,25 @@ using System.Threading.Tasks;
 
 namespace Controller
 {
-    public class AgendaController(IAgendaService agendaService)
+    public class AgendaController
     {
+        private readonly IAgendaService _agendaService;
+
+        public AgendaController(IAgendaService agendaService)
+        {
+            _agendaService = agendaService;
+        }
+
         public async Task<ResponseDto> RegistrarCronogramaAsync(CronogramaDto dto) =>
-            await agendaService.RegistrarCronogramaAsync(dto);
+            await _agendaService.RegistrarCronogramaAsync(dto);
 
         public async Task<ResponseDto> RegistrarPresentacionAsync(PresentacionDto dto) =>
-            await agendaService.RegistrarPresentacionAsync(dto);
+            await _agendaService.RegistrarPresentacionAsync(dto);
 
         public async Task<List<CronogramaDto>> ListarCronogramasAsync() =>
-            await agendaService.ListarCronogramasAsync();
+            await _agendaService.ListarCronogramasAsync();
 
         public async Task<List<PresentacionDto>> ListarPresentacionesAsync() =>
-            await agendaService.ListarPresentacionesAsync();
+            await _agendaService.ListarPresentacionesAsync();
     }
 }
