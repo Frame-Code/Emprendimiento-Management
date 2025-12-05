@@ -4,6 +4,9 @@
       "commandName": "Executable",
       "executablePath": "C:/Repos/C#/Ug/ProyectoFinal/WinForms/bin/Debug/net8.0-windows/WinForms.exe",
       "workingDirectory": "C:/Repos/C#/Ug/ProyectoFinal/WinForms/bin/Debug/net8.0-windows"
+    },
+    "Edwin Go": {
+      "commandName": "Executable"
     }
   }
 }
