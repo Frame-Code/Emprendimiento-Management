@@ -24,6 +24,10 @@ namespace Datos
         public DbSet<RolUsuario> RolUsuarios { get; set; }
         public DbSet<CargoParticipante> CargosParticipante { get; set; }
 
+        public DbSet<Cronograma> Cronogramas { get; set; }//nuevo
+        public DbSet<Presentacion> Presentaciones { get; set; }//nuevo 
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
