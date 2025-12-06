@@ -69,8 +69,9 @@
             BtnAdd.Name = "BtnAdd";
             BtnAdd.Size = new Size(203, 29);
             BtnAdd.TabIndex = 1;
-            BtnAdd.Text = "Agregar particpante";
+            BtnAdd.Text = "Agregar participante";
             BtnAdd.UseVisualStyleBackColor = true;
+            BtnAdd.Click += BtnAdd_Click;
             // 
             // label2
             // 

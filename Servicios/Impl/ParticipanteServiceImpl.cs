@@ -18,6 +18,17 @@ namespace Servicios.Impl
     {
         public async Task<ResponseDto> AgregarParticipante(ParticipanteDto participanteDto)
         {
+            var participantes = await participanteRepository.ListarAsync();
+            var participanteValidate = participantes.FirstOrDefault(p => p.NumeroIdentificacion == participanteDto.NoIdentificacion || p.NumeroTelefono == participanteDto.NoTelefono);
+            if (participanteValidate != null)
+            {
+                return new ResponseDto
+                {
+                    IsSuccess = false,
+                    Message = "Ya existe un participante con el mismo número de identificación."
+                };
+            }
+
             var emprendimiento = await emprendimientoRepository.ObtenerPorIdAsync(participanteDto.IdEmprendimiento);
             var cargo = await cargoParticipanteRepository.ObtenerPorIdAsync(participanteDto.IdCargoParticipante);
             if (emprendimiento == null || cargo == null)
@@ -54,7 +65,7 @@ namespace Servicios.Impl
             var list = await participanteRepository.ListarAsync();
             var nombres = list
                 .Where(p => p.IdEmprendimiento == idEmprendimiento)
-                .Select(p => p.NombresCompletos)
+                .Select(p => p.NombresCompletos + "... #Identificacion: " + p.NumeroIdentificacion + "... Cargo: " + p.cargoParticipante.Nombre)
                 .ToList();
             return nombres;
         }
