@@ -5,8 +5,19 @@ using Modelo;
 
 namespace Datos.Impl
 {
-    public class ParticipanteRepositoryImpl(AppContext context) : IParticipanteRepository
+    public class ParticipanteRepositoryImpl : IParticipanteRepository
     {
+        private readonly AppContext context;
+
+        public ParticipanteRepositoryImpl(AppContext context)
+        {
+            this.context = context;
+        }
+
+        public ParticipanteRepositoryImpl()
+        {
+        }
+
         public async Task<Participante?> ObtenerPorIdAsync(int id) =>
             await context.Participantes
                 .Include(p => p.emprendimiento)
