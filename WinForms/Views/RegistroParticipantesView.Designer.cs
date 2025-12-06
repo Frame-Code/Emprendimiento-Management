@@ -112,7 +112,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1080, 450);
+            ClientSize = new Size(1269, 450);
             Controls.Add(btnRegistrar);
             Controls.Add(cmbCargo);
             Controls.Add(label4);

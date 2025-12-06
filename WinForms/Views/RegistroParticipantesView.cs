@@ -74,8 +74,10 @@ namespace WinForms.Views
             if (respuesta.IsSuccess)
             {
                 MessageBox.Show("¡Guardado correctamente!");
-                txtNombre.Clear();
-                txtApellido.Clear();
+
+                // AGREGA ESTAS DOS LÍNEAS:
+                this.DialogResult = DialogResult.OK; // Avisa al padre que todo salió bien
+                this.Close(); // Cierra la ventana de registro automáticamente
             }
             else
             {
@@ -83,17 +85,14 @@ namespace WinForms.Views
             }
         }
 
-        // En RegistroParticipantesView.cs
-        // Fíjate que en el paréntesis ahora pedimos TRES cosas: ID, RepoParticipante y RepoCargo
         public RegistroParticipantesView(
             int idEmprendimiento,
             IParticipanteRepository participanteRepo,
-            ICargoParticipanteRepository cargoRepo) // <--- Agregamos este parámetro
+            ICargoParticipanteRepository cargoRepo)
         {
             InitializeComponent();
             _idEmprendimientoActual = idEmprendimiento;
 
-            // Ya no usamos 'new' aquí, usamos los que nos pasaron en el paréntesis
             var miServicio = new RegistroParticipanteService(participanteRepo, cargoRepo);
 
             _miControlador = new RegistroParticipanteController(miServicio);

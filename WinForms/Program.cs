@@ -31,12 +31,12 @@ internal static class Program
         using (var scope = services.CreateScope())
         {
             var db = scope.ServiceProvider.GetRequiredService<AppContext>();
-            // db.Database.Migrate();
+
 
             var mainForm = scope.ServiceProvider.GetRequiredService<MainFormView>();
             Application.Run(mainForm);
-            //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
-            //Application.Run(registroEmprendimiento);
+            var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
+            Application.Run(registroEmprendimiento);
         }
     }
 
