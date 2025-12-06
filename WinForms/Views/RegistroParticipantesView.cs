@@ -82,5 +82,22 @@ namespace WinForms.Views
                 MessageBox.Show("Error: " + respuesta.Message);
             }
         }
+
+        // En RegistroParticipantesView.cs
+        // Fíjate que en el paréntesis ahora pedimos TRES cosas: ID, RepoParticipante y RepoCargo
+        public RegistroParticipantesView(
+            int idEmprendimiento,
+            IParticipanteRepository participanteRepo,
+            ICargoParticipanteRepository cargoRepo) // <--- Agregamos este parámetro
+        {
+            InitializeComponent();
+            _idEmprendimientoActual = idEmprendimiento;
+
+            // Ya no usamos 'new' aquí, usamos los que nos pasaron en el paréntesis
+            var miServicio = new RegistroParticipanteService(participanteRepo, cargoRepo);
+
+            _miControlador = new RegistroParticipanteController(miServicio);
+        }
+
     }
 }
