@@ -9,6 +9,7 @@ using Servicios.Impl;
 using Servicios.Interfaces;
 using Shared;
 using WinForms.Views;
+using WinForms.Views.Util;
 using AppContext = Datos.AppContext;
 
 namespace WinForms;
@@ -35,8 +36,8 @@ internal static class Program
 
             var mainForm = scope.ServiceProvider.GetRequiredService<MainFormView>();
             Application.Run(mainForm);
-            var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
-            Application.Run(registroEmprendimiento);
+            /*var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
+            Application.Run(registroEmprendimiento);*/
         }
     }
 
@@ -74,17 +75,20 @@ internal static class Program
                 // Servicios 
                 services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();
                 services.AddScoped<IParticipanteService, ParticipanteServiceImpl>();
+                services.AddScoped<IRegistroParticipanteService, RegistroParticipanteService>();
 
                 // Controllers
                 services.AddScoped<RegistroEmprendimientoController>();
                 services.AddScoped<ParticipanteController>();
+                services.AddScoped<RegistroParticipanteController>();
 
                 // Formularios
-                services.AddScoped<MainFormView>();
                 services.AddScoped<EmprendimientosUc>();
                 services.AddScoped<RegistroEmprendimientoView>();
                 services.AddScoped<DetalleEmprendimientoView>();
-
+                services.AddScoped<RegistroParticipantesView>();
+                services.AddScoped<VerParticipantesView>();
+                services.AddScoped<MainFormView>();
             });
     }
 }

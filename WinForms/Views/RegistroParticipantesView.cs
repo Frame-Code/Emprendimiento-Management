@@ -1,66 +1,67 @@
 ﻿using System;
 using System.Windows.Forms;
 using Shared;
-using Servicios.Impl;
 using Controller;
 using Datos.Interfaces;
+using Servicios.Impl;
 using WinForms.Views.Util;
-
+using Servicios.Interfaces;
 
 namespace WinForms.Views
 {
     public partial class RegistroParticipantesView : Form
     {
         private readonly RegistroParticipanteController _miControlador;
+        private readonly IRegistroParticipanteService _miServicio;
         private int _idEmprendimientoActual;
 
-        public RegistroParticipantesView(int idEmprendimiento, RegistroParticipanteController controller)
+        // Constructor que se usa desde VerParticipantesView
+        public RegistroParticipantesView(
+            IParticipanteRepository participanteRepo,
+            ICargoParticipanteRepository cargoRepo, 
+            RegistroParticipanteController registroParticipanteController, 
+            IRegistroParticipanteService registroParticipanteService)
         {
+            _miControlador = registroParticipanteController;
+            _miServicio = registroParticipanteService;
             InitializeComponent();
-            _idEmprendimientoActual = idEmprendimiento;
-
-            _miControlador = controller;
         }
 
+        public void Init(int idEmprendimiento)
+        {
+            _idEmprendimientoActual = idEmprendimiento;
+        }
+
+        // Carga inicial del formulario: llena el ComboBox de cargos
         private async void RegistroParticipantesView_Load(object sender, EventArgs e)
         {
-            try
-            {
-
-                var cargos = await _miControlador.CargarCargosParaCombo();
-
-                cmbCargo.DataSource = cargos;
-                cmbCargo.DisplayMember = "Nombre";
-                cmbCargo.ValueMember = "Id";
-                cmbCargo.SelectedIndex = -1;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error cargando cargos: " + ex.Message);
-            }
+            
         }
 
+        // Click del botón Registrar
         private async void btnRegistrar_Click(object sender, EventArgs e)
         {
-
+            // Validar Nombre y Apellido usando Utils
             if (!Utils.ValidateStrings(txtNombre.Text, txtApellido.Text))
             {
                 MessageBox.Show("Completa los nombres y apellidos.");
                 return;
             }
+
+            // Validar que haya seleccionado un cargo
             if (cmbCargo.SelectedIndex == -1)
             {
                 MessageBox.Show("Selecciona un cargo.");
                 return;
             }
 
-
             var nuevoDto = new ParticipanteDto
             {
-                Nombres = txtNombre.Text,
-                Apellidos = txtApellido.Text,
+                Nombres = txtNombre.Text.Trim(),
+                Apellidos = txtApellido.Text.Trim(),
                 IdEmprendimiento = _idEmprendimientoActual,
                 IdCargoParticipante = (int)cmbCargo.SelectedValue,
+                // De momento fijos, hasta que tengas campos en la UI
                 NoIdentificacion = "0000000000",
                 NoTelefono = "0000000000"
             };
@@ -74,10 +75,8 @@ namespace WinForms.Views
             if (respuesta.IsSuccess)
             {
                 MessageBox.Show("¡Guardado correctamente!");
-
-                // AGREGA ESTAS DOS LÍNEAS:
-                this.DialogResult = DialogResult.OK; // Avisa al padre que todo salió bien
-                this.Close(); // Cierra la ventana de registro automáticamente
+                this.DialogResult = DialogResult.OK; // Para que el padre sepa que fue exitoso
+                this.Close();                        // Cierre automático del formulario
             }
             else
             {
@@ -85,18 +84,21 @@ namespace WinForms.Views
             }
         }
 
-        public RegistroParticipantesView(
-            int idEmprendimiento,
-            IParticipanteRepository participanteRepo,
-            ICargoParticipanteRepository cargoRepo)
+        private async void RegistroParticipantesView_Load_1(object sender, EventArgs e)
         {
-            InitializeComponent();
-            _idEmprendimientoActual = idEmprendimiento;
+            try
+            {
+                var cargos = await _miControlador.CargarCargosParaCombo();
 
-            var miServicio = new RegistroParticipanteService(participanteRepo, cargoRepo);
+                cmbCargo.DataSource = cargos;
+                cmbCargo.DisplayMember = "Nombre";
+                cmbCargo.ValueMember = "Id";
 
-            _miControlador = new RegistroParticipanteController(miServicio);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error cargando cargos: " + ex.Message);
+            }
         }
-
     }
 }

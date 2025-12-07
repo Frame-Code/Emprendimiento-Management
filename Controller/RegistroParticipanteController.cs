@@ -3,15 +3,16 @@ using System.Threading.Tasks;
 using Modelo;
 using Shared;
 using Servicios.Impl;
+using Servicios.Interfaces;
 
 namespace Controller
 {
 
     public class RegistroParticipanteController
     {
-        private readonly RegistroParticipanteService _servicioExclusivo;
+        private readonly IRegistroParticipanteService _servicioExclusivo;
 
-        public RegistroParticipanteController(RegistroParticipanteService servicio)
+        public RegistroParticipanteController(IRegistroParticipanteService servicio)
         {
             _servicioExclusivo = servicio;
         }

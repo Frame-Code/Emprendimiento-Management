@@ -13,10 +13,6 @@ namespace Datos.Impl
             this.context = context;
         }
 
-        public CargoParticipanteRepositoryImpl()
-        {
-        }
-
         public async Task<CargoParticipante?> ObtenerPorIdAsync(int id) =>
             await context.CargosParticipante
                 .FirstOrDefaultAsync(c => c.Id == id);

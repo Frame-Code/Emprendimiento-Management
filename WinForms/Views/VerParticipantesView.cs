@@ -7,8 +7,10 @@ namespace WinForms.Views.Util
 {
     public partial class VerParticipantesView : Form
     {
-        public VerParticipantesView()
+        private RegistroParticipantesView _registroParticipantesView;
+        public VerParticipantesView(RegistroParticipantesView registroParticipantesView)
         {
+            _registroParticipantesView = registroParticipantesView;
             InitializeComponent();
         }
 
@@ -16,16 +18,10 @@ namespace WinForms.Views.Util
         {
             try
             {
-                int idEmprendimiento = 1;
+                int idEmprendimiento = 1; // aquí tienes que poner el id real del emprendimiento, auqneu nose porque lo pides, ya me explicas
 
-                var repoParticipante = new ParticipanteRepositoryImpl();
-                var repoCargo = new CargoParticipanteRepositoryImpl();
-
-                RegistroParticipantesView formRegistro = new RegistroParticipantesView(
-                    idEmprendimiento,
-                    repoParticipante,
-                    repoCargo
-                );
+                var formRegistro = _registroParticipantesView;
+                formRegistro.Init(idEmprendimiento);
 
                 if (formRegistro.ShowDialog() == DialogResult.OK)
                 {

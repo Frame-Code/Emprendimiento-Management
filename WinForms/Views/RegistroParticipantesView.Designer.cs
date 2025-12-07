@@ -96,6 +96,7 @@
             cmbCargo.Name = "cmbCargo";
             cmbCargo.Size = new Size(266, 33);
             cmbCargo.TabIndex = 6;
+            cmbCargo.DropDownStyle = ComboBoxStyle.DropDownList;
             // 
             // btnRegistrar
             // 
@@ -123,6 +124,7 @@
             Controls.Add(label1);
             Name = "RegistroParticipantesView";
             Text = "RegistroParticipantesView";
+            Load += RegistroParticipantesView_Load_1;
             ResumeLayout(false);
             PerformLayout();
         }

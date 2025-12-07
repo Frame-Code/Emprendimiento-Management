@@ -15,10 +15,12 @@ namespace WinForms
     public partial class MainFormView : Form
     {
         private readonly EmprendimientosUc _emprendimientosUc;
+        private readonly VerParticipantesView _verParticipantesView;
 
-        public MainFormView(EmprendimientosUc emprendimientosUc)
+        public MainFormView(EmprendimientosUc emprendimientosUc, VerParticipantesView verParticipantesView)
         {
             _emprendimientosUc = emprendimientosUc;
+            _verParticipantesView = verParticipantesView;
             InitializeComponent();
         }
 
@@ -39,8 +41,7 @@ namespace WinForms
             try
             {
 
-                VerParticipantesView participantesView = new VerParticipantesView();
-
+                VerParticipantesView participantesView = _verParticipantesView;
                 participantesView.ShowDialog();
             }
             catch (Exception ex)

@@ -4,11 +4,12 @@ using System.Threading.Tasks;
 using Modelo;
 using Datos.Interfaces;
 using Shared;
+using Servicios.Interfaces;
 
 namespace Servicios.Impl
 {
 
-    public class RegistroParticipanteService
+    public class RegistroParticipanteService : IRegistroParticipanteService
     {
 
         private readonly IParticipanteRepository _participanteRepo;
