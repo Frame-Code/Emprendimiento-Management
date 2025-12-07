@@ -13,5 +13,6 @@ namespace Servicios.Interfaces
         Task<ResponseDto> RegistrarPresentacionAsync(PresentacionDto dto);
         Task<List<CronogramaDto>> ListarCronogramasAsync();
         Task<List<PresentacionDto>> ListarPresentacionesAsync();
+        Task<List<ExpositorDto>> ListarExpositoresAsync();
     }
 }

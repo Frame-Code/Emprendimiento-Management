@@ -28,5 +28,8 @@ namespace Controller
 
         public async Task<List<PresentacionDto>> ListarPresentacionesAsync() =>
             await _agendaService.ListarPresentacionesAsync();
+
+        public Task<List<ExpositorDto>> ListarExpositoresAsync() =>
+            _agendaService.ListarExpositoresAsync();
     }
 }

@@ -29,12 +29,13 @@ namespace WinForms.Views
 
 
 
-        private void GestionAgendaView_Load(object sender, EventArgs e)
+        private async void GestionAgendaView_Load(object sender, EventArgs e)
         {
-            // Solo mientras no los traes de BD:
-            cmbExpositor.Items.Add("Emprendimiento A");
-            cmbExpositor.Items.Add("Emprendimiento B");
-            cmbExpositor.Items.Add("Emprendimiento C");
+            var expositores = await _controller.ListarExpositoresAsync();
+
+            cmbExpositor.DataSource = expositores;
+            cmbExpositor.DisplayMember = "Nombre";
+            cmbExpositor.ValueMember = "Id";
             cmbExpositor.SelectedIndex = -1;
         }
 
@@ -76,14 +77,14 @@ namespace WinForms.Views
                 return;
             }
 
-            // 🔥 OBTENER EL NUEVO ORDEN AUTOMÁTICO
+            
             var presentaciones = await _controller.ListarPresentacionesAsync();
             int nuevoOrden = presentaciones.Count + 1;
 
-            // Si quieres mostrarlo en el NumericUpDown
+           
             numOrden.Value = nuevoOrden;
 
-            // Crear DTO
+            
             var dto = new PresentacionDto
             {
                 Expositor = cmbExpositor.Text,

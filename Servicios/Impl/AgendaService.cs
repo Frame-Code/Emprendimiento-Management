@@ -5,11 +5,22 @@ using Shared;
 
 namespace Servicios.Impl
 {
-    public class AgendaServiceImpl(
-        ICronogramaRepository cronogramaRepository,
-        IPresentacionRepository presentacionRepository
-    ) : IAgendaService
+    public class AgendaServiceImpl : IAgendaService
     {
+        private readonly ICronogramaRepository _cronogramaRepository;
+        private readonly IPresentacionRepository _presentacionRepository;
+        private readonly IEmprendimientoRepository _emprendimientoRepository;
+
+        public AgendaServiceImpl(
+            ICronogramaRepository cronogramaRepository,
+            IPresentacionRepository presentacionRepository,
+            IEmprendimientoRepository emprendimientoRepository)
+        {
+            _cronogramaRepository = cronogramaRepository;
+            _presentacionRepository = presentacionRepository;
+            _emprendimientoRepository = emprendimientoRepository;
+        }
+
         public async Task<ResponseDto> RegistrarCronogramaAsync(CronogramaDto dto)
         {
             var entity = new Cronograma
@@ -19,7 +30,7 @@ namespace Servicios.Impl
                 Ubicacion = dto.Ubicacion
             };
 
-            await cronogramaRepository.CreateAsync(entity);
+            await _cronogramaRepository.CreateAsync(entity);
 
             return new ResponseDto
             {
@@ -39,7 +50,7 @@ namespace Servicios.Impl
                 Ubicacion = dto.Ubicacion
             };
 
-            await presentacionRepository.CreateAsync(entity);
+            await _presentacionRepository.CreateAsync(entity);
 
             return new ResponseDto
             {
@@ -50,7 +61,7 @@ namespace Servicios.Impl
 
         public async Task<List<CronogramaDto>> ListarCronogramasAsync()
         {
-            var lista = await cronogramaRepository.ListarAsync();
+            var lista = await _cronogramaRepository.ListarAsync();
 
             return lista.Select(c => new CronogramaDto
             {
@@ -62,7 +73,7 @@ namespace Servicios.Impl
 
         public async Task<List<PresentacionDto>> ListarPresentacionesAsync()
         {
-            var lista = await presentacionRepository.ListarAsync();
+            var lista = await _presentacionRepository.ListarAsync();
 
             return lista.Select(p => new PresentacionDto
             {
@@ -71,6 +82,18 @@ namespace Servicios.Impl
                 Fecha = p.Fecha,
                 Hora = p.Hora,
                 Ubicacion = p.Ubicacion
+            }).ToList();
+        }
+
+        
+        public async Task<List<ExpositorDto>> ListarExpositoresAsync()
+        {
+            var emprendimientos = await _emprendimientoRepository.ListarAsync();
+
+            return emprendimientos.Select(e => new ExpositorDto
+            {
+                Id = e.Id,
+                Nombre = e.Nombre
             }).ToList();
         }
     }
