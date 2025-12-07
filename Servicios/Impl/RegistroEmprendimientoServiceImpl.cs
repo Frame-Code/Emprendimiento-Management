@@ -33,7 +33,12 @@ namespace Servicios.Impl
             }).ToList();
             return dtos;
         }
-            
+
+        public async Task<EmprendimientoDto?> ObtenerPorIdAsync(int id)
+        {
+            var listaCompleta = await ListarEmprendimientosAsync();
+            return listaCompleta.FirstOrDefault(e => e.Id == id);
+        }
 
         public async Task<List<Facultad>> ListarFacultadesAsync() => 
             await facultadRepository.ListarAsync();
@@ -59,8 +64,8 @@ namespace Servicios.Impl
             {
                 Nombre = dto.Nombre,
                 Descripcion = dto.Descripcion,
-                IdFacultad = rubro.Id,
-                IdRubroEmprendimiento = facultad.Id
+                IdFacultad = facultad.Id,
+                IdRubroEmprendimiento = rubro.Id
             };
 
             await emprendimientoRepository.CreateAsync(emprendimiento);

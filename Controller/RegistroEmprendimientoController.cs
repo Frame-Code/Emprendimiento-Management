@@ -21,5 +21,11 @@ namespace Controller
 
         public async Task DeleteByIdAsync(int id) =>
             await registroEmprendimientoService.DeleteByIdAsync(id);
+
+        public async Task<EmprendimientoDto?> ObtenerPorIdAsync(int id) =>
+            await registroEmprendimientoService.ObtenerPorIdAsync(id);
+
+
+
     }
 }
