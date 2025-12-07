@@ -70,14 +70,18 @@ internal static class Program
                 services.AddScoped<IFacultadRepository, FacultadRepositoryImpl>();
                 services.AddScoped<IParticipanteRepository, ParticipanteRepositoryImpl>();
                 services.AddScoped<ICargoParticipanteRepository, CargoParticipanteRepositoryImpl>();
+                services.AddScoped<ICronogramaRepository, CronogramaRepositoryImpl>();
+                services.AddScoped<IPresentacionRepository, PresentacionRepositoryImpl>();
 
                 // Servicios 
                 services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();
                 services.AddScoped<IParticipanteService, ParticipanteServiceImpl>();
+                services.AddScoped<IAgendaService, AgendaServiceImpl>();
 
                 // Controllers
                 services.AddScoped<RegistroEmprendimientoController>();
                 services.AddScoped<ParticipanteController>();
+                services.AddScoped<AgendaController>();
 
                 // Formularios
                 services.AddScoped<MainFormView>();

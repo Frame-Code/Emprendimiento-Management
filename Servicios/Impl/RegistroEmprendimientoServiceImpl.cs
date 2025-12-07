@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 
 namespace Servicios.Impl
 {
-    public class RegistroEmprendimientoServiceImpl (
-        IEmprendimientoRepository emprendimientoRepository, 
+    public class RegistroEmprendimientoServiceImpl(
+        IEmprendimientoRepository emprendimientoRepository,
         IRubroEmprendimientoRepository rubroEmprendimientoRepository,
         IFacultadRepository facultadRepository) : IRegistroEmprendimientoService
     {
@@ -34,7 +34,8 @@ namespace Servicios.Impl
             return dtos;
         }
 
-        public async Task<List<Facultad>> ListarFacultadesAsync() => 
+
+        public async Task<List<Facultad>> ListarFacultadesAsync() =>
             await facultadRepository.ListarAsync();
 
         public async Task<List<RubroEmprendimiento>> ListarRubrosAsync() =>
