@@ -59,8 +59,8 @@ namespace Servicios.Impl
             {
                 Nombre = dto.Nombre,
                 Descripcion = dto.Descripcion,
-                IdFacultad = rubro.Id,
-                IdRubroEmprendimiento = facultad.Id
+                IdFacultad = facultad.Id,
+                IdRubroEmprendimiento = rubro.Id
             };
 
             await emprendimientoRepository.CreateAsync(emprendimiento);
@@ -69,7 +69,15 @@ namespace Servicios.Impl
                 IsSuccess = true,
                 Message = "Emprendimiento creado con exito"
             };
-
         }
+            
+        public async Task<EmprendimientoDto?> ObtenerPorIdAsync(int id)
+        {
+            var listaCompleta = await ListarEmprendimientosAsync();
+            return listaCompleta.FirstOrDefault(e => e.Id == id);
+        }
+            
+
+        
     }
 }

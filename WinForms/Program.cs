@@ -27,14 +27,14 @@ internal static class Program
         ApplicationConfiguration.Initialize();
 
         var services = AppHost.Services;
-
+        
         using (var scope = services.CreateScope())
         {
             var db = scope.ServiceProvider.GetRequiredService<AppContext>();
             db.Database.Migrate();
-
-            var agenda = scope.ServiceProvider.GetRequiredService < GestionAgendaView>();
-            Application.Run(agenda); //AQUI PON LA VISTA QUE NECESITAS, 
+          
+            var agenda = scope.ServiceProvider.GetRequiredService<GestionAgendaView>();
+            Application.Run(agenda);
             //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
             //Application.Run(registroEmprendimiento);
         }
@@ -70,34 +70,27 @@ internal static class Program
                 services.AddScoped<IFacultadRepository, FacultadRepositoryImpl>();
                 services.AddScoped<IParticipanteRepository, ParticipanteRepositoryImpl>();
                 services.AddScoped<ICargoParticipanteRepository, CargoParticipanteRepositoryImpl>();
-                // Repositorios (NUEVOS)
                 services.AddScoped<ICronogramaRepository, CronogramaRepositoryImpl>();
                 services.AddScoped<IPresentacionRepository, PresentacionRepositoryImpl>();
 
-
-                //AGREGA LOS REPOSITORIOS, SERVICIOS Y CONTROLADRES QUE AGREGASTE AQUI
                 // Servicios 
                 services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();
                 services.AddScoped<IParticipanteService, ParticipanteServiceImpl>();
-                // Servicios (NUEVO)
                 services.AddScoped<IAgendaService, AgendaServiceImpl>();
-
 
                 // Controllers
                 services.AddScoped<RegistroEmprendimientoController>();
                 services.AddScoped<ParticipanteController>();
-                // Controladores (NUEVO)
                 services.AddScoped<AgendaController>();
-
 
                 // Formularios
                 services.AddScoped<MainFormView>();
                 services.AddScoped<EmprendimientosUc>();
                 services.AddScoped<RegistroEmprendimientoView>();
                 services.AddScoped<DetalleEmprendimientoView>();
-                // Formularios (NUEVO)
+                services.AddScoped<ConsultaEmprendimientoView>();
+                services.AddScoped<MainEstudianteView>();
                 services.AddScoped<GestionAgendaView>();
-
             });
     }
 }
