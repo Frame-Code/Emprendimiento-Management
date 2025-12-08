@@ -33,7 +33,7 @@ internal static class Program
             var db = scope.ServiceProvider.GetRequiredService<AppContext>();
             db.Database.Migrate();
 
-            var mainForm = scope.ServiceProvider.GetRequiredService<MainFormView>();
+            var mainForm = scope.ServiceProvider.GetRequiredService<CalendariodeActividadesView>();
             Application.Run(mainForm);
             //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
             //Application.Run(registroEmprendimiento);
@@ -70,21 +70,23 @@ internal static class Program
                 services.AddScoped<IFacultadRepository, FacultadRepositoryImpl>();
                 services.AddScoped<IParticipanteRepository, ParticipanteRepositoryImpl>();
                 services.AddScoped<ICargoParticipanteRepository, CargoParticipanteRepositoryImpl>();
+                services.AddScoped<ICalendarioService, CalendarioServiceImpl>();
 
                 // Servicios 
                 services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();
                 services.AddScoped<IParticipanteService, ParticipanteServiceImpl>();
 
-                // Controllers
+                // Controllers 
                 services.AddScoped<RegistroEmprendimientoController>();
                 services.AddScoped<ParticipanteController>();
+                services.AddScoped<CalendarioController>();
 
                 // Formularios
                 services.AddScoped<MainFormView>();
                 services.AddScoped<EmprendimientosUc>();
                 services.AddScoped<RegistroEmprendimientoView>();
                 services.AddScoped<DetalleEmprendimientoView>();
-
+                services.AddScoped<CalendariodeActividadesView>();
             });
     }
 }

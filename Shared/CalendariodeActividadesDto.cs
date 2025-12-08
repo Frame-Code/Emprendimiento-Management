@@ -8,6 +8,10 @@ namespace Shared
 {
     public class CalendariodeActividadesDto
     {
-        public int IdFacultad { get; set; }
+        public string NombreEvento { get; set; } = null!;
+        public DateTime FechaInicio { get; set; }
+        public DateTime FechaFin { get; set; }
+        public string Facultad { get; set; } = null!;
+        public int FacultadId { get; set; }
     }
 }
