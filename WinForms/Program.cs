@@ -32,9 +32,9 @@ internal static class Program
         {
             var db = scope.ServiceProvider.GetRequiredService<AppContext>();
             db.Database.Migrate();
-          
-            var agenda = scope.ServiceProvider.GetRequiredService<GestionAgendaView>();
-            Application.Run(agenda);
+
+            var mainForm = scope.ServiceProvider.GetRequiredService<CalendariodeActividadesView>();
+            Application.Run(mainForm);
             //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
             //Application.Run(registroEmprendimiento);
         }
@@ -70,6 +70,7 @@ internal static class Program
                 services.AddScoped<IFacultadRepository, FacultadRepositoryImpl>();
                 services.AddScoped<IParticipanteRepository, ParticipanteRepositoryImpl>();
                 services.AddScoped<ICargoParticipanteRepository, CargoParticipanteRepositoryImpl>();
+                services.AddScoped<ICalendarioService, CalendarioServiceImpl>();
                 services.AddScoped<ICronogramaRepository, CronogramaRepositoryImpl>();
                 services.AddScoped<IPresentacionRepository, PresentacionRepositoryImpl>();
 
@@ -78,9 +79,10 @@ internal static class Program
                 services.AddScoped<IParticipanteService, ParticipanteServiceImpl>();
                 services.AddScoped<IAgendaService, AgendaServiceImpl>();
 
-                // Controllers
+                // Controllers 
                 services.AddScoped<RegistroEmprendimientoController>();
                 services.AddScoped<ParticipanteController>();
+                services.AddScoped<CalendarioController>();
                 services.AddScoped<AgendaController>();
 
                 // Formularios
@@ -88,6 +90,7 @@ internal static class Program
                 services.AddScoped<EmprendimientosUc>();
                 services.AddScoped<RegistroEmprendimientoView>();
                 services.AddScoped<DetalleEmprendimientoView>();
+                services.AddScoped<CalendariodeActividadesView>();
                 services.AddScoped<ConsultaEmprendimientoView>();
                 services.AddScoped<MainEstudianteView>();
                 services.AddScoped<GestionAgendaView>();
