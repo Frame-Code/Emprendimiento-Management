@@ -18,8 +18,8 @@ namespace WinForms.Views
         // Constructor que se usa desde VerParticipantesView
         public RegistroParticipantesView(
             IParticipanteRepository participanteRepo,
-            ICargoParticipanteRepository cargoRepo, 
-            RegistroParticipanteController registroParticipanteController, 
+            ICargoParticipanteRepository cargoRepo,
+            RegistroParticipanteController registroParticipanteController,
             IRegistroParticipanteService registroParticipanteService)
         {
             _miControlador = registroParticipanteController;
@@ -35,20 +35,33 @@ namespace WinForms.Views
         // Carga inicial del formulario: llena el ComboBox de cargos
         private async void RegistroParticipantesView_Load(object sender, EventArgs e)
         {
-            
+            try
+            {
+                var cargos = await _miControlador.CargarCargosParaCombo();
+
+                cmbCargo.DataSource = cargos;
+                cmbCargo.DisplayMember = "Nombre";
+                cmbCargo.ValueMember = "Id";
+
+                cmbCargo.SelectedIndex = -1; // dejar así SI haces validación después
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error cargando cargos: " + ex.Message);
+            }
         }
 
         // Click del botón Registrar
         private async void btnRegistrar_Click(object sender, EventArgs e)
         {
-            // Validar Nombre y Apellido usando Utils
-            if (!Utils.ValidateStrings(txtNombre.Text, txtApellido.Text))
+
+            if (!Utils.ValidateStrings(txtNombre.Text, txtApellido.Text, txtNdeIdentificacion.Text
+                , txtNdeTelefono.Text))
             {
-                MessageBox.Show("Completa los nombres y apellidos.");
+                MessageBox.Show("Completa los espacios en blanco.");
                 return;
             }
 
-            // Validar que haya seleccionado un cargo
             if (cmbCargo.SelectedIndex == -1)
             {
                 MessageBox.Show("Selecciona un cargo.");
@@ -61,9 +74,8 @@ namespace WinForms.Views
                 Apellidos = txtApellido.Text.Trim(),
                 IdEmprendimiento = _idEmprendimientoActual,
                 IdCargoParticipante = (int)cmbCargo.SelectedValue,
-                // De momento fijos, hasta que tengas campos en la UI
-                NoIdentificacion = "0000000000",
-                NoTelefono = "0000000000"
+                NoIdentificacion = txtNdeIdentificacion.Text.Trim(),
+                NoTelefono = txtNdeTelefono.Text.Trim()
             };
 
             btnRegistrar.Enabled = false;
@@ -84,21 +96,9 @@ namespace WinForms.Views
             }
         }
 
-        private async void RegistroParticipantesView_Load_1(object sender, EventArgs e)
+        private void txtNEmprendimiento_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                var cargos = await _miControlador.CargarCargosParaCombo();
 
-                cmbCargo.DataSource = cargos;
-                cmbCargo.DisplayMember = "Nombre";
-                cmbCargo.ValueMember = "Id";
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error cargando cargos: " + ex.Message);
-            }
         }
     }
-}
+}
