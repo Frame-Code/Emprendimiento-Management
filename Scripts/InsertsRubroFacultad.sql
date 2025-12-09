@@ -15,3 +15,13 @@ insert into CargosParticipante values
 ('Visitante', 'Visitante'),
 ('Supervisor', 'Supervisor'),
 ('Participante general', 'Participante general')
+
+
+insert into RolUsuarios values
+('Administrador', 'ADM'),
+('Estudiante', 'Est')
+
+
+insert into Usuarios values
+('admin', 'admin', 1),
+('estu', 'estu', 2)
