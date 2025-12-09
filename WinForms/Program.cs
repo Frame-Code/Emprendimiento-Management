@@ -70,6 +70,7 @@ internal static class Program
                 services.AddScoped<IFacultadRepository, FacultadRepositoryImpl>();
                 services.AddScoped<IParticipanteRepository, ParticipanteRepositoryImpl>();
                 services.AddScoped<ICargoParticipanteRepository, CargoParticipanteRepositoryImpl>();
+                services.AddScoped<ICalendarioService, CalendarioServiceImpl>();
                 services.AddScoped<ICronogramaRepository, CronogramaRepositoryImpl>();
                 services.AddScoped<IPresentacionRepository, PresentacionRepositoryImpl>();
                 services.AddScoped<IUsuarioRepository, UsuarioRepositoryImpl>();
@@ -82,9 +83,10 @@ internal static class Program
                 services.AddScoped<ILogInService, LogInServiceImpl>();
                 services.AddScoped<IRolUsuarioService, RolUsuarioServiceImpl>();
 
-                // Controllers
+                // Controllers 
                 services.AddScoped<RegistroEmprendimientoController>();
                 services.AddScoped<ParticipanteController>();
+                services.AddScoped<CalendarioController>();
                 services.AddScoped<AgendaController>();
                 services.AddScoped<LogInController>();
 
@@ -93,6 +95,7 @@ internal static class Program
                 services.AddScoped<EmprendimientosUc>();
                 services.AddScoped<RegistroEmprendimientoView>();
                 services.AddScoped<DetalleEmprendimientoView>();
+                services.AddScoped<CalendariodeActividadesView>();
                 services.AddScoped<ConsultaEmprendimientoView>();
                 services.AddScoped<MainEstudianteView>();
                 services.AddScoped<GestionAgendaView>();
