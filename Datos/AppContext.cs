@@ -26,6 +26,8 @@ namespace Datos
 
         public DbSet<Cronograma> Cronogramas { get; set; }//nuevo
         public DbSet<Presentacion> Presentaciones { get; set; }//nuevo 
+        
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
