@@ -50,6 +50,11 @@ namespace Servicios.Impl
             return response;
         }
 
+        public async Task<List<Participante>> ObtenerTodos()
+        {          
+            return await _participanteRepo.ListarAsync();
+        }
+
         public async Task<List<CargoParticipante>> ObtenerListaCargos()
         {
             return await _cargoRepo.ListarAsync();

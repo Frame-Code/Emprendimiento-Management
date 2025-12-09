@@ -12,5 +12,7 @@ namespace Servicios.Interfaces
     {
         public Task<ResponseDto> RegistrarNuevoParticipante(ParticipanteDto dto);
         public Task<List<CargoParticipante>> ObtenerListaCargos();
+        public Task<List<Participante>> ObtenerTodos();
+
     }
 }

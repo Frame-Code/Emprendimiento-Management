@@ -28,5 +28,11 @@ namespace Controller
 
             return await _servicioExclusivo.RegistrarNuevoParticipante(dto);
         }
+
+        public async Task<List<Participante>> ObtenerTodos()
+        {
+            return await _servicioExclusivo.ObtenerTodos();
+
+        }
     }
 }

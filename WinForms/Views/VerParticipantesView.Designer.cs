@@ -20,6 +20,8 @@
             base.Dispose(disposing);
         }
 
+
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -29,46 +31,46 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            dataGridView1 = new DataGridView();
+            dgvParticipantes = new DataGridView();
             label2 = new Label();
             btnRegistrate = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvParticipantes).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(270, 9);
+            label1.Location = new Point(12, 9);
             label1.Name = "label1";
             label1.Size = new Size(529, 48);
             label1.TabIndex = 0;
             label1.Text = "Participantes Emprendimiento";
             // 
-            // dataGridView1
+            // dgvParticipantes
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(35, 81);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(394, 318);
-            dataGridView1.TabIndex = 1;
+            dgvParticipantes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvParticipantes.Location = new Point(12, 60);
+            dgvParticipantes.Name = "dgvParticipantes";
+            dgvParticipantes.RowHeadersWidth = 62;
+            dgvParticipantes.Size = new Size(1389, 371);
+            dgvParticipantes.TabIndex = 1;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(501, 183);
+            label2.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(12, 446);
             label2.Name = "label2";
-            label2.Size = new Size(474, 38);
+            label2.Size = new Size(207, 30);
             label2.TabIndex = 2;
-            label2.Text = "No te has registrado? , Hazlo abajo";
+            label2.Text = "Registrate GRATIS!";
             // 
             // btnRegistrate
             // 
-            btnRegistrate.Location = new Point(552, 252);
+            btnRegistrate.Location = new Point(225, 437);
             btnRegistrate.Name = "btnRegistrate";
-            btnRegistrate.Size = new Size(362, 65);
+            btnRegistrate.Size = new Size(159, 50);
             btnRegistrate.TabIndex = 3;
             btnRegistrate.Text = "Registrate";
             btnRegistrate.UseVisualStyleBackColor = true;
@@ -78,14 +80,15 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1059, 450);
+            ClientSize = new Size(1420, 496);
             Controls.Add(btnRegistrate);
             Controls.Add(label2);
-            Controls.Add(dataGridView1);
+            Controls.Add(dgvParticipantes);
             Controls.Add(label1);
             Name = "VerParticipantesView";
             Text = "VerParticipantesView";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Load += VerParticipantesView_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvParticipantes).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -93,7 +96,7 @@
         #endregion
 
         private Label label1;
-        private DataGridView dataGridView1;
+        private DataGridView dgvParticipantes;
         private Label label2;
         private Button btnRegistrate;
     }
