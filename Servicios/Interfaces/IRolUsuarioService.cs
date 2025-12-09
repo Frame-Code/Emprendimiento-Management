@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Datos.Interfaces
+namespace Servicios.Interfaces
 {
-    public interface IUsuarioRepository : IRepository<Usuario>
+    public interface IRolUsuarioService
     {
-        Task<Usuario?> GetByUserName(string userName);
+        public Task<RolUsuario?> GetRolByCode(string code);
     }
 }

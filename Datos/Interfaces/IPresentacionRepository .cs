@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Datos.Interfaces
 {
-    public interface IUsuarioRepository : IRepository<Usuario>
+    public interface IPresentacionRepository : IRepository<Presentacion>
+
     {
-        Task<Usuario?> GetByUserName(string userName);
     }
 }
