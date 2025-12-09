@@ -4,6 +4,7 @@ using Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datos.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20251203044351_AddIndexParticipantes")]
+    partial class AddIndexParticipantes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,30 +121,6 @@ namespace Datos.Migrations
                     b.HasIndex("IdUsuario");
 
                     b.ToTable("Comentarios");
-                });
-
-            modelBuilder.Entity("Modelo.Cronograma", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Hora")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ubicacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cronogramas");
                 });
 
             modelBuilder.Entity("Modelo.Emprendimiento", b =>
@@ -278,44 +257,10 @@ namespace Datos.Migrations
 
                     b.HasIndex("IdEmprendimiento");
 
-                    b.HasIndex("NumeroIdentificacion")
-                        .IsUnique();
-
-                    b.HasIndex("NumeroTelefono")
+                    b.HasIndex("NumeroIdentificacion", "NumeroTelefono")
                         .IsUnique();
 
                     b.ToTable("Participantes");
-                });
-
-            modelBuilder.Entity("Modelo.Presentacion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Expositor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Hora")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Orden")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Ubicacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Presentaciones");
                 });
 
             modelBuilder.Entity("Modelo.ResultadoEvento", b =>
