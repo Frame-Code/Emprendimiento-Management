@@ -9,5 +9,6 @@ namespace Datos.Interfaces
 {
     public interface IAgendaPresentacionRepository : IRepository<AgendaPresentacion>
     {
+        Task<List<AgendaPresentacion>> ListarPorEventoAsync(int idEvento);
     }
 }

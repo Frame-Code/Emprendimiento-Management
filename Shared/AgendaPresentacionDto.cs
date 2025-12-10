@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Modelo
+namespace Shared
 {
-    public class AgendaPresentacion
+    public class AgendaPresentacionDto
     {
-        public int Id { get; set; }
         public int IdEvento { get; set; }
-        public Evento Evento { get; set; } = null!;
         public int IdEmprendimiento { get; set; }
-        public Emprendimiento Emprendimiento { get; set; } = null!;
         public int Orden { get; set; }
     }
 }
