@@ -65,7 +65,7 @@ namespace Servicios.Impl
             var list = await participanteRepository.ListarAsync();
             var nombres = list
                 .Where(p => p.IdEmprendimiento == idEmprendimiento)
-                .Select(p => p.NombresCompletos + "... #Identificacion: " + p.NumeroIdentificacion + "... Cargo: " + p.cargoParticipante.Nombre)
+                .Select(p => p.NombresCompletos + "... #Identificacion: " + p.NumeroIdentificacion + "... Cargo: " + p.CargoParticipante.Nombre)
                 .ToList();
             return nombres;
         }

@@ -39,6 +39,8 @@ partial class MainFormView
         LblUserName = new Label();
         panel2 = new Panel();
         label1 = new Label();
+        BtnEventos = new Button();
+        BtnResultadoEventos = new Button();
         panel1.SuspendLayout();
         panel3.SuspendLayout();
         panel2.SuspendLayout();
@@ -68,6 +70,8 @@ partial class MainFormView
         // 
         panel3.BackColor = Color.Silver;
         panel3.BorderStyle = BorderStyle.FixedSingle;
+        panel3.Controls.Add(BtnResultadoEventos);
+        panel3.Controls.Add(BtnEventos);
         panel3.Controls.Add(BtnParticipantes);
         panel3.Controls.Add(BtnFacultades);
         panel3.Controls.Add(label3);
@@ -86,7 +90,7 @@ partial class MainFormView
         BtnParticipantes.Name = "BtnParticipantes";
         BtnParticipantes.Size = new Size(199, 39);
         BtnParticipantes.TabIndex = 8;
-        BtnParticipantes.Text = "Particpantes";
+        BtnParticipantes.Text = "Participantes";
         BtnParticipantes.UseVisualStyleBackColor = false;
         // 
         // BtnFacultades
@@ -104,6 +108,7 @@ partial class MainFormView
         label3.AutoSize = true;
         label3.Font = new Font("Segoe UI", 11F);
         label3.Location = new Point(3, 40);
+        label3.Margin = new Padding(1, 0, 1, 0);
         label3.Name = "label3";
         label3.Size = new Size(236, 25);
         label3.TabIndex = 6;
@@ -150,6 +155,26 @@ partial class MainFormView
         label1.TabIndex = 8;
         label1.Text = "Administrar emprendimientos";
         // 
+        // BtnEventos
+        // 
+        BtnEventos.BackColor = Color.FromArgb(224, 224, 224);
+        BtnEventos.Location = new Point(12, 297);
+        BtnEventos.Name = "BtnEventos";
+        BtnEventos.Size = new Size(199, 39);
+        BtnEventos.TabIndex = 9;
+        BtnEventos.Text = "Eventos";
+        BtnEventos.UseVisualStyleBackColor = false;
+        // 
+        // BtnResultadoEventos
+        // 
+        BtnResultadoEventos.BackColor = Color.FromArgb(224, 224, 224);
+        BtnResultadoEventos.Location = new Point(11, 371);
+        BtnResultadoEventos.Name = "BtnResultadoEventos";
+        BtnResultadoEventos.Size = new Size(199, 39);
+        BtnResultadoEventos.TabIndex = 10;
+        BtnResultadoEventos.Text = "Resultados Eventos";
+        BtnResultadoEventos.UseVisualStyleBackColor = false;
+        // 
         // MainFormView
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
@@ -159,12 +184,12 @@ partial class MainFormView
         Controls.Add(panel1);
         Name = "MainFormView";
         Text = "Form1";
+        WindowState = FormWindowState.Maximized;
         panel1.ResumeLayout(false);
         panel3.ResumeLayout(false);
         panel3.PerformLayout();
         panel2.ResumeLayout(false);
         panel2.PerformLayout();
-        WindowState = FormWindowState.Maximized;
         ResumeLayout(false);
     }
 
@@ -179,4 +204,6 @@ partial class MainFormView
     private Button BtnParticipantes;
     private Button BtnFacultades;
     private Label label3;
+    private Button BtnEventos;
+    private Button BtnResultadoEventos;
 }

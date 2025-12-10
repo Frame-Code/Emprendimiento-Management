@@ -88,12 +88,13 @@ namespace Datos
                 b.Property(x => x.NumeroTelefono).IsRequired(). HasMaxLength(15);
                 b.Property(x => x.NumeroIdentificacion).IsRequired().HasMaxLength(15);
 
-                b.HasOne(x => x.emprendimiento)
-                    .WithMany()
+                b.HasOne(x => x.Emprendimiento)
+                    .WithMany(e => e.Participantes)
                     .HasForeignKey(x => x.IdEmprendimiento)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .IsRequired(false)
+                    .OnDelete(DeleteBehavior.Restrict);
 
-                b.HasOne(x => x.cargoParticipante)
+                b.HasOne(x => x.CargoParticipante)
                     .WithMany()
                     .HasForeignKey(x => x.IdCargoParticipante)
                     .OnDelete(DeleteBehavior.Restrict);
