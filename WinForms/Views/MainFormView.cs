@@ -1,9 +1,10 @@
 using Controller;
+using Shared;
 using WinForms.Views;
 
 namespace WinForms;
 
-public partial class MainFormView : Form, ITypeMainForm
+public partial class MainFormView : Form, IViewRolType
 {
     private readonly EmprendimientosUc _emprendimientosUc;
     public ViewType ViewType => ViewType.Administrador;

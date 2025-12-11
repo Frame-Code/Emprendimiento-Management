@@ -1,4 +1,5 @@
 ﻿using Controller;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +12,7 @@ using System.Windows.Forms;
 
 namespace WinForms.Views
 {
-    public partial class MainEstudianteView : Form, ITypeMainForm
+    public partial class MainEstudianteView : Form, IViewRolType
     {
         private readonly ConsultaEmprendimientoView _consultaView;
         public ViewType ViewType => ViewType.Estudiante;
