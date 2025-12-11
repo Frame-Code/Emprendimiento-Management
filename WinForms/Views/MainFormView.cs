@@ -34,6 +34,7 @@ public partial class MainFormView : Form, IViewRolType
         InitializeComponent();
         LblUserName.Text = UserName;
         FormClosed += (s, e) => closeWindows();
+        Utils.ConfigureForm(this);
         Show();
     }
 }
