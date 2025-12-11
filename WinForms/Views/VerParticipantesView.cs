@@ -21,7 +21,6 @@ namespace WinForms.Views.Util
             InitializeComponent();
         }
 
-        // 1. ESTE ES EL MÉTODO QUE CARGA LOS PARTICIPANTES EN EL GRID
         private async Task CargarParticipantes()
         {
             try
@@ -37,7 +36,6 @@ namespace WinForms.Views.Util
             }
         }
 
-        // 2. ESTE MÉTODO SE EJECUTA CUANDO SE ABRE LA VISTA
         private async void VerParticipantesView_Load(object sender, EventArgs e)
         {
             await CargarParticipantes();
@@ -47,10 +45,9 @@ namespace WinForms.Views.Util
         {
             try
             {
-                int idEmprendimiento = 1;
 
                 var formRegistro = _registroParticipantesView;
-                formRegistro.Init(idEmprendimiento);
+
 
                 if (formRegistro.ShowDialog() == DialogResult.OK)
                 {

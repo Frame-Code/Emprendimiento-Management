@@ -36,8 +36,6 @@
             label4 = new Label();
             cmbCargo = new ComboBox();
             btnRegistrar = new Button();
-            label5 = new Label();
-            txtNEmprendimiento = new TextBox();
             label6 = new Label();
             txtNdeIdentificacion = new TextBox();
             label7 = new Label();
@@ -89,7 +87,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(44, 257);
+            label4.Location = new Point(44, 215);
             label4.Name = "label4";
             label4.Size = new Size(143, 25);
             label4.TabIndex = 5;
@@ -99,7 +97,7 @@
             // 
             cmbCargo.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbCargo.FormattingEnabled = true;
-            cmbCargo.Location = new Point(225, 257);
+            cmbCargo.Location = new Point(225, 215);
             cmbCargo.Name = "cmbCargo";
             cmbCargo.Size = new Size(266, 33);
             cmbCargo.TabIndex = 6;
@@ -115,29 +113,10 @@
             btnRegistrar.UseVisualStyleBackColor = true;
             btnRegistrar.Click += btnRegistrar_Click;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(44, 210);
-            label5.Name = "label5";
-            label5.RightToLeft = RightToLeft.Yes;
-            label5.Size = new Size(144, 25);
-            label5.TabIndex = 8;
-            label5.Text = "Emprendimiento";
-            label5.UseMnemonic = false;
-            // 
-            // txtNEmprendimiento
-            // 
-            txtNEmprendimiento.Location = new Point(225, 207);
-            txtNEmprendimiento.Name = "txtNEmprendimiento";
-            txtNEmprendimiento.Size = new Size(64, 31);
-            txtNEmprendimiento.TabIndex = 9;
-            txtNEmprendimiento.TextChanged += txtNEmprendimiento_TextChanged;
-            // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(44, 305);
+            label6.Location = new Point(44, 264);
             label6.Name = "label6";
             label6.Size = new Size(158, 25);
             label6.TabIndex = 10;
@@ -145,7 +124,7 @@
             // 
             // txtNdeIdentificacion
             // 
-            txtNdeIdentificacion.Location = new Point(225, 302);
+            txtNdeIdentificacion.Location = new Point(225, 264);
             txtNdeIdentificacion.Name = "txtNdeIdentificacion";
             txtNdeIdentificacion.Size = new Size(266, 31);
             txtNdeIdentificacion.TabIndex = 11;
@@ -153,7 +132,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(44, 347);
+            label7.Location = new Point(44, 308);
             label7.Name = "label7";
             label7.Size = new Size(122, 25);
             label7.TabIndex = 12;
@@ -161,7 +140,7 @@
             // 
             // txtNdeTelefono
             // 
-            txtNdeTelefono.Location = new Point(225, 347);
+            txtNdeTelefono.Location = new Point(225, 308);
             txtNdeTelefono.Name = "txtNdeTelefono";
             txtNdeTelefono.Size = new Size(266, 31);
             txtNdeTelefono.TabIndex = 13;
@@ -175,8 +154,6 @@
             Controls.Add(label7);
             Controls.Add(txtNdeIdentificacion);
             Controls.Add(label6);
-            Controls.Add(txtNEmprendimiento);
-            Controls.Add(label5);
             Controls.Add(btnRegistrar);
             Controls.Add(cmbCargo);
             Controls.Add(label4);
@@ -202,8 +179,6 @@
         private Label label4;
         private ComboBox cmbCargo;
         private Button btnRegistrar;
-        private Label label5;
-        private TextBox txtNEmprendimiento;
         private Label label6;
         private TextBox txtNdeIdentificacion;
         private Label label7;

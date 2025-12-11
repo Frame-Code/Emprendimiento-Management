@@ -52,7 +52,7 @@ partial class MainFormView
         panel1.Controls.Add(panel2);
         panel1.Dock = DockStyle.Fill;
         panel1.Location = new Point(0, 0);
-        panel1.Margin = new Padding(4, 4, 4, 4);
+        panel1.Margin = new Padding(4);
         panel1.Name = "panel1";
         panel1.Size = new Size(1581, 940);
         panel1.TabIndex = 1;
@@ -61,7 +61,7 @@ partial class MainFormView
         // 
         PnlContenedor.Dock = DockStyle.Fill;
         PnlContenedor.Location = new Point(298, 76);
-        PnlContenedor.Margin = new Padding(4, 4, 4, 4);
+        PnlContenedor.Margin = new Padding(4);
         PnlContenedor.Name = "PnlContenedor";
         PnlContenedor.Size = new Size(1283, 864);
         PnlContenedor.TabIndex = 8;
@@ -77,7 +77,7 @@ partial class MainFormView
         panel3.Controls.Add(LblUserName);
         panel3.Dock = DockStyle.Left;
         panel3.Location = new Point(0, 76);
-        panel3.Margin = new Padding(4, 4, 4, 4);
+        panel3.Margin = new Padding(4);
         panel3.Name = "panel3";
         panel3.Size = new Size(298, 864);
         panel3.TabIndex = 7;
@@ -86,11 +86,11 @@ partial class MainFormView
         // 
         BtnParticipantes.BackColor = Color.FromArgb(224, 224, 224);
         BtnParticipantes.Location = new Point(15, 280);
-        BtnParticipantes.Margin = new Padding(4, 4, 4, 4);
+        BtnParticipantes.Margin = new Padding(4);
         BtnParticipantes.Name = "BtnParticipantes";
         BtnParticipantes.Size = new Size(249, 49);
         BtnParticipantes.TabIndex = 8;
-        BtnParticipantes.Text = "Particpantes";
+        BtnParticipantes.Text = "Participantes";
         BtnParticipantes.UseVisualStyleBackColor = false;
         BtnParticipantes.Click += BtnParticipantes_Click;
         // 
@@ -98,7 +98,7 @@ partial class MainFormView
         // 
         BtnFacultades.BackColor = Color.FromArgb(224, 224, 224);
         BtnFacultades.Location = new Point(15, 194);
-        BtnFacultades.Margin = new Padding(4, 4, 4, 4);
+        BtnFacultades.Margin = new Padding(4);
         BtnFacultades.Name = "BtnFacultades";
         BtnFacultades.Size = new Size(249, 49);
         BtnFacultades.TabIndex = 7;
@@ -120,7 +120,7 @@ partial class MainFormView
         // 
         BtnEmprendimiento.BackColor = Color.FromArgb(224, 224, 224);
         BtnEmprendimiento.Location = new Point(15, 108);
-        BtnEmprendimiento.Margin = new Padding(4, 4, 4, 4);
+        BtnEmprendimiento.Margin = new Padding(4);
         BtnEmprendimiento.Name = "BtnEmprendimiento";
         BtnEmprendimiento.Size = new Size(249, 49);
         BtnEmprendimiento.TabIndex = 3;
@@ -145,7 +145,7 @@ partial class MainFormView
         panel2.Controls.Add(label1);
         panel2.Dock = DockStyle.Top;
         panel2.Location = new Point(0, 0);
-        panel2.Margin = new Padding(4, 4, 4, 4);
+        panel2.Margin = new Padding(4);
         panel2.Name = "panel2";
         panel2.Size = new Size(1581, 76);
         panel2.TabIndex = 6;
@@ -168,7 +168,7 @@ partial class MainFormView
         BackColor = SystemColors.ButtonFace;
         ClientSize = new Size(1581, 940);
         Controls.Add(panel1);
-        Margin = new Padding(4, 4, 4, 4);
+        Margin = new Padding(4);
         Name = "MainFormView";
         Text = "Form1";
         WindowState = FormWindowState.Maximized;

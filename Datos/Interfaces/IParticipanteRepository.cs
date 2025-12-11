@@ -1,4 +1,5 @@
-﻿using Modelo;
+﻿using Microsoft.EntityFrameworkCore;
+using Modelo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,10 @@ namespace Datos.Interfaces
 {
     public interface IParticipanteRepository : IRepository<Participante>
     {
+        Task<bool> ExisteIdentificacionAsync(string identificacion);
+        Task<bool> ExisteTelefonoAsync(string telefono);
+
+
+
     }
 }

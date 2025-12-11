@@ -22,7 +22,7 @@ namespace Modelo
         public string NumeroIdentificacion { get; set; } = null!;
         public string NumeroTelefono { get; set; } = null!;
         public string? FotoPath { get; set; }
-        public int IdEmprendimiento { get; set; }
+        public int? IdEmprendimiento { get; set; }
         public Emprendimiento emprendimiento { get; set; } = null!;
         public int IdCargoParticipante { get; set; }
         public CargoParticipante cargoParticipante { get; set; } = null!;

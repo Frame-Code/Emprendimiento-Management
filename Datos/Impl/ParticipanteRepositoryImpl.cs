@@ -14,10 +14,6 @@ namespace Datos.Impl
             this.context = context;
         }
 
-        public ParticipanteRepositoryImpl()
-        {
-        }
-
         public async Task<Participante?> ObtenerPorIdAsync(int id) =>
             await context.Participantes
                 .Include(p => p.emprendimiento)
@@ -26,7 +22,6 @@ namespace Datos.Impl
 
         public async Task<List<Participante>> ListarAsync() =>
             await context.Participantes
-                         .Include(p => p.emprendimiento)
                          .Include(p => p.cargoParticipante)
                          .ToListAsync();
 
@@ -40,5 +35,14 @@ namespace Datos.Impl
         {
             throw new NotImplementedException();
         }
+
+        public async Task<bool> ExisteIdentificacionAsync(string identificacion) =>
+            await context.Participantes.AnyAsync(p => p.NumeroIdentificacion == identificacion);
+        
+        public async Task<bool> ExisteTelefonoAsync(string telefono) =>
+            await context.Participantes.AnyAsync(p => p.NumeroTelefono == telefono);
+
+
+
     }
 }

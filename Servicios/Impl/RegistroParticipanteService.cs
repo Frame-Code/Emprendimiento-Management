@@ -26,13 +26,25 @@ namespace Servicios.Impl
             var response = new ResponseDto();
             try
             {
+                if (await _participanteRepo.ExisteIdentificacionAsync(dto.NoIdentificacion))
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Ya existe un participante con esa identificación.";
+                    return response;
+                }
+                if (await _participanteRepo.ExisteTelefonoAsync(dto.NoTelefono))
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Ya existe un participante con ese número de teléfono.";
+                    return response;
+                }
+
                 var nuevoParticipante = new Participante
                 {
                     Nombres = dto.Nombres,
                     Apellidos = dto.Apellidos,
                     NumeroIdentificacion = dto.NoIdentificacion,
                     NumeroTelefono = dto.NoTelefono,
-                    IdEmprendimiento = dto.IdEmprendimiento,
                     IdCargoParticipante = dto.IdCargoParticipante,
                     FotoPath = ""
                 };

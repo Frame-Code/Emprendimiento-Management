@@ -13,26 +13,13 @@ namespace WinForms.Views
     {
         private readonly RegistroParticipanteController _miControlador;
         private readonly IRegistroParticipanteService _miServicio;
-        private int _idEmprendimientoActual;
 
-        // Constructor que se usa desde VerParticipantesView
-        public RegistroParticipantesView(
-            IParticipanteRepository participanteRepo,
-            ICargoParticipanteRepository cargoRepo,
-            RegistroParticipanteController registroParticipanteController,
-            IRegistroParticipanteService registroParticipanteService)
+        public RegistroParticipantesView(RegistroParticipanteController controller)
         {
-            _miControlador = registroParticipanteController;
-            _miServicio = registroParticipanteService;
+            _miControlador = controller;
             InitializeComponent();
         }
 
-        public void Init(int idEmprendimiento)
-        {
-            _idEmprendimientoActual = idEmprendimiento;
-        }
-
-        // Carga inicial del formulario: llena el ComboBox de cargos
         private async void RegistroParticipantesView_Load(object sender, EventArgs e)
         {
             try
@@ -43,7 +30,7 @@ namespace WinForms.Views
                 cmbCargo.DisplayMember = "Nombre";
                 cmbCargo.ValueMember = "Id";
 
-                cmbCargo.SelectedIndex = -1; // dejar así SI haces validación después
+                cmbCargo.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
@@ -51,7 +38,6 @@ namespace WinForms.Views
             }
         }
 
-        // Click del botón Registrar
         private async void btnRegistrar_Click(object sender, EventArgs e)
         {
 
@@ -72,7 +58,6 @@ namespace WinForms.Views
             {
                 Nombres = txtNombre.Text.Trim(),
                 Apellidos = txtApellido.Text.Trim(),
-                IdEmprendimiento = _idEmprendimientoActual,
                 IdCargoParticipante = (int)cmbCargo.SelectedValue,
                 NoIdentificacion = txtNdeIdentificacion.Text.Trim(),
                 NoTelefono = txtNdeTelefono.Text.Trim()
@@ -87,18 +72,13 @@ namespace WinForms.Views
             if (respuesta.IsSuccess)
             {
                 MessageBox.Show("¡Guardado correctamente!");
-                this.DialogResult = DialogResult.OK; // Para que el padre sepa que fue exitoso
-                this.Close();                        // Cierre automático del formulario
+                this.DialogResult = DialogResult.OK;
+                this.Close();                       
             }
             else
             {
                 MessageBox.Show("Error: " + respuesta.Message);
             }
-        }
-
-        private void txtNEmprendimiento_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
