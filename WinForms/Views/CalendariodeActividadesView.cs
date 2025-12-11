@@ -1,4 +1,5 @@
-﻿using Datos.Impl;
+﻿using Controller;
+using Datos.Impl;
 using Servicios.Impl;
 using Shared;
 using System;
@@ -12,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinForms.Views;
-using Controller;
+using WinForms.Views.Util;
 
 namespace WinForms.Views
 
@@ -26,6 +27,7 @@ namespace WinForms.Views
         {
             _controller = controller;
             InitializeComponent();
+            Utils.ConfigureForm(this);
         }
 
         private async void CalendariodeActividadesView_Load(object sender, EventArgs e)

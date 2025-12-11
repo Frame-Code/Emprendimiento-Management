@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinForms.Views.Util;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WinForms.Views
 {
@@ -23,6 +25,7 @@ namespace WinForms.Views
             _controller = controller;
             _serviceProvider = serviceProvider;
             InitializeComponent();
+            Utils.ConfigureForm(this);
         }
 
         private async void button1_Click(object sender, EventArgs e)

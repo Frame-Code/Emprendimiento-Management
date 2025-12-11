@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinForms.Views.Util;
 
 namespace WinForms.Views
 {
@@ -21,6 +22,7 @@ namespace WinForms.Views
         public MainEstudianteView(ConsultaEmprendimientoView consultaView)
         {
             _consultaView = consultaView;
+            Utils.ConfigureForm(this);
         }
 
         private void btnEmprendimientoReg_Click(object sender, EventArgs e)

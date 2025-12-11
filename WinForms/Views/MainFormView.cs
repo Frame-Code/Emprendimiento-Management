@@ -1,6 +1,7 @@
 using Controller;
 using Shared;
 using WinForms.Views;
+using WinForms.Views.Util;
 
 namespace WinForms;
 
@@ -13,6 +14,7 @@ public partial class MainFormView : Form, IViewRolType
     public MainFormView(EmprendimientosUc emprendimientosUc)
     {
         _emprendimientosUc = emprendimientosUc;
+        Utils.ConfigureForm(this);
     }
 
     private void CargarModulo(UserControl modulo)

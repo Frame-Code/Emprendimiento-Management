@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinForms.Views.Util;
 
 namespace WinForms.Views
 {
@@ -25,6 +26,7 @@ namespace WinForms.Views
             _controller = controller;
             _serviceProvider = serviceProvider;
             InitializeComponent();
+            Utils.ConfigureForm(this);
         }
 
         //Helpers-------------------------------------------------
