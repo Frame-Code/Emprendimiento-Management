@@ -23,8 +23,8 @@ namespace WinForms.Views
         {
             InitializeComponent();
             _controller = controller;
-
             this.Load += GestionAgendaView_Load;
+            Utils.ConfigureForm(this);
         }
 
 

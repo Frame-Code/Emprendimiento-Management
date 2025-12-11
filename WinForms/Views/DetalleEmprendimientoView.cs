@@ -22,6 +22,7 @@ namespace WinForms
         {
             _controller = controller;
             InitializeComponent();
+            Utils.ConfigureForm(this);
         }
 
         //Helpers-----------------------------------

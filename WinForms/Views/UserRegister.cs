@@ -21,6 +21,7 @@ namespace WinForms.Views
         {
             _controller = controller;
             InitializeComponent();
+            Utils.ConfigureForm(this);
         }
 
         private async void BtnSignUp_Click(object sender, EventArgs e)

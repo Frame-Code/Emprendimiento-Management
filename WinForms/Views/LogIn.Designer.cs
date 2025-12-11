@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            TxtLogIn = new Button();
+            BtnLogin = new Button();
             TxtUser = new TextBox();
             label2 = new Label();
             label3 = new Label();
@@ -48,15 +48,15 @@
             label1.TabIndex = 0;
             label1.Text = "Inicio de sesión";
             // 
-            // TxtLogIn
+            // BtnLogin
             // 
-            TxtLogIn.Location = new Point(156, 238);
-            TxtLogIn.Name = "TxtLogIn";
-            TxtLogIn.Size = new Size(236, 39);
-            TxtLogIn.TabIndex = 1;
-            TxtLogIn.Text = "Iniciar sesión";
-            TxtLogIn.UseVisualStyleBackColor = true;
-            TxtLogIn.Click += button1_Click;
+            BtnLogin.Location = new Point(156, 238);
+            BtnLogin.Name = "BtnLogin";
+            BtnLogin.Size = new Size(236, 39);
+            BtnLogin.TabIndex = 1;
+            BtnLogin.Text = "Iniciar sesión";
+            BtnLogin.UseVisualStyleBackColor = true;
+            BtnLogin.Click += button1_Click;
             // 
             // TxtUser
             // 
@@ -126,7 +126,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(TxtUser);
-            Controls.Add(TxtLogIn);
+            Controls.Add(BtnLogin);
             Controls.Add(label1);
             Name = "LogIn";
             Text = "LogIn";
@@ -137,7 +137,7 @@
         #endregion
 
         private Label label1;
-        private Button TxtLogIn;
+        private Button BtnLogin;
         private TextBox TxtUser;
         private Label label2;
         private Label label3;
