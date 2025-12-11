@@ -103,6 +103,7 @@
             cmbFacultad.Name = "cmbFacultad";
             cmbFacultad.Size = new Size(195, 23);
             cmbFacultad.TabIndex = 11;
+            cmbFacultad.SelectedIndexChanged += cmbFacultad_SelectedIndexChanged;
             // 
             // CalendariodeActividadesView
             // 

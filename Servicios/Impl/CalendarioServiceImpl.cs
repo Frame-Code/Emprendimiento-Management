@@ -56,7 +56,7 @@ namespace Servicios.Impl
             var presentaciones = await agendaPresentacionRepository.ListarAsync();
 
             return presentaciones
-                .Where(e => e.Evento.FechaInicio.Date == fecha.Date)
+                .Where(e => e.Evento.FechaInicio.Date == fecha.Date || e.Evento.FechaFin.Date == fecha.Date)
                 .Select(e => new CalendariodeActividadesDto
                 {
                     NombreEvento = e.Evento.Nombre,
