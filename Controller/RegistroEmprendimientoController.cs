@@ -21,5 +21,7 @@ namespace Controller
 
         public async Task DeleteByIdAsync(int id) =>
             await registroEmprendimientoService.DeleteByIdAsync(id);
+
+       
     }
 }

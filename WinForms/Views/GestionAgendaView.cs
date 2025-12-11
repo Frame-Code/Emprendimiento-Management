@@ -1,5 +1,6 @@
 ﻿using Controller;
 using Shared;
+using System.Globalization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,63 +12,79 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinForms.Views.Util;
 
-
-
 namespace WinForms.Views
 {
     public partial class GestionAgendaView : Form
     {
-        private readonly AgendaController _controller;
+        private readonly AgendaController _agendaController;
+        private readonly EventoController _eventoController;
 
-        public GestionAgendaView(AgendaController controller)
+        public GestionAgendaView(AgendaController agendaController, EventoController eventoController)
         {
             InitializeComponent();
-            _controller = controller;
+            _agendaController = agendaController;
+            _eventoController = eventoController;
 
             this.Load += GestionAgendaView_Load;
         }
-
-
+        private bool cargando = false;
 
         private async void GestionAgendaView_Load(object sender, EventArgs e)
         {
-            var expositores = await _controller.ListarExpositoresAsync();
+            cargando = true;
 
-            cmbExpositor.DataSource = expositores;
+            cmbEvento.DataSource = await _eventoController.ListarEventosAsync();
+            cmbEvento.DisplayMember = "Nombre";
+            cmbEvento.ValueMember = "Id";
+            cmbEvento.SelectedIndex = -1;
+
+            cmbExpositor.DataSource = await _agendaController.ListarExpositoresAsync();
             cmbExpositor.DisplayMember = "Nombre";
             cmbExpositor.ValueMember = "Id";
             cmbExpositor.SelectedIndex = -1;
+
+            cargando = false;
         }
 
-        private async void btnGuardarCronograma_Click(object sender, EventArgs e)
+        private async void cmbEvento_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MessageBox.Show("La fecha y hora pertenecen al evento, no a la agenda.");
+            if (cargando || cmbEvento.SelectedIndex == -1)
+                return;
+
+            int idEvento = (int)cmbEvento.SelectedValue;
+            dgAgenda.DataSource = await _agendaController.ListarAgendaPorEventoAsync(idEvento);
         }
+
+
 
         private async void btnAgregarPresentacion_Click(object sender, EventArgs e)
         {
+            if (cmbEvento.SelectedIndex == -1)
+            {
+                MessageBox.Show("Seleccione un evento.");
+                return;
+            }
+
             if (cmbExpositor.SelectedIndex == -1)
             {
                 MessageBox.Show("Seleccione un expositor.");
                 return;
             }
 
-            int idEvento = 1; 
-            int idEmprendimiento = (int)cmbExpositor.SelectedValue;
+            int idEvento = (int)cmbEvento.SelectedValue;
+            int idExpo = (int)cmbExpositor.SelectedValue;
 
-            var total = await _controller.ListarAgendaPorEventoAsync(idEvento);
-            int nuevoOrden = total.Count + 1;
-
-            numOrden.Value = nuevoOrden;
+            var listaActual = await _agendaController.ListarAgendaPorEventoAsync(idEvento);
+            int orden = listaActual.Any() ? listaActual.Max(a => a.Orden) + 1 : 1;
 
             var dto = new AgendaPresentacionDto
             {
                 IdEvento = idEvento,
-                IdEmprendimiento = idEmprendimiento,
-                Orden = nuevoOrden
+                IdEmprendimiento = idExpo,
+                Orden = orden
             };
 
-            var result = await _controller.RegistrarAgendaPresentacionAsync(dto);
+            var result = await _agendaController.RegistrarAgendaPresentacionAsync(dto);
 
             if (!result.IsSuccess)
             {
@@ -75,8 +92,12 @@ namespace WinForms.Views
                 return;
             }
 
-            MessageBox.Show($"Presentación agendada con orden #{nuevoOrden}");
-        }
-    }
+            MessageBox.Show($"Presentación agregada con orden #{orden}");
 
+            dgAgenda.DataSource = await _agendaController.ListarAgendaPorEventoAsync(idEvento);
+        }
+
+
+
+    }
 }

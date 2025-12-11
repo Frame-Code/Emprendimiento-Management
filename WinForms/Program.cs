@@ -33,8 +33,8 @@ internal static class Program
             var db = scope.ServiceProvider.GetRequiredService<AppContext>();
             db.Database.Migrate();
 
-            var agenda = scope.ServiceProvider.GetRequiredService < GestionAgendaView>();
-            Application.Run(agenda); //AQUI PON LA VISTA QUE NECESITAS, 
+            var evento = scope.ServiceProvider.GetRequiredService < GestionAgendaView>();
+            Application.Run(evento); //AQUI PON LA VISTA QUE NECESITAS, 
             //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
             //Application.Run(registroEmprendimiento);
         }
@@ -81,6 +81,7 @@ internal static class Program
                 services.AddScoped<IParticipanteService, ParticipanteServiceImpl>();
                 // Servicios (NUEVO)
                 services.AddScoped<IAgendaService, AgendaServiceImpl>();
+                services.AddScoped<IEventoService, EventoServiceImpl>();//new
 
 
                 // Controllers
@@ -88,6 +89,7 @@ internal static class Program
                 services.AddScoped<ParticipanteController>();
                 // Controladores (NUEVO)
                 services.AddScoped<AgendaController>();
+                services.AddScoped<EventoController>();//new
 
 
                 // Formularios
@@ -97,6 +99,7 @@ internal static class Program
                 services.AddScoped<DetalleEmprendimientoView>();
                 // Formularios (NUEVO)
                 services.AddScoped<GestionAgendaView>();
+                services.AddScoped<CrearEventoView>();//new
 
             });
     }
