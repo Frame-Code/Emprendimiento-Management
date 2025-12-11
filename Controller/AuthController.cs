@@ -8,20 +8,7 @@ using System.Threading.Tasks;
 
 namespace Controller
 {
-    public enum ViewType
-    {
-        Administrador,
-        Estudiante,
-    }
-
-    public interface ITypeMainForm
-    {
-        ViewType ViewType { get; }
-        string UserName { get; set; }
-        void ShowForm(Action closeWindows);
-    }
-
-    public class LogInController(ILogInService logInService, IRolUsuarioService rolUsuarioService)
+    public class AuthController(ILogInService logInService, IRolUsuarioService rolUsuarioService, ISignUpService signUpService)
     {
         public async Task<ResponseDto> ValidateCredentials(string username, string password)
         {
@@ -56,24 +43,43 @@ namespace Controller
                 };
             }
 
-            return rol.Codigo switch
+            var viewType = GetViewTypeByRolCode(roleCode);
+            if(viewType == null)
             {
-                "ADM" => new ResponseDto
-                {
-                    IsSuccess = true,
-                    Data = ViewType.Administrador
-                },
-                "EST" => new ResponseDto
-                {
-                    IsSuccess = true,
-                    Data = ViewType.Estudiante
-                },
-                _ => new ResponseDto
+                return new ResponseDto
                 {
                     IsSuccess = false,
                     Message = "Rol no reconocido"
-                }
+                };
+            }
+
+            return new ResponseDto
+            {
+                IsSuccess = true,
+                Data = viewType
             };
         }
+
+        public ViewType? GetViewTypeByRolCode(string roleCode) =>
+            roleCode switch
+            {
+                "ADM" => ViewType.Administrador,
+                "EST" => ViewType.Estudiante,
+                _ => null
+            };
+
+        public string GetRolCodeByViewType(ViewType viewType) =>
+            viewType switch
+            {
+                ViewType.Administrador => "ADM",
+                ViewType.Estudiante => "EST",
+                _ => throw new ArgumentException("Tipo de vista no reconocido")
+            };
+
+        public async Task<bool> IsAvailableUsername(string username) =>
+            await signUpService.IsAvailableUsername(username);
+
+        public async Task<ResponseDto> RegisterUser(string username, string password, string roleCode) =>
+            await signUpService.RegisterUser(username, password, roleCode);
     }
 }

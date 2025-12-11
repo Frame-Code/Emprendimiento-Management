@@ -32,6 +32,8 @@ partial class MainFormView
         panel1 = new Panel();
         PnlContenedor = new Panel();
         panel3 = new Panel();
+        BtnResultadoEventos = new Button();
+        BtnEventos = new Button();
         BtnParticipantes = new Button();
         BtnFacultades = new Button();
         label3 = new Label();
@@ -39,8 +41,6 @@ partial class MainFormView
         LblUserName = new Label();
         panel2 = new Panel();
         label1 = new Label();
-        BtnEventos = new Button();
-        BtnResultadoEventos = new Button();
         panel1.SuspendLayout();
         panel3.SuspendLayout();
         panel2.SuspendLayout();
@@ -82,6 +82,26 @@ partial class MainFormView
         panel3.Name = "panel3";
         panel3.Size = new Size(239, 691);
         panel3.TabIndex = 7;
+        // 
+        // BtnResultadoEventos
+        // 
+        BtnResultadoEventos.BackColor = Color.FromArgb(224, 224, 224);
+        BtnResultadoEventos.Location = new Point(11, 371);
+        BtnResultadoEventos.Name = "BtnResultadoEventos";
+        BtnResultadoEventos.Size = new Size(199, 39);
+        BtnResultadoEventos.TabIndex = 10;
+        BtnResultadoEventos.Text = "Resultados Eventos";
+        BtnResultadoEventos.UseVisualStyleBackColor = false;
+        // 
+        // BtnEventos
+        // 
+        BtnEventos.BackColor = Color.FromArgb(224, 224, 224);
+        BtnEventos.Location = new Point(12, 297);
+        BtnEventos.Name = "BtnEventos";
+        BtnEventos.Size = new Size(199, 39);
+        BtnEventos.TabIndex = 9;
+        BtnEventos.Text = "Eventos";
+        BtnEventos.UseVisualStyleBackColor = false;
         // 
         // BtnParticipantes
         // 
@@ -154,26 +174,6 @@ partial class MainFormView
         label1.Size = new Size(370, 35);
         label1.TabIndex = 8;
         label1.Text = "Administrar emprendimientos";
-        // 
-        // BtnEventos
-        // 
-        BtnEventos.BackColor = Color.FromArgb(224, 224, 224);
-        BtnEventos.Location = new Point(12, 297);
-        BtnEventos.Name = "BtnEventos";
-        BtnEventos.Size = new Size(199, 39);
-        BtnEventos.TabIndex = 9;
-        BtnEventos.Text = "Eventos";
-        BtnEventos.UseVisualStyleBackColor = false;
-        // 
-        // BtnResultadoEventos
-        // 
-        BtnResultadoEventos.BackColor = Color.FromArgb(224, 224, 224);
-        BtnResultadoEventos.Location = new Point(11, 371);
-        BtnResultadoEventos.Name = "BtnResultadoEventos";
-        BtnResultadoEventos.Size = new Size(199, 39);
-        BtnResultadoEventos.TabIndex = 10;
-        BtnResultadoEventos.Text = "Resultados Eventos";
-        BtnResultadoEventos.UseVisualStyleBackColor = false;
         // 
         // MainFormView
         // 

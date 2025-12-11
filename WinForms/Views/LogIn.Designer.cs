@@ -30,10 +30,12 @@
         {
             label1 = new Label();
             TxtLogIn = new Button();
-            this.TxtUser = new TextBox();
+            TxtUser = new TextBox();
             label2 = new Label();
             label3 = new Label();
             TxtPassword = new TextBox();
+            linkLabel1 = new LinkLabel();
+            label4 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -48,7 +50,7 @@
             // 
             // TxtLogIn
             // 
-            TxtLogIn.Location = new Point(145, 269);
+            TxtLogIn.Location = new Point(156, 238);
             TxtLogIn.Name = "TxtLogIn";
             TxtLogIn.Size = new Size(236, 39);
             TxtLogIn.TabIndex = 1;
@@ -58,11 +60,11 @@
             // 
             // TxtUser
             // 
-            this.TxtUser.Location = new Point(159, 135);
-            this.TxtUser.Name = "TxtUser";
-            this.TxtUser.PlaceholderText = "Escribe tu nombre de usuario...";
-            this.TxtUser.Size = new Size(342, 27);
-            this.TxtUser.TabIndex = 2;
+            TxtUser.Location = new Point(159, 135);
+            TxtUser.Name = "TxtUser";
+            TxtUser.PlaceholderText = "Escribe tu nombre de usuario...";
+            TxtUser.Size = new Size(342, 27);
+            TxtUser.TabIndex = 2;
             // 
             // label2
             // 
@@ -93,15 +95,37 @@
             TxtPassword.TabIndex = 5;
             TxtPassword.UseSystemPasswordChar = true;
             // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new Point(206, 305);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(109, 20);
+            linkLabel1.TabIndex = 6;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Registrate aquí";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(248, 285);
+            label4.Name = "label4";
+            label4.Size = new Size(20, 20);
+            label4.TabIndex = 7;
+            label4.Text = "O";
+            // 
             // LogIn
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(560, 379);
+            Controls.Add(label4);
+            Controls.Add(linkLabel1);
             Controls.Add(TxtPassword);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(this.TxtUser);
+            Controls.Add(TxtUser);
             Controls.Add(TxtLogIn);
             Controls.Add(label1);
             Name = "LogIn";
@@ -118,5 +142,7 @@
         private Label label2;
         private Label label3;
         private TextBox TxtPassword;
+        private LinkLabel linkLabel1;
+        private Label label4;
     }
 }

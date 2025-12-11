@@ -82,13 +82,14 @@ internal static class Program
                 services.AddScoped<IAgendaService, AgendaServiceImpl>();
                 services.AddScoped<ILogInService, LogInServiceImpl>();
                 services.AddScoped<IRolUsuarioService, RolUsuarioServiceImpl>();
+                services.AddScoped<ISignUpService, SignUpServiceImpl>();
 
                 // Controllers 
                 services.AddScoped<RegistroEmprendimientoController>();
                 services.AddScoped<ParticipanteController>();
                 services.AddScoped<CalendarioController>();
                 services.AddScoped<AgendaController>();
-                services.AddScoped<LogInController>();
+                services.AddScoped<AuthController>();
 
                 // Formularios
                 services.AddScoped<MainFormView>();
@@ -100,10 +101,11 @@ internal static class Program
                 services.AddScoped<MainEstudianteView>();
                 services.AddScoped<GestionAgendaView>();
                 services.AddScoped<LogIn>();
+                services.AddScoped<UserRegister>();
 
                 //MainForms
-                services.AddScoped<ITypeMainForm, MainFormView>();
-                services.AddScoped<ITypeMainForm, MainEstudianteView>();
+                services.AddScoped<IViewRolType, MainFormView>();
+                services.AddScoped<IViewRolType, MainEstudianteView>();
             });
     }
 }
