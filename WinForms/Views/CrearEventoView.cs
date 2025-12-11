@@ -39,10 +39,10 @@ namespace WinForms.Views
         {
             try
             {
-                // 1️⃣ Trae los emprendimientos desde el controlador
+                
                 var emprendimientos = await _controller.ListarEmprendimientosAsync();
 
-                // 2️⃣ Asigna los datos al ComboBox
+                
                 cmbEmprendimiento.DataSource = emprendimientos;
                 cmbEmprendimiento.DisplayMember = "Nombre";   // Lo que el usuario ve
                 cmbEmprendimiento.ValueMember = "Id";         // El valor interno
@@ -58,7 +58,7 @@ namespace WinForms.Views
 
         private async void btnCrearEvento_Click(object sender, EventArgs e)
         {
-            // Validar campos vacíos
+           
             if (!Utils.ValidateStrings(
                     txtNombreEvento.Text,
                     txtFechaInicio.Text,
@@ -93,7 +93,7 @@ namespace WinForms.Views
                 return;
             }
 
-            // Crear DTO
+            
             var dto = new EventoDto
             {
                 Nombre = txtNombreEvento.Text,
@@ -104,7 +104,7 @@ namespace WinForms.Views
                 IdEmprendimiento = (int)cmbEmprendimiento.SelectedValue
             };
 
-            // Crear evento en BD
+            
             var result = await _controller.CrearEventoAsync(dto);
 
             MessageBox.Show(result.IsSuccess

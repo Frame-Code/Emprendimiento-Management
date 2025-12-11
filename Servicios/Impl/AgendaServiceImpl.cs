@@ -20,10 +20,10 @@ namespace Servicios.Impl
 
         public async Task<ResponseDto> RegistrarAgendaPresentacionAsync(AgendaPresentacionDto dto)
         {
-            // Obtener agenda SOLO del evento seleccionado
+           
             var listaActual = await _agendaPresentacionRepository.ListarPorEventoAsync(dto.IdEvento);
 
-            // Calcular nuevo orden correcto
+            
             int nuevoOrden = listaActual.Any()
                 ? listaActual.Max(a => a.Orden) + 1
                 : 1;
