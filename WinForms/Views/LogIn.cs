@@ -26,6 +26,8 @@ namespace WinForms.Views
             _serviceProvider = serviceProvider;
             InitializeComponent();
             Utils.ConfigureForm(this);
+            this.WindowState = FormWindowState.Maximized;
+            CenterRoundedPanel();
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -90,6 +92,24 @@ namespace WinForms.Views
 
             signUpForm._ViewType = ViewType.Estudiante;
             signUpForm.ShowDialog();
+        }
+
+        private void CenterRoundedPanel()
+        {
+            int x = (this.ClientSize.Width - roundedPanel1.Width) / 2;
+            int y = (this.ClientSize.Height - roundedPanel1.Height) / 2;
+
+            roundedPanel1.Location = new Point(x, y);
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LogIn_Load(object sender, EventArgs e)
+        {
+            CenterRoundedPanel();
         }
     }
 }

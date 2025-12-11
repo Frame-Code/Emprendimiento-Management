@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing; 
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms; 
-using System.Drawing; 
 
 namespace WinForms.Views.Util
 {
@@ -54,7 +54,12 @@ namespace WinForms.Views.Util
             textBoxes.ForEach(tb =>
             {
                 tb.Font = font;
-                tb.BorderStyle = BorderStyle.None;
+                tb.Multiline = true;
+                tb.Height = 35;
+                tb.Multiline = true;
+                tb.AcceptsReturn = false;
+                tb.AcceptsTab = false;
+                WrapTextBox(tb);
             });
 
             List<ComboBox> comboBoxes = GetAllControls<ComboBox>(form);
@@ -134,5 +139,31 @@ namespace WinForms.Views.Util
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             grid.MultiSelect = false;
         }
+
+        public static void WrapTextBox(TextBox txt)
+        {
+            // Crear contenedor redondeado
+            RoundedPanel container = new RoundedPanel();
+            container.BorderRadius = 15;
+            container.BorderSize = 1;
+            container.BorderColor = Color.LightGray;
+
+            // Tamaño del contenedor = tamaño del textbox + padding
+            container.Size = new Size(txt.Width + 10, txt.Height + 7);
+            container.Location = new Point(txt.Left - 5, txt.Top - 5);
+
+            // Preparar textbox
+            txt.BorderStyle = BorderStyle.None;
+            txt.Location = new Point(5, 5);
+            txt.Width = container.Width - 10;
+
+            // Mover al nuevo contenedor
+            Control parent = txt.Parent;
+            parent.Controls.Add(container);
+            parent.Controls.Remove(txt);
+
+            container.Controls.Add(txt);
+        }
+
     }
 }

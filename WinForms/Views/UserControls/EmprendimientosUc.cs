@@ -37,6 +37,7 @@ namespace WinForms.Views
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = listEmprendimientos;
             LoadButtons();
+            Utils.ConfigureForm(this);
         }
         private void LoadButtons()
         {

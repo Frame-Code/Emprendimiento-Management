@@ -22,6 +22,9 @@ namespace WinForms.Views
             _controller = controller;
             InitializeComponent();
             Utils.ConfigureForm(this);
+            this.WindowState = FormWindowState.Maximized;
+            CenterRoundedPanel();
+
         }
 
         private async void BtnSignUp_Click(object sender, EventArgs e)
@@ -55,6 +58,19 @@ namespace WinForms.Views
             else
                 MessageBox.Show($"Error al registrar el usuario: {response.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+        }
+
+        private void CenterRoundedPanel()
+        {
+            int x = (this.ClientSize.Width - roundedPanel1.Width) / 2;
+            int y = (this.ClientSize.Height - roundedPanel1.Height) / 2;
+
+            roundedPanel1.Location = new Point(x, y);
+        }
+
+        private void UserRegister_Load(object sender, EventArgs e)
+        {
+            CenterRoundedPanel();
         }
     }
 }
