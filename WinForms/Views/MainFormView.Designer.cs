@@ -42,6 +42,7 @@ partial class MainFormView
         LblUserName = new Label();
         panel2 = new Panel();
         label1 = new Label();
+        BtnCalendario = new Button();
         panel1.SuspendLayout();
         panel3.SuspendLayout();
         roundedPanel1.SuspendLayout();
@@ -57,8 +58,9 @@ partial class MainFormView
         panel1.Controls.Add(panel2);
         panel1.Dock = DockStyle.Fill;
         panel1.Location = new Point(0, 0);
+        panel1.Margin = new Padding(3, 2, 3, 2);
         panel1.Name = "panel1";
-        panel1.Size = new Size(1265, 752);
+        panel1.Size = new Size(1107, 564);
         panel1.TabIndex = 1;
         // 
         // PnlContenedor
@@ -112,7 +114,7 @@ partial class MainFormView
         BtnFacultades.BackColor = Color.FromArgb(224, 224, 224);
         BtnFacultades.Location = new Point(18, 94);
         BtnFacultades.Name = "BtnFacultades";
-        BtnFacultades.Size = new Size(199, 39);
+        BtnFacultades.Size = new Size(174, 29);
         BtnFacultades.TabIndex = 7;
         BtnFacultades.Text = "Facultades";
         BtnFacultades.UseVisualStyleBackColor = false;
@@ -132,7 +134,7 @@ partial class MainFormView
         BtnEmprendimiento.BackColor = Color.FromArgb(224, 224, 224);
         BtnEmprendimiento.Location = new Point(18, 25);
         BtnEmprendimiento.Name = "BtnEmprendimiento";
-        BtnEmprendimiento.Size = new Size(199, 39);
+        BtnEmprendimiento.Size = new Size(174, 29);
         BtnEmprendimiento.TabIndex = 3;
         BtnEmprendimiento.Text = "Emprendimientos";
         BtnEmprendimiento.UseVisualStyleBackColor = false;
@@ -167,7 +169,7 @@ partial class MainFormView
         LblUserName.Font = new Font("Segoe UI", 11F);
         LblUserName.Location = new Point(17, 10);
         LblUserName.Name = "LblUserName";
-        LblUserName.Size = new Size(100, 25);
+        LblUserName.Size = new Size(78, 20);
         LblUserName.TabIndex = 4;
         LblUserName.Text = "UserName";
         // 
@@ -177,6 +179,7 @@ partial class MainFormView
         panel2.Controls.Add(label1);
         panel2.Dock = DockStyle.Top;
         panel2.Location = new Point(0, 0);
+        panel2.Margin = new Padding(3, 2, 3, 2);
         panel2.Name = "panel2";
         panel2.Size = new Size(1265, 55);
         panel2.TabIndex = 6;
@@ -187,17 +190,30 @@ partial class MainFormView
         label1.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
         label1.Location = new Point(473, 8);
         label1.Name = "label1";
-        label1.Size = new Size(370, 35);
+        label1.Size = new Size(296, 28);
         label1.TabIndex = 8;
         label1.Text = "Administrar emprendimientos";
         // 
+        // BtnCalendario
+        // 
+        BtnCalendario.BackColor = Color.FromArgb(224, 224, 224);
+        BtnCalendario.Location = new Point(10, 216);
+        BtnCalendario.Margin = new Padding(3, 2, 3, 2);
+        BtnCalendario.Name = "BtnCalendario";
+        BtnCalendario.Size = new Size(174, 29);
+        BtnCalendario.TabIndex = 10;
+        BtnCalendario.Text = "Calendario";
+        BtnCalendario.UseVisualStyleBackColor = false;
+        BtnCalendario.Click += BtnCalendario_Click;
+        // 
         // MainFormView
         // 
-        AutoScaleDimensions = new SizeF(8F, 20F);
+        AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = SystemColors.ButtonFace;
-        ClientSize = new Size(1265, 752);
+        ClientSize = new Size(1107, 564);
         Controls.Add(panel1);
+        Margin = new Padding(3, 2, 3, 2);
         Name = "MainFormView";
         Text = "Form1";
         WindowState = FormWindowState.Maximized;

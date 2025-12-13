@@ -1,6 +1,8 @@
 using Controller;
 using Shared;
 using WinForms.Views;
+using Controller;
+using Servicios.Impl;
 using WinForms.Views.Util;
 
 namespace WinForms;
@@ -8,12 +10,15 @@ namespace WinForms;
 public partial class MainFormView : Form, IViewRolType
 {
     private readonly EmprendimientosUc _emprendimientosUc;
+    private readonly CalendariodeActividadesView _calendariodeActividadesview;
     public ViewType ViewType => ViewType.Administrador;
     public string UserName { get; set; } = "Usuario";
 
-    public MainFormView(EmprendimientosUc emprendimientosUc)
+    public MainFormView(EmprendimientosUc emprendimientosUc, CalendariodeActividadesView calendariodeActividadesview)
     {
         _emprendimientosUc = emprendimientosUc;
+        _calendariodeActividadesview = calendariodeActividadesview;
+        InitializeComponent();
         Utils.ConfigureForm(this);
     }
 
@@ -29,6 +34,19 @@ public partial class MainFormView : Form, IViewRolType
         CargarModulo(_emprendimientosUc);
     }
 
+    private void BtnCalendario_Click(object sender, EventArgs e)
+    {
+        try 
+        {
+            CalendariodeActividadesView calendarioview = _calendariodeActividadesview;
+            calendarioview.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Error al cargar el m�dulo de calendario: " + ex.Message);
+        }
+    }
+    
     public void ShowForm(Action closeWindows)
     {   
         InitializeComponent();
