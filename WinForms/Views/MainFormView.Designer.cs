@@ -42,7 +42,6 @@ partial class MainFormView
         LblUserName = new Label();
         panel2 = new Panel();
         label1 = new Label();
-        BtnCalendario = new Button();
         panel1.SuspendLayout();
         panel3.SuspendLayout();
         roundedPanel1.SuspendLayout();
@@ -68,7 +67,7 @@ partial class MainFormView
         PnlContenedor.Dock = DockStyle.Fill;
         PnlContenedor.Location = new Point(256, 55);
         PnlContenedor.Name = "PnlContenedor";
-        PnlContenedor.Size = new Size(1009, 697);
+        PnlContenedor.Size = new Size(851, 509);
         PnlContenedor.TabIndex = 8;
         // 
         // panel3
@@ -80,7 +79,7 @@ partial class MainFormView
         panel3.Dock = DockStyle.Left;
         panel3.Location = new Point(0, 55);
         panel3.Name = "panel3";
-        panel3.Size = new Size(256, 697);
+        panel3.Size = new Size(256, 509);
         panel3.TabIndex = 7;
         // 
         // roundedPanel1
@@ -104,7 +103,7 @@ partial class MainFormView
         BtnResultadoEventos.BackColor = Color.FromArgb(224, 224, 224);
         BtnResultadoEventos.Location = new Point(17, 310);
         BtnResultadoEventos.Name = "BtnResultadoEventos";
-        BtnResultadoEventos.Size = new Size(199, 39);
+        BtnResultadoEventos.Size = new Size(175, 39);
         BtnResultadoEventos.TabIndex = 10;
         BtnResultadoEventos.Text = "Resultados Eventos";
         BtnResultadoEventos.UseVisualStyleBackColor = false;
@@ -124,10 +123,11 @@ partial class MainFormView
         BtnEventos.BackColor = Color.FromArgb(224, 224, 224);
         BtnEventos.Location = new Point(18, 236);
         BtnEventos.Name = "BtnEventos";
-        BtnEventos.Size = new Size(199, 39);
+        BtnEventos.Size = new Size(174, 39);
         BtnEventos.TabIndex = 9;
         BtnEventos.Text = "Eventos";
         BtnEventos.UseVisualStyleBackColor = false;
+        BtnEventos.Click += BtnEventos_Click;
         // 
         // BtnEmprendimiento
         // 
@@ -145,7 +145,7 @@ partial class MainFormView
         BtnParticipantes.BackColor = Color.FromArgb(224, 224, 224);
         BtnParticipantes.Location = new Point(18, 163);
         BtnParticipantes.Name = "BtnParticipantes";
-        BtnParticipantes.Size = new Size(199, 39);
+        BtnParticipantes.Size = new Size(174, 39);
         BtnParticipantes.TabIndex = 8;
         BtnParticipantes.Text = "Participantes";
         BtnParticipantes.UseVisualStyleBackColor = false;
@@ -158,7 +158,7 @@ partial class MainFormView
         roundedPanel2.BorderSize = 1;
         roundedPanel2.Controls.Add(LblUserName);
         roundedPanel2.Dock = DockStyle.Bottom;
-        roundedPanel2.Location = new Point(0, 651);
+        roundedPanel2.Location = new Point(0, 463);
         roundedPanel2.Name = "roundedPanel2";
         roundedPanel2.Size = new Size(254, 44);
         roundedPanel2.TabIndex = 5;
@@ -181,7 +181,7 @@ partial class MainFormView
         panel2.Location = new Point(0, 0);
         panel2.Margin = new Padding(3, 2, 3, 2);
         panel2.Name = "panel2";
-        panel2.Size = new Size(1265, 55);
+        panel2.Size = new Size(1107, 55);
         panel2.TabIndex = 6;
         // 
         // label1
@@ -193,18 +193,6 @@ partial class MainFormView
         label1.Size = new Size(296, 28);
         label1.TabIndex = 8;
         label1.Text = "Administrar emprendimientos";
-        // 
-        // BtnCalendario
-        // 
-        BtnCalendario.BackColor = Color.FromArgb(224, 224, 224);
-        BtnCalendario.Location = new Point(10, 216);
-        BtnCalendario.Margin = new Padding(3, 2, 3, 2);
-        BtnCalendario.Name = "BtnCalendario";
-        BtnCalendario.Size = new Size(174, 29);
-        BtnCalendario.TabIndex = 10;
-        BtnCalendario.Text = "Calendario";
-        BtnCalendario.UseVisualStyleBackColor = false;
-        BtnCalendario.Click += BtnCalendario_Click;
         // 
         // MainFormView
         // 
