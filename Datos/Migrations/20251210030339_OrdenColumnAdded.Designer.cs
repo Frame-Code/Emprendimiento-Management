@@ -4,6 +4,7 @@ using Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datos.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20251210030339_OrdenColumnAdded")]
+    partial class OrdenColumnAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -257,7 +260,7 @@ namespace Datos.Migrations
                     b.Property<int>("IdCargoParticipante")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdEmprendimiento")
+                    b.Property<int>("IdEmprendimiento")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombres")
@@ -515,20 +518,21 @@ namespace Datos.Migrations
 
             modelBuilder.Entity("Modelo.Participante", b =>
                 {
-                    b.HasOne("Modelo.CargoParticipante", "CargoParticipante")
+                    b.HasOne("Modelo.CargoParticipante", "cargoParticipante")
                         .WithMany()
                         .HasForeignKey("IdCargoParticipante")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Modelo.Emprendimiento", "Emprendimiento")
-                        .WithMany("Participantes")
+                    b.HasOne("Modelo.Emprendimiento", "emprendimiento")
+                        .WithMany()
                         .HasForeignKey("IdEmprendimiento")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("CargoParticipante");
+                    b.Navigation("cargoParticipante");
 
-                    b.Navigation("Emprendimiento");
+                    b.Navigation("emprendimiento");
                 });
 
             modelBuilder.Entity("Modelo.ResultadoEvento", b =>
@@ -578,11 +582,6 @@ namespace Datos.Migrations
                     b.Navigation("Emprendimiento");
 
                     b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("Modelo.Emprendimiento", b =>
-                {
-                    b.Navigation("Participantes");
                 });
 #pragma warning restore 612, 618
         }

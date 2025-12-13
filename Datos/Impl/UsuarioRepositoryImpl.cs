@@ -22,6 +22,11 @@ namespace Datos.Impl
             throw new NotImplementedException();
         }
 
+        public async Task<Usuario?> GetByUserName(string userName) =>
+            await context.Usuarios
+            .Include(u => u.RolUsuario)
+            .FirstOrDefaultAsync(usr => usr.NombreUsuario == userName);
+
         public async Task<List<Usuario>> ListarAsync() =>
             await context.Usuarios.
             Include(u => u.RolUsuario)

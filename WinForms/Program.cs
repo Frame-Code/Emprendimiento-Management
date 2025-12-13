@@ -32,9 +32,9 @@ internal static class Program
         {
             var db = scope.ServiceProvider.GetRequiredService<AppContext>();
             db.Database.Migrate();
-
-            var mainForm = scope.ServiceProvider.GetRequiredService<MainFormView>();
-            Application.Run(mainForm);
+          
+            var agenda = scope.ServiceProvider.GetRequiredService<LogIn>();
+            Application.Run(agenda);
             //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
             //Application.Run(registroEmprendimiento);
         }
@@ -73,17 +73,23 @@ internal static class Program
                 services.AddScoped<ICalendarioService, CalendarioServiceImpl>();
                 services.AddScoped<ICronogramaRepository, CronogramaRepositoryImpl>();
                 services.AddScoped<IPresentacionRepository, PresentacionRepositoryImpl>();
+                services.AddScoped<IUsuarioRepository, UsuarioRepositoryImpl>();
+                services.AddScoped<IRolUsuarioRepository, RolUsuarioRepositoryImpl>();
 
                 // Servicios 
                 services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();
                 services.AddScoped<IParticipanteService, ParticipanteServiceImpl>();
                 services.AddScoped<IAgendaService, AgendaServiceImpl>();
+                services.AddScoped<ILogInService, LogInServiceImpl>();
+                services.AddScoped<IRolUsuarioService, RolUsuarioServiceImpl>();
+                services.AddScoped<ISignUpService, SignUpServiceImpl>();
 
                 // Controllers 
                 services.AddScoped<RegistroEmprendimientoController>();
                 services.AddScoped<ParticipanteController>();
                 services.AddScoped<CalendarioController>();
                 services.AddScoped<AgendaController>();
+                services.AddScoped<AuthController>();
 
                 // Formularios
                 services.AddScoped<MainFormView>();
@@ -94,6 +100,12 @@ internal static class Program
                 services.AddScoped<ConsultaEmprendimientoView>();
                 services.AddScoped<MainEstudianteView>();
                 services.AddScoped<GestionAgendaView>();
+                services.AddScoped<LogIn>();
+                services.AddScoped<UserRegister>();
+
+                //MainForms
+                services.AddScoped<IViewRolType, MainFormView>();
+                services.AddScoped<IViewRolType, MainEstudianteView>();
             });
     }
 }

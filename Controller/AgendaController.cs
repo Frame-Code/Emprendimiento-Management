@@ -17,19 +17,13 @@ namespace Controller
             _agendaService = agendaService;
         }
 
-        public async Task<ResponseDto> RegistrarCronogramaAsync(CronogramaDto dto) =>
-            await _agendaService.RegistrarCronogramaAsync(dto);
+        public async Task<ResponseDto> RegistrarAgendaPresentacionAsync(AgendaPresentacionDto dto)
+            => await _agendaService.RegistrarAgendaPresentacionAsync(dto);
 
-        public async Task<ResponseDto> RegistrarPresentacionAsync(PresentacionDto dto) =>
-            await _agendaService.RegistrarPresentacionAsync(dto);
+        public async Task<List<AgendaPresentacionDto>> ListarAgendaPorEventoAsync(int idEvento)
+            => await _agendaService.ListarAgendaPorEventoAsync(idEvento);
 
-        public async Task<List<CronogramaDto>> ListarCronogramasAsync() =>
-            await _agendaService.ListarCronogramasAsync();
-
-        public async Task<List<PresentacionDto>> ListarPresentacionesAsync() =>
-            await _agendaService.ListarPresentacionesAsync();
-
-        public Task<List<ExpositorDto>> ListarExpositoresAsync() =>
-            _agendaService.ListarExpositoresAsync();
+        public async Task<List<ExpositorDto>> ListarExpositoresAsync()
+            => await _agendaService.ListarExpositoresAsync();
     }
 }
