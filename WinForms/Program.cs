@@ -37,14 +37,9 @@ internal static class Program
 
             var mainForm = scope.ServiceProvider.GetRequiredService<MainFormView>();
             Application.Run(mainForm); 
-            /*var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
-            Application.Run(registroEmprendimiento);*/
 
-          
-            var agenda = scope.ServiceProvider.GetRequiredService<LogIn>();
-            Application.Run(agenda);
-            //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
-            //Application.Run(registroEmprendimiento);
+/*            var agenda = scope.ServiceProvider.GetRequiredService<LogIn>();
+            Application.Run(agenda);*/
 
         }
     }
@@ -92,6 +87,7 @@ internal static class Program
                 services.AddScoped<IAgendaService, AgendaServiceImpl>();
                 services.AddScoped<ILogInService, LogInServiceImpl>();
                 services.AddScoped<IRolUsuarioService, RolUsuarioServiceImpl>();
+                services.AddScoped<ISignUpService, SignUpServiceImpl>();
 
                 // Controllers 
                 services.AddScoped<RegistroEmprendimientoController>();
@@ -99,7 +95,7 @@ internal static class Program
                 services.AddScoped<RegistroParticipanteController>();
                 services.AddScoped<CalendarioController>();
                 services.AddScoped<AgendaController>();
-                services.AddScoped<LogInController>();
+                services.AddScoped<AuthController>();
 
                 // Formularios
                 services.AddScoped<EmprendimientosUc>();
@@ -115,7 +111,11 @@ internal static class Program
                 services.AddScoped<MainEstudianteView>();
                 services.AddScoped<GestionAgendaView>();
                 services.AddScoped<LogIn>();
+                services.AddScoped<UserRegister>();
 
+                //MainForms
+                services.AddScoped<IViewRolType, MainFormView>();
+                services.AddScoped<IViewRolType, MainEstudianteView>();
             });
     }
 }

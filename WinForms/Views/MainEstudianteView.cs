@@ -1,4 +1,5 @@
 ﻿using Controller;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,10 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinForms.Views.Util;
 
 namespace WinForms.Views
 {
-    public partial class MainEstudianteView : Form, ITypeMainForm
+    public partial class MainEstudianteView : Form, IViewRolType
     {
         private readonly ConsultaEmprendimientoView _consultaView;
         public ViewType ViewType => ViewType.Estudiante;
@@ -20,6 +22,7 @@ namespace WinForms.Views
         public MainEstudianteView(ConsultaEmprendimientoView consultaView)
         {
             _consultaView = consultaView;
+            Utils.ConfigureForm(this);
         }
 
         private void btnEmprendimientoReg_Click(object sender, EventArgs e)

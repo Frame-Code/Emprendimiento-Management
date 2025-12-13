@@ -1,4 +1,5 @@
-﻿using Datos.Impl;
+﻿using Controller;
+using Datos.Impl;
 using Servicios.Impl;
 using Shared;
 using System;
@@ -12,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinForms.Views;
-using Controller;
+using WinForms.Views.Util;
 
 namespace WinForms.Views
 
@@ -24,8 +25,9 @@ namespace WinForms.Views
 
         public CalendariodeActividadesView(CalendarioController controller)
         {
-            _controller = controller;
+            _controller = controller ?? throw new ArgumentNullException(nameof(controller));
             InitializeComponent();
+            Utils.ConfigureForm(this);
         }
 
         private async void CalendariodeActividadesView_Load(object sender, EventArgs e)
@@ -34,11 +36,20 @@ namespace WinForms.Views
         }
 
         private async Task CargarDatosAsync()
-        { 
+        {
+            
             var facultades = await _controller.ListarFacultadesAsync();
+
+            var opcionDefault = new Modelo.Facultad();
+            opcionDefault.Id = 0;
+            opcionDefault.Nombre = "Elije tu Facultad...";
+            facultades.Insert(0, opcionDefault);
+
+
             cmbFacultad.DataSource = facultades;
             cmbFacultad.DisplayMember = "Nombre";
             cmbFacultad.ValueMember = "Id";
+            cmbFacultad.SelectedIndex = 0;
 
             var actividades = await _controller.ListarActividadesAsync();
             dgvActividades.DataSource = null;
@@ -71,6 +82,11 @@ namespace WinForms.Views
             DateTime fechaSeleccionada = e.Start;
             var listaFiltrada = await _controller.FiltrarPorFechaAsync(fechaSeleccionada);
             dgvActividades.DataSource = listaFiltrada;
+        }
+
+        private void cmbFacultad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

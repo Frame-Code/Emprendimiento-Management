@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinForms.Views.Util;
 
 namespace WinForms.Views
 {
@@ -25,16 +26,17 @@ namespace WinForms.Views
             _controller = controller;
             _serviceProvider = serviceProvider;
             InitializeComponent();
+            Utils.ConfigureForm(this);
         }
 
         //Helpers-------------------------------------------------
         private async Task Init()
         {
-            var listEmprendimientos = await _controller.ListarEmprendimientosAsync();
-            emprendimientos = listEmprendimientos;
+            emprendimientos = await _controller.ListarEmprendimientosAsync();
             dataGridView1.DataSource = null;
-            dataGridView1.DataSource = listEmprendimientos;
+            dataGridView1.DataSource = emprendimientos;
             LoadButtons();
+            Utils.ConfigureForm(this);
         }
         private void LoadButtons()
         {
@@ -90,13 +92,13 @@ namespace WinForms.Views
                 using var scope = _serviceProvider.CreateScope();
                 var form = scope.ServiceProvider.GetRequiredService<DetalleEmprendimientoView>();
                 int idEmprendimiento = (int)dataGridView1.Rows[e.RowIndex].Cells["Id"].Value;
-                var emprendimiento = emprendimientos.FirstOrDefault(emp => emp.Id == idEmprendimiento);
-                if(emprendimiento == null)
+                EmprendimientoDto? emprendimientoDto = emprendimientos.FirstOrDefault(emp => emp.Id == idEmprendimiento);
+                if(emprendimientoDto == null)
                 {
                     MessageBox.Show("Emprendimiento no encontrado");
                     return;
                 }
-                await form.Init(emprendimiento.Nombre, emprendimiento.Rubro, emprendimiento?.Descripcion, emprendimiento.Facultad, emprendimiento.Id);
+                await form.Init(emprendimientoDto.Nombre, emprendimientoDto.Rubro, emprendimientoDto?.Descripcion, emprendimientoDto.Facultad, emprendimientoDto.Id);
                 form.FormClosed += Form_FormClosed;
                 form.ShowDialog();
                 return;

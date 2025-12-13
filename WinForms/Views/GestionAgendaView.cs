@@ -23,13 +23,11 @@ namespace WinForms.Views
         {
             InitializeComponent();
             _controller = controller;
-
-            this.Load += GestionAgendaView_Load;
+            Utils.ConfigureForm(this);
+            Load += GestionAgendaView_Load;
         }
-
-
-
-        private async void GestionAgendaView_Load(object sender, EventArgs e)
+        
+        private async void GestionAgendaView_Load(object? sender, EventArgs e)
         {
             var expositores = await _controller.ListarExpositoresAsync();
 
@@ -41,68 +39,45 @@ namespace WinForms.Views
 
         private async void btnGuardarCronograma_Click(object sender, EventArgs e)
         {
-            bool isValid = Utils.ValidateStrings(txtUbicacion.Text);
-
-            if (!isValid)
-            {
-                MessageBox.Show("Por favor completa la ubicación.");
-                return;
-            }
-
-            var dto = new CronogramaDto
-            {
-                Fecha = dtFecha.Value,
-                Hora = dtHora.Value.ToString("HH:mm"),
-                Ubicacion = txtUbicacion.Text
-            };
-
-            var result = await _controller.RegistrarCronogramaAsync(dto);
-
-            if (!result.IsSuccess)
-            {
-                MessageBox.Show($"Error: {result.Message}");
-                return;
-            }
-
-            MessageBox.Show("Cronograma guardado correctamente.");
+            MessageBox.Show("La fecha y hora pertenecen al evento, no a la agenda.");
         }
 
         private async void btnAgregarPresentacion_Click(object sender, EventArgs e)
         {
-            bool isValid = Utils.ValidateStrings(cmbExpositor.Text);
-
-            if (!isValid)
+            if (cmbExpositor.SelectedIndex == -1)
             {
-                MessageBox.Show("Ingrese un expositor válido.");
+                MessageBox.Show("Seleccione un expositor.");
                 return;
             }
 
-            
-            var presentaciones = await _controller.ListarPresentacionesAsync();
-            int nuevoOrden = presentaciones.Count + 1;
+            int idEvento = 1;
+            if (cmbExpositor.SelectedValue is not int idEmprendimiento)
+            {
+                MessageBox.Show("Seleccione un emprendimiento.");
+                return;
+            }
 
-           
+            var total = await _controller.ListarAgendaPorEventoAsync(idEvento);
+            int nuevoOrden = total.Count + 1;
+
             numOrden.Value = nuevoOrden;
 
-            
-            var dto = new PresentacionDto
+            var dto = new AgendaPresentacionDto
             {
-                Expositor = cmbExpositor.Text,
-                Orden = nuevoOrden,
-                Fecha = dtFecha.Value,
-                Hora = dtHora.Value.ToString("HH:mm"),
-                Ubicacion = txtUbicacion.Text
+                IdEvento = idEvento,
+                IdEmprendimiento = idEmprendimiento,
+                Orden = nuevoOrden
             };
 
-            var result = await _controller.RegistrarPresentacionAsync(dto);
+            var result = await _controller.RegistrarAgendaPresentacionAsync(dto);
 
             if (!result.IsSuccess)
             {
-                MessageBox.Show($"Error: {result.Message}");
+                MessageBox.Show(result.Message);
                 return;
             }
 
-            MessageBox.Show($"Presentación registrada con orden #{nuevoOrden}");
+            MessageBox.Show($"Presentación agendada con orden #{nuevoOrden}");
         }
     }
 

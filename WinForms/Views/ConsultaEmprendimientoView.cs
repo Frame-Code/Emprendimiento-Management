@@ -24,8 +24,8 @@ namespace WinForms.Views
         {
             _controller = controller;
             InitializeComponent();
-
             cmbListEmpReg.DropDownStyle = ComboBoxStyle.DropDownList;
+            Utils.ConfigureForm(this);
         }
         private async void ConsultaEmprendimientoView_Load(object sender, EventArgs e)
         {

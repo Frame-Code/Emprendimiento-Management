@@ -16,13 +16,14 @@ namespace Datos.Impl
 
         public async Task<Participante?> ObtenerPorIdAsync(int id) =>
             await context.Participantes
-                .Include(p => p.emprendimiento)
-                .Include(p => p.cargoParticipante)
+                .Include(p => p.Emprendimiento)
+                .Include(p => p.CargoParticipante)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
         public async Task<List<Participante>> ListarAsync() =>
             await context.Participantes
-                         .Include(p => p.cargoParticipante)
+                         .Include(p => p.Emprendimiento)
+                         .Include(p => p.CargoParticipante)
                          .ToListAsync();
 
         public async Task CreateAsync(Participante entity)

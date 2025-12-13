@@ -23,9 +23,9 @@ namespace Modelo
         public string NumeroTelefono { get; set; } = null!;
         public string? FotoPath { get; set; }
         public int? IdEmprendimiento { get; set; }
-        public Emprendimiento emprendimiento { get; set; } = null!;
+        public Emprendimiento? Emprendimiento { get; set; }
         public int IdCargoParticipante { get; set; }
-        public CargoParticipante cargoParticipante { get; set; } = null!;
+        public CargoParticipante CargoParticipante { get; set; } = null!;
 
     }
 }

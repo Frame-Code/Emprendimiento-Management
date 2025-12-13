@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Modelo;
+using System.Linq;
 using Datos.Interfaces;
 
 namespace Datos.Impl
@@ -28,5 +29,13 @@ namespace Datos.Impl
         {
             throw new NotImplementedException();
         }
+        public async Task<List<AgendaPresentacion>> ListarPorEventoAsync(int idEvento)
+        {
+            return await context.AgendaPresentaciones
+                .Where(a => a.IdEvento == idEvento)
+                .OrderBy(a => a.Orden)
+                .ToListAsync();
+        }
+
     }
 }
