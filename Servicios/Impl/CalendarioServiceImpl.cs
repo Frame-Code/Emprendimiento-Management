@@ -14,7 +14,6 @@ namespace Servicios.Impl
 {
     public class CalendarioServiceImpl(
         IAgendaPresentacionRepository agendaPresentacionRepository,
-        IEventoRepository eventoRepository,
         IFacultadRepository facultadRepository
     ) : ICalendarioService
     {
