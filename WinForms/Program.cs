@@ -45,7 +45,7 @@ internal static class Program
             Application.Run(agenda);
             //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
             //Application.Run(registroEmprendimiento);
- 96abbc376d9ddf8b891271b5557aa2c55c2349b6
+
         }
     }
 
@@ -88,24 +88,18 @@ internal static class Program
                 // Servicios 
                 services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();
                 services.AddScoped<IParticipanteService, ParticipanteServiceImpl>();
-
                 services.AddScoped<IRegistroParticipanteService, RegistroParticipanteService>();
-
                 services.AddScoped<IAgendaService, AgendaServiceImpl>();
                 services.AddScoped<ILogInService, LogInServiceImpl>();
                 services.AddScoped<IRolUsuarioService, RolUsuarioServiceImpl>();
- 96abbc376d9ddf8b891271b5557aa2c55c2349b6
 
                 // Controllers 
                 services.AddScoped<RegistroEmprendimientoController>();
                 services.AddScoped<ParticipanteController>();
- HEAD
                 services.AddScoped<RegistroParticipanteController>();
-
                 services.AddScoped<CalendarioController>();
                 services.AddScoped<AgendaController>();
                 services.AddScoped<LogInController>();
- 96abbc376d9ddf8b891271b5557aa2c55c2349b6
 
                 // Formularios
                 services.AddScoped<EmprendimientosUc>();
@@ -122,10 +116,6 @@ internal static class Program
                 services.AddScoped<GestionAgendaView>();
                 services.AddScoped<LogIn>();
 
-                //MainForms
-                services.AddScoped<ITypeMainForm, MainFormView>();
-                services.AddScoped<ITypeMainForm, MainEstudianteView>();
-96abbc376d9ddf8b891271b5557aa2c55c2349b6
             });
     }
 }
