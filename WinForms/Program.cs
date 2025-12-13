@@ -33,14 +33,11 @@ internal static class Program
         {
             var db = scope.ServiceProvider.GetRequiredService<AppContext>();
             db.Database.Migrate();
-
-
-            var mainForm = scope.ServiceProvider.GetRequiredService<MainFormView>();
-            Application.Run(mainForm); 
-
-/*            var agenda = scope.ServiceProvider.GetRequiredService<LogIn>();
-            Application.Run(agenda);*/
-
+          
+            var agenda = scope.ServiceProvider.GetRequiredService<MainFormView>();
+            Application.Run(agenda);
+            //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
+            //Application.Run(registroEmprendimiento);
         }
     }
 
@@ -98,6 +95,7 @@ internal static class Program
                 services.AddScoped<AuthController>();
 
                 // Formularios
+                services.AddScoped<MainFormView>();
                 services.AddScoped<EmprendimientosUc>();
                 services.AddScoped<RegistroEmprendimientoView>();
                 services.AddScoped<DetalleEmprendimientoView>();
