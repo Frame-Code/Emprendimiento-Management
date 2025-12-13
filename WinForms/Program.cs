@@ -9,6 +9,7 @@ using Servicios.Impl;
 using Servicios.Interfaces;
 using Shared;
 using WinForms.Views;
+using WinForms.Views.Util;
 using AppContext = Datos.AppContext;
 
 namespace WinForms;
@@ -32,11 +33,14 @@ internal static class Program
         {
             var db = scope.ServiceProvider.GetRequiredService<AppContext>();
             db.Database.Migrate();
-          
-            var agenda = scope.ServiceProvider.GetRequiredService<LogIn>();
-            Application.Run(agenda);
-            //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
-            //Application.Run(registroEmprendimiento);
+
+
+            var mainForm = scope.ServiceProvider.GetRequiredService<MainFormView>();
+            Application.Run(mainForm); 
+
+/*            var agenda = scope.ServiceProvider.GetRequiredService<LogIn>();
+            Application.Run(agenda);*/
+
         }
     }
 
@@ -79,6 +83,7 @@ internal static class Program
                 // Servicios 
                 services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();
                 services.AddScoped<IParticipanteService, ParticipanteServiceImpl>();
+                services.AddScoped<IRegistroParticipanteService, RegistroParticipanteService>();
                 services.AddScoped<IAgendaService, AgendaServiceImpl>();
                 services.AddScoped<ILogInService, LogInServiceImpl>();
                 services.AddScoped<IRolUsuarioService, RolUsuarioServiceImpl>();
@@ -87,15 +92,20 @@ internal static class Program
                 // Controllers 
                 services.AddScoped<RegistroEmprendimientoController>();
                 services.AddScoped<ParticipanteController>();
+                services.AddScoped<RegistroParticipanteController>();
                 services.AddScoped<CalendarioController>();
                 services.AddScoped<AgendaController>();
                 services.AddScoped<AuthController>();
 
                 // Formularios
-                services.AddScoped<MainFormView>();
                 services.AddScoped<EmprendimientosUc>();
                 services.AddScoped<RegistroEmprendimientoView>();
                 services.AddScoped<DetalleEmprendimientoView>();
+
+                services.AddScoped<RegistroParticipantesView>();
+                services.AddScoped<VerParticipantesView>();
+                services.AddScoped<MainFormView>();
+
                 services.AddScoped<CalendariodeActividadesView>();
                 services.AddScoped<ConsultaEmprendimientoView>();
                 services.AddScoped<MainEstudianteView>();

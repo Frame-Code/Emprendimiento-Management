@@ -1,4 +1,4 @@
-﻿namespace WinForms;
+namespace WinForms;
 
 partial class MainFormView
 {

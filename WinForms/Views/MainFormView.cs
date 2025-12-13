@@ -19,18 +19,38 @@ public partial class MainFormView : Form, IViewRolType
         Utils.ConfigureForm(this);
     }
 
-    private void CargarModulo(UserControl modulo)
-    {
-        PnlContenedor.Controls.Clear();
-        modulo.Dock = DockStyle.Fill;
-        PnlContenedor.Controls.Add(modulo);
-    }
+      public MainFormView(EmprendimientosUc emprendimientosUc, VerParticipantesView verParticipantesView)
+      {
+          _emprendimientosUc = emprendimientosUc;
+          _verParticipantesView = verParticipantesView;
+          InitializeComponent();
+      }
 
-    private void BtnEmprendimiento_Click(object sender, EventArgs e)
-    {
-        CargarModulo(_emprendimientosUc);
-    }
+        private void CargarModulo(UserControl modulo)
+        {
+            PnlContenedor.Controls.Clear();
+            modulo.Dock = DockStyle.Fill;
+            PnlContenedor.Controls.Add(modulo);
+        }
 
+        private void BtnEmprendimiento_Click(object sender, EventArgs e)
+        {
+            CargarModulo(_emprendimientosUc);
+        }
+
+        private void BtnParticipantes_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                VerParticipantesView participantesView = _verParticipantesView;
+                participantesView.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al abrir participantes: " + ex.Message);
+            }
+        }
     private void BtnCalendario_Click(object sender, EventArgs e)
     {
         try 
@@ -40,7 +60,7 @@ public partial class MainFormView : Form, IViewRolType
         }
         catch (Exception ex)
         {
-            MessageBox.Show("Error al cargar el m�dulo de calendario: " + ex.Message);
+            MessageBox.Show("Error al cargar el modulo de calendario: " + ex.Message);
         }
     }
     

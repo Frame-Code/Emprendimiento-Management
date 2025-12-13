@@ -5,8 +5,15 @@ using Modelo;
 
 namespace Datos.Impl
 {
-    public class ParticipanteRepositoryImpl(AppContext context) : IParticipanteRepository
+    public class ParticipanteRepositoryImpl : IParticipanteRepository
     {
+        private readonly AppContext context;
+
+        public ParticipanteRepositoryImpl(AppContext context)
+        {
+            this.context = context;
+        }
+
         public async Task<Participante?> ObtenerPorIdAsync(int id) =>
             await context.Participantes
                 .Include(p => p.Emprendimiento)
@@ -29,5 +36,14 @@ namespace Datos.Impl
         {
             throw new NotImplementedException();
         }
+
+        public async Task<bool> ExisteIdentificacionAsync(string identificacion) =>
+            await context.Participantes.AnyAsync(p => p.NumeroIdentificacion == identificacion);
+        
+        public async Task<bool> ExisteTelefonoAsync(string telefono) =>
+            await context.Participantes.AnyAsync(p => p.NumeroTelefono == telefono);
+
+
+
     }
 }
