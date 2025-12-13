@@ -1,4 +1,4 @@
-namespace WinForms;
+namespace WinForms.Views;
 
 partial class MainFormView
 {
@@ -238,7 +238,6 @@ partial class MainFormView
     private Button BtnFacultades;
     private Button BtnEventos;
     private Button BtnResultadoEventos;
-    private Button BtnCalendario;
     private Views.Util.RoundedPanel roundedPanel2;
     private Views.Util.RoundedPanel roundedPanel1;
 }

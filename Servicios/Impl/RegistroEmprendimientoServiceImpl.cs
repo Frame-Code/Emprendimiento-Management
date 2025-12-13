@@ -23,14 +23,16 @@ namespace Servicios.Impl
         public async Task<List<EmprendimientoDto>> ListarEmprendimientosAsync()
         {
             var emprendimientos = await emprendimientoRepository.ListarAsync();
-            var dtos = emprendimientos.Select(e => new EmprendimientoDto
-            {
-                Id = e.Id,
-                Nombre = e.Nombre,
-                Descripcion = e.Descripcion,
-                Facultad = e.Facultad.Nombre,
-                Rubro = e.RubroEmprendimiento.Nombre
-            }).ToList();
+            var dtos = emprendimientos
+                .Select(e => new EmprendimientoDto
+                {
+                    Id = e.Id,
+                    Nombre = e.Nombre,
+                    Descripcion = e.Descripcion,
+                    Facultad = e.Facultad.Nombre,
+                    Rubro = e.RubroEmprendimiento.Nombre
+                })
+                .ToList();
             return dtos;
         }
 

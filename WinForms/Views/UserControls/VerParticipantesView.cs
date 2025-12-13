@@ -1,17 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Controller;
-using System.Data;
-using System.Data.SqlClient;
+﻿using Controller;
 
-namespace WinForms.Views.Util
+namespace WinForms.Views.UserControls
 {
     public partial class VerParticipantesView : UserControl
     {
         private readonly RegistroParticipanteController _registroParticipanteController;
         private readonly RegistroParticipantesView _registroParticipantesView;
-        private readonly VerParticipantesView _verParticipantesView;
 
         public VerParticipantesView(
             RegistroParticipanteController registroParticipanteController,
