@@ -58,17 +58,18 @@ partial class MainFormView
         panel1.Controls.Add(panel2);
         panel1.Dock = DockStyle.Fill;
         panel1.Location = new Point(0, 0);
-        panel1.Margin = new Padding(3, 2, 3, 2);
+        panel1.Margin = new Padding(4, 3, 4, 3);
         panel1.Name = "panel1";
-        panel1.Size = new Size(1107, 564);
+        panel1.Size = new Size(1581, 940);
         panel1.TabIndex = 1;
         // 
         // PnlContenedor
         // 
         PnlContenedor.Dock = DockStyle.Fill;
-        PnlContenedor.Location = new Point(256, 55);
+        PnlContenedor.Location = new Point(365, 90);
+        PnlContenedor.Margin = new Padding(4, 5, 4, 5);
         PnlContenedor.Name = "PnlContenedor";
-        PnlContenedor.Size = new Size(1009, 697);
+        PnlContenedor.Size = new Size(1216, 850);
         PnlContenedor.TabIndex = 8;
         // 
         // panel3
@@ -78,9 +79,10 @@ partial class MainFormView
         panel3.Controls.Add(roundedPanel1);
         panel3.Controls.Add(roundedPanel2);
         panel3.Dock = DockStyle.Left;
-        panel3.Location = new Point(0, 55);
+        panel3.Location = new Point(0, 90);
+        panel3.Margin = new Padding(4, 5, 4, 5);
         panel3.Name = "panel3";
-        panel3.Size = new Size(256, 697);
+        panel3.Size = new Size(365, 850);
         panel3.TabIndex = 7;
         // 
         // roundedPanel1
@@ -94,17 +96,19 @@ partial class MainFormView
         roundedPanel1.Controls.Add(BtnEventos);
         roundedPanel1.Controls.Add(BtnEmprendimiento);
         roundedPanel1.Controls.Add(BtnParticipantes);
-        roundedPanel1.Location = new Point(11, 5);
+        roundedPanel1.Location = new Point(16, 8);
+        roundedPanel1.Margin = new Padding(4, 5, 4, 5);
         roundedPanel1.Name = "roundedPanel1";
-        roundedPanel1.Size = new Size(235, 606);
+        roundedPanel1.Size = new Size(336, 1010);
         roundedPanel1.TabIndex = 0;
         // 
         // BtnResultadoEventos
         // 
         BtnResultadoEventos.BackColor = Color.FromArgb(224, 224, 224);
-        BtnResultadoEventos.Location = new Point(17, 310);
+        BtnResultadoEventos.Location = new Point(24, 517);
+        BtnResultadoEventos.Margin = new Padding(4, 5, 4, 5);
         BtnResultadoEventos.Name = "BtnResultadoEventos";
-        BtnResultadoEventos.Size = new Size(199, 39);
+        BtnResultadoEventos.Size = new Size(284, 65);
         BtnResultadoEventos.TabIndex = 10;
         BtnResultadoEventos.Text = "Resultados Eventos";
         BtnResultadoEventos.UseVisualStyleBackColor = false;
@@ -112,9 +116,10 @@ partial class MainFormView
         // BtnFacultades
         // 
         BtnFacultades.BackColor = Color.FromArgb(224, 224, 224);
-        BtnFacultades.Location = new Point(18, 94);
+        BtnFacultades.Location = new Point(26, 157);
+        BtnFacultades.Margin = new Padding(4, 5, 4, 5);
         BtnFacultades.Name = "BtnFacultades";
-        BtnFacultades.Size = new Size(174, 29);
+        BtnFacultades.Size = new Size(249, 48);
         BtnFacultades.TabIndex = 7;
         BtnFacultades.Text = "Facultades";
         BtnFacultades.UseVisualStyleBackColor = false;
@@ -122,19 +127,22 @@ partial class MainFormView
         // BtnEventos
         // 
         BtnEventos.BackColor = Color.FromArgb(224, 224, 224);
-        BtnEventos.Location = new Point(18, 236);
+        BtnEventos.Location = new Point(26, 393);
+        BtnEventos.Margin = new Padding(4, 5, 4, 5);
         BtnEventos.Name = "BtnEventos";
-        BtnEventos.Size = new Size(199, 39);
+        BtnEventos.Size = new Size(284, 65);
         BtnEventos.TabIndex = 9;
         BtnEventos.Text = "Eventos";
         BtnEventos.UseVisualStyleBackColor = false;
+        BtnEventos.Click += BtnEventos_Click;
         // 
         // BtnEmprendimiento
         // 
         BtnEmprendimiento.BackColor = Color.FromArgb(224, 224, 224);
-        BtnEmprendimiento.Location = new Point(18, 25);
+        BtnEmprendimiento.Location = new Point(26, 42);
+        BtnEmprendimiento.Margin = new Padding(4, 5, 4, 5);
         BtnEmprendimiento.Name = "BtnEmprendimiento";
-        BtnEmprendimiento.Size = new Size(174, 29);
+        BtnEmprendimiento.Size = new Size(249, 48);
         BtnEmprendimiento.TabIndex = 3;
         BtnEmprendimiento.Text = "Emprendimientos";
         BtnEmprendimiento.UseVisualStyleBackColor = false;
@@ -143,9 +151,10 @@ partial class MainFormView
         // BtnParticipantes
         // 
         BtnParticipantes.BackColor = Color.FromArgb(224, 224, 224);
-        BtnParticipantes.Location = new Point(18, 163);
+        BtnParticipantes.Location = new Point(26, 272);
+        BtnParticipantes.Margin = new Padding(4, 5, 4, 5);
         BtnParticipantes.Name = "BtnParticipantes";
-        BtnParticipantes.Size = new Size(199, 39);
+        BtnParticipantes.Size = new Size(284, 65);
         BtnParticipantes.TabIndex = 8;
         BtnParticipantes.Text = "Participantes";
         BtnParticipantes.UseVisualStyleBackColor = false;
@@ -159,18 +168,20 @@ partial class MainFormView
         roundedPanel2.BorderSize = 1;
         roundedPanel2.Controls.Add(LblUserName);
         roundedPanel2.Dock = DockStyle.Bottom;
-        roundedPanel2.Location = new Point(0, 651);
+        roundedPanel2.Location = new Point(0, 775);
+        roundedPanel2.Margin = new Padding(4, 5, 4, 5);
         roundedPanel2.Name = "roundedPanel2";
-        roundedPanel2.Size = new Size(254, 44);
+        roundedPanel2.Size = new Size(363, 73);
         roundedPanel2.TabIndex = 5;
         // 
         // LblUserName
         // 
         LblUserName.AutoSize = true;
         LblUserName.Font = new Font("Segoe UI", 11F);
-        LblUserName.Location = new Point(17, 10);
+        LblUserName.Location = new Point(24, 17);
+        LblUserName.Margin = new Padding(4, 0, 4, 0);
         LblUserName.Name = "LblUserName";
-        LblUserName.Size = new Size(78, 20);
+        LblUserName.Size = new Size(115, 30);
         LblUserName.TabIndex = 4;
         LblUserName.Text = "UserName";
         // 
@@ -180,18 +191,19 @@ partial class MainFormView
         panel2.Controls.Add(label1);
         panel2.Dock = DockStyle.Top;
         panel2.Location = new Point(0, 0);
-        panel2.Margin = new Padding(3, 2, 3, 2);
+        panel2.Margin = new Padding(4, 3, 4, 3);
         panel2.Name = "panel2";
-        panel2.Size = new Size(1265, 55);
+        panel2.Size = new Size(1581, 90);
         panel2.TabIndex = 6;
         // 
         // label1
         // 
         label1.AutoSize = true;
         label1.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-        label1.Location = new Point(473, 8);
+        label1.Location = new Point(676, 13);
+        label1.Margin = new Padding(4, 0, 4, 0);
         label1.Name = "label1";
-        label1.Size = new Size(296, 28);
+        label1.Size = new Size(443, 41);
         label1.TabIndex = 8;
         label1.Text = "Administrar emprendimientos";
         // 
@@ -209,12 +221,12 @@ partial class MainFormView
         // 
         // MainFormView
         // 
-        AutoScaleDimensions = new SizeF(7F, 15F);
+        AutoScaleDimensions = new SizeF(10F, 25F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = SystemColors.ButtonFace;
-        ClientSize = new Size(1107, 564);
+        ClientSize = new Size(1581, 940);
         Controls.Add(panel1);
-        Margin = new Padding(3, 2, 3, 2);
+        Margin = new Padding(4, 3, 4, 3);
         Name = "MainFormView";
         Text = "Form1";
         WindowState = FormWindowState.Maximized;

@@ -53,7 +53,7 @@
             dgvParticipantes.Location = new Point(12, 60);
             dgvParticipantes.Name = "dgvParticipantes";
             dgvParticipantes.RowHeadersWidth = 62;
-            dgvParticipantes.Size = new Size(1389, 371);
+            dgvParticipantes.Size = new Size(810, 371);
             dgvParticipantes.TabIndex = 1;
             // 
             // label2
@@ -80,13 +80,12 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1420, 496);
             Controls.Add(btnRegistrate);
             Controls.Add(label2);
             Controls.Add(dgvParticipantes);
             Controls.Add(label1);
             Name = "VerParticipantesView";
-            Text = "VerParticipantesView";
+            Size = new Size(859, 496);
             Load += VerParticipantesView_Load;
             ((System.ComponentModel.ISupportInitialize)dgvParticipantes).EndInit();
             ResumeLayout(false);

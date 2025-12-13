@@ -37,34 +37,39 @@ public partial class MainFormView : Form, IViewRolType
     {
         try
         {
-
-            VerParticipantesView participantesView = _verParticipantesView;
-            participantesView.ShowDialog();
+            CargarModulo(_verParticipantesView);
         }
         catch (Exception ex)
         {
             MessageBox.Show("Error al abrir participantes: " + ex.Message);
         }
     }
+
+
     private void BtnCalendario_Click(object sender, EventArgs e)
     {
-        try 
-        {
-            CalendariodeActividadesView calendarioView = _calendarioActividadesView;
-            calendarioView.ShowDialog();
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show("Error al cargar el modulo de calendario: " + ex.Message);
-        }
+
     }
-    
+
     public void ShowForm(Action closeWindows)
-    {   
+    {
         InitializeComponent();
         LblUserName.Text = UserName;
         FormClosed += (s, e) => closeWindows();
         Utils.ConfigureForm(this);
         Show();
+    }
+
+    private void BtnEventos_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            CargarModulo(_calendarioActividadesView);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Error al abrir calendario de actividades: " + ex.Message);
+
+        }
     }
 }
