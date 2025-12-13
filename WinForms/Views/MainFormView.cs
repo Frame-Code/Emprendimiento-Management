@@ -23,7 +23,6 @@ public partial class MainFormView : Form, IViewRolType
     
     public void ShowForm(Action closeWindows)
     {
-        InitializeComponent();
         LblUserName.Text = UserName;
         FormClosed += (s, e) => closeWindows();
         Utils.ConfigureForm(this);
@@ -36,6 +35,7 @@ public partial class MainFormView : Form, IViewRolType
         modulo.Dock = DockStyle.Fill;
         modulo.Visible = true;
         PnlContenedor.Controls.Add(modulo);
+        modulo.BringToFront();
     }
 
     private void BtnEmprendimiento_Click(object sender, EventArgs e)

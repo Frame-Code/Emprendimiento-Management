@@ -181,7 +181,6 @@ partial class MainFormView
         LblUserName.Name = "LblUserName";
         LblUserName.Size = new Size(115, 30);
         LblUserName.TabIndex = 4;
-        LblUserName.Text = "UserName";
         // 
         // panel2
         // 
