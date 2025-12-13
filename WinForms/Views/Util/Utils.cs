@@ -158,9 +158,9 @@ namespace WinForms.Views.Util
             txt.Width = container.Width - 10;
 
             // Mover al nuevo contenedor
-            Control parent = txt.Parent;
-            parent.Controls.Add(container);
-            parent.Controls.Remove(txt);
+            Control? parent = txt.Parent;
+            parent?.Controls.Add(container);
+            parent?.Controls.Remove(txt);
 
             container.Controls.Add(txt);
         }
