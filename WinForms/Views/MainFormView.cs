@@ -47,8 +47,18 @@ public partial class MainFormView : Form, IViewRolType
         }
     }
     private void BtnCalendario_Click(object sender, EventArgs e)
+    public void ShowForm(Action closeWindows)
     {
-        try 
+        InitializeComponent();
+        LblUserName.Text = UserName;
+        FormClosed += (s, e) => closeWindows();
+        Utils.ConfigureForm(this);
+        Show();
+    }
+
+    private void BtnEventos_Click(object sender, EventArgs e)
+    {
+        try
         {
             CalendariodeActividadesView calendarioView = _calendarioActividadesView;
             calendarioView.ShowDialog();
@@ -57,14 +67,5 @@ public partial class MainFormView : Form, IViewRolType
         {
             MessageBox.Show("Error al cargar el modulo de calendario: " + ex.Message);
         }
-    }
-    
-    public void ShowForm(Action closeWindows)
-    {   
-        InitializeComponent();
-        LblUserName.Text = UserName;
-        FormClosed += (s, e) => closeWindows();
-        Utils.ConfigureForm(this);
-        Show();
     }
 }
