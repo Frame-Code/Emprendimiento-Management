@@ -26,7 +26,7 @@ namespace WinForms.Views
             _serviceProvider = serviceProvider;
             InitializeComponent();
             Utils.ConfigureForm(this);
-            this.WindowState = FormWindowState.Maximized;
+            WindowState = FormWindowState.Maximized;
             CenterRoundedPanel();
         }
 
@@ -66,7 +66,7 @@ namespace WinForms.Views
                 return;
             }
 
-            //Trae el formalario que coincide que tipo de vista que corresponde al rol del usuario logeado
+            //Trae el formulario que coincide que tipo de vista que corresponde al rol del usuario logeado
             var mainForm = _serviceProvider.GetServices<IViewRolType>()
                 .FirstOrDefault(type => type.ViewType == viewType);
             if (mainForm == null)

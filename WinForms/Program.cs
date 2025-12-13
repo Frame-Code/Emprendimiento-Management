@@ -9,6 +9,7 @@ using Servicios.Impl;
 using Servicios.Interfaces;
 using Shared;
 using WinForms.Views;
+using WinForms.Views.UserControls;
 using WinForms.Views.Util;
 using AppContext = Datos.AppContext;
 
@@ -34,8 +35,8 @@ internal static class Program
             var db = scope.ServiceProvider.GetRequiredService<AppContext>();
             db.Database.Migrate();
           
-            var agenda = scope.ServiceProvider.GetRequiredService<MainFormView>();
-            Application.Run(agenda);
+            var view = scope.ServiceProvider.GetRequiredService<LogIn>();
+            Application.Run(view);
             //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
             //Application.Run(registroEmprendimiento);
         }
@@ -47,7 +48,7 @@ internal static class Program
             .ConfigureAppConfiguration((context, config) =>
             {
                 config.Sources.Clear();
-                config .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
             })
             .ConfigureServices((context, services) =>
             {

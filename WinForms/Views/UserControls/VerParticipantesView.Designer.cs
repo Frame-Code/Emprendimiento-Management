@@ -1,4 +1,4 @@
-﻿namespace WinForms.Views.Util
+﻿namespace WinForms.Views.UserControls
 {
     partial class VerParticipantesView
     {

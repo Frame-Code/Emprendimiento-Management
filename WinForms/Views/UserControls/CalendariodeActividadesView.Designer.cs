@@ -1,4 +1,4 @@
-﻿namespace WinForms.Views
+﻿namespace WinForms.Views.UserControls
 {
     partial class CalendariodeActividadesView
     {
