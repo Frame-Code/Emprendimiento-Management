@@ -7,10 +7,11 @@ using System.Data.SqlClient;
 
 namespace WinForms.Views.Util
 {
-    public partial class VerParticipantesView : Form
+    public partial class VerParticipantesView : UserControl
     {
         private readonly RegistroParticipanteController _registroParticipanteController;
         private readonly RegistroParticipantesView _registroParticipantesView;
+        private readonly VerParticipantesView _verParticipantesView;
 
         public VerParticipantesView(
             RegistroParticipanteController registroParticipanteController,
@@ -25,14 +26,14 @@ namespace WinForms.Views.Util
         {
             try
             {
-                var lista = await _registroParticipanteController.ObtenerTodos();
-
-                dgvParticipantes.AutoGenerateColumns = true;
+                var lista = await _registroParticipanteController.ObtenerParticipantesVista();
+                
                 dgvParticipantes.DataSource = lista;
+                dgvParticipantes.AutoGenerateColumns = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error cargando datos: " + ex.Message);
+                MessageBox.Show("Error al cargar participantes: " + ex.Message);
             }
         }
 

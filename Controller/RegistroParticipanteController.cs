@@ -34,5 +34,19 @@ namespace Controller
             return await _servicioExclusivo.ObtenerTodos();
 
         }
+        
+
+    public async Task<List<VerParticipantesDto>> ObtenerParticipantesVista()
+        {
+            var lista = await _servicioExclusivo.ObtenerTodos();
+
+            return lista.Select(p => new VerParticipantesDto
+            {
+                Nombre = p.Nombres,
+                Apellido = p.Apellidos,
+                Telefono = p.NumeroTelefono,
+                Identificacion = p.NumeroIdentificacion
+            }).ToList();
+        }
     }
 }

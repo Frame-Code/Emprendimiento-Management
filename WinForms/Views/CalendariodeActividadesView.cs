@@ -18,7 +18,7 @@ using WinForms.Views.Util;
 namespace WinForms.Views
 
 {
-    public partial class CalendariodeActividadesView : Form
+    public partial class CalendariodeActividadesView : UserControl
     {
 
         private readonly CalendarioController _controller;
