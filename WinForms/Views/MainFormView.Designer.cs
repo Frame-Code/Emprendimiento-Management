@@ -29,12 +29,13 @@ partial class MainFormView
     /// </summary>
     private void InitializeComponent()
     {
+        components = new System.ComponentModel.Container();
         panel1 = new System.Windows.Forms.Panel();
         PnlContenedor = new System.Windows.Forms.Panel();
         panel3 = new System.Windows.Forms.Panel();
         roundedPanel1 = new WinForms.Views.Util.RoundedPanel();
         BtnResultadoEventos = new System.Windows.Forms.Button();
-        BtnFacultades = new System.Windows.Forms.Button();
+        BtnGenerales = new System.Windows.Forms.Button();
         BtnEventos = new System.Windows.Forms.Button();
         BtnEmprendimiento = new System.Windows.Forms.Button();
         BtnParticipantes = new System.Windows.Forms.Button();
@@ -42,6 +43,9 @@ partial class MainFormView
         LblUserName = new System.Windows.Forms.Label();
         panel2 = new System.Windows.Forms.Panel();
         label1 = new System.Windows.Forms.Label();
+        MenuOptions = new System.Windows.Forms.ContextMenuStrip(components);
+        toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
         panel1.SuspendLayout();
         panel3.SuspendLayout();
         roundedPanel1.SuspendLayout();
@@ -91,7 +95,7 @@ partial class MainFormView
         roundedPanel1.BorderRadius = 20;
         roundedPanel1.BorderSize = 1;
         roundedPanel1.Controls.Add(BtnResultadoEventos);
-        roundedPanel1.Controls.Add(BtnFacultades);
+        roundedPanel1.Controls.Add(BtnGenerales);
         roundedPanel1.Controls.Add(BtnEventos);
         roundedPanel1.Controls.Add(BtnEmprendimiento);
         roundedPanel1.Controls.Add(BtnParticipantes);
@@ -109,19 +113,20 @@ partial class MainFormView
         BtnResultadoEventos.Name = "BtnResultadoEventos";
         BtnResultadoEventos.Size = new System.Drawing.Size(253, 48);
         BtnResultadoEventos.TabIndex = 10;
-        BtnResultadoEventos.Text = "Resultados Eventos";
+        BtnResultadoEventos.Text = "Resultado Eventos";
         BtnResultadoEventos.UseVisualStyleBackColor = false;
         // 
-        // BtnFacultades
+        // BtnGenerales
         // 
-        BtnFacultades.BackColor = System.Drawing.Color.FromArgb(((int)((byte)224)), ((int)((byte)224)), ((int)((byte)224)));
-        BtnFacultades.Location = new System.Drawing.Point(26, 131);
-        BtnFacultades.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-        BtnFacultades.Name = "BtnFacultades";
-        BtnFacultades.Size = new System.Drawing.Size(251, 48);
-        BtnFacultades.TabIndex = 7;
-        BtnFacultades.Text = "Facultades";
-        BtnFacultades.UseVisualStyleBackColor = false;
+        BtnGenerales.BackColor = System.Drawing.Color.FromArgb(((int)((byte)224)), ((int)((byte)224)), ((int)((byte)224)));
+        BtnGenerales.Location = new System.Drawing.Point(24, 33);
+        BtnGenerales.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+        BtnGenerales.Name = "BtnGenerales";
+        BtnGenerales.Size = new System.Drawing.Size(251, 48);
+        BtnGenerales.TabIndex = 7;
+        BtnGenerales.Text = "Maestros generales";
+        BtnGenerales.UseVisualStyleBackColor = false;
+        BtnGenerales.Click += BtnGenerales_Click;
         // 
         // BtnEventos
         // 
@@ -138,7 +143,7 @@ partial class MainFormView
         // BtnEmprendimiento
         // 
         BtnEmprendimiento.BackColor = System.Drawing.Color.FromArgb(((int)((byte)224)), ((int)((byte)224)), ((int)((byte)224)));
-        BtnEmprendimiento.Location = new System.Drawing.Point(26, 42);
+        BtnEmprendimiento.Location = new System.Drawing.Point(24, 128);
         BtnEmprendimiento.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
         BtnEmprendimiento.Name = "BtnEmprendimiento";
         BtnEmprendimiento.Size = new System.Drawing.Size(249, 48);
@@ -205,6 +210,22 @@ partial class MainFormView
         label1.TabIndex = 8;
         label1.Text = "Administrar emprendimientos";
         // 
+        // MenuOptions
+        // 
+        MenuOptions.ImageScalingSize = new System.Drawing.Size(20, 20);
+        MenuOptions.Name = "MenuOptions";
+        MenuOptions.Size = new System.Drawing.Size(61, 4);
+        // 
+        // toolStripMenuItem1
+        // 
+        toolStripMenuItem1.Name = "toolStripMenuItem1";
+        toolStripMenuItem1.Size = new System.Drawing.Size(32, 19);
+        // 
+        // toolStripMenuItem2
+        // 
+        toolStripMenuItem2.Name = "toolStripMenuItem2";
+        toolStripMenuItem2.Size = new System.Drawing.Size(32, 19);
+        // 
         // MainFormView
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -225,16 +246,21 @@ partial class MainFormView
         ResumeLayout(false);
     }
 
+    private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+
+    private System.Windows.Forms.ContextMenuStrip MenuOptions;
+    private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+
     #endregion
-    private Panel panel1;
+    private System.Windows.Forms.Panel panel1;
     private System.Windows.Forms.Panel PnlContenedor;
     private System.Windows.Forms.Panel panel3;
-    private Button BtnEmprendimiento;
+    private System.Windows.Forms.Button BtnEmprendimiento;
     private Label LblUserName;
-    private Panel panel2;
+    private System.Windows.Forms.Panel panel2;
     private Label label1;
     private System.Windows.Forms.Button BtnParticipantes;
-    private System.Windows.Forms.Button BtnFacultades;
+    private System.Windows.Forms.Button BtnGenerales;
     private System.Windows.Forms.Button BtnEventos;
     private System.Windows.Forms.Button BtnResultadoEventos;
     private WinForms.Views.Util.RoundedPanel roundedPanel2;

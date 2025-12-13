@@ -18,6 +18,7 @@ namespace WinForms.Views
         private readonly ConsultaEmprendimientoView _consultaView;
         public ViewType ViewType => ViewType.Estudiante;
         public string UserName { get; set; } = "Usuario";
+        public IEnumerable<MenuOptionsDto> MenuOptionsDto { get; set; }
 
         public MainEstudianteView(ConsultaEmprendimientoView consultaView)
         {

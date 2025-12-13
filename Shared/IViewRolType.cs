@@ -15,6 +15,7 @@ namespace Shared
     {
         ViewType ViewType { get; }
         string UserName { get; set; }
+        IEnumerable<MenuOptionsDto> MenuOptionsDto { get; set; }
         void ShowForm(Action closeWindows);
     }
 }
