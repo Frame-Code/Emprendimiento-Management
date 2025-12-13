@@ -15,5 +15,6 @@ namespace Servicios.Interfaces
         Task<List<Facultad>> ListarFacultadesAsync();
         Task<List<EmprendimientoDto>> ListarEmprendimientosAsync();
         Task DeleteByIdAsync(int id);
+        Task<EmprendimientoDto?> ObtenerPorIdAsync(int id);
     }
 }

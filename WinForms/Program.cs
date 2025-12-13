@@ -34,10 +34,18 @@ internal static class Program
             var db = scope.ServiceProvider.GetRequiredService<AppContext>();
             db.Database.Migrate();
 
+
             var mainForm = scope.ServiceProvider.GetRequiredService<MainFormView>();
             Application.Run(mainForm); 
             /*var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
             Application.Run(registroEmprendimiento);*/
+
+          
+            var agenda = scope.ServiceProvider.GetRequiredService<LogIn>();
+            Application.Run(agenda);
+            //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
+            //Application.Run(registroEmprendimiento);
+ 96abbc376d9ddf8b891271b5557aa2c55c2349b6
         }
     }
 
@@ -71,24 +79,53 @@ internal static class Program
                 services.AddScoped<IFacultadRepository, FacultadRepositoryImpl>();
                 services.AddScoped<IParticipanteRepository, ParticipanteRepositoryImpl>();
                 services.AddScoped<ICargoParticipanteRepository, CargoParticipanteRepositoryImpl>();
+                services.AddScoped<ICalendarioService, CalendarioServiceImpl>();
+                services.AddScoped<ICronogramaRepository, CronogramaRepositoryImpl>();
+                services.AddScoped<IPresentacionRepository, PresentacionRepositoryImpl>();
+                services.AddScoped<IUsuarioRepository, UsuarioRepositoryImpl>();
+                services.AddScoped<IRolUsuarioRepository, RolUsuarioRepositoryImpl>();
 
                 // Servicios 
                 services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();
                 services.AddScoped<IParticipanteService, ParticipanteServiceImpl>();
+
                 services.AddScoped<IRegistroParticipanteService, RegistroParticipanteService>();
 
-                // Controllers
+                services.AddScoped<IAgendaService, AgendaServiceImpl>();
+                services.AddScoped<ILogInService, LogInServiceImpl>();
+                services.AddScoped<IRolUsuarioService, RolUsuarioServiceImpl>();
+ 96abbc376d9ddf8b891271b5557aa2c55c2349b6
+
+                // Controllers 
                 services.AddScoped<RegistroEmprendimientoController>();
                 services.AddScoped<ParticipanteController>();
+ HEAD
                 services.AddScoped<RegistroParticipanteController>();
+
+                services.AddScoped<CalendarioController>();
+                services.AddScoped<AgendaController>();
+                services.AddScoped<LogInController>();
+ 96abbc376d9ddf8b891271b5557aa2c55c2349b6
 
                 // Formularios
                 services.AddScoped<EmprendimientosUc>();
                 services.AddScoped<RegistroEmprendimientoView>();
                 services.AddScoped<DetalleEmprendimientoView>();
+
                 services.AddScoped<RegistroParticipantesView>();
                 services.AddScoped<VerParticipantesView>();
                 services.AddScoped<MainFormView>();
+
+                services.AddScoped<CalendariodeActividadesView>();
+                services.AddScoped<ConsultaEmprendimientoView>();
+                services.AddScoped<MainEstudianteView>();
+                services.AddScoped<GestionAgendaView>();
+                services.AddScoped<LogIn>();
+
+                //MainForms
+                services.AddScoped<ITypeMainForm, MainFormView>();
+                services.AddScoped<ITypeMainForm, MainEstudianteView>();
+96abbc376d9ddf8b891271b5557aa2c55c2349b6
             });
     }
 }

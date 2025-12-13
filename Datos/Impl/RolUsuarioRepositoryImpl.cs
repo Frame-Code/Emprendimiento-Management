@@ -22,6 +22,9 @@ namespace Datos.Impl
             throw new NotImplementedException();
         }
 
+        public async Task<RolUsuario?> GetRolByCode(string code) =>
+            await context.RolUsuarios.FirstOrDefaultAsync(r => r.Codigo == code);
+
         public async Task<List<RolUsuario>> ListarAsync() =>
             await context.RolUsuarios.ToListAsync();
 

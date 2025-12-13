@@ -9,6 +9,6 @@ namespace Datos.Interfaces
 {
     public interface IRolUsuarioRepository : IRepository<RolUsuario>
     {
-
+        Task<RolUsuario?> GetRolByCode(string code);
     }
 }
