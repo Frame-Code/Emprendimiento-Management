@@ -12,8 +12,6 @@ namespace WinForms.Views
     public partial class RegistroParticipantesView : Form
     {
         private readonly RegistroParticipanteController _miControlador;
-        private readonly IRegistroParticipanteService _miServicio;
-
         public RegistroParticipantesView(RegistroParticipanteController controller)
         {
             _miControlador = controller;
@@ -48,7 +46,7 @@ namespace WinForms.Views
                 return;
             }
 
-            if (cmbCargo.SelectedIndex == -1)
+            if (cmbCargo.SelectedIndex == -1 || cmbCargo.SelectedValue is not int idCargo)
             {
                 MessageBox.Show("Selecciona un cargo.");
                 return;
@@ -58,7 +56,7 @@ namespace WinForms.Views
             {
                 Nombres = txtNombre.Text.Trim(),
                 Apellidos = txtApellido.Text.Trim(),
-                IdCargoParticipante = (int)cmbCargo.SelectedValue,
+                IdCargoParticipante = idCargo,
                 NoIdentificacion = txtNdeIdentificacion.Text.Trim(),
                 NoTelefono = txtNdeTelefono.Text.Trim()
             };
