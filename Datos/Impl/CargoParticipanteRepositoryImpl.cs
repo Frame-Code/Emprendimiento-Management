@@ -4,8 +4,15 @@ using Datos.Interfaces;
 
 namespace Datos.Impl
 {
-    public class CargoParticipanteRepositoryImpl(AppContext context) : ICargoParticipanteRepository
+    public class CargoParticipanteRepositoryImpl : ICargoParticipanteRepository
     {
+        private readonly AppContext context;
+
+        public CargoParticipanteRepositoryImpl(AppContext context)
+        {
+            this.context = context;
+        }
+
         public async Task<CargoParticipante?> ObtenerPorIdAsync(int id) =>
             await context.CargosParticipante
                 .FirstOrDefaultAsync(c => c.Id == id);

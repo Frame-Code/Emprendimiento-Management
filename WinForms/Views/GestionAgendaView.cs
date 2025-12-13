@@ -23,13 +23,11 @@ namespace WinForms.Views
         {
             InitializeComponent();
             _controller = controller;
-            this.Load += GestionAgendaView_Load;
             Utils.ConfigureForm(this);
+            Load += GestionAgendaView_Load;
         }
-
-
-
-        private async void GestionAgendaView_Load(object sender, EventArgs e)
+        
+        private async void GestionAgendaView_Load(object? sender, EventArgs e)
         {
             var expositores = await _controller.ListarExpositoresAsync();
 
@@ -52,8 +50,12 @@ namespace WinForms.Views
                 return;
             }
 
-            int idEvento = 1; 
-            int idEmprendimiento = (int)cmbExpositor.SelectedValue;
+            int idEvento = 1;
+            if (cmbExpositor.SelectedValue is not int idEmprendimiento)
+            {
+                MessageBox.Show("Seleccione un emprendimiento.");
+                return;
+            }
 
             var total = await _controller.ListarAgendaPorEventoAsync(idEvento);
             int nuevoOrden = total.Count + 1;

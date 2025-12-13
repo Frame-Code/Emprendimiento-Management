@@ -1,8 +1,5 @@
-using Controller;
 using Shared;
 using WinForms.Views;
-using Controller;
-using Servicios.Impl;
 using WinForms.Views.Util;
 
 namespace WinForms;
@@ -10,14 +7,16 @@ namespace WinForms;
 public partial class MainFormView : Form, IViewRolType
 {
     private readonly EmprendimientosUc _emprendimientosUc;
-    private readonly CalendariodeActividadesView _calendariodeActividadesview;
+    private readonly CalendariodeActividadesView _calendarioActividadesView;
+    private readonly VerParticipantesView _verParticipantesView;
     public ViewType ViewType => ViewType.Administrador;
     public string UserName { get; set; } = "Usuario";
 
-    public MainFormView(EmprendimientosUc emprendimientosUc, CalendariodeActividadesView calendariodeActividadesview)
+    public MainFormView(EmprendimientosUc emprendimientosUc, CalendariodeActividadesView calendarioActividadesView, VerParticipantesView verParticipantesView)
     {
         _emprendimientosUc = emprendimientosUc;
-        _calendariodeActividadesview = calendariodeActividadesview;
+        _calendarioActividadesView = calendarioActividadesView;
+        _verParticipantesView = verParticipantesView;
         InitializeComponent();
         Utils.ConfigureForm(this);
     }
@@ -34,6 +33,20 @@ public partial class MainFormView : Form, IViewRolType
         CargarModulo(_emprendimientosUc);
     }
 
+    private void BtnParticipantes_Click(object sender, EventArgs e)
+    {
+        try
+        {
+
+            VerParticipantesView participantesView = _verParticipantesView;
+            participantesView.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Error al abrir participantes: " + ex.Message);
+        }
+    }
+    private void BtnCalendario_Click(object sender, EventArgs e)
     public void ShowForm(Action closeWindows)
     {
         InitializeComponent();
@@ -47,12 +60,12 @@ public partial class MainFormView : Form, IViewRolType
     {
         try
         {
-            CalendariodeActividadesView calendarioview = _calendariodeActividadesview;
-            calendarioview.ShowDialog();
+            CalendariodeActividadesView calendarioView = _calendarioActividadesView;
+            calendarioView.ShowDialog();
         }
         catch (Exception ex)
         {
-            MessageBox.Show("Error al cargar el m�dulo de calendario: " + ex.Message);
+            MessageBox.Show("Error al cargar el modulo de calendario: " + ex.Message);
         }
     }
 }

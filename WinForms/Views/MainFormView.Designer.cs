@@ -1,4 +1,4 @@
-﻿namespace WinForms;
+namespace WinForms;
 
 partial class MainFormView
 {
@@ -149,6 +149,7 @@ partial class MainFormView
         BtnParticipantes.TabIndex = 8;
         BtnParticipantes.Text = "Participantes";
         BtnParticipantes.UseVisualStyleBackColor = false;
+        BtnParticipantes.Click += BtnParticipantes_Click;
         // 
         // roundedPanel2
         // 
@@ -227,7 +228,7 @@ partial class MainFormView
     private Button BtnFacultades;
     private Button BtnEventos;
     private Button BtnResultadoEventos;
-    private Views.Util.RoundedPanel roundedPanel3;
+    private Button BtnCalendario;
     private Views.Util.RoundedPanel roundedPanel2;
     private Views.Util.RoundedPanel roundedPanel1;
 }
