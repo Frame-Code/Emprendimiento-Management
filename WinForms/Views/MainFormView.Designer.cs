@@ -149,6 +149,7 @@ partial class MainFormView
         BtnParticipantes.TabIndex = 8;
         BtnParticipantes.Text = "Participantes";
         BtnParticipantes.UseVisualStyleBackColor = false;
+        BtnParticipantes.Click += BtnParticipantes_Click;
         // 
         // roundedPanel2
         // 
