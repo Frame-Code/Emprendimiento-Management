@@ -49,7 +49,6 @@ public partial class MainFormView : Form, IViewRolForm
         modulo.Dock = DockStyle.Fill;
         modulo.Visible = true;
         PnlContenedor.Controls.Add(modulo);
-        modulo.BringToFront();
     }
 
     private void BtnEmprendimiento_Click(object sender, EventArgs e)
