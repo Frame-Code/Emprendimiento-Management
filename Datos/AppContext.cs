@@ -62,7 +62,6 @@ namespace Datos
                 b.HasKey(x => x.Id);
                 b.Property(x => x.Nombre).IsRequired().HasMaxLength(300);
                 b.Property(x => x.Descripcion).HasMaxLength(2000);
-                b.Property(x => x.LogoPath).HasMaxLength(500);
 
                 // Relaciones
                 b.HasOne(x => x.Facultad)
@@ -82,13 +81,18 @@ namespace Datos
                 b.HasKey(x => x.Id);
                 b.Property(x => x.Nombres).IsRequired().HasMaxLength(200);
                 b.Property(x => x.Apellidos).IsRequired().HasMaxLength(200);
-                b.Property(x => x.FotoPath).HasMaxLength(500);
                 b.Property(x => x.NumeroTelefono).IsRequired(). HasMaxLength(15);
                 b.Property(x => x.NumeroIdentificacion).IsRequired().HasMaxLength(15);
 
                 b.HasOne(x => x.Emprendimiento)
                     .WithMany(e => e.Participantes)
                     .HasForeignKey(x => x.IdEmprendimiento)
+                    .IsRequired(false)
+                    .OnDelete(DeleteBehavior.Restrict);
+                
+                b.HasOne(x => x.Foto)
+                    .WithMany()
+                    .HasForeignKey(x => x.IdFoto)
                     .IsRequired(false)
                     .OnDelete(DeleteBehavior.Restrict);
 
@@ -235,6 +239,19 @@ namespace Datos
                     .OnDelete(DeleteBehavior.NoAction);
 
                 b.HasIndex(menu => new { menu.Code, menu.Grupo });
+            });
+            
+            //Foto
+            modelBuilder.Entity<Foto>(b =>
+            {
+                b.HasKey(x => x.Id);
+                b.Property(x => x.ImageUrl).IsRequired().HasMaxLength(6000);
+                b.Property(x => x.FileName).IsRequired().HasMaxLength(250);
+                b.Property(x => x.FileExtension).IsRequired().HasMaxLength(15);
+
+                b.HasMany(x => x.Emprendimientos)
+                    .WithMany(x => x.Fotos)
+                    .UsingEntity(j => j.ToTable("EmprendimientoFotos"));
             });
         }
     }

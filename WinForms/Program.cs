@@ -89,6 +89,9 @@ internal static class Program
                 services.AddScoped<IRolUsuarioService, RolUsuarioServiceImpl>();
                 services.AddScoped<ISignUpService, SignUpServiceImpl>();
                 services.AddScoped<IMenuOpcionesService, MenuOpcionesServiceImpl>();
+                services.AddScoped<IFacultadService, FacultadServiceImpl>();
+                services.AddScoped<IRubroEmprendimientoService, RubroEmprendimientoService>();
+                services.AddScoped<IFileService, FileServiceImpl>();
 
                 // Controllers 
                 services.AddScoped<RegistroEmprendimientoController>();
@@ -98,6 +101,9 @@ internal static class Program
                 services.AddScoped<AgendaController>();
                 services.AddScoped<AuthController>();
                 services.AddScoped<MenuOpcionesController>();
+                services.AddScoped<FacultadController>();
+                services.AddScoped<RubroEmprendimientoController>();
+                services.AddScoped<FileController>();
 
                 // Formularios
                 services.AddScoped<MainFormView>();
