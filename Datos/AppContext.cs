@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Modelo.Properties;
 
 namespace Datos
 {
@@ -23,13 +24,10 @@ namespace Datos
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<RolUsuario> RolUsuarios { get; set; }
         public DbSet<CargoParticipante> CargosParticipante { get; set; }
-
-        public DbSet<Cronograma> Cronogramas { get; set; }//nuevo
-        public DbSet<Presentacion> Presentaciones { get; set; }//nuevo 
+        public DbSet<Cronograma> Cronogramas { get; set; }
+        public DbSet<Presentacion> Presentaciones { get; set; } 
+        public DbSet<MenuOpciones> MenuOpciones { get; set; }
         
-
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -221,6 +219,22 @@ namespace Datos
                     .WithMany()
                     .HasForeignKey(x => x.IdEmprendimiento)
                     .OnDelete(DeleteBehavior.Cascade);
+            });
+            
+            //Menu opciones
+            modelBuilder.Entity<MenuOpciones>(b =>
+            {
+                b.HasKey(x => x.Id);
+                b.Property(x => x.Nombre).IsRequired().HasMaxLength(250);
+                b.Property(x => x.Code).IsRequired().HasMaxLength(50);
+                b.Property(x => x.Grupo).IsRequired().HasMaxLength(250);
+
+                b.HasOne(x => x.RolUsuario)
+                    .WithMany()
+                    .HasForeignKey(x => x.IdRolUsuario)
+                    .OnDelete(DeleteBehavior.NoAction);
+
+                b.HasIndex(menu => new { menu.Code, menu.Grupo });
             });
         }
     }

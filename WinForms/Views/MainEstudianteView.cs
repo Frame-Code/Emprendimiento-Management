@@ -9,15 +9,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Shared.ViewRol;
 using WinForms.Views.Util;
 
 namespace WinForms.Views
 {
-    public partial class MainEstudianteView : Form, IViewRolType
+    public partial class MainEstudianteView : Form, IViewRolForm
     {
         private readonly ConsultaEmprendimientoView _consultaView;
         public ViewType ViewType => ViewType.Estudiante;
         public string UserName { get; set; } = "Usuario";
+        public IEnumerable<MenuOptionsDto> MenuOptionsDto { get; set; }
 
         public MainEstudianteView(ConsultaEmprendimientoView consultaView)
         {
