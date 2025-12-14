@@ -45,8 +45,7 @@ namespace Servicios.Impl
                     Apellidos = dto.Apellidos,
                     NumeroIdentificacion = dto.NoIdentificacion,
                     NumeroTelefono = dto.NoTelefono,
-                    IdCargoParticipante = dto.IdCargoParticipante,
-                    FotoPath = ""
+                    IdCargoParticipante = dto.IdCargoParticipante
                 };
 
                 await _participanteRepo.CreateAsync(nuevoParticipante);

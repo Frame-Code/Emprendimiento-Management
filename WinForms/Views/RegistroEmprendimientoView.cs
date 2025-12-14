@@ -17,9 +17,12 @@ namespace WinForms.Views
     public partial class RegistroEmprendimientoView : Form
     {
         private readonly RegistroEmprendimientoController _controller;
-        public RegistroEmprendimientoView(RegistroEmprendimientoController controller)
+        private readonly FileController _fileController;
+        private List<string> filesPath = new List<string>();
+        public RegistroEmprendimientoView(RegistroEmprendimientoController controller, FileController fileController)
         {
             _controller = controller;
+            _fileController = fileController;
             InitializeComponent();
             Utils.ConfigureForm(this);
         }
@@ -40,12 +43,32 @@ namespace WinForms.Views
                 return;
             }
 
+            var files = new List<FileDto>();
+            foreach (var path in filesPath)
+            {
+                var responseFile = _fileController.CopyFile(path);
+                if (!responseFile.IsSuccess)
+                {
+                    MessageBox.Show("Error: " + responseFile.Message);
+                    break;
+                }
+
+                var data = responseFile.Data;
+                if (data is not FileDto fileDto)
+                {
+                    MessageBox.Show("Error al obtener el archivo, consulte a sistemas");
+                    break;
+                }
+                files.Add(fileDto);
+            }
+            
             var dto = new RegistroEmprendimientoDto
             {
                 Nombre = TxtNombre.Text,
                 Descripcion = TxtDescripcion.Text,
                 IdFacultad = idFacultad,
-                IdRubroEmprendimiento = idRubro
+                IdRubroEmprendimiento = idRubro,
+                fotos = files
             };
 
             var response = await _controller.RegistrarEmprendimientoAsync(dto);
@@ -80,6 +103,49 @@ namespace WinForms.Views
             CmbRubro.DisplayMember = "Nombre";
             CmbRubro.ValueMember = "Id";
             CmbRubro.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using var ofd = new OpenFileDialog
+            {
+                Title = "Selecciona una imagen",
+                Filter = "Imágenes|*.png;*.jpg;*.jpeg;*.bmp;*.gif;*.webp",
+                Multiselect = true
+            };
+
+            if (ofd.ShowDialog() != DialogResult.OK)
+                return;
+
+            PnlImages.Controls.Clear();
+            var flowLayout = new FlowLayoutPanel();
+            flowLayout.FlowDirection = FlowDirection.LeftToRight;
+            flowLayout.WrapContents = true;
+            flowLayout.AutoScroll = true;
+            flowLayout.Dock = DockStyle.Fill;
+            
+            PnlImages.Controls.Add(flowLayout);
+            var listPath = ofd.FileNames;
+            
+            foreach (var file in ofd.FileNames)
+            {
+                var pb = new PictureBox
+                {
+                    Width = 120,
+                    Height = 120,
+                    SizeMode = PictureBoxSizeMode.Zoom,
+                    Margin = new Padding(6),
+                    BorderStyle = BorderStyle.FixedSingle
+                };
+
+                using var fs = new FileStream(file, FileMode.Open, FileAccess.Read);
+                using var imgTemp = Image.FromStream(fs);
+                pb.Image = new Bitmap(imgTemp);
+                pb.Tag = file;
+                filesPath.Add(file);
+                flowLayout.Controls.Add(pb);
+            }
+            flowLayout.ResumeLayout();
         }
     }
 }

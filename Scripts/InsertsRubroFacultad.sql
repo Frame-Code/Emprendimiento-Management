@@ -21,7 +21,10 @@ insert into RolUsuarios values
 ('Administrador', 'ADM'),
 ('Estudiante', 'Est')
 
-
 insert into Usuarios values
 ('admin', 'admin', 1),
 ('estu', 'estu', 2)
+
+insert into MenuOpciones values
+('Rubro de emprendimientos', 'RBR', 'MAESTRO_GENERAL_ADM', 1),
+('Facultades', 'FCL', 'MAESTRO_GENERAL_ADM', 1)

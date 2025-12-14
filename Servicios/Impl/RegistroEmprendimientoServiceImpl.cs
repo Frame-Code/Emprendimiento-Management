@@ -57,12 +57,23 @@ namespace Servicios.Impl
                 };
             }
 
+            var fotos = dto.fotos
+                .Select(ft =>
+                    new Foto
+                    {
+                        FileName = ft.FileName,
+                        FileExtension = ft.FileExtension,
+                        ImageUrl = ft.Url
+                    })
+                .ToList();
+
             var emprendimiento = new Emprendimiento
             {
                 Nombre = dto.Nombre,
                 Descripcion = dto.Descripcion,
                 IdFacultad = facultad.Id,
-                IdRubroEmprendimiento = rubro.Id
+                IdRubroEmprendimiento = rubro.Id,
+                Fotos = fotos
             };
 
             await emprendimientoRepository.CreateAsync(emprendimiento);

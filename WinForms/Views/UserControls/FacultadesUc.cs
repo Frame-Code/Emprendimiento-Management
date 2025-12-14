@@ -49,7 +49,7 @@ public partial class FacultadesUc : UserControl, IViewRolUc
 
         await _controller.SaveAsync(facultad);
         await LoadGrid();
-        MessageBox.Show("Rubro emprendimiento creado correctamente", "Facultad creada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MessageBox.Show("Facultad creada correctamente", "Facultad creada", MessageBoxButtons.OK, MessageBoxIcon.Information);
         
         
     }
