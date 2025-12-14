@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Servicios.Impl;
 using Servicios.Interfaces;
 using Shared;
+using Shared.ViewRol;
 using WinForms.Views;
 using WinForms.Views.UserControls;
 using WinForms.Views.Util;
@@ -77,6 +78,7 @@ internal static class Program
                 services.AddScoped<IPresentacionRepository, PresentacionRepositoryImpl>();
                 services.AddScoped<IUsuarioRepository, UsuarioRepositoryImpl>();
                 services.AddScoped<IRolUsuarioRepository, RolUsuarioRepositoryImpl>();
+                services.AddScoped<IMenuOpcionesRepository, MenuOpcionesRepository>();
 
                 // Servicios 
                 services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();
@@ -86,6 +88,7 @@ internal static class Program
                 services.AddScoped<ILogInService, LogInServiceImpl>();
                 services.AddScoped<IRolUsuarioService, RolUsuarioServiceImpl>();
                 services.AddScoped<ISignUpService, SignUpServiceImpl>();
+                services.AddScoped<IMenuOpcionesService, MenuOpcionesServiceImpl>();
 
                 // Controllers 
                 services.AddScoped<RegistroEmprendimientoController>();
@@ -94,6 +97,7 @@ internal static class Program
                 services.AddScoped<CalendarioController>();
                 services.AddScoped<AgendaController>();
                 services.AddScoped<AuthController>();
+                services.AddScoped<MenuOpcionesController>();
 
                 // Formularios
                 services.AddScoped<MainFormView>();
@@ -111,10 +115,14 @@ internal static class Program
                 services.AddScoped<GestionAgendaView>();
                 services.AddScoped<LogIn>();
                 services.AddScoped<UserRegister>();
+                
+                //options
+                services.AddScoped<IViewRolUc, FacultadesUc>();
+                services.AddScoped<IViewRolUc, RubroEmprendimientoUc>();
 
                 //MainForms
-                services.AddScoped<IViewRolType, MainFormView>();
-                services.AddScoped<IViewRolType, MainEstudianteView>();
+                services.AddScoped<IViewRolForm, MainFormView>();
+                services.AddScoped<IViewRolForm, MainEstudianteView>();
             });
     }
 }

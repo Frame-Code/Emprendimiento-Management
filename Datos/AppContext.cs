@@ -225,14 +225,16 @@ namespace Datos
             modelBuilder.Entity<MenuOpciones>(b =>
             {
                 b.HasKey(x => x.Id);
-                b.Property(x => x.Nombre).IsRequired().HasMaxLength(20);
-                b.Property(x => x.Code).IsRequired().HasMaxLength(15);
-                b.Property(x => x.Grupo).IsRequired().HasMaxLength(100);
+                b.Property(x => x.Nombre).IsRequired().HasMaxLength(250);
+                b.Property(x => x.Code).IsRequired().HasMaxLength(50);
+                b.Property(x => x.Grupo).IsRequired().HasMaxLength(250);
 
                 b.HasOne(x => x.RolUsuario)
                     .WithMany()
                     .HasForeignKey(x => x.IdRolUsuario)
-                    .OnDelete(DeleteBehavior.SetNull);
+                    .OnDelete(DeleteBehavior.NoAction);
+
+                b.HasIndex(menu => new { menu.Code, menu.Grupo });
             });
         }
     }

@@ -1,9 +1,15 @@
-﻿namespace WinForms.Views.UserControls;
+﻿using Shared.ViewRol;
 
-public partial class RubroEmprendimientoUc : UserControl
+namespace WinForms.Views.UserControls;
+
+public partial class RubroEmprendimientoUc : UserControl, IViewRolUc
 {
+    public ViewType ViewType { get; } = ViewType.Administrador;
+    public string UcCode { get; set; } = "RBR";
+    
     public RubroEmprendimientoUc()
     {
         InitializeComponent();
     }
+
 }

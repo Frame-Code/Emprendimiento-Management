@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Shared.ViewRol;
 using WinForms.Views.Util;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -69,8 +70,9 @@ namespace WinForms.Views
             }
             
             //Trae el formulario que coincide que tipo de vista que corresponde al rol del usuario logeado
-            var mainForm = _serviceProvider.GetServices<IViewRolType>()
+            var mainForm = _serviceProvider.GetServices<IViewRolForm>()
                 .FirstOrDefault(type => type.ViewType == viewType);
+            
             if (mainForm == null)
             {
                 MessageBox.Show("Error al cargar la vista principal", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
