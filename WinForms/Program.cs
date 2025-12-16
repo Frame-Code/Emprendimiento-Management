@@ -34,7 +34,7 @@ internal static class Program
         using (var scope = services.CreateScope())
         {
             var db = scope.ServiceProvider.GetRequiredService<AppContext>();
-            db.Database.Migrate();
+            //db.Database.Migrate();
           
             var view = scope.ServiceProvider.GetRequiredService<MainFormView>();
             Application.Run(view);
@@ -79,6 +79,7 @@ internal static class Program
                 services.AddScoped<IUsuarioRepository, UsuarioRepositoryImpl>();
                 services.AddScoped<IRolUsuarioRepository, RolUsuarioRepositoryImpl>();
                 services.AddScoped<IMenuOpcionesRepository, MenuOpcionesRepository>();
+                services.AddScoped<IFotoRepository, FotoRepositoryImpl>();
 
                 // Servicios 
                 services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();

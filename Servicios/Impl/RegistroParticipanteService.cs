@@ -14,11 +14,13 @@ namespace Servicios.Impl
 
         private readonly IParticipanteRepository _participanteRepo;
         private readonly ICargoParticipanteRepository _cargoRepo;
+        private readonly IFotoRepository _fotoRepo;
 
-        public RegistroParticipanteService(IParticipanteRepository participanteRepo, ICargoParticipanteRepository cargoRepo)
+        public RegistroParticipanteService(IParticipanteRepository participanteRepo, ICargoParticipanteRepository cargoRepo, IFotoRepository fotoRepo)
         {
             _participanteRepo = participanteRepo;
             _cargoRepo = cargoRepo;
+            _fotoRepo = fotoRepo;
         }
 
         public async Task<ResponseDto> RegistrarNuevoParticipante(ParticipanteDto dto)
@@ -39,7 +41,7 @@ namespace Servicios.Impl
                     return response;
                 }
 
-                var nuevoParticipante = new Participante
+                var participante = new Participante
                 {
                     Nombres = dto.Nombres,
                     Apellidos = dto.Apellidos,
@@ -48,7 +50,22 @@ namespace Servicios.Impl
                     IdCargoParticipante = dto.IdCargoParticipante
                 };
 
-                await _participanteRepo.CreateAsync(nuevoParticipante);
+                if (dto.fotos != null && dto.fotos.Any())
+                {
+                    var f = dto.fotos.First();
+
+                    var foto = new Foto
+                    {
+                        ImageUrl = f.Url,
+                        FileName = f.FileName,
+                        FileExtension = f.FileExtension
+                    };
+                    await _fotoRepo.CreateAsync(foto);
+
+                    participante.IdFoto = foto.Id;
+                }
+
+                await _participanteRepo.CreateAsync(participante);
 
                 response.IsSuccess = true;
                 response.Message = "Participante guardado con éxito.";
