@@ -46,7 +46,6 @@ public partial class MainFormView : Form, IViewRolType
             MessageBox.Show("Error al abrir participantes: " + ex.Message);
         }
     }
-    private void BtnCalendario_Click(object sender, EventArgs e)
     public void ShowForm(Action closeWindows)
     {
         InitializeComponent();

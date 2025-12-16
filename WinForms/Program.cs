@@ -34,7 +34,7 @@ internal static class Program
             var db = scope.ServiceProvider.GetRequiredService<AppContext>();
             db.Database.Migrate();
           
-            var agenda = scope.ServiceProvider.GetRequiredService<MainFormView>();
+            var agenda = scope.ServiceProvider.GetRequiredService<MainEstudianteView>();
             Application.Run(agenda);
             //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
             //Application.Run(registroEmprendimiento);
