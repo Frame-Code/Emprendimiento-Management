@@ -9,23 +9,46 @@ using System.Threading.Tasks;
 
 namespace Datos.Impl
 {
-    public class EventoRepositoryImpl(AppContext context) : IEventoRepository
+    public class EventoRepositoryImpl : IEventoRepository
     {
+        private readonly AppContext _context;
+
+        public EventoRepositoryImpl(AppContext context)
+        {
+            _context = context;
+        }
+
+        // Crear evento
         public async Task CreateAsync(Evento entity)
         {
-            await context.Eventos.AddAsync(entity);
-            await context.SaveChangesAsync();
+            await _context.Eventos.AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteByIdAsync(int id)
+        // Eliminar evento por Id
+        public async Task DeleteByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var evento = await ObtenerPorIdAsync(id);
+            if (evento == null)
+                throw new Exception("Evento no encontrado");
+
+            _context.Eventos.Remove(evento);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Evento>> ListarAsync() =>
-            await context.Eventos.ToListAsync();
+        // Listar todos los eventos
+        public async Task<List<Evento>> ListarAsync()
+        {
+            return await _context.Eventos
+                .OrderBy(e => e.FechaInicio)
+                .ToListAsync();
+        }
 
-        public async Task<Evento?> ObtenerPorIdAsync(int id) =>
-            await context.Eventos.FirstOrDefaultAsync(e => e.Id == id);
+        // Obtener evento por Id
+        public async Task<Evento?> ObtenerPorIdAsync(int id)
+        {
+            return await _context.Eventos
+                .FirstOrDefaultAsync(e => e.Id == id);
+        }
     }
 }

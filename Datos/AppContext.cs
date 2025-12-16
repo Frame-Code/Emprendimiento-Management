@@ -133,6 +133,7 @@ namespace Datos
             modelBuilder.Entity<AgendaPresentacion>(b =>
             {
                 b.HasKey(x => x.Id);
+                b.Property(x => x.Orden);
 
                 b.HasOne(x => x.Evento)
                     .WithMany()

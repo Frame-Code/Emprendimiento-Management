@@ -35,8 +35,8 @@ internal static class Program
         {
             var db = scope.ServiceProvider.GetRequiredService<AppContext>();
             db.Database.Migrate();
-          
-            var view = scope.ServiceProvider.GetRequiredService<LogIn>();
+
+            var view = scope.ServiceProvider.GetRequiredService<GestionEventoView>();
             Application.Run(view);
             //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
             //Application.Run(registroEmprendimiento);
@@ -92,6 +92,7 @@ internal static class Program
                 services.AddScoped<IFacultadService, FacultadServiceImpl>();
                 services.AddScoped<IRubroEmprendimientoService, RubroEmprendimientoService>();
                 services.AddScoped<IFileService, FileServiceImpl>();
+                services.AddScoped<IEventoService, EventoServiceImpl>();//new
 
                 // Controllers 
                 services.AddScoped<RegistroEmprendimientoController>();
@@ -104,6 +105,9 @@ internal static class Program
                 services.AddScoped<FacultadController>();
                 services.AddScoped<RubroEmprendimientoController>();
                 services.AddScoped<FileController>();
+                services.AddScoped<EventoController>();//eventos
+                
+
 
                 // Formularios
                 services.AddScoped<MainFormView>();
@@ -121,7 +125,9 @@ internal static class Program
                 services.AddScoped<GestionAgendaView>();
                 services.AddScoped<LogIn>();
                 services.AddScoped<UserRegister>();
-                
+                services.AddScoped<GestionEventoView>();
+
+
                 //options
                 services.AddScoped<IViewRolUc, FacultadesUc>();
                 services.AddScoped<IViewRolUc, RubroEmprendimientoUc>();
@@ -129,6 +135,8 @@ internal static class Program
                 //MainForms
                 services.AddScoped<IViewRolForm, MainFormView>();
                 services.AddScoped<IViewRolForm, MainEstudianteView>();
+
+                // ventanas de eventos
             });
     }
 }
