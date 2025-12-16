@@ -83,14 +83,42 @@ namespace Servicios.Impl
                 Message = "Emprendimiento creado con exito"
             };
         }
-            
-        public async Task<EmprendimientoDto?> ObtenerPorIdAsync(int id)
+        public async Task<List<Emprendimiento>> ListarEmprendimientosEstudiantesAsync()
         {
-            var listaCompleta = await ListarEmprendimientosAsync();
-            return listaCompleta.FirstOrDefault(e => e.Id == id);
+            var resultados = await emprendimientoRepository.ListarAsync();
+            var listaEmprendimientos = resultados
+                .Select(e => new Emprendimiento
+                {
+                    Id = e.Id,
+                    Nombre = e.Nombre,
+                    Descripcion = e.Descripcion,
+                    IdFacultad = e.IdFacultad,
+                    IdRubroEmprendimiento = e.IdRubroEmprendimiento,
+                    Facultad = e.Facultad,
+                    RubroEmprendimiento = e.RubroEmprendimiento,
+                    Fotos = e.Fotos.ToList(),
+                })
+                .ToList();
+            return listaEmprendimientos;
         }
-            
 
-        
+        public async Task<Emprendimiento?> ObtenerPorIdAsync(int id)
+        {
+            var e = await emprendimientoRepository.ObtenerPorIdAsync(id);
+
+            if (e == null) return null;
+
+            return new Emprendimiento
+            {
+                Id = e.Id,
+                Nombre = e.Nombre,
+                Descripcion = e.Descripcion,
+                IdFacultad = e.IdFacultad,
+                IdRubroEmprendimiento = e.IdRubroEmprendimiento,
+                Facultad = e.Facultad,
+                RubroEmprendimiento = e.RubroEmprendimiento,
+                Fotos = e.Fotos
+            };
+        }
     }
 }
