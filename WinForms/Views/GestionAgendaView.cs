@@ -17,68 +17,64 @@ namespace WinForms.Views
 {
     public partial class GestionAgendaView : Form
     {
-        private readonly AgendaController _controller;
+        private readonly AgendaController _agendaController;
+        private readonly EventoController _eventoController;
 
-        public GestionAgendaView(AgendaController controller)
+        public GestionAgendaView(
+            AgendaController agendaController,
+            EventoController eventoController)
         {
             InitializeComponent();
-            _controller = controller;
-            Utils.ConfigureForm(this);
-            Load += GestionAgendaView_Load;
-        }
-        
-        private async void GestionAgendaView_Load(object? sender, EventArgs e)
-        {
-            var expositores = await _controller.ListarExpositoresAsync();
+            _agendaController = agendaController;
+            _eventoController = eventoController;
 
-            cmbExpositor.DataSource = expositores;
+            this.Load += GestionAgendaView_Load;
+        }
+
+        private async void GestionAgendaView_Load(object sender, EventArgs e)
+        {
+            // Eventos
+            cmbEvento.DataSource = await _eventoController.ListarEventosAsync();
+            cmbEvento.DisplayMember = "Nombre";
+            cmbEvento.ValueMember = "Id";
+            cmbEvento.SelectedIndex = -1;
+
+            // Expositores
+            cmbExpositor.DataSource = await _agendaController.ListarExpositoresAsync();
             cmbExpositor.DisplayMember = "Nombre";
             cmbExpositor.ValueMember = "Id";
             cmbExpositor.SelectedIndex = -1;
         }
 
-        private async void btnGuardarCronograma_Click(object sender, EventArgs e)
+        private async void cmbEvento_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MessageBox.Show("La fecha y hora pertenecen al evento, no a la agenda.");
+            if (cmbEvento.SelectedIndex == -1) return;
+
+            int idEvento = (int)cmbEvento.SelectedValue;
+            dgAgenda.DataSource =
+                await _agendaController.ListarAgendaPorEventoAsync(idEvento);
         }
 
         private async void btnAgregarPresentacion_Click(object sender, EventArgs e)
         {
-            if (cmbExpositor.SelectedIndex == -1)
+            if (cmbEvento.SelectedIndex == -1 || cmbExpositor.SelectedIndex == -1)
             {
-                MessageBox.Show("Seleccione un expositor.");
+                MessageBox.Show("Seleccione evento y expositor");
                 return;
             }
-
-            int idEvento = 1;
-            if (cmbExpositor.SelectedValue is not int idEmprendimiento)
-            {
-                MessageBox.Show("Seleccione un emprendimiento.");
-                return;
-            }
-
-            var total = await _controller.ListarAgendaPorEventoAsync(idEvento);
-            int nuevoOrden = total.Count + 1;
-
-            numOrden.Value = nuevoOrden;
 
             var dto = new AgendaPresentacionDto
             {
-                IdEvento = idEvento,
-                IdEmprendimiento = idEmprendimiento,
-                Orden = nuevoOrden
+                IdEvento = (int)cmbEvento.SelectedValue,
+                IdEmprendimiento = (int)cmbExpositor.SelectedValue
+                
             };
 
-            var result = await _controller.RegistrarAgendaPresentacionAsync(dto);
+            var result = await _agendaController.RegistrarAgendaPresentacionAsync(dto);
+            MessageBox.Show(result.Message);
 
-            if (!result.IsSuccess)
-            {
-                MessageBox.Show(result.Message);
-                return;
-            }
-
-            MessageBox.Show($"Presentación agendada con orden #{nuevoOrden}");
+            dgAgenda.DataSource = await _agendaController.ListarAgendaPorEventoAsync(dto.IdEvento);
         }
-    }
 
+    }
 }
