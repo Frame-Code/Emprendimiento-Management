@@ -716,3 +716,4 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/csharp,windows,visualstudio,visualstudiocode,rider,dotnetcore,database
 
+/WinForms/Views/MainFormView.cs

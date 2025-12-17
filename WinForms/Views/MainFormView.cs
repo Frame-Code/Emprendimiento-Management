@@ -66,6 +66,9 @@ public partial class MainFormView : Form, IViewRolForm
         {
             MessageBox.Show("Error al abrir participantes: " + ex.Message);
         }
+        Show();
+        Show();
+        Show();
     }
 
     private void BtnEventos_Click(object sender, EventArgs e)
