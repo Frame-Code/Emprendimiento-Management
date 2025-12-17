@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Datos.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -86,7 +86,7 @@ namespace Datos.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Foto",
+                name: "Fotos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -97,7 +97,7 @@ namespace Datos.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Foto", x => x.Id);
+                    table.PrimaryKey("PK_Fotos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -287,9 +287,9 @@ namespace Datos.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EmprendimientoFotos_Foto_FotosId",
+                        name: "FK_EmprendimientoFotos_Fotos_FotosId",
                         column: x => x.FotosId,
-                        principalTable: "Foto",
+                        principalTable: "Fotos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -324,9 +324,9 @@ namespace Datos.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Participantes_Foto_IdFoto",
+                        name: "FK_Participantes_Fotos_IdFoto",
                         column: x => x.IdFoto,
-                        principalTable: "Foto",
+                        principalTable: "Fotos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -534,7 +534,7 @@ namespace Datos.Migrations
                 name: "CargosParticipante");
 
             migrationBuilder.DropTable(
-                name: "Foto");
+                name: "Fotos");
 
             migrationBuilder.DropTable(
                 name: "CategoriasPremio");
