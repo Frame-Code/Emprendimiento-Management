@@ -10,20 +10,20 @@ namespace Controller
 {
     public class AgendaController
     {
-        private readonly IAgendaService _agendaService;
+        private readonly IAgendaService _service;
 
-        public AgendaController(IAgendaService agendaService)
+        public AgendaController(IAgendaService service)
         {
-            _agendaService = agendaService;
+            _service = service;
         }
 
-        public async Task<ResponseDto> RegistrarAgendaPresentacionAsync(AgendaPresentacionDto dto)
-            => await _agendaService.RegistrarAgendaPresentacionAsync(dto);
+        public Task<ResponseDto> RegistrarAgendaPresentacionAsync(AgendaPresentacionDto dto)
+            => _service.RegistrarAgendaPresentacionAsync(dto);
 
-        public async Task<List<AgendaPresentacionDto>> ListarAgendaPorEventoAsync(int idEvento)
-            => await _agendaService.ListarAgendaPorEventoAsync(idEvento);
+        public Task<List<AgendaPresentacionDto>> ListarAgendaPorEventoAsync(int idEvento)
+            => _service.ListarAgendaPorEventoAsync(idEvento);
 
-        public async Task<List<ExpositorDto>> ListarExpositoresAsync()
-            => await _agendaService.ListarExpositoresAsync();
+        public Task<List<ExpositorDto>> ListarExpositoresAsync()
+            => _service.ListarExpositoresAsync();
     }
 }

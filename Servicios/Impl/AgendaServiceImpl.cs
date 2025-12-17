@@ -7,45 +7,53 @@ namespace Servicios.Impl
 {
     public class AgendaServiceImpl : IAgendaService
     {
-        private readonly IAgendaPresentacionRepository _agendaPresentacionRepository;
+        private readonly IAgendaPresentacionRepository _agendaRepository;
         private readonly IEmprendimientoRepository _emprendimientoRepository;
 
         public AgendaServiceImpl(
-            IAgendaPresentacionRepository agendaPresentacionRepository,
+            IAgendaPresentacionRepository agendaRepository,
             IEmprendimientoRepository emprendimientoRepository)
         {
-            _agendaPresentacionRepository = agendaPresentacionRepository;
+            _agendaRepository = agendaRepository;
             _emprendimientoRepository = emprendimientoRepository;
         }
 
+    
         public async Task<ResponseDto> RegistrarAgendaPresentacionAsync(AgendaPresentacionDto dto)
         {
+           
+            int maxOrden = await _agendaRepository.ObtenerMaxOrdenGlobalAsync();
+
             var entity = new AgendaPresentacion
             {
                 IdEvento = dto.IdEvento,
                 IdEmprendimiento = dto.IdEmprendimiento,
-                Orden = dto.Orden
+                Orden = maxOrden + 1
             };
 
-            await _agendaPresentacionRepository.CreateAsync(entity);
+            await _agendaRepository.CreateAsync(entity);
 
             return new ResponseDto
             {
                 IsSuccess = true,
-                Message = "Presentación agendada correctamente"
+                Message = $"Presentación registrada con orden #{entity.Orden}"
             };
         }
 
+       
         public async Task<List<AgendaPresentacionDto>> ListarAgendaPorEventoAsync(int idEvento)
         {
-            var agenda = await _agendaPresentacionRepository.ListarPorEventoAsync(idEvento);
+            var lista = await _agendaRepository.ListarPorEventoAsync(idEvento);
 
-            return agenda.Select(a => new AgendaPresentacionDto
-            {
-                IdEvento = a.IdEvento,
-                IdEmprendimiento = a.IdEmprendimiento,
-                Orden = a.Orden
-            }).ToList();
+            return lista
+                .OrderBy(a => a.Orden)
+                .Select(a => new AgendaPresentacionDto
+                {
+                    IdEvento = a.IdEvento,
+                    IdEmprendimiento = a.IdEmprendimiento,
+                    Orden = a.Orden
+                })
+                .ToList();
         }
 
         public async Task<List<ExpositorDto>> ListarExpositoresAsync()
