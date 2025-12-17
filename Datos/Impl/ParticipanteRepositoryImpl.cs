@@ -32,6 +32,13 @@ namespace Datos.Impl
             await context.SaveChangesAsync();
         }
 
+        public async Task UpdateAsync(Participante entity)
+        {
+            context.Participantes.Update(entity);
+            context.Entry(entity).State = EntityState.Modified;
+            await context.SaveChangesAsync();
+        }
+
         public Task DeleteByIdAsync(int id)
         {
             throw new NotImplementedException();
