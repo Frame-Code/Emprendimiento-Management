@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Datos.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,6 +37,21 @@ namespace Datos.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CategoriasPremio", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cronogramas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Hora = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Ubicacion = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cronogramas", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -71,6 +86,38 @@ namespace Datos.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Fotos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", maxLength: 6000, nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    FileExtension = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fotos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Presentaciones",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Expositor = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Orden = table.Column<int>(type: "int", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Hora = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Ubicacion = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Presentaciones", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RolUsuarios",
                 columns: table => new
                 {
@@ -96,6 +143,27 @@ namespace Datos.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RubrosEmprendimiento", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MenuOpciones",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Grupo = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    IdRolUsuario = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MenuOpciones", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MenuOpciones_RolUsuarios_IdRolUsuario",
+                        column: x => x.IdRolUsuario,
+                        principalTable: "RolUsuarios",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -127,7 +195,6 @@ namespace Datos.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true),
-                    LogoPath = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     IdFacultad = table.Column<int>(type: "int", nullable: false),
                     IdRubroEmprendimiento = table.Column<int>(type: "int", nullable: false)
                 },
@@ -155,7 +222,8 @@ namespace Datos.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdEvento = table.Column<int>(type: "int", nullable: false),
-                    IdEmprendimiento = table.Column<int>(type: "int", nullable: false)
+                    IdEmprendimiento = table.Column<int>(type: "int", nullable: false),
+                    Orden = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -203,6 +271,30 @@ namespace Datos.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EmprendimientoFotos",
+                columns: table => new
+                {
+                    EmprendimientosId = table.Column<int>(type: "int", nullable: false),
+                    FotosId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmprendimientoFotos", x => new { x.EmprendimientosId, x.FotosId });
+                    table.ForeignKey(
+                        name: "FK_EmprendimientoFotos_Emprendimientos_EmprendimientosId",
+                        column: x => x.EmprendimientosId,
+                        principalTable: "Emprendimientos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EmprendimientoFotos_Fotos_FotosId",
+                        column: x => x.FotosId,
+                        principalTable: "Fotos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Participantes",
                 columns: table => new
                 {
@@ -210,8 +302,10 @@ namespace Datos.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombres = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Apellidos = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    FotoPath = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    IdEmprendimiento = table.Column<int>(type: "int", nullable: false),
+                    NumeroIdentificacion = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    NumeroTelefono = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    IdFoto = table.Column<int>(type: "int", nullable: true),
+                    IdEmprendimiento = table.Column<int>(type: "int", nullable: true),
                     IdCargoParticipante = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -228,7 +322,13 @@ namespace Datos.Migrations
                         column: x => x.IdEmprendimiento,
                         principalTable: "Emprendimientos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Participantes_Fotos_IdFoto",
+                        column: x => x.IdFoto,
+                        principalTable: "Fotos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -307,6 +407,11 @@ namespace Datos.Migrations
                 column: "IdUsuario");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EmprendimientoFotos_FotosId",
+                table: "EmprendimientoFotos",
+                column: "FotosId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Emprendimientos_IdFacultad",
                 table: "Emprendimientos",
                 column: "IdFacultad");
@@ -317,6 +422,16 @@ namespace Datos.Migrations
                 column: "IdRubroEmprendimiento");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MenuOpciones_Code_Grupo",
+                table: "MenuOpciones",
+                columns: new[] { "Code", "Grupo" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MenuOpciones_IdRolUsuario",
+                table: "MenuOpciones",
+                column: "IdRolUsuario");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Participantes_IdCargoParticipante",
                 table: "Participantes",
                 column: "IdCargoParticipante");
@@ -325,6 +440,23 @@ namespace Datos.Migrations
                 name: "IX_Participantes_IdEmprendimiento",
                 table: "Participantes",
                 column: "IdEmprendimiento");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Participantes_IdFoto",
+                table: "Participantes",
+                column: "IdFoto");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Participantes_NumeroIdentificacion",
+                table: "Participantes",
+                column: "NumeroIdentificacion",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Participantes_NumeroTelefono",
+                table: "Participantes",
+                column: "NumeroTelefono",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ResultadoEventos_IdCategoriaPremio",
@@ -375,7 +507,19 @@ namespace Datos.Migrations
                 name: "Comentarios");
 
             migrationBuilder.DropTable(
+                name: "Cronogramas");
+
+            migrationBuilder.DropTable(
+                name: "EmprendimientoFotos");
+
+            migrationBuilder.DropTable(
+                name: "MenuOpciones");
+
+            migrationBuilder.DropTable(
                 name: "Participantes");
+
+            migrationBuilder.DropTable(
+                name: "Presentaciones");
 
             migrationBuilder.DropTable(
                 name: "ResultadoEventos");
@@ -388,6 +532,9 @@ namespace Datos.Migrations
 
             migrationBuilder.DropTable(
                 name: "CargosParticipante");
+
+            migrationBuilder.DropTable(
+                name: "Fotos");
 
             migrationBuilder.DropTable(
                 name: "CategoriasPremio");

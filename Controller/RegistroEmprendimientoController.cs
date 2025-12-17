@@ -22,10 +22,10 @@ namespace Controller
         public async Task DeleteByIdAsync(int id) =>
             await registroEmprendimientoService.DeleteByIdAsync(id);
 
-        public async Task<EmprendimientoDto?> ObtenerPorIdAsync(int id) =>
+        public async Task<Emprendimiento?> ObtenerPorIdAsync(int id) =>
             await registroEmprendimientoService.ObtenerPorIdAsync(id);
 
-
-
+        public async Task<List<Emprendimiento>> ListarEmprendimientosEstudiantesAsync() =>
+            await registroEmprendimientoService.ListarEmprendimientosEstudiantesAsync();
     }
 }

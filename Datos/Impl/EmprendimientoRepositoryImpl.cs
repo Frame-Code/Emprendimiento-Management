@@ -32,6 +32,7 @@ namespace Datos.Impl
             await context.Emprendimientos
             .Include(e => e.Facultad)
             .Include(e => e.RubroEmprendimiento)
+            .Include(e => e.Fotos)
             .ToListAsync();
 
         public async Task<Emprendimiento?> ObtenerPorIdAsync(int id) =>

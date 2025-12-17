@@ -28,219 +28,130 @@
         /// </summary>
         private void InitializeComponent()
         {
-            groupBox1 = new GroupBox();
-            btnGuardarCronograma = new Button();
-            txtUbicacion = new TextBox();
-            label3 = new Label();
-            dtHora = new DateTimePicker();
-            label2 = new Label();
-            label1 = new Label();
-            dtFecha = new DateTimePicker();
-            groupBox2 = new GroupBox();
-            cmbExpositor = new ComboBox();
-            btnAgregarPresentacion = new Button();
-            numOrden = new NumericUpDown();
-            label5 = new Label();
-            label4 = new Label();
             label6 = new Label();
-            groupBox1.SuspendLayout();
+            label5 = new Label();
+            btnAgregarPresentacion = new Button();
+            cmbExpositor = new ComboBox();
+            groupBox2 = new GroupBox();
+            cmbEvento = new ComboBox();
+            label1 = new Label();
+            dgAgenda = new DataGridView();
             groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numOrden).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgAgenda).BeginInit();
             SuspendLayout();
             // 
-            // groupBox1
+            // label6
             // 
-            groupBox1.Controls.Add(btnGuardarCronograma);
-            groupBox1.Controls.Add(txtUbicacion);
-            groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(dtHora);
-            groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(dtFecha);
-            groupBox1.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox1.Location = new Point(39, 102);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(395, 314);
-            groupBox1.TabIndex = 0;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Cronograma de Exposición";
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.Location = new Point(306, 29);
+            label6.Name = "label6";
+            label6.Size = new Size(317, 32);
+            label6.TabIndex = 2;
+            label6.Text = "Gestion de Agendamiento";
             // 
-            // btnGuardarCronograma
+            // label5
             // 
-            btnGuardarCronograma.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnGuardarCronograma.Location = new Point(114, 255);
-            btnGuardarCronograma.Name = "btnGuardarCronograma";
-            btnGuardarCronograma.Size = new Size(87, 31);
-            btnGuardarCronograma.TabIndex = 6;
-            btnGuardarCronograma.Text = "Guardar";
-            btnGuardarCronograma.UseVisualStyleBackColor = true;
-            btnGuardarCronograma.Click += btnGuardarCronograma_Click;
-            // 
-            // txtUbicacion
-            // 
-            txtUbicacion.Font = new Font("Arial Narrow", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtUbicacion.Location = new Point(85, 188);
-            txtUbicacion.Name = "txtUbicacion";
-            txtUbicacion.Size = new Size(200, 26);
-            txtUbicacion.TabIndex = 5;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Arial Narrow", 12F);
-            label3.Location = new Point(15, 191);
-            label3.Name = "label3";
-            label3.Size = new Size(68, 20);
-            label3.TabIndex = 4;
-            label3.Text = "Ubicacion";
-            // 
-            // dtHora
-            // 
-            dtHora.Font = new Font("Arial Narrow", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dtHora.Format = DateTimePickerFormat.Time;
-            dtHora.Location = new Point(85, 124);
-            dtHora.Name = "dtHora";
-            dtHora.Size = new Size(200, 26);
-            dtHora.TabIndex = 3;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Arial Narrow", 12F);
-            label2.Location = new Point(15, 124);
-            label2.Name = "label2";
-            label2.Size = new Size(37, 20);
-            label2.TabIndex = 2;
-            label2.Text = "Hora";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Arial Narrow", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(15, 57);
-            label1.Name = "label1";
-            label1.Size = new Size(46, 20);
-            label1.TabIndex = 1;
-            label1.Text = "Fecha";
-            // 
-            // dtFecha
-            // 
-            dtFecha.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dtFecha.Location = new Point(85, 57);
-            dtFecha.Name = "dtFecha";
-            dtFecha.Size = new Size(200, 26);
-            dtFecha.TabIndex = 0;
-            // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(cmbExpositor);
-            groupBox2.Controls.Add(btnAgregarPresentacion);
-            groupBox2.Controls.Add(numOrden);
-            groupBox2.Controls.Add(label5);
-            groupBox2.Controls.Add(label4);
-            groupBox2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox2.Location = new Point(498, 102);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(320, 253);
-            groupBox2.TabIndex = 1;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Orden de Presentaciones";
-            // 
-            // cmbExpositor
-            // 
-            cmbExpositor.FormattingEnabled = true;
-            cmbExpositor.Location = new Point(122, 49);
-            cmbExpositor.Name = "cmbExpositor";
-            cmbExpositor.Size = new Size(140, 28);
-            cmbExpositor.TabIndex = 9;
+            label5.AutoSize = true;
+            label5.Font = new Font("Arial", 12F);
+            label5.Location = new Point(29, 106);
+            label5.Name = "label5";
+            label5.Size = new Size(74, 18);
+            label5.TabIndex = 4;
+            label5.Text = "Expositor";
             // 
             // btnAgregarPresentacion
             // 
+            btnAgregarPresentacion.BackColor = Color.LightBlue;
             btnAgregarPresentacion.Font = new Font("Arial Black", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAgregarPresentacion.Location = new Point(95, 172);
             btnAgregarPresentacion.Name = "btnAgregarPresentacion";
             btnAgregarPresentacion.Size = new Size(94, 39);
             btnAgregarPresentacion.TabIndex = 8;
             btnAgregarPresentacion.Text = "Agendar";
-            btnAgregarPresentacion.UseVisualStyleBackColor = true;
+            btnAgregarPresentacion.UseVisualStyleBackColor = false;
             btnAgregarPresentacion.Click += btnAgregarPresentacion_Click;
             // 
-            // numOrden
+            // cmbExpositor
             // 
-            numOrden.Enabled = false;
-            numOrden.Font = new Font("Arial", 12F);
-            numOrden.Location = new Point(107, 116);
-            numOrden.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            numOrden.Name = "numOrden";
-            numOrden.Size = new Size(120, 26);
-            numOrden.TabIndex = 7;
-            numOrden.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            cmbExpositor.BackColor = SystemColors.GradientActiveCaption;
+            cmbExpositor.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbExpositor.FormattingEnabled = true;
+            cmbExpositor.Location = new Point(128, 106);
+            cmbExpositor.Name = "cmbExpositor";
+            cmbExpositor.Size = new Size(140, 28);
+            cmbExpositor.TabIndex = 9;
             // 
-            // label5
+            // groupBox2
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Arial", 12F);
-            label5.Location = new Point(28, 57);
-            label5.Name = "label5";
-            label5.Size = new Size(74, 18);
-            label5.TabIndex = 4;
-            label5.Text = "Expositor";
+            groupBox2.BackColor = Color.Transparent;
+            groupBox2.Controls.Add(cmbEvento);
+            groupBox2.Controls.Add(label1);
+            groupBox2.Controls.Add(cmbExpositor);
+            groupBox2.Controls.Add(btnAgregarPresentacion);
+            groupBox2.Controls.Add(label5);
+            groupBox2.Cursor = Cursors.Hand;
+            groupBox2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox2.Location = new Point(54, 114);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(352, 280);
+            groupBox2.TabIndex = 1;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Agendamiento";
             // 
-            // label4
+            // cmbEvento
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Arial", 12F);
-            label4.Location = new Point(28, 118);
-            label4.Name = "label4";
-            label4.Size = new Size(51, 18);
-            label4.TabIndex = 3;
-            label4.Text = "Orden";
+            cmbEvento.BackColor = SystemColors.GradientActiveCaption;
+            cmbEvento.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbEvento.FormattingEnabled = true;
+            cmbEvento.Location = new Point(129, 52);
+            cmbEvento.Name = "cmbEvento";
+            cmbEvento.Size = new Size(139, 28);
+            cmbEvento.TabIndex = 11;
             // 
-            // label6
+            // label1
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(280, 29);
-            label6.Name = "label6";
-            label6.Size = new Size(354, 32);
-            label6.TabIndex = 2;
-            label6.Text = "Gestion de Eventos y Agenda";
+            label1.AutoSize = true;
+            label1.Font = new Font("Arial", 12F);
+            label1.Location = new Point(29, 56);
+            label1.Name = "label1";
+            label1.Size = new Size(56, 18);
+            label1.TabIndex = 10;
+            label1.Text = "Evento";
+            // 
+            // dgAgenda
+            // 
+            dgAgenda.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgAgenda.Location = new Point(490, 151);
+            dgAgenda.Name = "dgAgenda";
+            dgAgenda.Size = new Size(240, 150);
+            dgAgenda.TabIndex = 3;
             // 
             // GestionAgendaView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(900, 499);
+            Controls.Add(dgAgenda);
             Controls.Add(label6);
             Controls.Add(groupBox2);
-            Controls.Add(groupBox1);
             Name = "GestionAgendaView";
             Text = "GestionAgendaView";
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numOrden).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgAgenda).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private GroupBox groupBox1;
-        private Label label2;
-        private Label label1;
-        private DateTimePicker dtFecha;
-        private Button btnGuardarCronograma;
-        private TextBox txtUbicacion;
-        private Label label3;
-        private DateTimePicker dtHora;
-        private GroupBox groupBox2;
-        private Label label5;
-        private Label label4;
-        private Button btnAgregarPresentacion;
-        private NumericUpDown numOrden;
         private Label label6;
+        private Label label5;
+        private Button btnAgregarPresentacion;
         private ComboBox cmbExpositor;
+        private GroupBox groupBox2;
+        private ComboBox cmbEvento;
+        private Label label1;
+        private DataGridView dgAgenda;
     }
 }
