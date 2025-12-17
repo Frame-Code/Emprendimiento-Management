@@ -18,23 +18,26 @@ public partial class MainFormView : Form, IViewRolForm
     private readonly CalendariodeActividadesView _calendarioActividadesView;
     private readonly VerParticipantesView _verParticipantesView;
     private readonly MenuOpcionesController _menuOpcionesController;
+    private readonly GaleriaEmprendimientoView _galeriaEmprendimientoView;
 
     public MainFormView(
-        EmprendimientosUc emprendimientosUc, 
-        CalendariodeActividadesView calendarioActividadesView, 
+        EmprendimientosUc emprendimientosUc,
+        CalendariodeActividadesView calendarioActividadesView,
         VerParticipantesView verParticipantesView,
         MenuOpcionesController menuOpcionesController,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider,
+        GaleriaEmprendimientoView galeriaEmprendimientoView)
     {
         _emprendimientosUc = emprendimientosUc;
         _calendarioActividadesView = calendarioActividadesView;
         _verParticipantesView = verParticipantesView;
         _menuOpcionesController = menuOpcionesController;
         _serviceProvider = serviceProvider;
+        _galeriaEmprendimientoView = galeriaEmprendimientoView;
         InitializeComponent();
         Utils.ConfigureForm(this);
     }
-    
+
     public void ShowForm(Action closeWindows)
     {
         LblUserName.Text = UserName;
@@ -85,13 +88,13 @@ public partial class MainFormView : Form, IViewRolForm
         var menusByGrupo = MenuOptionsDto
             .Where(menu => string.Equals(menu.Grupo, "MAESTRO_GENERAL_ADM", StringComparison.InvariantCultureIgnoreCase))
             .ToList();
-        
+
         if (menusByGrupo.Count == 0)
         {
             MessageBox.Show("No se pudo cargar las opciones de este boton, consulte a sistemas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
-        
+
         menusByGrupo.ForEach(menu =>
         {
             bool menuExists = MenuOptions.Items
@@ -100,16 +103,16 @@ public partial class MainFormView : Form, IViewRolForm
             if (!menuExists)
             {
                 var item = new ToolStripMenuItem(menu.Nombre) { Name = menu.Code };
-                item.Click += ItemClick; 
-                MenuOptions.Items.Add(item);    
+                item.Click += ItemClick;
+                MenuOptions.Items.Add(item);
             }
         });
         MenuOptions.Show(BtnGenerales, new Point(0, BtnGenerales.Height));
     }
-    
+
     private void ItemClick(object? sender, EventArgs e)
     {
-        if(sender is not ToolStripMenuItem item) 
+        if (sender is not ToolStripMenuItem item)
             return;
 
         var code = item.Name;
@@ -118,7 +121,7 @@ public partial class MainFormView : Form, IViewRolForm
             MessageBox.Show("No se puede cargar el modulo seleccionado, consultar a sistemas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
-        
+
         var iUserControl = _serviceProvider.GetServices<IViewRolUc>()
             .FirstOrDefault(type => type.ViewType == ViewType.Administrador && type.UcCode == code);
 
@@ -130,6 +133,9 @@ public partial class MainFormView : Form, IViewRolForm
         CargarModulo(uc);
     }
 
-    
-    
+    private void btnGaleria_Click(object sender, EventArgs e)
+    {
+        CargarModulo(_galeriaEmprendimientoView);
+    }
+
 }
