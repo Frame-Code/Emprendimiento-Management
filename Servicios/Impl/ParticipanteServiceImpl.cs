@@ -7,58 +7,68 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using AppContext = Datos.AppContext;
 
 namespace Servicios.Impl
 {
     public class ParticipanteServiceImpl(
         IParticipanteRepository participanteRepository,
         ICargoParticipanteRepository cargoParticipanteRepository,
-        IEmprendimientoRepository emprendimientoRepository
+        IEmprendimientoRepository emprendimientoRepository,
+        IServiceProvider serviceProvider
         ) : IParticipanteService
     {
-        public async Task<ResponseDto> AgregarParticipante(ParticipanteDto participanteDto)
+        public async Task<ResponseDto> AgregarParticipante(int idParticipante, int idEmprendimiento)
         {
             var participantes = await participanteRepository.ListarAsync();
-            var participanteValidate = participantes.FirstOrDefault(p => p.NumeroIdentificacion == participanteDto.NoIdentificacion || p.NumeroTelefono == participanteDto.NoTelefono);
-            if (participanteValidate != null)
+            var participanteValidate = participantes.FirstOrDefault(p => p.Id == idParticipante);
+            if (participanteValidate == null)
             {
                 return new ResponseDto
                 {
                     IsSuccess = false,
-                    Message = "Ya existe un participante con el mismo número de identificación."
+                    Message = "Error, participante no ha sido encontrado."
                 };
             }
 
-            var emprendimiento = await emprendimientoRepository.ObtenerPorIdAsync(participanteDto.IdEmprendimiento);
-            var cargo = await cargoParticipanteRepository.ObtenerPorIdAsync(participanteDto.IdCargoParticipante);
-            if (emprendimiento == null || cargo == null)
+            var emprendimiento = await emprendimientoRepository.ObtenerPorIdAsync(idEmprendimiento);
+            if (emprendimiento == null)
             {
                 return new ResponseDto
                 {
                     IsSuccess = false,
-                    Message = "Emprendimiento o cargo de participante no encontrado."
+                    Message = "Error, Emprendimiento no ha sido encontrado."
                 };
             }
-            var participante = new Participante
-            {
-                Nombres = participanteDto.Nombres,
-                Apellidos = participanteDto.Apellidos,
-                NumeroIdentificacion = participanteDto.NoIdentificacion,
-                NumeroTelefono = participanteDto.NoTelefono,
-                IdEmprendimiento = participanteDto.IdEmprendimiento,
-                IdCargoParticipante = participanteDto.IdCargoParticipante
-            };
-            await participanteRepository.CreateAsync(participante);
+            
+            participanteValidate.IdEmprendimiento = idEmprendimiento;
+            await participanteRepository.UpdateAsync(participanteValidate);
             return new ResponseDto
             {
                 IsSuccess = true,
                 Message = "Participante agregado exitosamente.",
-                Data = participante
+                Data = participanteValidate
             };
         }
 
         public async Task<List<CargoParticipante>> ListarCargos() =>
             await cargoParticipanteRepository.ListarAsync();
+
+        public async Task<List<VerParticipantesDto>> ListarParticipantes()
+        {
+            var list = await participanteRepository.ListarAsync();
+            var participantes = list.Select(par => new VerParticipantesDto
+            {
+                Id = par.Id,
+                Nombre = par.Nombres,
+                Apellido = par.Apellidos,
+                CargoParticipante = par.CargoParticipante.Nombre,
+                Identificacion = par.NumeroIdentificacion,
+                Telefono = par.NumeroTelefono
+            });
+            return participantes.ToList();
+        }
 
         public async Task<List<string>> ObtenerNombresParticipantes(int idEmprendimiento)
         {
