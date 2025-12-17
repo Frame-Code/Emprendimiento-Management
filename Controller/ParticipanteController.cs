@@ -14,10 +14,13 @@ namespace Controller
         public async Task<List<string>> ObtenerNombresParticipantes(int idEmprendimiento) =>
             await participanteService.ObtenerNombresParticipantes(idEmprendimiento);
 
-        public async Task<ResponseDto> AgregarParticipante(ParticipanteDto participanteDto) =>
-            await participanteService.AgregarParticipante(participanteDto);
+        public async Task<ResponseDto> AgregarParticipante(int idParticipante, int idEmprendimiento) =>
+            await participanteService.AgregarParticipante(idParticipante, idEmprendimiento);
 
         public async Task<List<CargoParticipante>> ListarCargos() =>
             await participanteService.ListarCargos();
+        
+        public async  Task<List<VerParticipantesDto>> ListarParticipantes() =>
+            await participanteService.ListarParticipantes();
     }
 }

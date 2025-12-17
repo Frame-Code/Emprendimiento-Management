@@ -126,6 +126,7 @@ internal static class Program
                 services.AddScoped<LogIn>();
                 services.AddScoped<UserRegister>();
                 services.AddScoped<GestionEventoView>();
+                services.AddScoped<GaleriaEmprendimientoView>();
 
 
                 //options

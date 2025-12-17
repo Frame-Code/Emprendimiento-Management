@@ -12,7 +12,7 @@ namespace Datos.Interfaces
     {
         Task<bool> ExisteIdentificacionAsync(string identificacion);
         Task<bool> ExisteTelefonoAsync(string telefono);
-
+        Task UpdateAsync(Participante entity);
 
 
     }

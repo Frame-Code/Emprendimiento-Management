@@ -11,7 +11,8 @@ namespace Servicios.Interfaces
     public interface IParticipanteService
     {
         Task<List<string>> ObtenerNombresParticipantes(int idEmprendimiento);
-        Task<ResponseDto> AgregarParticipante(ParticipanteDto participanteDto);
+        Task<ResponseDto> AgregarParticipante(int idParticipante, int idEmprendimiento);
         Task<List<CargoParticipante>> ListarCargos();
+        Task<List<VerParticipantesDto>> ListarParticipantes();
     }
 }
