@@ -15,9 +15,9 @@ namespace Datos.Impl
 
         public async Task<List<AgendaPresentacion>> ListarAsync() =>
             await context.AgendaPresentaciones
-                         .Include(a => a.Evento)
-                         .Include(a => a.Emprendimiento)
-                         .ToListAsync();
+                .Include(a => a.Evento)
+                .Include(a => a.Emprendimiento)
+                .ToListAsync();
 
         public async Task CreateAsync(AgendaPresentacion entity)
         {
@@ -29,6 +29,7 @@ namespace Datos.Impl
         {
             throw new NotImplementedException();
         }
+
         public async Task<List<AgendaPresentacion>> ListarPorEventoAsync(int idEvento)
         {
             return await context.AgendaPresentaciones
@@ -37,5 +38,11 @@ namespace Datos.Impl
                 .ToListAsync();
         }
 
+        public async Task<int> ObtenerMaxOrdenGlobalAsync()
+        {
+            return await context.AgendaPresentaciones
+                .Select(a => (int?)a.Orden)
+                .MaxAsync() ?? 0;
+        }
     }
 }

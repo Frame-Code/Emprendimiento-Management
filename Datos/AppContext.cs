@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Modelo.Properties;
 
 namespace Datos
 {
@@ -23,12 +24,10 @@ namespace Datos
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<RolUsuario> RolUsuarios { get; set; }
         public DbSet<CargoParticipante> CargosParticipante { get; set; }
-
-        public DbSet<Cronograma> Cronogramas { get; set; }//nuevo
-        public DbSet<Presentacion> Presentaciones { get; set; }//nuevo 
-        
-
-
+        public DbSet<Cronograma> Cronogramas { get; set; }
+        public DbSet<Presentacion> Presentaciones { get; set; } 
+        public DbSet<MenuOpciones> MenuOpciones { get; set; }
+        public DbSet<Foto> Fotos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -64,7 +63,6 @@ namespace Datos
                 b.HasKey(x => x.Id);
                 b.Property(x => x.Nombre).IsRequired().HasMaxLength(300);
                 b.Property(x => x.Descripcion).HasMaxLength(2000);
-                b.Property(x => x.LogoPath).HasMaxLength(500);
 
                 // Relaciones
                 b.HasOne(x => x.Facultad)
@@ -84,13 +82,18 @@ namespace Datos
                 b.HasKey(x => x.Id);
                 b.Property(x => x.Nombres).IsRequired().HasMaxLength(200);
                 b.Property(x => x.Apellidos).IsRequired().HasMaxLength(200);
-                b.Property(x => x.FotoPath).HasMaxLength(500);
                 b.Property(x => x.NumeroTelefono).IsRequired(). HasMaxLength(15);
                 b.Property(x => x.NumeroIdentificacion).IsRequired().HasMaxLength(15);
 
                 b.HasOne(x => x.Emprendimiento)
                     .WithMany(e => e.Participantes)
                     .HasForeignKey(x => x.IdEmprendimiento)
+                    .IsRequired(false)
+                    .OnDelete(DeleteBehavior.Restrict);
+                
+                b.HasOne(x => x.Foto)
+                    .WithMany()
+                    .HasForeignKey(x => x.IdFoto)
                     .IsRequired(false)
                     .OnDelete(DeleteBehavior.Restrict);
 
@@ -131,6 +134,7 @@ namespace Datos
             modelBuilder.Entity<AgendaPresentacion>(b =>
             {
                 b.HasKey(x => x.Id);
+                b.Property(x => x.Orden);
 
                 b.HasOne(x => x.Evento)
                     .WithMany()
@@ -221,6 +225,35 @@ namespace Datos
                     .WithMany()
                     .HasForeignKey(x => x.IdEmprendimiento)
                     .OnDelete(DeleteBehavior.Cascade);
+            });
+            
+            //Menu opciones
+            modelBuilder.Entity<MenuOpciones>(b =>
+            {
+                b.HasKey(x => x.Id);
+                b.Property(x => x.Nombre).IsRequired().HasMaxLength(250);
+                b.Property(x => x.Code).IsRequired().HasMaxLength(50);
+                b.Property(x => x.Grupo).IsRequired().HasMaxLength(250);
+
+                b.HasOne(x => x.RolUsuario)
+                    .WithMany()
+                    .HasForeignKey(x => x.IdRolUsuario)
+                    .OnDelete(DeleteBehavior.NoAction);
+
+                b.HasIndex(menu => new { menu.Code, menu.Grupo });
+            });
+            
+            //Foto
+            modelBuilder.Entity<Foto>(b =>
+            {
+                b.HasKey(x => x.Id);
+                b.Property(x => x.ImageUrl).IsRequired().HasMaxLength(6000);
+                b.Property(x => x.FileName).IsRequired().HasMaxLength(250);
+                b.Property(x => x.FileExtension).IsRequired().HasMaxLength(15);
+
+                b.HasMany(x => x.Emprendimientos)
+                    .WithMany(x => x.Fotos)
+                    .UsingEntity(j => j.ToTable("EmprendimientoFotos"));
             });
         }
     }

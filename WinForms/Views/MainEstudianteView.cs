@@ -9,29 +9,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Shared.ViewRol;
 using WinForms.Views.Util;
+using WinForms.Views.UserControls;
 
 namespace WinForms.Views
 {
-    public partial class MainEstudianteView : Form, IViewRolType
+    public partial class MainEstudianteView : Form, IViewRolForm
     {
-        private readonly ConsultaEmprendimientoView _consultaView;
-        private readonly CalendariodeActividadesView _calendarioActividadesView;
+        private readonly ConsultaEmprendimientoUc _consultaUc;
         public ViewType ViewType => ViewType.Estudiante;
         public string UserName { get; set; } = "Usuario";
+        public IEnumerable<MenuOptionsDto> MenuOptionsDto { get; set; }
 
-        public MainEstudianteView(ConsultaEmprendimientoView consultaView, 
-               CalendariodeActividadesView calendarioActividadesView)
+        public MainEstudianteView(ConsultaEmprendimientoUc consultaUc)
         {
-            _consultaView = consultaView;
-            _calendarioActividadesView = calendarioActividadesView;
             InitializeComponent();
+            _consultaUc = consultaUc;
             Utils.ConfigureForm(this);
-        }
-
-        private void btnEmprendimientoReg_Click(object sender, EventArgs e)
-        {
-            _consultaView.ShowDialog();
         }
 
         public void ShowForm(Action closeWindows)
@@ -41,18 +36,19 @@ namespace WinForms.Views
             FormClosed += (s, e) => closeWindows();
             Show();
         }
-
-        private void BtnCalendarioInsano_Click(object sender, EventArgs e)
+        private void btnEmprendimientoReg_Click(object sender, EventArgs e)
         {
-            try
-            {
-                CalendariodeActividadesView calendarioView = _calendarioActividadesView;
-                calendarioView.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar el modulo de calendario: " + ex.Message);
-            }
+            NavegarA(_consultaUc);
+        }
+
+        private void NavegarA(UserControl control)
+        {
+            pnlContenedorModuloEst.Controls.Clear();
+            control.Dock = DockStyle.Fill;
+
+            pnlContenedorModuloEst.Controls.Add(control);
+            control.BringToFront();
+            control.Show();
         }
     }
 }

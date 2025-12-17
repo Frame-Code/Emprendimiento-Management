@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Shared.ViewRol;
 using WinForms.Views.Util;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -19,14 +20,16 @@ namespace WinForms.Views
     public partial class LogIn : Form
     {
         private readonly AuthController _controller;
+        private readonly MenuOpcionesController _menuOpcionesController;
         private readonly IServiceProvider _serviceProvider;
-        public LogIn(AuthController controller, IServiceProvider serviceProvider)
+        public LogIn(AuthController controller, MenuOpcionesController menuOpcionesController, IServiceProvider serviceProvider)
         {
             _controller = controller;
+            _menuOpcionesController = menuOpcionesController;
             _serviceProvider = serviceProvider;
             InitializeComponent();
             Utils.ConfigureForm(this);
-            this.WindowState = FormWindowState.Maximized;
+            WindowState = FormWindowState.Maximized;
             CenterRoundedPanel();
         }
 
@@ -65,16 +68,18 @@ namespace WinForms.Views
                 MessageBox.Show("Error al definir el rol de usuario: " + response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            //Trae el formalario que coincide que tipo de vista que corresponde al rol del usuario logeado
-            var mainForm = _serviceProvider.GetServices<IViewRolType>()
+            
+            //Trae el formulario que coincide que tipo de vista que corresponde al rol del usuario logeado
+            var mainForm = _serviceProvider.GetServices<IViewRolForm>()
                 .FirstOrDefault(type => type.ViewType == viewType);
+            
             if (mainForm == null)
             {
                 MessageBox.Show("Error al cargar la vista principal", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             mainForm.UserName = userDto.Username;
+            mainForm.MenuOptionsDto = await _menuOpcionesController.ListarPorRol(userDto.RoleCode);
             mainForm.ShowForm(this.Close);
             this.Hide();
         }

@@ -10,6 +10,6 @@ namespace Shared
     {
         public int IdEvento { get; set; }
         public int IdEmprendimiento { get; set; }
-        public int Orden { get; set; }
+        public int Orden { get; set; } 
     }
 }

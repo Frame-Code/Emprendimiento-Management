@@ -8,7 +8,9 @@ using Microsoft.Extensions.Hosting;
 using Servicios.Impl;
 using Servicios.Interfaces;
 using Shared;
+using Shared.ViewRol;
 using WinForms.Views;
+using WinForms.Views.UserControls;
 using WinForms.Views.Util;
 using AppContext = Datos.AppContext;
 
@@ -33,9 +35,9 @@ internal static class Program
         {
             var db = scope.ServiceProvider.GetRequiredService<AppContext>();
             db.Database.Migrate();
-          
-            var agenda = scope.ServiceProvider.GetRequiredService<MainEstudianteView>();
-            Application.Run(agenda);
+
+            var view = scope.ServiceProvider.GetRequiredService<LogIn>();
+            Application.Run(view);
             //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
             //Application.Run(registroEmprendimiento);
         }
@@ -47,7 +49,7 @@ internal static class Program
             .ConfigureAppConfiguration((context, config) =>
             {
                 config.Sources.Clear();
-                config .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
             })
             .ConfigureServices((context, services) =>
             {
@@ -76,6 +78,8 @@ internal static class Program
                 services.AddScoped<IPresentacionRepository, PresentacionRepositoryImpl>();
                 services.AddScoped<IUsuarioRepository, UsuarioRepositoryImpl>();
                 services.AddScoped<IRolUsuarioRepository, RolUsuarioRepositoryImpl>();
+                services.AddScoped<IMenuOpcionesRepository, MenuOpcionesRepository>();
+                services.AddScoped<IFotoRepository, FotoRepositoryImpl>();
 
                 // Servicios 
                 services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();
@@ -85,6 +89,11 @@ internal static class Program
                 services.AddScoped<ILogInService, LogInServiceImpl>();
                 services.AddScoped<IRolUsuarioService, RolUsuarioServiceImpl>();
                 services.AddScoped<ISignUpService, SignUpServiceImpl>();
+                services.AddScoped<IMenuOpcionesService, MenuOpcionesServiceImpl>();
+                services.AddScoped<IFacultadService, FacultadServiceImpl>();
+                services.AddScoped<IRubroEmprendimientoService, RubroEmprendimientoService>();
+                services.AddScoped<IFileService, FileServiceImpl>();
+                services.AddScoped<IEventoService, EventoServiceImpl>();//new
 
                 // Controllers 
                 services.AddScoped<RegistroEmprendimientoController>();
@@ -93,6 +102,13 @@ internal static class Program
                 services.AddScoped<CalendarioController>();
                 services.AddScoped<AgendaController>();
                 services.AddScoped<AuthController>();
+                services.AddScoped<MenuOpcionesController>();
+                services.AddScoped<FacultadController>();
+                services.AddScoped<RubroEmprendimientoController>();
+                services.AddScoped<FileController>();
+                services.AddScoped<EventoController>();//eventos
+                
+
 
                 // Formularios
                 services.AddScoped<MainFormView>();
@@ -103,17 +119,24 @@ internal static class Program
                 services.AddScoped<RegistroParticipantesView>();
                 services.AddScoped<VerParticipantesView>();
                 services.AddScoped<MainFormView>();
-
+                services.AddScoped<ConsultaEmprendimientoUc>();
                 services.AddScoped<CalendariodeActividadesView>();
-                services.AddScoped<ConsultaEmprendimientoView>();
                 services.AddScoped<MainEstudianteView>();
                 services.AddScoped<GestionAgendaView>();
                 services.AddScoped<LogIn>();
                 services.AddScoped<UserRegister>();
+                services.AddScoped<GestionEventoView>();
+
+
+                //options
+                services.AddScoped<IViewRolUc, FacultadesUc>();
+                services.AddScoped<IViewRolUc, RubroEmprendimientoUc>();
 
                 //MainForms
-                services.AddScoped<IViewRolType, MainFormView>();
-                services.AddScoped<IViewRolType, MainEstudianteView>();
+                services.AddScoped<IViewRolForm, MainFormView>();
+                services.AddScoped<IViewRolForm, MainEstudianteView>();
+
+                // ventanas de eventos
             });
     }
 }

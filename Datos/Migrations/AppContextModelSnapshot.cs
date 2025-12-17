@@ -22,6 +22,21 @@ namespace Datos.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("EmprendimientoFoto", b =>
+                {
+                    b.Property<int>("EmprendimientosId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FotosId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EmprendimientosId", "FotosId");
+
+                    b.HasIndex("FotosId");
+
+                    b.ToTable("EmprendimientoFotos", (string)null);
+                });
+
             modelBuilder.Entity("Modelo.AgendaPresentacion", b =>
                 {
                     b.Property<int>("Id")
@@ -165,10 +180,6 @@ namespace Datos.Migrations
                     b.Property<int>("IdRubroEmprendimiento")
                         .HasColumnType("int");
 
-                    b.Property<string>("LogoPath")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(300)
@@ -237,6 +248,34 @@ namespace Datos.Migrations
                     b.ToTable("Facultades");
                 });
 
+            modelBuilder.Entity("Modelo.Foto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FileExtension")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(6000)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Fotos");
+                });
+
             modelBuilder.Entity("Modelo.Participante", b =>
                 {
                     b.Property<int>("Id")
@@ -250,14 +289,13 @@ namespace Datos.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("FotoPath")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
                     b.Property<int>("IdCargoParticipante")
                         .HasColumnType("int");
 
                     b.Property<int?>("IdEmprendimiento")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdFoto")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombres")
@@ -280,6 +318,8 @@ namespace Datos.Migrations
                     b.HasIndex("IdCargoParticipante");
 
                     b.HasIndex("IdEmprendimiento");
+
+                    b.HasIndex("IdFoto");
 
                     b.HasIndex("NumeroIdentificacion")
                         .IsUnique();
@@ -319,6 +359,41 @@ namespace Datos.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Presentaciones");
+                });
+
+            modelBuilder.Entity("Modelo.Properties.MenuOpciones", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Grupo")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("IdRolUsuario")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdRolUsuario");
+
+                    b.HasIndex("Code", "Grupo");
+
+                    b.ToTable("MenuOpciones");
                 });
 
             modelBuilder.Entity("Modelo.ResultadoEvento", b =>
@@ -456,6 +531,21 @@ namespace Datos.Migrations
                     b.ToTable("Votos");
                 });
 
+            modelBuilder.Entity("EmprendimientoFoto", b =>
+                {
+                    b.HasOne("Modelo.Emprendimiento", null)
+                        .WithMany()
+                        .HasForeignKey("EmprendimientosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Modelo.Foto", null)
+                        .WithMany()
+                        .HasForeignKey("FotosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Modelo.AgendaPresentacion", b =>
                 {
                     b.HasOne("Modelo.Emprendimiento", "Emprendimiento")
@@ -526,9 +616,27 @@ namespace Datos.Migrations
                         .HasForeignKey("IdEmprendimiento")
                         .OnDelete(DeleteBehavior.Restrict);
 
+                    b.HasOne("Modelo.Foto", "Foto")
+                        .WithMany()
+                        .HasForeignKey("IdFoto")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("CargoParticipante");
 
                     b.Navigation("Emprendimiento");
+
+                    b.Navigation("Foto");
+                });
+
+            modelBuilder.Entity("Modelo.Properties.MenuOpciones", b =>
+                {
+                    b.HasOne("Modelo.RolUsuario", "RolUsuario")
+                        .WithMany()
+                        .HasForeignKey("IdRolUsuario")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("RolUsuario");
                 });
 
             modelBuilder.Entity("Modelo.ResultadoEvento", b =>

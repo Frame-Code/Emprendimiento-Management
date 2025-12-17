@@ -29,5 +29,17 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
+    
+    <ItemGroup>
+      <Compile Update="Views\UserControls\CalendariodeActividadesView.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Views\UserControls\FacultadesUc.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Update="Views\UserControls\RubroEmprendimientoUc.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
+    </ItemGroup>
 
 </Project>

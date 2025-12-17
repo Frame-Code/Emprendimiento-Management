@@ -40,6 +40,9 @@
             txtNdeIdentificacion = new TextBox();
             label7 = new Label();
             txtNdeTelefono = new TextBox();
+            btnFoto = new Button();
+            pnlFoto = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pnlFoto).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -104,7 +107,7 @@
             // 
             // btnRegistrar
             // 
-            btnRegistrar.Location = new Point(628, 113);
+            btnRegistrar.Location = new Point(44, 371);
             btnRegistrar.Name = "btnRegistrar";
             btnRegistrar.Size = new Size(361, 48);
             btnRegistrar.TabIndex = 7;
@@ -145,11 +148,31 @@
             txtNdeTelefono.Size = new Size(266, 31);
             txtNdeTelefono.TabIndex = 13;
             // 
+            // btnFoto
+            // 
+            btnFoto.Location = new Point(700, 116);
+            btnFoto.Name = "btnFoto";
+            btnFoto.Size = new Size(220, 34);
+            btnFoto.TabIndex = 14;
+            btnFoto.Text = "Agregar Foto";
+            btnFoto.UseVisualStyleBackColor = true;
+            btnFoto.Click += btnFoto_Click;
+            // 
+            // pnlFoto
+            // 
+            pnlFoto.Location = new Point(593, 173);
+            pnlFoto.Name = "pnlFoto";
+            pnlFoto.Size = new Size(441, 218);
+            pnlFoto.TabIndex = 15;
+            pnlFoto.TabStop = false;
+            // 
             // RegistroParticipantesView
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1072, 450);
+            Controls.Add(pnlFoto);
+            Controls.Add(btnFoto);
             Controls.Add(txtNdeTelefono);
             Controls.Add(label7);
             Controls.Add(txtNdeIdentificacion);
@@ -165,6 +188,7 @@
             Name = "RegistroParticipantesView";
             Text = "RegistroParticipantesView";
             Load += RegistroParticipantesView_Load;
+            ((System.ComponentModel.ISupportInitialize)pnlFoto).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -183,5 +207,7 @@
         private TextBox txtNdeIdentificacion;
         private Label label7;
         private TextBox txtNdeTelefono;
+        private Button btnFoto;
+        private PictureBox pnlFoto;
     }
 }

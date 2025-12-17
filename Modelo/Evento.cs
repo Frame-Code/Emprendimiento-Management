@@ -15,8 +15,6 @@ namespace Modelo
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
         public string? Ubicacion { get; set; }
-
-
-       
+      
     }
 }

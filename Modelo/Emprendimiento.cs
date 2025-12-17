@@ -12,12 +12,12 @@ namespace Modelo
         public int Id { get; set; }
         public string Nombre { get; set; } = null!;
         public string? Descripcion { get; set; }
-        public string? LogoPath { get; set; }
         public int IdFacultad { get; set; }
         public Facultad Facultad { get; set; } = null!;
         public int IdRubroEmprendimiento { get; set; }
         public RubroEmprendimiento RubroEmprendimiento { get; set; } = null!;
         public ICollection<Participante> Participantes { get; set; } = new List<Participante>();
+        public ICollection<Foto> Fotos { get; set; } = new List<Foto>();
 
     }
 }
