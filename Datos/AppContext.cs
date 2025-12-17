@@ -27,7 +27,8 @@ namespace Datos
         public DbSet<Cronograma> Cronogramas { get; set; }
         public DbSet<Presentacion> Presentaciones { get; set; } 
         public DbSet<MenuOpciones> MenuOpciones { get; set; }
-        
+        public DbSet<Foto> Fotos { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

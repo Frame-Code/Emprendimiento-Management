@@ -79,6 +79,7 @@ internal static class Program
                 services.AddScoped<IUsuarioRepository, UsuarioRepositoryImpl>();
                 services.AddScoped<IRolUsuarioRepository, RolUsuarioRepositoryImpl>();
                 services.AddScoped<IMenuOpcionesRepository, MenuOpcionesRepository>();
+                services.AddScoped<IFotoRepository, FotoRepositoryImpl>();
 
                 // Servicios 
                 services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();
