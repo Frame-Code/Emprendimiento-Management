@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            BtnCalendarioInsano = new Button();
             LblUserName = new Label();
             btnEmprendimientoReg = new Button();
             label1 = new Label();
             pnlContenedorModuloEst = new Panel();
             panel3 = new Panel();
             label2 = new Label();
-            BtnCalendarioInsano = new Button();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             SuspendLayout();
@@ -52,6 +52,16 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(209, 480);
             panel1.TabIndex = 0;
+            // 
+            // BtnCalendarioInsano
+            // 
+            BtnCalendarioInsano.Location = new Point(33, 172);
+            BtnCalendarioInsano.Name = "BtnCalendarioInsano";
+            BtnCalendarioInsano.Size = new Size(130, 55);
+            BtnCalendarioInsano.TabIndex = 2;
+            BtnCalendarioInsano.Text = "Evento";
+            BtnCalendarioInsano.UseVisualStyleBackColor = true;
+            BtnCalendarioInsano.Click += BtnCalendarioInsano_Click;
             // 
             // LblUserName
             // 
@@ -85,7 +95,7 @@
             // 
             // pnlContenedorModuloEst
             // 
-            pnlContenedorModuloEst.BorderStyle = BorderStyle.FixedSingle;
+            pnlContenedorModuloEst.BorderStyle = BorderStyle.Fixed3D;
             pnlContenedorModuloEst.Location = new Point(210, 59);
             pnlContenedorModuloEst.Name = "pnlContenedorModuloEst";
             pnlContenedorModuloEst.Size = new Size(786, 480);
@@ -109,16 +119,6 @@
             label2.Size = new Size(230, 30);
             label2.TabIndex = 0;
             label2.Text = "Modulo de Estudiante";
-            // 
-            // BtnCalendarioInsano
-            // 
-            BtnCalendarioInsano.Location = new Point(34, 180);
-            BtnCalendarioInsano.Name = "BtnCalendarioInsano";
-            BtnCalendarioInsano.Size = new Size(130, 55);
-            BtnCalendarioInsano.TabIndex = 2;
-            BtnCalendarioInsano.Text = "Evento";
-            BtnCalendarioInsano.UseVisualStyleBackColor = true;
-            BtnCalendarioInsano.Click += BtnCalendarioInsano_Click;
             // 
             // MainEstudianteView
             // 
