@@ -61,8 +61,7 @@ namespace Servicios.Impl
                     NombreEvento = e.Evento.Nombre,
                     FechaInicio = e.Evento.FechaInicio,
                     FechaFin = e.Evento.FechaFin,
-                    Facultad = e.Emprendimiento.Facultad?.Nombre ?? "Sin Facultad",
-                    FacultadId = e.Emprendimiento.IdFacultad
+                    Facultad = e.Emprendimiento.Facultad?.Nombre ?? "Sin Facultad"
                 }).ToList();
         }
     }

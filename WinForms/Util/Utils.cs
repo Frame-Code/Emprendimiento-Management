@@ -56,7 +56,7 @@ namespace WinForms.Views.Util
                 tb.Font = font;
                 tb.Multiline = true;
                 tb.Height = 35;
-                tb.Multiline = true;
+                tb.Multiline = !tb.UseSystemPasswordChar;
                 tb.AcceptsReturn = false;
                 tb.AcceptsTab = false;
                 WrapTextBox(tb);

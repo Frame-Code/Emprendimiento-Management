@@ -30,62 +30,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            dgvParticipantes = new DataGridView();
-            label2 = new Label();
-            btnRegistrate = new Button();
+            label1 = new System.Windows.Forms.Label();
+            dgvParticipantes = new System.Windows.Forms.DataGridView();
+            btnRegistrate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)dgvParticipantes).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(12, 9);
+            label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
+            label1.Location = new System.Drawing.Point(12, 9);
             label1.Name = "label1";
-            label1.Size = new Size(529, 48);
+            label1.Size = new System.Drawing.Size(369, 41);
             label1.TabIndex = 0;
-            label1.Text = "Participantes Emprendimiento";
+            label1.Text = "Participantes registrados";
             // 
             // dgvParticipantes
             // 
-            dgvParticipantes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvParticipantes.Location = new Point(12, 60);
+            dgvParticipantes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvParticipantes.Location = new System.Drawing.Point(12, 60);
             dgvParticipantes.Name = "dgvParticipantes";
             dgvParticipantes.RowHeadersWidth = 62;
-            dgvParticipantes.Size = new Size(810, 371);
+            dgvParticipantes.Size = new System.Drawing.Size(1088, 442);
             dgvParticipantes.TabIndex = 1;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(12, 446);
-            label2.Name = "label2";
-            label2.Size = new Size(207, 30);
-            label2.TabIndex = 2;
-            label2.Text = "Registrate GRATIS!";
             // 
             // btnRegistrate
             // 
-            btnRegistrate.Location = new Point(225, 437);
+            btnRegistrate.Location = new System.Drawing.Point(128, 526);
             btnRegistrate.Name = "btnRegistrate";
-            btnRegistrate.Size = new Size(159, 50);
+            btnRegistrate.Size = new System.Drawing.Size(844, 44);
             btnRegistrate.TabIndex = 3;
-            btnRegistrate.Text = "Registrate";
+            btnRegistrate.Text = "Registrar nuevo participante";
             btnRegistrate.UseVisualStyleBackColor = true;
             btnRegistrate.Click += btnRegistrate_Click;
             // 
             // VerParticipantesView
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(btnRegistrate);
-            Controls.Add(label2);
             Controls.Add(dgvParticipantes);
             Controls.Add(label1);
-            Name = "VerParticipantesView";
-            Size = new Size(859, 496);
+            Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            Size = new System.Drawing.Size(1125, 768);
             Load += VerParticipantesView_Load;
             ((System.ComponentModel.ISupportInitialize)dgvParticipantes).EndInit();
             ResumeLayout(false);
@@ -94,9 +82,8 @@
 
         #endregion
 
-        private Label label1;
-        private DataGridView dgvParticipantes;
-        private Label label2;
-        private Button btnRegistrate;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dgvParticipantes;
+        private System.Windows.Forms.Button btnRegistrate;
     }
 }

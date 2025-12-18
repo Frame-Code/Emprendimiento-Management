@@ -92,6 +92,7 @@
             // 
             TxtPassword.Location = new System.Drawing.Point(46, 229);
             TxtPassword.Name = "TxtPassword";
+            TxtPassword.PasswordChar = '*';
             TxtPassword.PlaceholderText = "Escribe tu contraseña...";
             TxtPassword.Size = new System.Drawing.Size(390, 27);
             TxtPassword.TabIndex = 5;

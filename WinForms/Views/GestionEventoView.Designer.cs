@@ -28,147 +28,147 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnCrearEvento = new Button();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            txtNombreEvento = new TextBox();
-            cmbEmprendimiento = new ComboBox();
-            dtpFechaInicio = new DateTimePicker();
-            label4 = new Label();
-            txtDescripcion = new TextBox();
-            txtUbicacion = new TextBox();
-            label5 = new Label();
-            label6 = new Label();
-            label7 = new Label();
-            dtpFechaFin = new DateTimePicker();
+            btnCrearEvento = new System.Windows.Forms.Button();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            txtNombreEvento = new System.Windows.Forms.TextBox();
+            cmbEmprendimiento = new System.Windows.Forms.ComboBox();
+            dtpFechaInicio = new System.Windows.Forms.DateTimePicker();
+            label4 = new System.Windows.Forms.Label();
+            txtDescripcion = new System.Windows.Forms.TextBox();
+            txtUbicacion = new System.Windows.Forms.TextBox();
+            label5 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
+            label7 = new System.Windows.Forms.Label();
+            dtpFechaFin = new System.Windows.Forms.DateTimePicker();
             SuspendLayout();
             // 
             // btnCrearEvento
             // 
-            btnCrearEvento.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCrearEvento.Location = new Point(360, 419);
+            btnCrearEvento.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
+            btnCrearEvento.Location = new System.Drawing.Point(267, 285);
             btnCrearEvento.Name = "btnCrearEvento";
-            btnCrearEvento.Size = new Size(111, 41);
+            btnCrearEvento.Size = new System.Drawing.Size(641, 41);
             btnCrearEvento.TabIndex = 0;
-            btnCrearEvento.Text = "Crear";
+            btnCrearEvento.Text = "Registrar evento";
             btnCrearEvento.UseVisualStyleBackColor = true;
             btnCrearEvento.Click += btnCrearEvento_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(55, 184);
+            label1.Location = new System.Drawing.Point(45, 107);
             label1.Name = "label1";
-            label1.Size = new Size(51, 15);
+            label1.Size = new System.Drawing.Size(64, 20);
             label1.TabIndex = 1;
             label1.Text = "Nombre";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(55, 343);
+            label2.Location = new System.Drawing.Point(45, 216);
             label2.Name = "label2";
-            label2.Size = new Size(60, 15);
+            label2.Size = new System.Drawing.Size(75, 20);
             label2.TabIndex = 2;
             label2.Text = "Ubicacion";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(55, 267);
+            label3.Location = new System.Drawing.Point(45, 159);
             label3.Name = "label3";
-            label3.Size = new Size(67, 15);
+            label3.Size = new System.Drawing.Size(87, 20);
             label3.TabIndex = 3;
-            label3.Text = "Description";
+            label3.Text = "Descripcion";
             // 
             // txtNombreEvento
             // 
-            txtNombreEvento.Location = new Point(146, 184);
+            txtNombreEvento.Location = new System.Drawing.Point(136, 107);
             txtNombreEvento.Name = "txtNombreEvento";
-            txtNombreEvento.Size = new Size(124, 23);
+            txtNombreEvento.Size = new System.Drawing.Size(462, 27);
             txtNombreEvento.TabIndex = 4;
             // 
             // cmbEmprendimiento
             // 
             cmbEmprendimiento.FormattingEnabled = true;
-            cmbEmprendimiento.Location = new Point(632, 340);
+            cmbEmprendimiento.Location = new System.Drawing.Point(785, 213);
             cmbEmprendimiento.Name = "cmbEmprendimiento";
-            cmbEmprendimiento.Size = new Size(156, 23);
+            cmbEmprendimiento.Size = new System.Drawing.Size(362, 28);
             cmbEmprendimiento.TabIndex = 5;
             // 
             // dtpFechaInicio
             // 
-            dtpFechaInicio.Format = DateTimePickerFormat.Custom;
-            dtpFechaInicio.Location = new Point(537, 187);
+            dtpFechaInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtpFechaInicio.Location = new System.Drawing.Point(774, 102);
             dtpFechaInicio.Name = "dtpFechaInicio";
-            dtpFechaInicio.Size = new Size(200, 23);
+            dtpFechaInicio.Size = new System.Drawing.Size(373, 27);
             dtpFechaInicio.TabIndex = 6;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Arial Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(275, 79);
+            label4.Font = new System.Drawing.Font("Arial Black", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
+            label4.Location = new System.Drawing.Point(418, 24);
             label4.Name = "label4";
-            label4.Size = new Size(287, 38);
+            label4.Size = new System.Drawing.Size(382, 48);
             label4.TabIndex = 7;
-            label4.Text = "Gestion de Evento";
+            label4.Text = "Crear nuevo evento";
             // 
             // txtDescripcion
             // 
-            txtDescripcion.Location = new Point(146, 264);
+            txtDescripcion.Location = new System.Drawing.Point(136, 156);
             txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Size = new Size(124, 23);
+            txtDescripcion.Size = new System.Drawing.Size(462, 27);
             txtDescripcion.TabIndex = 8;
             // 
             // txtUbicacion
             // 
-            txtUbicacion.Location = new Point(146, 335);
+            txtUbicacion.Location = new System.Drawing.Point(136, 216);
             txtUbicacion.Name = "txtUbicacion";
-            txtUbicacion.Size = new Size(124, 23);
+            txtUbicacion.Size = new System.Drawing.Size(462, 27);
             txtUbicacion.TabIndex = 9;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(449, 187);
+            label5.Location = new System.Drawing.Point(656, 107);
             label5.Name = "label5";
-            label5.Size = new Size(75, 15);
+            label5.Size = new System.Drawing.Size(94, 20);
             label5.TabIndex = 10;
             label5.Text = "Inicio Evento";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(449, 267);
+            label6.Location = new System.Drawing.Point(656, 163);
             label6.Name = "label6";
-            label6.Size = new Size(62, 15);
+            label6.Size = new System.Drawing.Size(77, 20);
             label6.TabIndex = 11;
             label6.Text = "Fin Evento";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(449, 343);
+            label7.Location = new System.Drawing.Point(656, 219);
             label7.Name = "label7";
-            label7.Size = new Size(159, 15);
+            label7.Size = new System.Drawing.Size(123, 20);
             label7.TabIndex = 12;
-            label7.Text = "Emprendimientos disponible";
+            label7.Text = "Emprendimiento:";
             // 
             // dtpFechaFin
             // 
-            dtpFechaFin.Format = DateTimePickerFormat.Custom;
-            dtpFechaFin.Location = new Point(537, 264);
+            dtpFechaFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtpFechaFin.Location = new System.Drawing.Point(774, 163);
             dtpFechaFin.Name = "dtpFechaFin";
-            dtpFechaFin.Size = new Size(200, 23);
+            dtpFechaFin.Size = new System.Drawing.Size(373, 27);
             dtpFechaFin.TabIndex = 13;
             // 
             // GestionEventoView
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(832, 529);
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1177, 355);
             Controls.Add(dtpFechaFin);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -183,7 +183,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(btnCrearEvento);
-            Name = "GestionEventoView";
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Text = "GestionEventoView";
             ResumeLayout(false);
             PerformLayout();
@@ -191,19 +191,19 @@
 
         #endregion
 
-        private Button btnCrearEvento;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private TextBox txtNombreEvento;
-        private ComboBox cmbEmprendimiento;
-        private DateTimePicker dtpFechaInicio;
-        private Label label4;
-        private TextBox txtDescripcion;
-        private TextBox txtUbicacion;
-        private Label label5;
-        private Label label6;
-        private Label label7;
-        private DateTimePicker dtpFechaFin;
+        private System.Windows.Forms.Button btnCrearEvento;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtNombreEvento;
+        private System.Windows.Forms.ComboBox cmbEmprendimiento;
+        private System.Windows.Forms.DateTimePicker dtpFechaInicio;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtDescripcion;
+        private System.Windows.Forms.TextBox txtUbicacion;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DateTimePicker dtpFechaFin;
     }
 }

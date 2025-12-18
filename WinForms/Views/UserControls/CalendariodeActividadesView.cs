@@ -1,4 +1,5 @@
 ﻿using Controller;
+using Microsoft.Extensions.DependencyInjection;
 using WinForms.Views.Util;
 
 namespace WinForms.Views.UserControls
@@ -6,11 +7,12 @@ namespace WinForms.Views.UserControls
 {
     public partial class CalendariodeActividadesView : UserControl
     {
-
+        private IServiceProvider _serviceProvider;
         private readonly CalendarioController _controller;
 
-        public CalendariodeActividadesView(CalendarioController controller)
+        public CalendariodeActividadesView(CalendarioController controller, IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
             _controller = controller ?? throw new ArgumentNullException(nameof(controller));
             InitializeComponent();
             Utils.ConfigureForm(this);
@@ -73,6 +75,19 @@ namespace WinForms.Views.UserControls
         private void cmbFacultad_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private async void BtnCrearEvento_Click(object sender, EventArgs e)
+        {
+            using var scope = _serviceProvider.CreateScope();
+            var form = scope.ServiceProvider.GetRequiredService<GestionEventoView>();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                form.Hide();
+                MessageBox.Show("¡Evento registrado exitosamente!");
+            }
+
+            await CargarDatosAsync();
         }
     }
 }
