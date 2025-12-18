@@ -119,6 +119,7 @@ internal static class Program
                 services.AddScoped<RegistroParticipantesView>();
                 services.AddScoped<VerParticipantesView>();
                 services.AddScoped<MainFormView>();
+                services.AddScoped<GaleriaEmprendimientoView>();
                 services.AddScoped<ConsultaEmprendimientoUc>();
                 services.AddScoped<CalendariodeActividadesView>();
                 services.AddScoped<MainEstudianteView>();
