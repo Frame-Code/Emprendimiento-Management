@@ -17,17 +17,20 @@ namespace WinForms.Views
 {
     public partial class MainEstudianteView : Form, IViewRolForm
     {
+        private readonly CalendariodeActividadesView _calendarioActividadesview;
         private readonly ConsultaEmprendimientoUc _consultaUc;
         public ViewType ViewType => ViewType.Estudiante;
         public string UserName { get; set; } = "Usuario";
         public IEnumerable<MenuOptionsDto> MenuOptionsDto { get; set; }
 
-        public MainEstudianteView(ConsultaEmprendimientoUc consultaUc)
+        public MainEstudianteView(ConsultaEmprendimientoUc consultaUc,
+               CalendariodeActividadesView calendarioActividadesview)
         {
             InitializeComponent();
             _consultaUc = consultaUc;
             WindowState = FormWindowState.Maximized;
             Utils.ConfigureForm(this);
+            
         }
 
         public void ShowForm(Action closeWindows)
@@ -49,6 +52,21 @@ namespace WinForms.Views
             pnlContenedorModuloEst.Controls.Add(control);
             control.BringToFront();
             control.Show();
+        }
+        private void BtnCalendarioInsano_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                pnlContenedorModuloEst.Controls.Clear();
+                CalendariodeActividadesView calendarioView = _calendarioActividadesview;
+                calendarioView.Dock = DockStyle.Fill;
+                pnlContenedorModuloEst.Controls.Add(calendarioView);
+                calendarioView.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar el modulo de calendario: " + ex.Message);
+            }
         }
     }
 }
