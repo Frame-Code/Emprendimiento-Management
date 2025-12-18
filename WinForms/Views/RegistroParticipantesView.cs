@@ -21,6 +21,7 @@ namespace WinForms.Views
             _miControlador = controller;
             _fileController = fileController;
             InitializeComponent();
+            Utils.ConfigureForm(this);
         }
 
         private async void RegistroParticipantesView_Load(object sender, EventArgs e)

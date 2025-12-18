@@ -12,6 +12,5 @@ namespace Shared
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
         public string Facultad { get; set; } = null!;
-        public int FacultadId { get; set; }
     }
 }
