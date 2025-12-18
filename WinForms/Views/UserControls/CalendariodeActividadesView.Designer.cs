@@ -34,6 +34,7 @@
             label3 = new System.Windows.Forms.Label();
             BtnFiltrar = new System.Windows.Forms.Button();
             cmbFacultad = new System.Windows.Forms.ComboBox();
+            BtnCrearEvento = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)dgvActividades).BeginInit();
             SuspendLayout();
             // 
@@ -95,10 +96,21 @@
             cmbFacultad.TabIndex = 11;
             cmbFacultad.SelectedIndexChanged += cmbFacultad_SelectedIndexChanged;
             // 
+            // BtnCrearEvento
+            // 
+            BtnCrearEvento.Location = new System.Drawing.Point(162, 722);
+            BtnCrearEvento.Name = "BtnCrearEvento";
+            BtnCrearEvento.Size = new System.Drawing.Size(763, 41);
+            BtnCrearEvento.TabIndex = 12;
+            BtnCrearEvento.Text = "Crear nuevo evento";
+            BtnCrearEvento.UseVisualStyleBackColor = true;
+            BtnCrearEvento.Click += BtnCrearEvento_Click;
+            // 
             // CalendariodeActividadesView
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(BtnCrearEvento);
             Controls.Add(cmbFacultad);
             Controls.Add(BtnFiltrar);
             Controls.Add(label3);
@@ -106,12 +118,14 @@
             Controls.Add(label1);
             Controls.Add(monthCalendar1);
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            Size = new System.Drawing.Size(1183, 741);
+            Size = new System.Drawing.Size(1183, 786);
             Load += CalendariodeActividadesView_Load;
             ((System.ComponentModel.ISupportInitialize)dgvActividades).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
+
+        private System.Windows.Forms.Button BtnCrearEvento;
 
         #endregion
 
