@@ -64,6 +64,7 @@ namespace WinForms.Views.UserControls
                 }
                 
                 var tarjeta = CrearTarjetaEmprendimiento(emprendimiento);
+                flpResultados.Controls.Clear();
                 flpResultados.Controls.Add(tarjeta);
                 flpResultados.ScrollControlIntoView(tarjeta);
             }
@@ -77,7 +78,7 @@ namespace WinForms.Views.UserControls
             // 1. Panel Contenedor
             var panel = new Panel
             {
-                Size = new Size(400, 160),
+                Size = new Size(1000, 300),
                 BorderStyle = BorderStyle.FixedSingle,
                 BackColor = Color.White,
                 Margin = new Padding(0, 0, 0, 10)
@@ -101,7 +102,7 @@ namespace WinForms.Views.UserControls
 
             int currentY = 10; 
             int textX = 150;   
-            int maxTextWidth = 230;
+            int maxTextWidth = 800;
             int spacing = 5;
 
             // 3. Labels

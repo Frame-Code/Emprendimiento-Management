@@ -42,10 +42,12 @@ namespace Controller
 
             return lista.Select(p => new VerParticipantesDto
             {
+                Id = p.Id,
                 Nombre = p.Nombres,
                 Apellido = p.Apellidos,
                 Telefono = p.NumeroTelefono,
-                Identificacion = p.NumeroIdentificacion
+                Identificacion = p.NumeroIdentificacion,
+                CargoParticipante = p.CargoParticipante.Nombre
             }).ToList();
         }
     }

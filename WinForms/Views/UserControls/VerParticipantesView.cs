@@ -1,4 +1,5 @@
 ﻿using Controller;
+using WinForms.Views.Util;
 
 namespace WinForms.Views.UserControls
 {
@@ -14,6 +15,7 @@ namespace WinForms.Views.UserControls
             _registroParticipanteController = registroParticipanteController;
             _registroParticipantesView = registroParticipantesView;
             InitializeComponent();
+            Utils.ConfigureForm(this);
         }
 
         private async Task CargarParticipantes()

@@ -28,116 +28,138 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
-            LblUserName = new Label();
-            btnEmprendimientoReg = new Button();
-            label1 = new Label();
-            pnlContenedorModuloEst = new Panel();
-            panel3 = new Panel();
-            label2 = new Label();
-            panel1.SuspendLayout();
+            LblUserName = new System.Windows.Forms.Label();
+            btnEmprendimientoReg = new System.Windows.Forms.Button();
+            pnlContenedorModuloEst = new System.Windows.Forms.Panel();
+            label2 = new System.Windows.Forms.Label();
+            panel3 = new System.Windows.Forms.Panel();
+            panel1 = new System.Windows.Forms.Panel();
+            roundedPanel2 = new WinForms.Views.Util.RoundedPanel();
+            roundedPanel1 = new WinForms.Views.Util.RoundedPanel();
             panel3.SuspendLayout();
+            panel1.SuspendLayout();
+            roundedPanel2.SuspendLayout();
+            roundedPanel1.SuspendLayout();
             SuspendLayout();
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.Silver;
-            panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(LblUserName);
-            panel1.Controls.Add(btnEmprendimientoReg);
-            panel1.Controls.Add(label1);
-            panel1.Location = new Point(0, 79);
-            panel1.Margin = new Padding(3, 4, 3, 4);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(239, 639);
-            panel1.TabIndex = 0;
             // 
             // LblUserName
             // 
             LblUserName.AutoSize = true;
-            LblUserName.Font = new Font("Segoe UI", 13F);
-            LblUserName.Location = new Point(11, 45);
+            LblUserName.Font = new System.Drawing.Font("Segoe UI", 13F);
+            LblUserName.Location = new System.Drawing.Point(29, 24);
             LblUserName.Name = "LblUserName";
-            LblUserName.Size = new Size(122, 30);
+            LblUserName.Size = new System.Drawing.Size(122, 30);
             LblUserName.TabIndex = 0;
             LblUserName.Text = "Useraname";
             // 
             // btnEmprendimientoReg
             // 
-            btnEmprendimientoReg.BackColor = Color.LightGray;
-            btnEmprendimientoReg.Location = new Point(38, 127);
-            btnEmprendimientoReg.Margin = new Padding(3, 4, 3, 4);
+            btnEmprendimientoReg.BackColor = System.Drawing.Color.LightGray;
+            btnEmprendimientoReg.Location = new System.Drawing.Point(13, 21);
+            btnEmprendimientoReg.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             btnEmprendimientoReg.Name = "btnEmprendimientoReg";
-            btnEmprendimientoReg.Size = new Size(153, 80);
+            btnEmprendimientoReg.Size = new System.Drawing.Size(267, 52);
             btnEmprendimientoReg.TabIndex = 1;
-            btnEmprendimientoReg.Text = "Consultar Emprendimientos\r\nRegistrados";
+            btnEmprendimientoReg.Text = "Consultar Emprendimientos\r\n";
             btnEmprendimientoReg.UseVisualStyleBackColor = false;
             btnEmprendimientoReg.Click += btnEmprendimientoReg_Click;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(7, 75);
-            label1.Name = "label1";
-            label1.Size = new Size(237, 20);
-            label1.TabIndex = 0;
-            label1.Text = "______________________________________";
-            // 
             // pnlContenedorModuloEst
             // 
-            pnlContenedorModuloEst.BorderStyle = BorderStyle.FixedSingle;
-            pnlContenedorModuloEst.Location = new Point(240, 79);
-            pnlContenedorModuloEst.Margin = new Padding(3, 4, 3, 4);
+            pnlContenedorModuloEst.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            pnlContenedorModuloEst.Location = new System.Drawing.Point(319, 53);
+            pnlContenedorModuloEst.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             pnlContenedorModuloEst.Name = "pnlContenedorModuloEst";
-            pnlContenedorModuloEst.Size = new Size(898, 639);
+            pnlContenedorModuloEst.Size = new System.Drawing.Size(1558, 854);
             pnlContenedorModuloEst.TabIndex = 1;
-            // 
-            // panel3
-            // 
-            panel3.BorderStyle = BorderStyle.FixedSingle;
-            panel3.Controls.Add(label2);
-            panel3.Location = new Point(0, 0);
-            panel3.Margin = new Padding(3, 4, 3, 4);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(1138, 85);
-            panel3.TabIndex = 2;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(11, 23);
+            label2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
+            label2.Location = new System.Drawing.Point(29, 9);
             label2.Name = "label2";
-            label2.Size = new Size(299, 37);
+            label2.Size = new System.Drawing.Size(534, 37);
             label2.TabIndex = 0;
-            label2.Text = "Modulo de Estudiante";
+            label2.Text = "Sistema de gestión de emprendimientos";
+            // 
+            // panel3
+            // 
+            panel3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            panel3.Controls.Add(label2);
+            panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            panel3.Location = new System.Drawing.Point(0, 0);
+            panel3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            panel3.Name = "panel3";
+            panel3.Size = new System.Drawing.Size(1877, 53);
+            panel3.TabIndex = 2;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            panel1.Controls.Add(roundedPanel2);
+            panel1.Controls.Add(roundedPanel1);
+            panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            panel1.Location = new System.Drawing.Point(0, 53);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(320, 854);
+            panel1.TabIndex = 3;
+            // 
+            // roundedPanel2
+            // 
+            roundedPanel2.BackColor = System.Drawing.Color.FromArgb(((int)((byte)250)), ((int)((byte)250)), ((int)((byte)250)));
+            roundedPanel2.BorderColor = System.Drawing.Color.LightGray;
+            roundedPanel2.BorderRadius = 20;
+            roundedPanel2.BorderSize = 1;
+            roundedPanel2.Controls.Add(LblUserName);
+            roundedPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            roundedPanel2.Location = new System.Drawing.Point(0, 791);
+            roundedPanel2.Name = "roundedPanel2";
+            roundedPanel2.Size = new System.Drawing.Size(320, 63);
+            roundedPanel2.TabIndex = 1;
+            // 
+            // roundedPanel1
+            // 
+            roundedPanel1.BackColor = System.Drawing.Color.FromArgb(((int)((byte)250)), ((int)((byte)250)), ((int)((byte)250)));
+            roundedPanel1.BorderColor = System.Drawing.Color.LightGray;
+            roundedPanel1.BorderRadius = 20;
+            roundedPanel1.BorderSize = 1;
+            roundedPanel1.Controls.Add(btnEmprendimientoReg);
+            roundedPanel1.Location = new System.Drawing.Point(12, 7);
+            roundedPanel1.Name = "roundedPanel1";
+            roundedPanel1.Size = new System.Drawing.Size(301, 717);
+            roundedPanel1.TabIndex = 0;
             // 
             // MainEstudianteView
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1139, 717);
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1877, 907);
+            Controls.Add(panel1);
             Controls.Add(panel3);
             Controls.Add(pnlContenedorModuloEst);
-            Controls.Add(panel1);
-            Margin = new Padding(3, 4, 3, 4);
-            Name = "MainEstudianteView";
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Text = "MainEstudianteView";
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            panel1.ResumeLayout(false);
+            roundedPanel2.ResumeLayout(false);
+            roundedPanel2.PerformLayout();
+            roundedPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
+        private WinForms.Views.Util.RoundedPanel roundedPanel1;
+        private WinForms.Views.Util.RoundedPanel roundedPanel2;
+
+        private System.Windows.Forms.Panel panel1;
+
         #endregion
 
-        private Panel panel1;
-        private Label label1;
-        private Panel pnlContenedorModuloEst;
-        private Panel panel3;
-        private Label label2;
-        private Button btnEmprendimientoReg;
-        private Label LblUserName;
+        private System.Windows.Forms.Panel pnlContenedorModuloEst;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnEmprendimientoReg;
+        private System.Windows.Forms.Label LblUserName;
     }
 }

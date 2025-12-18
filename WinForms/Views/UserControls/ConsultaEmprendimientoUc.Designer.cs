@@ -22,24 +22,24 @@
 
         #region Código generado por el Diseñador de componentes
 
-        /// <summary> 
-        /// Método necesario para admitir el Diseñador. No se puede modificar
-        /// el contenido de este método con el editor de código.
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            btnConsultaReg = new Button();
-            cmbListEmpReg = new ComboBox();
-            label2 = new Label();
-            label1 = new Label();
-            flpResultados = new FlowLayoutPanel();
+            btnConsultaReg = new System.Windows.Forms.Button();
+            cmbListEmpReg = new System.Windows.Forms.ComboBox();
+            label1 = new System.Windows.Forms.Label();
+            flpResultados = new System.Windows.Forms.FlowLayoutPanel();
+            label2 = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
             // btnConsultaReg
             // 
-            btnConsultaReg.Location = new Point(528, 114);
+            btnConsultaReg.Location = new System.Drawing.Point(661, 92);
             btnConsultaReg.Name = "btnConsultaReg";
-            btnConsultaReg.Size = new Size(122, 42);
+            btnConsultaReg.Size = new System.Drawing.Size(399, 34);
             btnConsultaReg.TabIndex = 9;
             btnConsultaReg.Text = "Consultar Emprendimientos";
             btnConsultaReg.UseVisualStyleBackColor = true;
@@ -48,63 +48,62 @@
             // cmbListEmpReg
             // 
             cmbListEmpReg.FormattingEnabled = true;
-            cmbListEmpReg.Location = new Point(288, 125);
+            cmbListEmpReg.Location = new System.Drawing.Point(26, 101);
             cmbListEmpReg.Name = "cmbListEmpReg";
-            cmbListEmpReg.Size = new Size(196, 23);
+            cmbListEmpReg.Size = new System.Drawing.Size(619, 28);
             cmbListEmpReg.TabIndex = 8;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(67, 114);
-            label2.Name = "label2";
-            label2.Size = new Size(206, 42);
-            label2.TabIndex = 6;
-            label2.Text = "Listado de Empendimientos \r\nRegistrados:";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(127, 51);
+            label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
+            label1.Location = new System.Drawing.Point(206, 0);
             label1.Name = "label1";
-            label1.Size = new Size(499, 32);
+            label1.Size = new System.Drawing.Size(449, 41);
             label1.TabIndex = 5;
-            label1.Text = "Consulta de Emprendimientos Registrados";
+            label1.Text = "Consulta de Emprendimientos ";
             // 
             // flpResultados
             // 
             flpResultados.AutoScroll = true;
-            flpResultados.FlowDirection = FlowDirection.TopDown;
-            flpResultados.Location = new Point(171, 184);
+            flpResultados.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            flpResultados.Location = new System.Drawing.Point(26, 139);
             flpResultados.Name = "flpResultados";
-            flpResultados.Size = new Size(417, 271);
+            flpResultados.Size = new System.Drawing.Size(1034, 377);
             flpResultados.TabIndex = 10;
             flpResultados.WrapContents = false;
             // 
+            // label2
+            // 
+            label2.Location = new System.Drawing.Point(26, 67);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(796, 22);
+            label2.TabIndex = 11;
+            label2.Text = "Listado de Empendimientos ";
+            // 
             // ConsultaEmprendimientoUc
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(label2);
             Controls.Add(flpResultados);
             Controls.Add(btnConsultaReg);
             Controls.Add(cmbListEmpReg);
-            Controls.Add(label2);
             Controls.Add(label1);
-            Name = "ConsultaEmprendimientoUc";
-            Size = new Size(745, 503);
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Size = new System.Drawing.Size(1116, 711);
             Load += ConsultaEmprendimientoUc_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
+        private System.Windows.Forms.Label label2;
+
         #endregion
 
-        private Button btnConsultaReg;
-        private ComboBox cmbListEmpReg;
-        private Label label2;
-        private Label label1;
-        private FlowLayoutPanel flpResultados;
+        private System.Windows.Forms.Button btnConsultaReg;
+        private System.Windows.Forms.ComboBox cmbListEmpReg;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.FlowLayoutPanel flpResultados;
     }
 }
