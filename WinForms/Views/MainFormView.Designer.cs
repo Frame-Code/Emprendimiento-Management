@@ -203,12 +203,12 @@ partial class MainFormView
         // 
         label1.AutoSize = true;
         label1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
-        label1.Location = new System.Drawing.Point(676, 13);
+        label1.Location = new System.Drawing.Point(16, 8);
         label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         label1.Name = "label1";
-        label1.Size = new System.Drawing.Size(370, 35);
+        label1.Size = new System.Drawing.Size(489, 35);
         label1.TabIndex = 8;
-        label1.Text = "Administrar emprendimientos";
+        label1.Text = "Sistema de gestión de emprendimientos";
         // 
         // MenuOptions
         // 
@@ -258,7 +258,7 @@ partial class MainFormView
     private System.Windows.Forms.Button BtnEmprendimiento;
     private Label LblUserName;
     private System.Windows.Forms.Panel panel2;
-    private Label label1;
+    private System.Windows.Forms.Label label1;
     private System.Windows.Forms.Button BtnParticipantes;
     private System.Windows.Forms.Button BtnGenerales;
     private System.Windows.Forms.Button BtnEventos;

@@ -26,12 +26,12 @@ namespace WinForms.Views
         {
             InitializeComponent();
             _consultaUc = consultaUc;
+            WindowState = FormWindowState.Maximized;
             Utils.ConfigureForm(this);
         }
 
         public void ShowForm(Action closeWindows)
         {
-            InitializeComponent();
             LblUserName.Text = UserName;
             FormClosed += (s, e) => closeWindows();
             Show();
