@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            btnGaleria = new Button();
             LblUserName = new Label();
             btnEmprendimientoReg = new Button();
             label1 = new Label();
@@ -43,32 +44,46 @@
             // 
             panel1.BackColor = Color.Silver;
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(btnGaleria);
             panel1.Controls.Add(LblUserName);
             panel1.Controls.Add(btnEmprendimientoReg);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(0, 79);
-            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Location = new Point(0, 99);
+            panel1.Margin = new Padding(4, 5, 4, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(239, 639);
+            panel1.Size = new Size(298, 798);
             panel1.TabIndex = 0;
+            // 
+            // btnGaleria
+            // 
+            btnGaleria.BackColor = Color.LightGray;
+            btnGaleria.Location = new Point(48, 585);
+            btnGaleria.Margin = new Padding(4, 5, 4, 5);
+            btnGaleria.Name = "btnGaleria";
+            btnGaleria.Size = new Size(191, 100);
+            btnGaleria.TabIndex = 2;
+            btnGaleria.Text = "Galeria";
+            btnGaleria.UseVisualStyleBackColor = false;
+            btnGaleria.Click += btnGaleria_Click;
             // 
             // LblUserName
             // 
             LblUserName.AutoSize = true;
             LblUserName.Font = new Font("Segoe UI", 13F);
-            LblUserName.Location = new Point(11, 45);
+            LblUserName.Location = new Point(14, 56);
+            LblUserName.Margin = new Padding(4, 0, 4, 0);
             LblUserName.Name = "LblUserName";
-            LblUserName.Size = new Size(122, 30);
+            LblUserName.Size = new Size(144, 36);
             LblUserName.TabIndex = 0;
             LblUserName.Text = "Useraname";
             // 
             // btnEmprendimientoReg
             // 
             btnEmprendimientoReg.BackColor = Color.LightGray;
-            btnEmprendimientoReg.Location = new Point(38, 127);
-            btnEmprendimientoReg.Margin = new Padding(3, 4, 3, 4);
+            btnEmprendimientoReg.Location = new Point(48, 159);
+            btnEmprendimientoReg.Margin = new Padding(4, 5, 4, 5);
             btnEmprendimientoReg.Name = "btnEmprendimientoReg";
-            btnEmprendimientoReg.Size = new Size(153, 80);
+            btnEmprendimientoReg.Size = new Size(191, 100);
             btnEmprendimientoReg.TabIndex = 1;
             btnEmprendimientoReg.Text = "Consultar Emprendimientos\r\nRegistrados";
             btnEmprendimientoReg.UseVisualStyleBackColor = false;
@@ -77,19 +92,20 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(7, 75);
+            label1.Location = new Point(9, 94);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(237, 20);
+            label1.Size = new Size(278, 25);
             label1.TabIndex = 0;
             label1.Text = "______________________________________";
             // 
             // pnlContenedorModuloEst
             // 
             pnlContenedorModuloEst.BorderStyle = BorderStyle.FixedSingle;
-            pnlContenedorModuloEst.Location = new Point(240, 79);
-            pnlContenedorModuloEst.Margin = new Padding(3, 4, 3, 4);
+            pnlContenedorModuloEst.Location = new Point(300, 99);
+            pnlContenedorModuloEst.Margin = new Padding(4, 5, 4, 5);
             pnlContenedorModuloEst.Name = "pnlContenedorModuloEst";
-            pnlContenedorModuloEst.Size = new Size(898, 639);
+            pnlContenedorModuloEst.Size = new Size(1122, 798);
             pnlContenedorModuloEst.TabIndex = 1;
             // 
             // panel3
@@ -97,30 +113,31 @@
             panel3.BorderStyle = BorderStyle.FixedSingle;
             panel3.Controls.Add(label2);
             panel3.Location = new Point(0, 0);
-            panel3.Margin = new Padding(3, 4, 3, 4);
+            panel3.Margin = new Padding(4, 5, 4, 5);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1138, 85);
+            panel3.Size = new Size(1422, 106);
             panel3.TabIndex = 2;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(11, 23);
+            label2.Location = new Point(14, 29);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(299, 37);
+            label2.Size = new Size(350, 45);
             label2.TabIndex = 0;
             label2.Text = "Modulo de Estudiante";
             // 
             // MainEstudianteView
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1139, 717);
+            ClientSize = new Size(1424, 896);
             Controls.Add(panel3);
             Controls.Add(pnlContenedorModuloEst);
             Controls.Add(panel1);
-            Margin = new Padding(3, 4, 3, 4);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "MainEstudianteView";
             Text = "MainEstudianteView";
             panel1.ResumeLayout(false);
@@ -139,5 +156,6 @@
         private Label label2;
         private Button btnEmprendimientoReg;
         private Label LblUserName;
+        private Button btnGaleria;
     }
 }

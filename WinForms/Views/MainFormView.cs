@@ -18,22 +18,19 @@ public partial class MainFormView : Form, IViewRolForm
     private readonly CalendariodeActividadesView _calendarioActividadesView;
     private readonly VerParticipantesView _verParticipantesView;
     private readonly MenuOpcionesController _menuOpcionesController;
-    private readonly GaleriaEmprendimientoView _galeriaEmprendimientoView;
 
     public MainFormView(
         EmprendimientosUc emprendimientosUc,
         CalendariodeActividadesView calendarioActividadesView,
         VerParticipantesView verParticipantesView,
         MenuOpcionesController menuOpcionesController,
-        IServiceProvider serviceProvider,
-        GaleriaEmprendimientoView galeriaEmprendimientoView)
+        IServiceProvider serviceProvider)
     {
         _emprendimientosUc = emprendimientosUc;
         _calendarioActividadesView = calendarioActividadesView;
         _verParticipantesView = verParticipantesView;
         _menuOpcionesController = menuOpcionesController;
         _serviceProvider = serviceProvider;
-        _galeriaEmprendimientoView = galeriaEmprendimientoView;
         InitializeComponent();
         Utils.ConfigureForm(this);
     }
@@ -132,10 +129,4 @@ public partial class MainFormView : Form, IViewRolForm
         }
         CargarModulo(uc);
     }
-
-    private void btnGaleria_Click(object sender, EventArgs e)
-    {
-        CargarModulo(_galeriaEmprendimientoView);
-    }
-
 }

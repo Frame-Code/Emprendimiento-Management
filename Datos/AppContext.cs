@@ -28,6 +28,7 @@ namespace Datos
         public DbSet<Presentacion> Presentaciones { get; set; } 
         public DbSet<MenuOpciones> MenuOpciones { get; set; }
         public DbSet<Foto> Fotos { get; set; }
+        public DbSet<ComentarioFoto> ComentariosFoto { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

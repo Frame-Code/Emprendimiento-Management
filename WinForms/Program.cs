@@ -34,9 +34,9 @@ internal static class Program
         using (var scope = services.CreateScope())
         {
             var db = scope.ServiceProvider.GetRequiredService<AppContext>();
-            db.Database.Migrate();
+            //db.Database.Migrate();
 
-            var view = scope.ServiceProvider.GetRequiredService<GestionAgendaView>();
+            var view = scope.ServiceProvider.GetRequiredService<MainEstudianteView>();
             Application.Run(view);
             //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
             //Application.Run(registroEmprendimiento);

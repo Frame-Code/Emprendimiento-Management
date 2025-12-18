@@ -34,7 +34,6 @@ partial class MainFormView
         PnlContenedor = new Panel();
         panel3 = new Panel();
         roundedPanel1 = new WinForms.Views.Util.RoundedPanel();
-        btnGaleria = new Button();
         BtnResultadoEventos = new Button();
         BtnGenerales = new Button();
         BtnEventos = new Button();
@@ -95,7 +94,6 @@ partial class MainFormView
         roundedPanel1.BorderColor = Color.LightGray;
         roundedPanel1.BorderRadius = 20;
         roundedPanel1.BorderSize = 1;
-        roundedPanel1.Controls.Add(btnGaleria);
         roundedPanel1.Controls.Add(BtnResultadoEventos);
         roundedPanel1.Controls.Add(BtnGenerales);
         roundedPanel1.Controls.Add(BtnEventos);
@@ -106,18 +104,6 @@ partial class MainFormView
         roundedPanel1.Name = "roundedPanel1";
         roundedPanel1.Size = new Size(384, 971);
         roundedPanel1.TabIndex = 0;
-        // 
-        // btnGaleria
-        // 
-        btnGaleria.BackColor = Color.FromArgb(224, 224, 224);
-        btnGaleria.Location = new Point(30, 611);
-        btnGaleria.Margin = new Padding(5, 6, 5, 6);
-        btnGaleria.Name = "btnGaleria";
-        btnGaleria.Size = new Size(316, 60);
-        btnGaleria.TabIndex = 11;
-        btnGaleria.Text = "Galería";
-        btnGaleria.UseVisualStyleBackColor = false;
-        btnGaleria.Click += btnGaleria_Click;
         // 
         // BtnResultadoEventos
         // 
@@ -281,5 +267,4 @@ partial class MainFormView
     private System.Windows.Forms.Button BtnResultadoEventos;
     private WinForms.Views.Util.RoundedPanel roundedPanel2;
     private WinForms.Views.Util.RoundedPanel roundedPanel1;
-    private Button btnGaleria;
 }

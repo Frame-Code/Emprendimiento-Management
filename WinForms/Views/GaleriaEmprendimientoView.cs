@@ -24,5 +24,10 @@ namespace WinForms.Views
         {
 
         }
+
+        private void pnlGene_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
