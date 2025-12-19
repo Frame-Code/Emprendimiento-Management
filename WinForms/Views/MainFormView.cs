@@ -130,6 +130,9 @@ public partial class MainFormView : Form, IViewRolForm
         CargarModulo(uc);
     }
 
-    
-    
+
+    private void BtnResultadoEventos_Click(object sender, EventArgs e)
+    {
+        throw new System.NotImplementedException();
+    }
 }

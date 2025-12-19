@@ -18,6 +18,7 @@ namespace Modelo
         public RubroEmprendimiento RubroEmprendimiento { get; set; } = null!;
         public ICollection<Participante> Participantes { get; set; } = new List<Participante>();
         public ICollection<Foto> Fotos { get; set; } = new List<Foto>();
+        public ICollection<EmprendimientoPremiacion> Premicaciones { get; set; } = new List<EmprendimientoPremiacion>();
 
     }
 }

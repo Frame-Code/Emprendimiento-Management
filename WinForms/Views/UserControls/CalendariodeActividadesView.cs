@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using WinForms.Views.Util;
 
 namespace WinForms.Views.UserControls
-
 {
     public partial class CalendariodeActividadesView : UserControl
     {
