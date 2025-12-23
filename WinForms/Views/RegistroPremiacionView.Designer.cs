@@ -104,6 +104,7 @@ partial class RegistroPremiacionView
         // 
         // DtFechaInicio
         // 
+        DtFechaInicio.CustomFormat = "\"dd/MM/yyyy HH:mm\"";
         DtFechaInicio.Location = new System.Drawing.Point(150, 175);
         DtFechaInicio.Name = "DtFechaInicio";
         DtFechaInicio.Size = new System.Drawing.Size(472, 27);

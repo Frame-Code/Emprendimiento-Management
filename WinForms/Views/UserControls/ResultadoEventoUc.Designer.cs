@@ -55,6 +55,7 @@ partial class ResultadoEventoUc
         GridPremiaciones.RowHeadersWidth = 51;
         GridPremiaciones.Size = new System.Drawing.Size(1250, 347);
         GridPremiaciones.TabIndex = 1;
+        GridPremiaciones.CellContentClick += GridPremiaciones_CellContentClick;
         // 
         // button1
         // 

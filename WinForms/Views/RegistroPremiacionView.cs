@@ -44,6 +44,14 @@ public partial class RegistroPremiacionView : Form
 
     private async void RegistroPremiacion_Load(object sender, EventArgs e)
     {
+        DtFechaFin.Format = DateTimePickerFormat.Custom;
+        DtFechaFin.CustomFormat = @"dd/MM/yyyy HH:mm";
+        DtFechaFin.ShowUpDown = true;
+        
+        DtFechaInicio.Format = DateTimePickerFormat.Custom;
+        DtFechaInicio.CustomFormat = @"dd/MM/yyyy HH:mm";
+        DtFechaInicio.ShowUpDown = true;
+
         await LoadGrid();
     }
 
@@ -110,5 +118,7 @@ public partial class RegistroPremiacionView : Form
         }
         
         MessageBox.Show(@"Se creo la premiacion correctamente");
+        this.DialogResult = DialogResult.OK;
+        this.Close();
     }
 }
