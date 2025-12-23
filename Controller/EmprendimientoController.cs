@@ -5,7 +5,7 @@ using Shared;
 
 namespace Controller
 {
-    public class RegistroEmprendimientoController(IRegistroEmprendimientoService registroEmprendimientoService)
+    public class EmprendimientoController(IRegistroEmprendimientoService registroEmprendimientoService)
     {
         public async Task<List<RubroEmprendimiento>> ListarRubrosAsync() =>
             await registroEmprendimientoService.ListarRubrosAsync();

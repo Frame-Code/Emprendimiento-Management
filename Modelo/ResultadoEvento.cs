@@ -15,6 +15,8 @@ namespace Modelo
         public Emprendimiento Emprendimiento { get; set; } = null!;
         public int IdCategoriaPremio { get; set; }
         public CategoriaPremio CategoriaPremio { get; set; } = null!;
+        public int IdPremiacion { get; set; }
+        public Premiacion Premiacion { get; set; } = null!;
 
     }
 }

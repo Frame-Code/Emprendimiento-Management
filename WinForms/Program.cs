@@ -80,6 +80,7 @@ internal static class Program
                 services.AddScoped<IRolUsuarioRepository, RolUsuarioRepositoryImpl>();
                 services.AddScoped<IMenuOpcionesRepository, MenuOpcionesRepository>();
                 services.AddScoped<IFotoRepository, FotoRepositoryImpl>();
+                services.AddScoped<IPremiacionRepository, PremiacionRepositoryImpl>();
 
                 // Servicios 
                 services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();
@@ -93,10 +94,11 @@ internal static class Program
                 services.AddScoped<IFacultadService, FacultadServiceImpl>();
                 services.AddScoped<IRubroEmprendimientoService, RubroEmprendimientoService>();
                 services.AddScoped<IFileService, FileServiceImpl>();
-                services.AddScoped<IEventoService, EventoServiceImpl>();//new
+                services.AddScoped<IEventoService, EventoServiceImpl>();
+                services.AddScoped<IPremiacionService, PremiacionServiceImpl>();
 
                 // Controllers 
-                services.AddScoped<RegistroEmprendimientoController>();
+                services.AddScoped<EmprendimientoController>();
                 services.AddScoped<ParticipanteController>();
                 services.AddScoped<RegistroParticipanteController>();
                 services.AddScoped<CalendarioController>();
@@ -106,7 +108,8 @@ internal static class Program
                 services.AddScoped<FacultadController>();
                 services.AddScoped<RubroEmprendimientoController>();
                 services.AddScoped<FileController>();
-                services.AddScoped<EventoController>();//eventos
+                services.AddScoped<EventoController>();
+                services.AddScoped<PremiacionController>();
                 
 
 
@@ -126,7 +129,8 @@ internal static class Program
                 services.AddScoped<LogIn>();
                 services.AddScoped<UserRegister>();
                 services.AddScoped<GestionEventoView>();
-
+                services.AddScoped<ResultadoEventoUc>();
+                services.AddScoped<RegistroPremiacionView>();
 
                 //options
                 services.AddScoped<IViewRolUc, FacultadesUc>();

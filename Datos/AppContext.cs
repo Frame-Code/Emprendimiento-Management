@@ -165,6 +165,12 @@ namespace Datos
                     .WithMany()
                     .HasForeignKey(x => x.IdCategoriaPremio)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                b.HasOne(x => x.Premiacion)
+                    .WithMany()
+                    .HasForeignKey(x => x.IdPremiacion)
+                    .OnDelete(DeleteBehavior.Restrict);
+
             });
 
             // Usuarios y roles
@@ -294,7 +300,7 @@ namespace Datos
                     .WithMany(e => e.Premiaciones)
                     .HasForeignKey(x => x.IdVoto);
                 p.HasOne(x => x.Premiacion)
-                    .WithMany(e => e.Premiaciones)
+                    .WithMany(e => e.Votos)
                     .HasForeignKey(x => x.IdPremiacion);
 
                 p.Property<DateTime>(x => x.FechaCreacion).IsRequired();

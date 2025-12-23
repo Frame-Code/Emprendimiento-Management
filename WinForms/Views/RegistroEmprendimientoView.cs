@@ -16,10 +16,10 @@ namespace WinForms.Views
 {
     public partial class RegistroEmprendimientoView : Form
     {
-        private readonly RegistroEmprendimientoController _controller;
+        private readonly EmprendimientoController _controller;
         private readonly FileController _fileController;
         private List<string> filesPath = new List<string>();
-        public RegistroEmprendimientoView(RegistroEmprendimientoController controller, FileController fileController)
+        public RegistroEmprendimientoView(EmprendimientoController controller, FileController fileController)
         {
             _controller = controller;
             _fileController = fileController;
