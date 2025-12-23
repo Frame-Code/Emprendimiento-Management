@@ -1,0 +1,11 @@
+﻿using Modelo;
+using Shared;
+
+namespace Servicios.Interfaces;
+
+public interface IPremiacionService
+{
+    Task<List<PremiacionDto>> ListarPremiacionesAsync();
+    Task<PremiacionDto?> ObtenerPremiacionPorIdAsync(int id);
+    Task<ResponseDto> CrearPremiacionAsync(PremiacionDto dto);
+}

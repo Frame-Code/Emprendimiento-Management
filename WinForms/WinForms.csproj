@@ -40,6 +40,12 @@
       <Compile Update="Views\UserControls\RubroEmprendimientoUc.cs">
         <SubType>UserControl</SubType>
       </Compile>
+      <Compile Update="Views\UserControls\ResultadoEventoUc.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Update="Views\RegistroPremiacionView.cs">
+        <SubType>Form</SubType>
+      </Compile>
     </ItemGroup>
 
 </Project>

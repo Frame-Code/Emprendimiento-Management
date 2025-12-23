@@ -8,10 +8,10 @@ namespace WinForms.Views.UserControls
     public partial class EmprendimientosUc : UserControl
     {
         private List<EmprendimientoDto> emprendimientos;
-        private readonly RegistroEmprendimientoController _controller;
+        private readonly EmprendimientoController _controller;
         private readonly IServiceProvider _serviceProvider;
 
-        public EmprendimientosUc(RegistroEmprendimientoController controller, IServiceProvider serviceProvider)
+        public EmprendimientosUc(EmprendimientoController controller, IServiceProvider serviceProvider)
         {
             emprendimientos = new List<EmprendimientoDto>();
             _controller = controller;

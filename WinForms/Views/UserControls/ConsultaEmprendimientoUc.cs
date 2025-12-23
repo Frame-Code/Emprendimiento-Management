@@ -17,8 +17,8 @@ namespace WinForms.Views.UserControls
 {
     public partial class ConsultaEmprendimientoUc : UserControl
     {
-        private readonly RegistroEmprendimientoController _controller;
-        public ConsultaEmprendimientoUc(RegistroEmprendimientoController controller)
+        private readonly EmprendimientoController _controller;
+        public ConsultaEmprendimientoUc(EmprendimientoController controller)
         {
             InitializeComponent();
             _controller = controller;

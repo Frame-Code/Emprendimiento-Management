@@ -28,6 +28,9 @@ namespace Datos
         public DbSet<Presentacion> Presentaciones { get; set; } 
         public DbSet<MenuOpciones> MenuOpciones { get; set; }
         public DbSet<Foto> Fotos { get; set; }
+        public DbSet<Premiacion> Premiacion { get; set; }
+        public DbSet<EmprendimientoPremiacion> EmprendimientoPremiacion { get; set; }
+        public DbSet<VotoPremiacion> VotoPremiacion { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -162,6 +165,12 @@ namespace Datos
                     .WithMany()
                     .HasForeignKey(x => x.IdCategoriaPremio)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                b.HasOne(x => x.Premiacion)
+                    .WithMany()
+                    .HasForeignKey(x => x.IdPremiacion)
+                    .OnDelete(DeleteBehavior.Restrict);
+
             });
 
             // Usuarios y roles
@@ -254,6 +263,47 @@ namespace Datos
                 b.HasMany(x => x.Emprendimientos)
                     .WithMany(x => x.Fotos)
                     .UsingEntity(j => j.ToTable("EmprendimientoFotos"));
+            });
+            
+            //Premiacion
+            modelBuilder.Entity<Premiacion>(p =>
+            {
+                p.HasKey(x => x.Id);
+                p.Property(x => x.Nombre).IsRequired().HasMaxLength(250);
+                p.Property(x => x.Observacion).HasMaxLength(5000);
+                p.Property(x => x.FechaInicioPremiacion).IsRequired();
+                p.Property(x => x.FechaFinPremiacion).IsRequired();
+                p.Property(x => x.FechaCreacion).IsRequired();
+
+                p.HasIndex(x => new { x.FechaInicioPremiacion, x.FechaFinPremiacion});
+            });
+            
+            //EmprendimientoPremiacion
+            modelBuilder.Entity<EmprendimientoPremiacion>(p =>
+            {
+                p.HasKey(x => new { x.IdEmprendimiento, x.IdPremiacion });
+                
+                p.HasOne(x => x.Emprendimiento)
+                    .WithMany(e => e.Premicaciones)
+                    .HasForeignKey(x => x.IdEmprendimiento);
+                
+                p.HasOne(x => x.Premiacion)
+                    .WithMany(e => e.Emprendimientos)
+                    .HasForeignKey(x => x.IdPremiacion);
+            });
+            
+            //VotoPremiacion
+            modelBuilder.Entity<VotoPremiacion>(p =>
+            {
+                p.HasKey(x => new { x.IdVoto, x.IdPremiacion });
+                p.HasOne(x => x.Voto)
+                    .WithMany(e => e.Premiaciones)
+                    .HasForeignKey(x => x.IdVoto);
+                p.HasOne(x => x.Premiacion)
+                    .WithMany(e => e.Votos)
+                    .HasForeignKey(x => x.IdPremiacion);
+
+                p.Property<DateTime>(x => x.FechaCreacion).IsRequired();
             });
         }
     }

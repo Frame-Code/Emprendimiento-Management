@@ -17,6 +17,7 @@ public partial class MainFormView : Form, IViewRolForm
     private readonly EmprendimientosUc _emprendimientosUc;
     private readonly CalendariodeActividadesView _calendarioActividadesView;
     private readonly VerParticipantesView _verParticipantesView;
+    private readonly ResultadoEventoUc _resultadoEventoUc;
     private readonly MenuOpcionesController _menuOpcionesController;
 
     public MainFormView(
@@ -24,12 +25,14 @@ public partial class MainFormView : Form, IViewRolForm
         CalendariodeActividadesView calendarioActividadesView, 
         VerParticipantesView verParticipantesView,
         MenuOpcionesController menuOpcionesController,
+        ResultadoEventoUc resultadoEvento,
         IServiceProvider serviceProvider)
     {
         _emprendimientosUc = emprendimientosUc;
         _calendarioActividadesView = calendarioActividadesView;
         _verParticipantesView = verParticipantesView;
         _menuOpcionesController = menuOpcionesController;
+        _resultadoEventoUc = resultadoEvento;
         _serviceProvider = serviceProvider;
         InitializeComponent();
         Utils.ConfigureForm(this);
@@ -130,6 +133,9 @@ public partial class MainFormView : Form, IViewRolForm
         CargarModulo(uc);
     }
 
-    
-    
+
+    private void BtnResultadoEventos_Click(object sender, EventArgs e)
+    {
+        CargarModulo(_resultadoEventoUc);
+    }
 }

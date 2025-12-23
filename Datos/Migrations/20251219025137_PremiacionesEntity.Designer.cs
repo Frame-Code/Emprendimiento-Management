@@ -4,6 +4,7 @@ using Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datos.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20251219025137_PremiacionesEntity")]
+    partial class PremiacionesEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -461,9 +464,6 @@ namespace Datos.Migrations
                     b.Property<int>("IdEmprendimiento")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdPremiacion")
-                        .HasColumnType("int");
-
                     b.Property<int>("Puesto")
                         .HasColumnType("int");
 
@@ -472,8 +472,6 @@ namespace Datos.Migrations
                     b.HasIndex("IdCategoriaPremio");
 
                     b.HasIndex("IdEmprendimiento");
-
-                    b.HasIndex("IdPremiacion");
 
                     b.ToTable("ResultadoEventos");
                 });
@@ -743,17 +741,9 @@ namespace Datos.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Modelo.Premiacion", "Premiacion")
-                        .WithMany()
-                        .HasForeignKey("IdPremiacion")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("CategoriaPremio");
 
                     b.Navigation("Emprendimiento");
-
-                    b.Navigation("Premiacion");
                 });
 
             modelBuilder.Entity("Modelo.Usuario", b =>

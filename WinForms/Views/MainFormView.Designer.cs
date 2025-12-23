@@ -115,6 +115,7 @@ partial class MainFormView
         BtnResultadoEventos.TabIndex = 10;
         BtnResultadoEventos.Text = "Resultado Eventos";
         BtnResultadoEventos.UseVisualStyleBackColor = false;
+        BtnResultadoEventos.Click += BtnResultadoEventos_Click;
         // 
         // BtnGenerales
         // 
