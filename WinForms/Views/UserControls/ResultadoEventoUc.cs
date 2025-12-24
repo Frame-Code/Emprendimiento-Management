@@ -74,13 +74,15 @@ public partial class ResultadoEventoUc : UserControl
         await LoadGrid();
     }
 
-    private void GridPremiaciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    private async void GridPremiaciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
     {
         if (GridPremiaciones.Columns[e.ColumnIndex].Name == "btnDetalles")
         {
             int idPremiacion = (int)GridPremiaciones.Rows[e.RowIndex].Cells["Id"].Value;
-            MessageBox.Show("poremiacion " + idPremiacion);
-            
+            using var  scope = _serviceProvider.CreateScope();
+            var form = scope.ServiceProvider.GetRequiredService<DetallePremiacionView>();
+            await form.Init(idPremiacion);
+            form.ShowDialog();
         }
     }
 }

@@ -7,7 +7,31 @@ namespace Datos.Impl;
 public class PremiacionRepositoryImpl(AppContext context) : IPremiacionRepository
 {
     public async Task<Premiacion?> ObtenerPorIdAsync(int id) =>
-        await context.Premiacion.FirstOrDefaultAsync(x => x.Id == id);
+        await context.Premiacion
+            .Include(x => x.Votos)
+                .ThenInclude(p => p.Voto)
+                .ThenInclude(p => p.Emprendimiento)
+                .ThenInclude(p => p.Facultad)
+            .Include(x => x.Votos)
+                .ThenInclude(p => p.Voto)
+                .ThenInclude(p => p.Emprendimiento)
+                .ThenInclude(p => p.RubroEmprendimiento)
+            .Include(x => x.Votos)
+                .ThenInclude(p => p.Voto)
+                .ThenInclude(p => p.Emprendimiento)
+            .Include(x => x.Votos)
+                .ThenInclude(p => p.Voto)
+                .ThenInclude(p => p.Usuario)
+            .Include(x => x.Votos)
+                .ThenInclude(p => p.Voto)
+                .ThenInclude(p => p.Usuario.RolUsuario)
+            .Include(x => x.Emprendimientos)
+                .ThenInclude(p => p.Emprendimiento)
+                .ThenInclude(p => p.Facultad)
+            .Include(x => x.Emprendimientos)
+                .ThenInclude(p => p.Emprendimiento)
+                .ThenInclude(p => p.RubroEmprendimiento)
+            .FirstOrDefaultAsync(x => x.Id == id);
 
     public async Task<List<Premiacion>> ListarAsync() =>
         await context.Premiacion.ToListAsync();

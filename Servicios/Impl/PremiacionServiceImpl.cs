@@ -42,7 +42,39 @@ public class PremiacionServiceImpl(IPremiacionRepository repository, IEmprendimi
         var premiacion = await repository.ObtenerPorIdAsync(id);
         if (premiacion == null)
             return null;
+        
+        var emprendimientoVotosDto = premiacion.Votos
+            .ToList()
+            .GroupBy(p => p.Voto.Emprendimiento)
+            .Select(p => new EmprendimientoVotoDto
+            {
+                IdEmprendimiento = p.Key.Id,
+                Nombre = p.Key.Nombre,
+                Facultad = p.Key.Facultad.Nombre,
+                Rubro = p.Key.RubroEmprendimiento.Nombre,
+                CantidadVotos = p.Count()
+            })
+            .ToList();
+        
+        var emprendimientosSinVoto = premiacion.Emprendimientos
+            .ToList()
+            .GroupBy(p => p.Emprendimiento)
+            .Select(p => new EmprendimientoVotoDto
+            {
+                IdEmprendimiento = p.Key.Id,
+                Nombre = p.Key.Nombre,
+                Facultad = p.Key.Facultad.Nombre,
+                Rubro = p.Key.RubroEmprendimiento.Nombre,
+                CantidadVotos = 0
+            })
+            .ToList();
 
+        var emprendimientosSinVotoUnicos = emprendimientosSinVoto
+            .Where(x => emprendimientoVotosDto.All(p => p.IdEmprendimiento != x.IdEmprendimiento));
+        
+        emprendimientoVotosDto.AddRange(emprendimientosSinVotoUnicos);
+        
+        
         return new PremiacionDto
         {
             Id = premiacion.Id,
@@ -65,7 +97,8 @@ public class PremiacionServiceImpl(IPremiacionRepository repository, IEmprendimi
                     NombreEmprendimiento = v.Voto.Emprendimiento.Nombre,
                     NombreUsuario = v.Voto.Usuario.NombreUsuario,
                     NombreRol = v.Voto.Usuario.RolUsuario.Nombre
-                }).ToList()
+                }).ToList(),
+            EmprendimientoVoto = emprendimientoVotosDto.ToList()
         };
     }
 

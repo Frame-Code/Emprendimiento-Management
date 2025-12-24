@@ -110,7 +110,7 @@ internal static class Program
                 services.AddScoped<FileController>();
                 services.AddScoped<EventoController>();
                 services.AddScoped<PremiacionController>();
-                
+                services.AddScoped<DetallePremiacionView>();
 
 
                 // Formularios
