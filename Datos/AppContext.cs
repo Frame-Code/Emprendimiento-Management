@@ -210,12 +210,6 @@ namespace Datos
                     .WithMany()
                     .HasForeignKey(x => x.IdUsuario)
                     .OnDelete(DeleteBehavior.Cascade);
-
-                b.HasIndex(x => new 
-                { 
-                    x.IdEmprendimiento, 
-                    x.IdUsuario 
-                }).IsUnique();
             });
 
             // Comentarios

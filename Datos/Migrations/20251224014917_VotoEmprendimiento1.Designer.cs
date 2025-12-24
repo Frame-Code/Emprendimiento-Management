@@ -4,6 +4,7 @@ using Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datos.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20251224014917_VotoEmprendimiento1")]
+    partial class VotoEmprendimiento1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -576,7 +579,8 @@ namespace Datos.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdEmprendimiento");
+                    b.HasIndex("IdEmprendimiento")
+                        .IsUnique();
 
                     b.HasIndex("IdUsuario");
 
@@ -769,8 +773,8 @@ namespace Datos.Migrations
             modelBuilder.Entity("Modelo.Voto", b =>
                 {
                     b.HasOne("Modelo.Emprendimiento", "Emprendimiento")
-                        .WithMany()
-                        .HasForeignKey("IdEmprendimiento")
+                        .WithOne()
+                        .HasForeignKey("Modelo.Voto", "IdEmprendimiento")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
