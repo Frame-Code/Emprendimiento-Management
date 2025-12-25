@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Servicios.Impl;
 using Servicios.Interfaces;
+using Servicios.Reports;
 using Shared;
 using Shared.ViewRol;
 using WinForms.Views;
@@ -30,6 +31,7 @@ internal static class Program
         ApplicationConfiguration.Initialize();
 
         var services = AppHost.Services;
+        QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
         
         using (var scope = services.CreateScope())
         {
@@ -96,6 +98,8 @@ internal static class Program
                 services.AddScoped<IFileService, FileServiceImpl>();
                 services.AddScoped<IEventoService, EventoServiceImpl>();
                 services.AddScoped<IPremiacionService, PremiacionServiceImpl>();
+                services.AddScoped<IPdfReportGenerator, PdfReportGeneratorImpl>();
+                services.AddScoped<IReport, PremiacionReportPdf>();
 
                 // Controllers 
                 services.AddScoped<EmprendimientoController>();

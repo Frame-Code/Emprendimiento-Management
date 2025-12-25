@@ -74,6 +74,7 @@ partial class DetallePremiacionView
         BtnReporte.TabIndex = 3;
         BtnReporte.Text = "Generar reporte";
         BtnReporte.UseVisualStyleBackColor = true;
+        BtnReporte.Click += BtnReporte_Click;
         // 
         // GridEmprendimientos
         // 

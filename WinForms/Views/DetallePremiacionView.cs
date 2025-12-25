@@ -1,4 +1,6 @@
-﻿using Controller;
+﻿using System.Diagnostics;
+using Controller;
+using Servicios.Interfaces;
 
 namespace WinForms.Views;
 
@@ -35,5 +37,33 @@ public partial class DetallePremiacionView : Form
 
         GridEmprendimientos.DataSource = null;
         GridEmprendimientos.DataSource = premiacion.EmprendimientoVoto;
+    }
+
+    private async void BtnReporte_Click(object sender, EventArgs e)
+    {
+        using var ofd = new SaveFileDialog()
+        {
+            Title = "Guardar el reporte",
+            Filter = "Archivo PDF (*.pdf)|*.pdf",
+            DefaultExt = "pdf",
+            AddExtension = true,
+            FileName = "Reporte.pdf"
+        };
+
+        if (ofd.ShowDialog() == DialogResult.OK)
+        {
+            string ruta = ofd.FileName;
+            var response = await _controller.GenerateReport(ruta, TypeReport.PremiacionReporte, IdPremiacion);
+            if (!response.IsSuccess)
+            {
+                MessageBox.Show(response.Message);
+                return;
+            }
+            MessageBox.Show(@"Reporte generado correctamente");
+            Process.Start("explorer.exe", $"/select,\"{ruta}\"");
+        }
+            
+
+        
     }
 }
