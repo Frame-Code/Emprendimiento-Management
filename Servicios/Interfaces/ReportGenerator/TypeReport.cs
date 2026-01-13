@@ -2,6 +2,5 @@
 
 public enum TypeReport
 {
-    Pdf,
-    Excel
+    PremiacionReporte,
 }

@@ -2,7 +2,7 @@
 
 namespace Servicios.Impl;
 
-public class PdfReportGeneratorGeneratorImpl : IPdfReportGenerator
+public class PdfReportGeneratorImpl : IPdfReportGenerator
 {
     public async Task Generate(IReport report, object data, string reportName)
     {

@@ -1,11 +1,18 @@
 ﻿using Datos.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Modelo;
 using Servicios.Interfaces;
+using Servicios.Reports;
 using Shared;
 
 namespace Servicios.Impl;
 
-public class PremiacionServiceImpl(IPremiacionRepository repository, IEmprendimientoRepository emprendimientoRepository) : IPremiacionService
+public class PremiacionServiceImpl(
+    IPremiacionRepository repository, 
+    IEmprendimientoRepository emprendimientoRepository,
+    IPdfReportGenerator reportGenerator,
+    IServiceProvider serviceProvider
+    ) : IPremiacionService
 {
     public async Task<List<PremiacionDto>> ListarPremiacionesAsync()
     {
@@ -142,4 +149,50 @@ public class PremiacionServiceImpl(IPremiacionRepository repository, IEmprendimi
         };
 
     }
+
+    public async Task<ResponseDto> GenerateReport(string reportName, TypeReport typeReport, int idPremiacion)
+    {
+        var premiacion = await ObtenerPremiacionPorIdAsync(idPremiacion);
+        if (premiacion == null)
+        {
+            return new ResponseDto
+            {
+                IsSuccess = false,
+                Message = "No se ha encontrado la premiacion seleccionada"
+            };
+        }
+
+        try
+        {
+            using var scope = serviceProvider.CreateScope();
+            var report = scope.ServiceProvider.GetServices<IReport>()
+                .FirstOrDefault(x => x.Report == typeReport);
+            if (report == null)
+            {
+                return new ResponseDto
+                {
+                    IsSuccess = false,
+                    Message = "No se ha encontrado el tipo de reporte generado"
+                };
+            }
+            
+            await reportGenerator.Generate(report, premiacion, reportName);
+            return new ResponseDto
+            {
+                IsSuccess = true,
+                Message = "Reporte generado correctamente",
+                Data = reportName
+            };
+        }
+        catch (Exception e)
+        {
+            return new ResponseDto
+            {
+                IsSuccess = false,
+                Message = "Se ha producido un error al generar el reporte, consulte a sistemas"
+            };
+        }
+    }
+
+    
 }
