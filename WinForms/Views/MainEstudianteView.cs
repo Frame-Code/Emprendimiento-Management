@@ -19,15 +19,19 @@ namespace WinForms.Views
     {
         private readonly CalendariodeActividadesView _calendarioActividadesview;
         private readonly ConsultaEmprendimientoUc _consultaUc;
+        private readonly VotoEventoUc _votoEventoUc;
         public ViewType ViewType => ViewType.Estudiante;
         public string UserName { get; set; } = "Usuario";
         public IEnumerable<MenuOptionsDto> MenuOptionsDto { get; set; }
 
         public MainEstudianteView(ConsultaEmprendimientoUc consultaUc,
-               CalendariodeActividadesView calendarioActividadesview)
+               CalendariodeActividadesView calendarioActividadesview,
+               VotoEventoUc votoEventoUc)
         {
             InitializeComponent();
             _consultaUc = consultaUc;
+            _calendarioActividadesview = calendarioActividadesview;
+            _votoEventoUc = votoEventoUc;
             WindowState = FormWindowState.Maximized;
             Utils.ConfigureForm(this);
             
@@ -65,8 +69,13 @@ namespace WinForms.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar el modulo de calendario: " + ex.Message);
+                MessageBox.Show(@"Error al cargar el modulo de calendario: " + ex.Message);
             }
+        }
+
+        private void BtnVotarView_Click(object sender, EventArgs e)
+        {
+            NavegarA(_votoEventoUc);
         }
     }
 }

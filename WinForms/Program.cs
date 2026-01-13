@@ -135,6 +135,7 @@ internal static class Program
                 services.AddScoped<GestionEventoView>();
                 services.AddScoped<ResultadoEventoUc>();
                 services.AddScoped<RegistroPremiacionView>();
+                services.AddScoped<VotoEventoUc>();
 
                 //options
                 services.AddScoped<IViewRolUc, FacultadesUc>();
