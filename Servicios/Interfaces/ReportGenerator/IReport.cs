@@ -2,6 +2,6 @@
 
 public interface IReport
 {
-    void Export(string name);
-    TypeReport Type { get; } 
+    TypeReport Report { get; }
+    Task Export(string reportName, object data);
 }

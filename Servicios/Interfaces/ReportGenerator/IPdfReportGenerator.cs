@@ -1,7 +1,6 @@
 ﻿namespace Servicios.Interfaces;
 
-public interface IPdfReport
+public interface IPdfReportGenerator
 {
-    TypeReport Type => TypeReport.Pdf;
-    void Generate(IReport report);
+    Task Generate(IReport report, object data, string reportName);
 }
