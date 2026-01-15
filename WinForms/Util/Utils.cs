@@ -51,16 +51,18 @@ namespace WinForms.Views.Util
             });
 
             List<TextBox> textBoxes = GetAllControls<TextBox>(form);
-            textBoxes.ForEach(tb =>
+            foreach (var tb in textBoxes)
             {
+                if(tb.Multiline) 
+                    continue;
                 tb.Font = font;
                 tb.Multiline = true;
                 tb.Height = 35;
                 tb.Multiline = !tb.UseSystemPasswordChar;
                 tb.AcceptsReturn = false;
                 tb.AcceptsTab = false;
-                WrapTextBox(tb);
-            });
+                WrapTextBox(tb);   
+            }
 
             List<ComboBox> comboBoxes = GetAllControls<ComboBox>(form);
             comboBoxes.ForEach(cb =>

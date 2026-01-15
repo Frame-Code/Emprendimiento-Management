@@ -86,7 +86,7 @@ namespace WinForms.Views.UserControls
                 EmprendimientoDto? emprendimientoDto = emprendimientos.FirstOrDefault(emp => emp.Id == idEmprendimiento);
                 if(emprendimientoDto == null)
                 {
-                    MessageBox.Show("Emprendimiento no encontrado");
+                    MessageBox.Show(@"Emprendimiento no encontrado");
                     return;
                 }
                 await form.Init(emprendimientoDto.Nombre, emprendimientoDto.Rubro, emprendimientoDto?.Descripcion, emprendimientoDto.Facultad, emprendimientoDto.Id);

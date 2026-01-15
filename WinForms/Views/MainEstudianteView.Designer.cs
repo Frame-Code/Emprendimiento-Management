@@ -36,6 +36,7 @@
             panel1 = new System.Windows.Forms.Panel();
             roundedPanel2 = new WinForms.Views.Util.RoundedPanel();
             roundedPanel1 = new WinForms.Views.Util.RoundedPanel();
+            BtnVotarView = new System.Windows.Forms.Button();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             roundedPanel2.SuspendLayout();
@@ -124,11 +125,24 @@
             roundedPanel1.BorderColor = System.Drawing.Color.LightGray;
             roundedPanel1.BorderRadius = 20;
             roundedPanel1.BorderSize = 1;
+            roundedPanel1.Controls.Add(BtnVotarView);
             roundedPanel1.Controls.Add(btnEmprendimientoReg);
             roundedPanel1.Location = new System.Drawing.Point(12, 7);
             roundedPanel1.Name = "roundedPanel1";
             roundedPanel1.Size = new System.Drawing.Size(301, 717);
             roundedPanel1.TabIndex = 0;
+            // 
+            // BtnVotarView
+            // 
+            BtnVotarView.BackColor = System.Drawing.Color.LightGray;
+            BtnVotarView.Location = new System.Drawing.Point(13, 104);
+            BtnVotarView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            BtnVotarView.Name = "BtnVotarView";
+            BtnVotarView.Size = new System.Drawing.Size(267, 52);
+            BtnVotarView.TabIndex = 2;
+            BtnVotarView.Text = "Votar emprendimiento favorito";
+            BtnVotarView.UseVisualStyleBackColor = false;
+            BtnVotarView.Click += BtnVotarView_Click;
             // 
             // MainEstudianteView
             // 
@@ -148,6 +162,8 @@
             roundedPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Button BtnVotarView;
 
         private WinForms.Views.Util.RoundedPanel roundedPanel1;
         private WinForms.Views.Util.RoundedPanel roundedPanel2;

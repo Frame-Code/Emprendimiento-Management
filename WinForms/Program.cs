@@ -83,9 +83,10 @@ internal static class Program
                 services.AddScoped<IMenuOpcionesRepository, MenuOpcionesRepository>();
                 services.AddScoped<IFotoRepository, FotoRepositoryImpl>();
                 services.AddScoped<IPremiacionRepository, PremiacionRepositoryImpl>();
+                services.AddScoped<IComentarioRepository, ComentarioRepositoryImpl>();
 
                 // Servicios 
-                services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();
+                services.AddScoped<IEmprendimientoService, EmprendimientoServiceImpl>();
                 services.AddScoped<IParticipanteService, ParticipanteServiceImpl>();
                 services.AddScoped<IRegistroParticipanteService, RegistroParticipanteService>();
                 services.AddScoped<IAgendaService, AgendaServiceImpl>();
@@ -98,6 +99,7 @@ internal static class Program
                 services.AddScoped<IFileService, FileServiceImpl>();
                 services.AddScoped<IEventoService, EventoServiceImpl>();
                 services.AddScoped<IPremiacionService, PremiacionServiceImpl>();
+                services.AddScoped<IComentarioService, ComentarioServiceImpl>();
                 services.AddScoped<IPdfReportGenerator, PdfReportGeneratorImpl>();
                 services.AddScoped<IReport, PremiacionReportPdf>();
 
@@ -115,6 +117,7 @@ internal static class Program
                 services.AddScoped<EventoController>();
                 services.AddScoped<PremiacionController>();
                 services.AddScoped<DetallePremiacionView>();
+                services.AddScoped<ComentarioController>();
 
 
                 // Formularios
@@ -135,6 +138,7 @@ internal static class Program
                 services.AddScoped<GestionEventoView>();
                 services.AddScoped<ResultadoEventoUc>();
                 services.AddScoped<RegistroPremiacionView>();
+                services.AddScoped<VotoEventoUc>();
 
                 //options
                 services.AddScoped<IViewRolUc, FacultadesUc>();

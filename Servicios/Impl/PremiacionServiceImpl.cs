@@ -10,6 +10,7 @@ namespace Servicios.Impl;
 public class PremiacionServiceImpl(
     IPremiacionRepository repository, 
     IEmprendimientoRepository emprendimientoRepository,
+    IUsuarioRepository usuarioRepository,
     IPdfReportGenerator reportGenerator,
     IServiceProvider serviceProvider
     ) : IPremiacionService
@@ -194,5 +195,87 @@ public class PremiacionServiceImpl(
         }
     }
 
-    
+    public async Task<PremiacionDto?> ObtenerPremiacionDisponible()
+    {
+        var premiacion = await repository.ObtenerPremiacionDisponible();
+        if (premiacion is null)
+            return null;
+
+        return new PremiacionDto
+        {
+            Id = premiacion.Id,
+            Nombre = premiacion.Nombre,
+            FechaCreacion = premiacion.FechaCreacion,
+            FechaFinPremiacion = premiacion.FechaFinPremiacion,
+            FechaInicioPremiacion = premiacion.FechaInicioPremiacion,
+            EmprendimientosDto = premiacion.Emprendimientos
+                .Select(e => new EmprendimientoDto
+                {
+                    Id = e.Emprendimiento.Id,
+                    Nombre = e.Emprendimiento.Nombre,
+                    Descripcion = e.Emprendimiento.Descripcion,
+                    Facultad = e.Emprendimiento.Facultad.Nombre,
+                    Rubro = e.Emprendimiento.RubroEmprendimiento.Nombre
+                }).ToList(),
+            Votos = premiacion.Votos
+                .Select(v => new VotoDto
+                {
+                    FechaCreacion = v.Voto.FechaCreacion,
+                    NombreEmprendimiento = v.Voto.Emprendimiento.Nombre,
+                    NombreUsuario = v.Voto.Usuario.NombreUsuario,
+                    NombreRol = v.Voto.Usuario.RolUsuario.Nombre
+                }).ToList(),
+        };
+    }
+
+    public async Task<ResponseDto> Votar(int idPremiacion, int idEmprendimiento, string username)
+    {
+        var premiacion = await repository.ObtenerPorIdAsync(idPremiacion);
+        if (premiacion is null)
+            return new ResponseDto()
+            {
+                IsSuccess = false,
+                Message = "No se ha encontrado la premiacion seleccionada"
+            };
+
+        var emprendimiento = await emprendimientoRepository.ObtenerPorIdAsync(idEmprendimiento);
+        if (emprendimiento is null)
+            return new ResponseDto()
+            {
+                IsSuccess = false,
+                Message = "No se ha encontrado el emprendimiento seleccionado"
+            };
+
+        var user = await usuarioRepository.GetByUserName(username);
+        if (user is null)
+            return new ResponseDto()
+            {
+                IsSuccess = false,
+                Message = "Fatal error: no se ha encontrado el usuario"
+            };
+
+        var voto = new Voto
+        {
+            Emprendimiento = emprendimiento,
+            FechaCreacion = DateTime.Now,
+            IdEmprendimiento = idEmprendimiento,
+            IdUsuario = user.Id
+        };
+        
+        premiacion.Votos.Add(
+            new VotoPremiacion
+            {
+                FechaCreacion = DateTime.Now,
+                IdPremiacion = idPremiacion,
+                Premiacion = premiacion,
+                Voto = voto
+            });
+
+        await repository.UpdatePremiacion(premiacion);
+        return new ResponseDto()
+        {
+            IsSuccess = true,
+            Message = "Voto registrado correctamente"
+        };
+    }
 }
