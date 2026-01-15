@@ -41,6 +41,8 @@ partial class VotoEventoUc
         BtnVotar = new System.Windows.Forms.Button();
         DgvEmprendimientos = new System.Windows.Forms.DataGridView();
         TxtComentario = new System.Windows.Forms.TextBox();
+        label4 = new System.Windows.Forms.Label();
+        LblEmprendimientoSelected = new System.Windows.Forms.Label();
         ((System.ComponentModel.ISupportInitialize)DgvEmprendimientos).BeginInit();
         SuspendLayout();
         // 
@@ -72,7 +74,7 @@ partial class VotoEventoUc
         // 
         // label6
         // 
-        label6.Location = new System.Drawing.Point(24, 518);
+        label6.Location = new System.Drawing.Point(24, 561);
         label6.Name = "label6";
         label6.Size = new System.Drawing.Size(589, 24);
         label6.TabIndex = 8;
@@ -80,7 +82,7 @@ partial class VotoEventoUc
         // 
         // BtnVotar
         // 
-        BtnVotar.Location = new System.Drawing.Point(230, 780);
+        BtnVotar.Location = new System.Drawing.Point(218, 751);
         BtnVotar.Name = "BtnVotar";
         BtnVotar.Size = new System.Drawing.Size(915, 41);
         BtnVotar.TabIndex = 9;
@@ -120,22 +122,41 @@ partial class VotoEventoUc
         DgvEmprendimientos.RowHeadersWidth = 51;
         DgvEmprendimientos.Size = new System.Drawing.Size(1339, 396);
         DgvEmprendimientos.TabIndex = 10;
+        DgvEmprendimientos.CellContentClick += DgvEmprendimientos_CellContentClick;
         // 
         // TxtComentario
         // 
         TxtComentario.AcceptsTab = true;
-        TxtComentario.Location = new System.Drawing.Point(24, 556);
+        TxtComentario.Location = new System.Drawing.Point(24, 599);
         TxtComentario.Multiline = true;
         TxtComentario.Name = "TxtComentario";
         TxtComentario.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        TxtComentario.Size = new System.Drawing.Size(1339, 218);
+        TxtComentario.Size = new System.Drawing.Size(1339, 146);
         TxtComentario.TabIndex = 11;
+        // 
+        // label4
+        // 
+        label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
+        label4.Location = new System.Drawing.Point(25, 517);
+        label4.Name = "label4";
+        label4.Size = new System.Drawing.Size(224, 29);
+        label4.TabIndex = 12;
+        label4.Text = "Emprendimiento seleccionado: ";
+        // 
+        // LblEmprendimientoSelected
+        // 
+        LblEmprendimientoSelected.Location = new System.Drawing.Point(241, 517);
+        LblEmprendimientoSelected.Name = "LblEmprendimientoSelected";
+        LblEmprendimientoSelected.Size = new System.Drawing.Size(611, 29);
+        LblEmprendimientoSelected.TabIndex = 13;
         // 
         // VotoEventoUc
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         BackColor = System.Drawing.SystemColors.Control;
+        Controls.Add(LblEmprendimientoSelected);
+        Controls.Add(label4);
         Controls.Add(TxtComentario);
         Controls.Add(DgvEmprendimientos);
         Controls.Add(BtnVotar);
@@ -146,10 +167,14 @@ partial class VotoEventoUc
         Location = new System.Drawing.Point(19, 19);
         Margin = new System.Windows.Forms.Padding(6);
         Size = new System.Drawing.Size(1381, 915);
+        Load += VotoEventoUc_Load;
         ((System.ComponentModel.ISupportInitialize)DgvEmprendimientos).EndInit();
         ResumeLayout(false);
         PerformLayout();
     }
+
+    private System.Windows.Forms.Label label4;
+    private System.Windows.Forms.Label LblEmprendimientoSelected;
 
     private System.Windows.Forms.DataGridView DgvEmprendimientos;
     private System.Windows.Forms.TextBox TxtComentario;

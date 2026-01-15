@@ -85,7 +85,7 @@ internal static class Program
                 services.AddScoped<IPremiacionRepository, PremiacionRepositoryImpl>();
 
                 // Servicios 
-                services.AddScoped<IRegistroEmprendimientoService, RegistroEmprendimientoServiceImpl>();
+                services.AddScoped<IEmprendimientoService, EmprendimientoServiceImpl>();
                 services.AddScoped<IParticipanteService, ParticipanteServiceImpl>();
                 services.AddScoped<IRegistroParticipanteService, RegistroParticipanteService>();
                 services.AddScoped<IAgendaService, AgendaServiceImpl>();

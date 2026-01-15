@@ -73,8 +73,9 @@ namespace WinForms.Views
             }
         }
 
-        private void BtnVotarView_Click(object sender, EventArgs e)
+        private async void BtnVotarView_Click(object sender, EventArgs e)
         {
+            await _votoEventoUc.Init(UserName);
             NavegarA(_votoEventoUc);
         }
     }

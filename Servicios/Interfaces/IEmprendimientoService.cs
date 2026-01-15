@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Servicios.Interfaces
 {
-    public interface IRegistroEmprendimientoService
+    public interface IEmprendimientoService
     {
         Task<List<RubroEmprendimiento>> ListarRubrosAsync();
         Task<ResponseDto> RegistrarEmprendimientoAsync(RegistroEmprendimientoDto dto);

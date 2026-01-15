@@ -5,27 +5,27 @@ using Shared;
 
 namespace Controller
 {
-    public class EmprendimientoController(IRegistroEmprendimientoService registroEmprendimientoService)
+    public class EmprendimientoController(IEmprendimientoService emprendimientoService)
     {
         public async Task<List<RubroEmprendimiento>> ListarRubrosAsync() =>
-            await registroEmprendimientoService.ListarRubrosAsync();
+            await emprendimientoService.ListarRubrosAsync();
 
         public async Task<ResponseDto> RegistrarEmprendimientoAsync(RegistroEmprendimientoDto dto) =>
-            await registroEmprendimientoService.RegistrarEmprendimientoAsync(dto);
+            await emprendimientoService.RegistrarEmprendimientoAsync(dto);
 
         public async Task<List<Facultad>> ListarFacultadesAsync() =>
-            await registroEmprendimientoService.ListarFacultadesAsync();
+            await emprendimientoService.ListarFacultadesAsync();
 
         public async Task<List<EmprendimientoDto>> ListarEmprendimientosAsync() =>
-            await registroEmprendimientoService.ListarEmprendimientosAsync();
+            await emprendimientoService.ListarEmprendimientosAsync();
 
         public async Task DeleteByIdAsync(int id) =>
-            await registroEmprendimientoService.DeleteByIdAsync(id);
+            await emprendimientoService.DeleteByIdAsync(id);
 
         public async Task<Emprendimiento?> ObtenerPorIdAsync(int id) =>
-            await registroEmprendimientoService.ObtenerPorIdAsync(id);
+            await emprendimientoService.ObtenerPorIdAsync(id);
 
         public async Task<List<Emprendimiento>> ListarEmprendimientosEstudiantesAsync() =>
-            await registroEmprendimientoService.ListarEmprendimientosEstudiantesAsync();
+            await emprendimientoService.ListarEmprendimientosEstudiantesAsync();
     }
 }

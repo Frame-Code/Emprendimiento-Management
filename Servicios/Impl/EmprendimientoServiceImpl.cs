@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 
 namespace Servicios.Impl
 {
-    public class RegistroEmprendimientoServiceImpl(
+    public class EmprendimientoServiceImpl(
         IEmprendimientoRepository emprendimientoRepository,
         IRubroEmprendimientoRepository rubroEmprendimientoRepository,
-        IFacultadRepository facultadRepository) : IRegistroEmprendimientoService
+        IFacultadRepository facultadRepository) : IEmprendimientoService
     {
         public async Task DeleteByIdAsync(int id) =>
             await emprendimientoRepository.DeleteByIdAsync(id);
