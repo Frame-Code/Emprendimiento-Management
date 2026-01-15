@@ -1,4 +1,5 @@
 ﻿using Controller;
+using Modelo;
 using WinForms.Views.Util;
 
 namespace WinForms.Views.UserControls;
@@ -6,12 +7,14 @@ namespace WinForms.Views.UserControls;
 public partial class VotoEventoUc : UserControl
 {
     private readonly PremiacionController _controller;
+    private readonly ComentarioController _comentarioController;
     private int _idEmprendimiento = 0;
     private int _idPremiacion = 0;
     private string? _nombreUsuario = null;
-    public VotoEventoUc(PremiacionController controller)
+    public VotoEventoUc(PremiacionController controller, ComentarioController comentarioController)
     {
         _controller = controller;
+        _comentarioController = comentarioController;
         InitializeComponent();
         Utils.ConfigureForm(this);
     }
@@ -36,15 +39,23 @@ public partial class VotoEventoUc : UserControl
             return;
         }
         
-        //Falta mapear el comentario
-        var comentario = TxtComentario.Text;
+        
         var response = await _controller.Votar(_idPremiacion, _idEmprendimiento, _nombreUsuario);
-        if (response.IsSuccess)
+        if (!response.IsSuccess)
+        {
+            MessageBox.Show(response.Message);
+            return;
+        }
+
+        var comentario = TxtComentario.Text;
+        var responseComentario = await _comentarioController.Guardar(comentario, _nombreUsuario, _idEmprendimiento);
+        if (!responseComentario.IsSuccess)
         {
             MessageBox.Show(response.Message);
             return;
         }
         MessageBox.Show(@"Voto registrado correctamente");
+        DgvEmprendimientos.Columns.Remove("btnAdd");
         DgvEmprendimientos.DataSource = null;
         BtnVotar.Enabled = false;
         TxtComentario.Enabled = false;
@@ -64,7 +75,8 @@ public partial class VotoEventoUc : UserControl
         var isDisponibleVotar = premiacionDisponible.Votos.All(v => v.NombreUsuario != nombreUsuario);
         if (!isDisponibleVotar)
         {
-            MessageBox.Show(@"Solo se puede votar una vez");
+            MessageBox.Show(@"Usted ya ha registrado un voto");
+            TxtComentario.Enabled = false;
             BtnVotar.Enabled = false;
             return;
         }

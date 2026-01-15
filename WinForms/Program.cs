@@ -83,6 +83,7 @@ internal static class Program
                 services.AddScoped<IMenuOpcionesRepository, MenuOpcionesRepository>();
                 services.AddScoped<IFotoRepository, FotoRepositoryImpl>();
                 services.AddScoped<IPremiacionRepository, PremiacionRepositoryImpl>();
+                services.AddScoped<IComentarioRepository, ComentarioRepositoryImpl>();
 
                 // Servicios 
                 services.AddScoped<IEmprendimientoService, EmprendimientoServiceImpl>();
@@ -98,6 +99,7 @@ internal static class Program
                 services.AddScoped<IFileService, FileServiceImpl>();
                 services.AddScoped<IEventoService, EventoServiceImpl>();
                 services.AddScoped<IPremiacionService, PremiacionServiceImpl>();
+                services.AddScoped<IComentarioService, ComentarioServiceImpl>();
                 services.AddScoped<IPdfReportGenerator, PdfReportGeneratorImpl>();
                 services.AddScoped<IReport, PremiacionReportPdf>();
 
@@ -115,6 +117,7 @@ internal static class Program
                 services.AddScoped<EventoController>();
                 services.AddScoped<PremiacionController>();
                 services.AddScoped<DetallePremiacionView>();
+                services.AddScoped<ComentarioController>();
 
 
                 // Formularios
