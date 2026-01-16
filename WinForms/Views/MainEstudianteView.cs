@@ -1,5 +1,7 @@
 ﻿using Controller;
+using Servicios.Interfaces;
 using Shared;
+using Shared.ViewRol;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,9 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Shared.ViewRol;
-using WinForms.Views.Util;
 using WinForms.Views.UserControls;
+using WinForms.Views.Util;
 
 namespace WinForms.Views
 {
@@ -19,18 +20,22 @@ namespace WinForms.Views
     {
         private readonly CalendariodeActividadesView _calendarioActividadesview;
         private readonly ConsultaEmprendimientoUc _consultaUc;
+        private readonly IFotoService _fotoService;
         public ViewType ViewType => ViewType.Estudiante;
         public string UserName { get; set; } = "Usuario";
         public IEnumerable<MenuOptionsDto> MenuOptionsDto { get; set; }
+        private FotoDto _fotoSeleccionada;
 
         public MainEstudianteView(ConsultaEmprendimientoUc consultaUc,
-               CalendariodeActividadesView calendarioActividadesview)
+               CalendariodeActividadesView calendarioActividadesview,
+               IFotoService fotoService)
         {
             InitializeComponent();
             _consultaUc = consultaUc;
             WindowState = FormWindowState.Maximized;
             Utils.ConfigureForm(this);
-            
+            _fotoService = fotoService;
+
         }
 
         public void ShowForm(Action closeWindows)
@@ -66,6 +71,25 @@ namespace WinForms.Views
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar el modulo de calendario: " + ex.Message);
+            }
+        }
+
+        private void btnGaleria_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                pnlContenedorModuloEst.Controls.Clear();
+
+                // Ahora _fotoService ya no saldrá en rojo porque ya existe arriba
+                var vistaGaleria = new GaleriaEmprendimientoView(_fotoService);
+
+                vistaGaleria.Dock = DockStyle.Fill;
+                pnlContenedorModuloEst.Controls.Add(vistaGaleria);
+                vistaGaleria.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar la galería: " + ex.Message);
             }
         }
     }

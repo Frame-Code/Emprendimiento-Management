@@ -38,7 +38,7 @@ internal static class Program
             var db = scope.ServiceProvider.GetRequiredService<AppContext>();
             //db.Database.Migrate();
 
-            var view = scope.ServiceProvider.GetRequiredService<LogIn>();
+            var view = scope.ServiceProvider.GetRequiredService<MainEstudianteView>();
             Application.Run(view);
             //var registroEmprendimiento = services.GetRequiredService<RegistroEmprendimientoView>();
             //Application.Run(registroEmprendimiento);
@@ -98,8 +98,10 @@ internal static class Program
                 services.AddScoped<IFileService, FileServiceImpl>();
                 services.AddScoped<IEventoService, EventoServiceImpl>();
                 services.AddScoped<IPremiacionService, PremiacionServiceImpl>();
+
                 services.AddScoped<IPdfReportGenerator, PdfReportGeneratorImpl>();
                 services.AddScoped<IReport, PremiacionReportPdf>();
+                services.AddScoped<IFotoService, FotoServiceImpl>();
 
                 // Controllers 
                 services.AddScoped<EmprendimientoController>();
@@ -135,6 +137,8 @@ internal static class Program
                 services.AddScoped<GestionEventoView>();
                 services.AddScoped<ResultadoEventoUc>();
                 services.AddScoped<RegistroPremiacionView>();
+
+                services.AddScoped<GaleriaEmprendimientoView>();
 
                 //options
                 services.AddScoped<IViewRolUc, FacultadesUc>();

@@ -14,7 +14,7 @@ namespace Servicios.Impl
         public async Task<LoginUserDto> GetUserByUsername(string username)
         {
             var user = await usuarioRepository.GetByUserName(username);
-            if(user == null)
+            if (user == null)
                 throw new Exception("Usuario no encontrado");
 
             return new LoginUserDto

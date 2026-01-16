@@ -8,5 +8,7 @@ public interface IPremiacionService
     Task<List<PremiacionDto>> ListarPremiacionesAsync();
     Task<PremiacionDto?> ObtenerPremiacionPorIdAsync(int id);
     Task<ResponseDto> CrearPremiacionAsync(PremiacionDto dto);
+
     Task<ResponseDto> GenerateReport(string reportName, TypeReport typeReport, int IdPremiacion);
+
 }

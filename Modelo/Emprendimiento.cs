@@ -20,5 +20,7 @@ namespace Modelo
         public ICollection<Foto> Fotos { get; set; } = new List<Foto>();
         public ICollection<EmprendimientoPremiacion> Premicaciones { get; set; } = new List<EmprendimientoPremiacion>();
 
+
+
     }
 }

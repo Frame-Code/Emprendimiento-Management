@@ -13,7 +13,8 @@ public class PremiacionController(IPremiacionService service)
 
     public async Task<ResponseDto> CrearPremiacionAsync(PremiacionDto dto) =>
         await service.CrearPremiacionAsync(dto);
-    
+
     public async Task<ResponseDto> GenerateReport(string reportName, TypeReport typeReport, int idPremiacion) => 
         await service.GenerateReport(reportName, typeReport, idPremiacion);
+
 }

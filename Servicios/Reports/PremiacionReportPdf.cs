@@ -1,4 +1,4 @@
-﻿using QuestPDF.Fluent;
+using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using Servicios.Interfaces;
@@ -27,9 +27,9 @@ public class PremiacionReportPdf : IDocument, IReport
 
     private void ComposeHeader(IContainer container)
     {
-        if(Data == null)
+        if (Data == null)
             return;
-        
+
         container.Row(row =>
         {
             row.RelativeItem().Column(col =>
@@ -38,29 +38,29 @@ public class PremiacionReportPdf : IDocument, IReport
                     .FontSize(16)
                     .Bold()
                     .AlignCenter();
-                
+
                 col.Item().Text("");
                 col.Item().Text("");
 
                 col.Item().Text($"Fecha emisión: {DateTime.Now}")
                     .AlignLeft();
-                
+
                 col.Item().Text("");
                 col.Item().Text($"Fecha registro: {Data.FechaCreacion}")
                     .AlignLeft();
-                
+
                 col.Item().Text("");
                 col.Item().Text($"Fecha inicio premiación: {Data.FechaInicioPremiacion}")
                     .AlignLeft();
-                
+
                 col.Item().Text("");
                 col.Item().Text($"Fecha fin premiación: {Data.FechaFinPremiacion}")
                     .AlignLeft();
-                
+
                 col.Item().Text("");
                 col.Item().Text($"Observaciones: {Data.Observaciones}")
                     .AlignLeft();
-                
+
                 col.Item().Text("");
                 col.Item().Text("");
             });
@@ -89,7 +89,7 @@ public class PremiacionReportPdf : IDocument, IReport
 
             if (Data == null)
                 return;
-            
+
             foreach (var item in Data.EmprendimientoVoto)
             {
                 table.Cell().Element(CellStyle).Text(item.Nombre);
@@ -119,6 +119,7 @@ public class PremiacionReportPdf : IDocument, IReport
     }
 
     public TypeReport Report => TypeReport.PremiacionReporte;
+
     public async Task Export(string reportName, object data)
     {
         await Task.Run(() =>
@@ -127,5 +128,4 @@ public class PremiacionReportPdf : IDocument, IReport
             this.GeneratePdf(reportName);
         });
     }
-    
 }
