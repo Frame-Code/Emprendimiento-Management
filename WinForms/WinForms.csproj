@@ -50,6 +50,9 @@
       <Compile Update="Views\DetallePremiacionView.cs">
         <SubType>Form</SubType>
       </Compile>
+      <Compile Update="Views\UserControls\VotoEventoUc.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
     </ItemGroup>
 
 </Project>

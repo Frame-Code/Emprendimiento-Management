@@ -36,7 +36,11 @@
             panel1 = new Panel();
             roundedPanel2 = new WinForms.Views.Util.RoundedPanel();
             roundedPanel1 = new WinForms.Views.Util.RoundedPanel();
+
             btnGaleria = new Button();
+
+            BtnVotarView = new System.Windows.Forms.Button();
+
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             roundedPanel2.SuspendLayout();
@@ -124,7 +128,11 @@
             roundedPanel1.BorderColor = Color.LightGray;
             roundedPanel1.BorderRadius = 20;
             roundedPanel1.BorderSize = 1;
+
             roundedPanel1.Controls.Add(btnGaleria);
+
+            roundedPanel1.Controls.Add(BtnVotarView);
+
             roundedPanel1.Controls.Add(btnEmprendimientoReg);
             roundedPanel1.Location = new Point(10, 5);
             roundedPanel1.Margin = new Padding(3, 2, 3, 2);
@@ -132,6 +140,7 @@
             roundedPanel1.Size = new Size(263, 538);
             roundedPanel1.TabIndex = 0;
             // 
+
             // btnGaleria
             // 
             btnGaleria.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -142,6 +151,19 @@
             btnGaleria.Text = "ver galeria";
             btnGaleria.UseVisualStyleBackColor = true;
             btnGaleria.Click += btnGaleria_Click;
+
+            // BtnVotarView
+            // 
+            BtnVotarView.BackColor = System.Drawing.Color.LightGray;
+            BtnVotarView.Location = new System.Drawing.Point(13, 104);
+            BtnVotarView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            BtnVotarView.Name = "BtnVotarView";
+            BtnVotarView.Size = new System.Drawing.Size(267, 52);
+            BtnVotarView.TabIndex = 2;
+            BtnVotarView.Text = "Votar emprendimiento favorito";
+            BtnVotarView.UseVisualStyleBackColor = false;
+            BtnVotarView.Click += BtnVotarView_Click;
+
             // 
             // MainEstudianteView
             // 
@@ -161,6 +183,8 @@
             roundedPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Button BtnVotarView;
 
         private WinForms.Views.Util.RoundedPanel roundedPanel1;
         private WinForms.Views.Util.RoundedPanel roundedPanel2;

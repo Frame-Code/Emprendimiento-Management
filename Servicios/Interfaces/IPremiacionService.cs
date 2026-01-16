@@ -11,4 +11,7 @@ public interface IPremiacionService
 
     Task<ResponseDto> GenerateReport(string reportName, TypeReport typeReport, int IdPremiacion);
 
+    Task<PremiacionDto?> ObtenerPremiacionDisponible();
+    Task<ResponseDto> Votar(int idPremiacion, int idEmprendimiento, string username);
+
 }

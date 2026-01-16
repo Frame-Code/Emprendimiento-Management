@@ -20,7 +20,11 @@ namespace WinForms.Views
     {
         private readonly CalendariodeActividadesView _calendarioActividadesview;
         private readonly ConsultaEmprendimientoUc _consultaUc;
+
         private readonly IFotoService _fotoService;
+
+        private readonly VotoEventoUc _votoEventoUc;
+
         public ViewType ViewType => ViewType.Estudiante;
         public string UserName { get; set; } = "Usuario";
         public IEnumerable<MenuOptionsDto> MenuOptionsDto { get; set; }
@@ -28,10 +32,16 @@ namespace WinForms.Views
 
         public MainEstudianteView(ConsultaEmprendimientoUc consultaUc,
                CalendariodeActividadesView calendarioActividadesview,
-               IFotoService fotoService)
+
+               IFotoService fotoService,
+
+               VotoEventoUc votoEventoUc)
+
         {
             InitializeComponent();
             _consultaUc = consultaUc;
+            _calendarioActividadesview = calendarioActividadesview;
+            _votoEventoUc = votoEventoUc;
             WindowState = FormWindowState.Maximized;
             Utils.ConfigureForm(this);
             _fotoService = fotoService;
@@ -70,9 +80,10 @@ namespace WinForms.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar el modulo de calendario: " + ex.Message);
+                MessageBox.Show(@"Error al cargar el modulo de calendario: " + ex.Message);
             }
         }
+
 
         private void btnGaleria_Click(object sender, EventArgs e)
         {
@@ -91,6 +102,13 @@ namespace WinForms.Views
             {
                 MessageBox.Show("Error al cargar la galería: " + ex.Message);
             }
+            }
+
+        private async void BtnVotarView_Click(object sender, EventArgs e)
+        {
+            await _votoEventoUc.Init(UserName);
+            NavegarA(_votoEventoUc);
+
         }
     }
 }
