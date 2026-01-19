@@ -34,7 +34,7 @@ namespace WinForms.Views
             _votoEventoUc = votoEventoUc;
             WindowState = FormWindowState.Maximized;
             Utils.ConfigureForm(this);
-            
+
         }
 
         public void ShowForm(Action closeWindows)
@@ -77,6 +77,22 @@ namespace WinForms.Views
         {
             await _votoEventoUc.Init(UserName);
             NavegarA(_votoEventoUc);
+        }
+
+        private void BotonCalendario_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                pnlContenedorModuloEst.Controls.Clear();
+                CalendariodeActividadesView calendarioView = _calendarioActividadesview;
+                calendarioView.Dock = DockStyle.Fill;
+                pnlContenedorModuloEst.Controls.Add(calendarioView);
+                calendarioView.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(@"Error al cargar el modulo de calendario: " + ex.Message);
+            }
         }
     }
 }
