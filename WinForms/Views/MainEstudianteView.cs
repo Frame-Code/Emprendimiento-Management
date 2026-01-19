@@ -26,11 +26,11 @@ namespace WinForms.Views
         public MainEstudianteView(ConsultaEmprendimientoUc consultaUc,
                CalendariodeActividadesView calendarioActividadesview)
         {
-            InitializeComponent();
             _consultaUc = consultaUc;
+            _calendarioActividadesview = calendarioActividadesview;
             WindowState = FormWindowState.Maximized;
+            InitializeComponent();
             Utils.ConfigureForm(this);
-            
         }
 
         public void ShowForm(Action closeWindows)
@@ -53,19 +53,27 @@ namespace WinForms.Views
             control.BringToFront();
             control.Show();
         }
-        private void BtnCalendarioInsano_Click(object sender, EventArgs e)
+
+        private void btnEventoReg_Click(object sender, EventArgs e)
         {
             try
             {
                 pnlContenedorModuloEst.Controls.Clear();
-                CalendariodeActividadesView calendarioView = _calendarioActividadesview;
-                calendarioView.Dock = DockStyle.Fill;
-                pnlContenedorModuloEst.Controls.Add(calendarioView);
-                calendarioView.BringToFront();
+
+                if (_calendarioActividadesview != null)
+                {
+                    _calendarioActividadesview.Dock = DockStyle.Fill;
+                    pnlContenedorModuloEst.Controls.Add(_calendarioActividadesview);
+                    _calendarioActividadesview.BringToFront();
+                }
+                else
+                {
+                    MessageBox.Show("La vista del calendario no ha sido inicializada por el controlador.");
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar el modulo de calendario: " + ex.Message);
+                MessageBox.Show("Error al cargar el modulo: " + ex.Message);
             }
         }
     }
