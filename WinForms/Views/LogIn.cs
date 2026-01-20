@@ -22,6 +22,7 @@ namespace WinForms.Views
         private readonly AuthController _controller;
         private readonly MenuOpcionesController _menuOpcionesController;
         private readonly IServiceProvider _serviceProvider;
+
         public LogIn(AuthController controller, MenuOpcionesController menuOpcionesController, IServiceProvider serviceProvider)
         {
             _controller = controller;

@@ -32,12 +32,13 @@
             btnGuardar = new Button();
             txtComentario = new TextBox();
             flpFotos = new FlowLayoutPanel();
+            flpComentarios = new FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)pbFoto).BeginInit();
             SuspendLayout();
             // 
             // pbFoto
             // 
-            pbFoto.Location = new Point(148, 33);
+            pbFoto.Location = new Point(177, 33);
             pbFoto.Name = "pbFoto";
             pbFoto.Size = new Size(132, 94);
             pbFoto.SizeMode = PictureBoxSizeMode.Zoom;
@@ -67,20 +68,31 @@
             flpFotos.AutoScroll = true;
             flpFotos.Location = new Point(21, 168);
             flpFotos.Name = "flpFotos";
-            flpFotos.Size = new Size(494, 330);
+            flpFotos.Size = new Size(434, 330);
             flpFotos.TabIndex = 4;
-            flpFotos.Paint += flpFotos_Paint;
+            
+            // 
+            // flpComentarios
+            // 
+            flpComentarios.AutoScroll = true;
+            flpComentarios.FlowDirection = FlowDirection.TopDown;
+            flpComentarios.Location = new Point(35, 590);
+            flpComentarios.Name = "flpComentarios";
+            flpComentarios.Size = new Size(396, 121);
+            flpComentarios.TabIndex = 5;
+            flpComentarios.WrapContents = false;
             // 
             // GaleriaEmprendimientoView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(flpComentarios);
             Controls.Add(flpFotos);
             Controls.Add(txtComentario);
             Controls.Add(btnGuardar);
             Controls.Add(pbFoto);
             Name = "GaleriaEmprendimientoView";
-            Size = new Size(669, 565);
+            Size = new Size(669, 754);
             ((System.ComponentModel.ISupportInitialize)pbFoto).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -92,5 +104,6 @@
         private Button btnGuardar;
         private TextBox txtComentario;
         private FlowLayoutPanel flpFotos;
+        private FlowLayoutPanel flpComentarios;
     }
 }

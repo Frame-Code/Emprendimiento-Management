@@ -11,5 +11,6 @@ namespace Shared
         public int Id { get; set; }
         public string ImageUrl { get; set; }
         public int EmprendimientoId { get; set; }
+        
     }
 }

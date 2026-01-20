@@ -20,7 +20,8 @@ namespace Servicios.Impl
             return new LoginUserDto
             {
                 Username = user.NombreUsuario,
-                RoleCode = user.RolUsuario.Codigo
+                
+                RoleCode = user.RolUsuario?.Codigo ?? ""
             };
         }
 

@@ -60,15 +60,13 @@ namespace Controller
                 Data = viewType
             };
         }
-
         public ViewType? GetViewTypeByRolCode(string roleCode) =>
-            roleCode switch
+            roleCode.Trim().ToUpper() switch
             {
                 "ADM" => ViewType.Administrador,
-                "EST" => ViewType.Estudiante,
+                "ESTU" => ViewType.Estudiante, // <--- AGREGA LA 'U' AQUÍ
                 _ => null
             };
-
         public string GetRolCodeByViewType(ViewType viewType) =>
             viewType switch
             {

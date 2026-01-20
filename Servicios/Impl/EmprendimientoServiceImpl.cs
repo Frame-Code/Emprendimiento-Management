@@ -22,18 +22,20 @@ namespace Servicios.Impl
 
         public async Task<List<EmprendimientoDto>> ListarEmprendimientosAsync()
         {
+            // El repositorio ya hace los .Include()
             var emprendimientos = await emprendimientoRepository.ListarAsync();
-            var dtos = emprendimientos
+
+            return emprendimientos
                 .Select(e => new EmprendimientoDto
                 {
                     Id = e.Id,
                     Nombre = e.Nombre,
                     Descripcion = e.Descripcion,
-                    Facultad = e.Facultad.Nombre,
-                    Rubro = e.RubroEmprendimiento.Nombre
+                    // Usamos el operador ? para evitar que explote si algo viene nulo en SQL
+                    Facultad = e.Facultad?.Nombre ?? "Sin Facultad",
+                    Rubro = e.RubroEmprendimiento?.Nombre ?? "Sin Rubro"
                 })
                 .ToList();
-            return dtos;
         }
 
 

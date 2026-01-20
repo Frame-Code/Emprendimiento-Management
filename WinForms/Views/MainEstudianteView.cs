@@ -22,6 +22,7 @@ namespace WinForms.Views
         private readonly ConsultaEmprendimientoUc _consultaUc;
 
         private readonly IFotoService _fotoService;
+        private readonly IComentarioService _comentarioService;
 
         private readonly VotoEventoUc _votoEventoUc;
 
@@ -32,7 +33,7 @@ namespace WinForms.Views
 
         public MainEstudianteView(ConsultaEmprendimientoUc consultaUc,
                CalendariodeActividadesView calendarioActividadesview,
-
+               IComentarioService comentarioService,
                IFotoService fotoService,
 
                VotoEventoUc votoEventoUc)
@@ -44,7 +45,7 @@ namespace WinForms.Views
             _votoEventoUc = votoEventoUc;
             WindowState = FormWindowState.Maximized;
             Utils.ConfigureForm(this);
-
+            _comentarioService = comentarioService;
             _fotoService = fotoService;
 
 
@@ -94,8 +95,8 @@ namespace WinForms.Views
             {
                 pnlContenedorModuloEst.Controls.Clear();
 
-                // Ahora _fotoService ya no saldrá en rojo porque ya existe arriba
-                var vistaGaleria = new GaleriaEmprendimientoView(_fotoService);
+                // AQUÍ ESTABA EL ERROR: Te faltaba pasar el _comentarioService
+                var vistaGaleria = new GaleriaEmprendimientoView(_fotoService, _comentarioService);
 
                 vistaGaleria.Dock = DockStyle.Fill;
                 pnlContenedorModuloEst.Controls.Add(vistaGaleria);
@@ -105,7 +106,7 @@ namespace WinForms.Views
             {
                 MessageBox.Show("Error al cargar la galería: " + ex.Message);
             }
-            }
+        }
 
         private async void BtnVotarView_Click(object sender, EventArgs e)
         {
