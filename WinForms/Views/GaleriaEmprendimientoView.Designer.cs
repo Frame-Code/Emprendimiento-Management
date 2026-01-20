@@ -67,7 +67,7 @@
             flpFotos.AutoScroll = true;
             flpFotos.Location = new Point(21, 168);
             flpFotos.Name = "flpFotos";
-            flpFotos.Size = new Size(570, 330);
+            flpFotos.Size = new Size(494, 330);
             flpFotos.TabIndex = 4;
             flpFotos.Paint += flpFotos_Paint;
             // 
@@ -80,7 +80,7 @@
             Controls.Add(btnGuardar);
             Controls.Add(pbFoto);
             Name = "GaleriaEmprendimientoView";
-            Size = new Size(669, 563);
+            Size = new Size(669, 565);
             ((System.ComponentModel.ISupportInitialize)pbFoto).EndInit();
             ResumeLayout(false);
             PerformLayout();

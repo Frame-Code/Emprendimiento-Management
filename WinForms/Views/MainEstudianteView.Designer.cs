@@ -36,16 +36,13 @@
             panel1 = new Panel();
             roundedPanel2 = new WinForms.Views.Util.RoundedPanel();
             roundedPanel1 = new WinForms.Views.Util.RoundedPanel();
-<<<<<<< HEAD
+
 
             btnGaleria = new Button();
 
-            BtnVotarView = new System.Windows.Forms.Button();
-
-=======
             BtnVotarView = new Button();
             BotonCalendario = new Button();
->>>>>>> 73fab0594b7d92e23d586438d7c97d997497db52
+
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             roundedPanel2.SuspendLayout();
@@ -65,11 +62,8 @@
             // btnEmprendimientoReg
             // 
             btnEmprendimientoReg.BackColor = Color.LightGray;
-<<<<<<< HEAD
-            btnEmprendimientoReg.Location = new Point(15, 22);
-=======
             btnEmprendimientoReg.Location = new Point(11, 16);
->>>>>>> 73fab0594b7d92e23d586438d7c97d997497db52
+
             btnEmprendimientoReg.Name = "btnEmprendimientoReg";
             btnEmprendimientoReg.Size = new Size(234, 39);
             btnEmprendimientoReg.TabIndex = 1;
@@ -82,11 +76,8 @@
             pnlContenedorModuloEst.BackColor = SystemColors.ButtonHighlight;
             pnlContenedorModuloEst.Location = new Point(279, 40);
             pnlContenedorModuloEst.Name = "pnlContenedorModuloEst";
-<<<<<<< HEAD
-            pnlContenedorModuloEst.Size = new Size(1363, 595);
-=======
+
             pnlContenedorModuloEst.Size = new Size(1363, 640);
->>>>>>> 73fab0594b7d92e23d586438d7c97d997497db52
             pnlContenedorModuloEst.TabIndex = 1;
             // 
             // label2
@@ -106,11 +97,8 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-<<<<<<< HEAD
             panel3.Size = new Size(1642, 40);
-=======
-            panel3.Size = new Size(1404, 40);
->>>>>>> 73fab0594b7d92e23d586438d7c97d997497db52
+
             panel3.TabIndex = 2;
             // 
             // panel1
@@ -122,11 +110,9 @@
             panel1.Location = new Point(0, 40);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-<<<<<<< HEAD
-            panel1.Size = new Size(280, 595);
-=======
+
             panel1.Size = new Size(280, 621);
->>>>>>> 73fab0594b7d92e23d586438d7c97d997497db52
+
             panel1.TabIndex = 3;
             // 
             // roundedPanel2
@@ -137,11 +123,9 @@
             roundedPanel2.BorderSize = 1;
             roundedPanel2.Controls.Add(LblUserName);
             roundedPanel2.Dock = DockStyle.Bottom;
-<<<<<<< HEAD
-            roundedPanel2.Location = new Point(0, 548);
-=======
+
             roundedPanel2.Location = new Point(0, 574);
->>>>>>> 73fab0594b7d92e23d586438d7c97d997497db52
+
             roundedPanel2.Margin = new Padding(3, 2, 3, 2);
             roundedPanel2.Name = "roundedPanel2";
             roundedPanel2.Size = new Size(280, 47);
@@ -153,13 +137,11 @@
             roundedPanel1.BorderColor = Color.LightGray;
             roundedPanel1.BorderRadius = 20;
             roundedPanel1.BorderSize = 1;
-<<<<<<< HEAD
 
             roundedPanel1.Controls.Add(btnGaleria);
 
-=======
             roundedPanel1.Controls.Add(BotonCalendario);
->>>>>>> 73fab0594b7d92e23d586438d7c97d997497db52
+
             roundedPanel1.Controls.Add(BtnVotarView);
 
             roundedPanel1.Controls.Add(btnEmprendimientoReg);
@@ -207,11 +189,9 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-<<<<<<< HEAD
-            ClientSize = new Size(1642, 635);
-=======
+
             ClientSize = new Size(1404, 661);
->>>>>>> 73fab0594b7d92e23d586438d7c97d997497db52
+
             Controls.Add(panel1);
             Controls.Add(panel3);
             Controls.Add(pnlContenedorModuloEst);
@@ -240,10 +220,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnEmprendimientoReg;
         private System.Windows.Forms.Label LblUserName;
-<<<<<<< HEAD
+
         private Button btnGaleria;
-=======
+
         private Button BotonCalendario;
->>>>>>> 73fab0594b7d92e23d586438d7c97d997497db52
+
     }
 }

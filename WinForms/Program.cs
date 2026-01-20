@@ -99,11 +99,10 @@ internal static class Program
                 services.AddScoped<IFileService, FileServiceImpl>();
                 services.AddScoped<IEventoService, EventoServiceImpl>();
                 services.AddScoped<IPremiacionService, PremiacionServiceImpl>();
-<<<<<<< HEAD
 
-=======
+
                 services.AddScoped<IComentarioService, ComentarioServiceImpl>();
->>>>>>> 93efb35f10f897fcb13cd76a36e6e4ed47b063a1
+
                 services.AddScoped<IPdfReportGenerator, PdfReportGeneratorImpl>();
                 services.AddScoped<IReport, PremiacionReportPdf>();
                 services.AddScoped<IFotoService, FotoServiceImpl>();

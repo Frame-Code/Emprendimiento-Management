@@ -44,10 +44,10 @@ namespace WinForms.Views
             _votoEventoUc = votoEventoUc;
             WindowState = FormWindowState.Maximized;
             Utils.ConfigureForm(this);
-<<<<<<< HEAD
+
             _fotoService = fotoService;
-=======
->>>>>>> 73fab0594b7d92e23d586438d7c97d997497db52
+
+
 
         }
 
