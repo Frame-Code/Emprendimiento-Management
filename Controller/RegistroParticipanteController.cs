@@ -4,6 +4,7 @@ using Modelo;
 using Shared;
 using Servicios.Impl;
 using Servicios.Interfaces;
+using Datos.Interfaces;
 
 namespace Controller
 {
@@ -11,10 +12,12 @@ namespace Controller
     public class RegistroParticipanteController
     {
         private readonly IRegistroParticipanteService _servicioExclusivo;
+        private readonly ISpExecutor _spExecutor;
 
-        public RegistroParticipanteController(IRegistroParticipanteService servicio)
+        public RegistroParticipanteController(IRegistroParticipanteService servicio, ISpExecutor spExecutor)
         {
             _servicioExclusivo = servicio;
+            _spExecutor = spExecutor;
         }
 
         public async Task<List<CargoParticipante>> CargarCargosParaCombo()
@@ -38,17 +41,8 @@ namespace Controller
 
     public async Task<List<VerParticipantesDto>> ObtenerParticipantesVista()
         {
-            var lista = await _servicioExclusivo.ObtenerTodos();
-
-            return lista.Select(p => new VerParticipantesDto
-            {
-                Id = p.Id,
-                Nombre = p.Nombres,
-                Apellido = p.Apellidos,
-                Telefono = p.NumeroTelefono,
-                Identificacion = p.NumeroIdentificacion,
-                CargoParticipante = p.CargoParticipante.Nombre
-            }).ToList();
+            var lista = await _spExecutor.ConsultarParticipantes();
+            return lista.ToList();
         }
     }
 }
