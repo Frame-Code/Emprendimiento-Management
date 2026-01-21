@@ -85,6 +85,7 @@ namespace WinForms.Views
             {
                 pnlContenedorModuloEst.Controls.Clear();
                 CalendariodeActividadesView calendarioView = _calendarioActividadesview;
+                calendarioView.OcultarBotonCrear();
                 calendarioView.Dock = DockStyle.Fill;
                 pnlContenedorModuloEst.Controls.Add(calendarioView);
                 calendarioView.BringToFront();
