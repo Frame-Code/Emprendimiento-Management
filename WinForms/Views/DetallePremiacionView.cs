@@ -53,6 +53,7 @@ public partial class DetallePremiacionView : Form
         if (ofd.ShowDialog() == DialogResult.OK)
         {
             string ruta = ofd.FileName;
+         
             var response = await _controller.GenerateReport(ruta, TypeReport.PremiacionReporte, IdPremiacion);
             if (!response.IsSuccess)
             {

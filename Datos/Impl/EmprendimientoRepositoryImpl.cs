@@ -22,20 +22,25 @@ namespace Datos.Impl
             var emprendimiento = await ObtenerPorIdAsync(id);
             if (emprendimiento == null)
                 throw new Exception("No se encontro el id del emprendimiento a eliminar");
-            
+
             context.Emprendimientos.Remove(emprendimiento);
             context.SaveChanges();
             return;
         }
-
-        public async Task<List<Emprendimiento>> ListarAsync() => 
-            await context.Emprendimientos
-            .Include(e => e.Facultad)
-            .Include(e => e.RubroEmprendimiento)
-            .Include(e => e.Fotos)
-            .ToListAsync();
+        public async Task<List<Emprendimiento>> ListarAsync() =>
+         await context.Emprendimientos
+             .Include(e => e.Facultad)
+             .Include(e => e.RubroEmprendimiento)
+             .Include(e => e.Fotos)
+             .ToListAsync();
 
         public async Task<Emprendimiento?> ObtenerPorIdAsync(int id) =>
-            await context.Emprendimientos.FirstOrDefaultAsync(e => e.Id == id);
+            await context.Emprendimientos
+                .Include(e => e.Facultad)
+                .Include(e => e.RubroEmprendimiento)
+                .Include(e => e.Fotos)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+
     }
 }

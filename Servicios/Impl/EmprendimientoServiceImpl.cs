@@ -23,19 +23,18 @@ namespace Servicios.Impl
         public async Task<List<EmprendimientoDto>> ListarEmprendimientosAsync()
         {
             var emprendimientos = await emprendimientoRepository.ListarAsync();
-            var dtos = emprendimientos
+
+            return emprendimientos
                 .Select(e => new EmprendimientoDto
                 {
                     Id = e.Id,
                     Nombre = e.Nombre,
                     Descripcion = e.Descripcion,
-                    Facultad = e.Facultad.Nombre,
-                    Rubro = e.RubroEmprendimiento.Nombre
+                    Facultad = e.Facultad?.Nombre ?? "Sin Facultad",
+                    Rubro = e.RubroEmprendimiento?.Nombre ?? "Sin Rubro"
                 })
                 .ToList();
-            return dtos;
         }
-
 
         public async Task<List<Facultad>> ListarFacultadesAsync() =>
             await facultadRepository.ListarAsync();
@@ -57,14 +56,14 @@ namespace Servicios.Impl
                 };
             }
 
+           
             var fotos = dto.fotos
-                .Select(ft =>
-                    new Foto
-                    {
-                        FileName = ft.FileName,
-                        FileExtension = ft.FileExtension,
-                        ImageUrl = ft.Url
-                    })
+                .Select(ft => new Foto
+                {
+                    FileName = ft.FileName,
+                    FileExtension = ft.FileExtension,
+                    ImageUrl = ft.Url
+                })
                 .ToList();
 
             var emprendimiento = new Emprendimiento
@@ -77,48 +76,24 @@ namespace Servicios.Impl
             };
 
             await emprendimientoRepository.CreateAsync(emprendimiento);
+
             return new ResponseDto
             {
                 IsSuccess = true,
-                Message = "Emprendimiento creado con exito"
+                Message = "Emprendimiento creado con éxito"
             };
         }
+
         public async Task<List<Emprendimiento>> ListarEmprendimientosEstudiantesAsync()
         {
-            var resultados = await emprendimientoRepository.ListarAsync();
-            var listaEmprendimientos = resultados
-                .Select(e => new Emprendimiento
-                {
-                    Id = e.Id,
-                    Nombre = e.Nombre,
-                    Descripcion = e.Descripcion,
-                    IdFacultad = e.IdFacultad,
-                    IdRubroEmprendimiento = e.IdRubroEmprendimiento,
-                    Facultad = e.Facultad,
-                    RubroEmprendimiento = e.RubroEmprendimiento,
-                    Fotos = e.Fotos.ToList(),
-                })
-                .ToList();
-            return listaEmprendimientos;
+           
+            return await emprendimientoRepository.ListarAsync();
         }
 
         public async Task<Emprendimiento?> ObtenerPorIdAsync(int id)
         {
-            var e = await emprendimientoRepository.ObtenerPorIdAsync(id);
-
-            if (e == null) return null;
-
-            return new Emprendimiento
-            {
-                Id = e.Id,
-                Nombre = e.Nombre,
-                Descripcion = e.Descripcion,
-                IdFacultad = e.IdFacultad,
-                IdRubroEmprendimiento = e.IdRubroEmprendimiento,
-                Facultad = e.Facultad,
-                RubroEmprendimiento = e.RubroEmprendimiento,
-                Fotos = e.Fotos
-            };
+           
+            return await emprendimientoRepository.ObtenerPorIdAsync(id);
         }
     }
 }

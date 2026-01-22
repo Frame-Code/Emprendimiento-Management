@@ -14,8 +14,9 @@ namespace Modelo
         public int IdUsuario { get; set; }
         public Usuario Usuario { get; set; } = null!;
         public int IdEmprendimiento { get; set; }
-        public Emprendimiento Emprendimiento { get; set; } = null!;
+        public virtual Emprendimiento Emprendimiento { get; set; } = null!;
 
-        
+
+
     }
 }

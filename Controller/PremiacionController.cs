@@ -14,6 +14,7 @@ public class PremiacionController(IPremiacionService service)
     public async Task<ResponseDto> CrearPremiacionAsync(PremiacionDto dto) =>
         await service.CrearPremiacionAsync(dto);
 
+
     public async Task<ResponseDto> Votar(int idPremiacion, int idEmprendimiento, string username) =>
         await service.Votar(idPremiacion, idEmprendimiento, username);
     
@@ -22,4 +23,5 @@ public class PremiacionController(IPremiacionService service)
 
     public async Task<PremiacionDto?> ObtenerPremiacionDisponible() =>
         await service.ObtenerPremiacionDisponible();
+
 }

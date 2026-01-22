@@ -151,6 +151,7 @@ public class PremiacionServiceImpl(
 
     }
 
+
     public async Task<ResponseDto> GenerateReport(string reportName, TypeReport typeReport, int idPremiacion)
     {
         var premiacion = await ObtenerPremiacionPorIdAsync(idPremiacion);
@@ -176,8 +177,9 @@ public class PremiacionServiceImpl(
                     Message = "No se ha encontrado el tipo de reporte generado"
                 };
             }
+
             
-            await reportGenerator.Generate(report, premiacion, reportName);
+            await reportGenerator.Generate(report, (object)premiacion, reportName);
             return new ResponseDto
             {
                 IsSuccess = true,
@@ -193,7 +195,10 @@ public class PremiacionServiceImpl(
                 Message = "Se ha producido un error al generar el reporte, consulte a sistemas"
             };
         }
+        
     }
+
+
 
     public async Task<PremiacionDto?> ObtenerPremiacionDisponible()
     {
@@ -278,4 +283,5 @@ public class PremiacionServiceImpl(
             Message = "Voto registrado correctamente"
         };
     }
+
 }
