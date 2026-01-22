@@ -4,6 +4,7 @@ using WinForms.Views.Util;
 
 namespace WinForms.Views.UserControls
 {
+
     public partial class CalendariodeActividadesView : UserControl
     {
         private IServiceProvider _serviceProvider;
@@ -87,6 +88,10 @@ namespace WinForms.Views.UserControls
             }
 
             await CargarDatosAsync();
+        }
+        public void OcultarBotonCrear()
+        {
+            BtnCrearEvento.Visible = false;
         }
     }
 }
