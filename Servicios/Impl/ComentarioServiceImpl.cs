@@ -39,17 +39,19 @@ public class ComentarioServiceImpl(
             .AsNoTracking()
             .Include(c => c.Usuario)
             .Include(c => c.Emprendimiento)
+                .ThenInclude(e => e.Facultad) 
+            .Include(c => c.Emprendimiento)
+                .ThenInclude(e => e.RubroEmprendimiento) 
             .Where(c => c.IdEmprendimiento == idEmprendimiento)
             .Select(c => new ComentarioDto
             {
                 Texto = c.Texto,
-                UsuarioNombre = c.Usuario.NombreUsuario,
+                UsuarioNombre = c.Usuario != null ? c.Usuario.NombreUsuario : "Anónimo",
                 HoraCreacion = c.HoraCreacion,
-                Facultad = c.Emprendimiento.Facultad.Nombre,
-                RubroNombre = c.Emprendimiento.RubroEmprendimiento.Nombre,
 
-                // MAPEAMOS EL NOMBRE DEL NEGOCIO AQUÍ
-                NombreEmprendimiento = c.Emprendimiento.Nombre
+                Facultad = c.Emprendimiento.Facultad != null ? c.Emprendimiento.Facultad.Nombre : "N/A",
+                RubroNombre = c.Emprendimiento.RubroEmprendimiento != null ? c.Emprendimiento.RubroEmprendimiento.Nombre : "N/A",
+                NombreEmprendimiento = c.Emprendimiento != null ? c.Emprendimiento.Nombre : "N/A"
             })
             .ToListAsync();
     }

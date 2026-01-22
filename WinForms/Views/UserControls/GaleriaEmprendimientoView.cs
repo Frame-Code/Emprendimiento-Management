@@ -137,7 +137,7 @@ namespace WinForms.Views
 
             if (comentarios == null || !comentarios.Any()) return;
 
-            // Llenamos el DataGridView con el nuevo campo "Emprendimiento"
+           
             dgvComentarios.DataSource = comentarios.Select(c => new
             {  
                 Usuario = c.UsuarioNombre,
@@ -152,12 +152,12 @@ namespace WinForms.Views
             {
                 dgvComentarios.ScrollBars = ScrollBars.Both;
 
-                // Ajustamos anchos
+               
                 dgvComentarios.Columns["Emprendimiento"].Width = 150;
                 dgvComentarios.Columns["Usuario"].Width = 100;
                 dgvComentarios.Columns["Facultad"].Width = 120;
 
-                // El mensaje sigue siendo el que se estira (Fill)
+               
                 dgvComentarios.Columns["Mensaje"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dgvComentarios.Columns["Mensaje"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
