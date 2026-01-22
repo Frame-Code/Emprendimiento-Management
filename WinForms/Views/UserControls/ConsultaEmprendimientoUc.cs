@@ -75,7 +75,7 @@ namespace WinForms.Views.UserControls
         }
         private Panel CrearTarjetaEmprendimiento(Emprendimiento emp)
         {
-            // 1. Panel Contenedor
+           
             var panel = new Panel
             {
                 Size = new Size(1000, 300),
@@ -84,7 +84,7 @@ namespace WinForms.Views.UserControls
                 Margin = new Padding(0, 0, 0, 10)
             };
 
-            // 2. Imagen
+           
             var pbFoto = new PictureBox
             {
                 Location = new Point(10, 10),
@@ -105,7 +105,7 @@ namespace WinForms.Views.UserControls
             int maxTextWidth = 800;
             int spacing = 5;
 
-            // 3. Labels
+            
             var lblNombre = new Label
             {
                 Text = $"Nombre: {emp.Nombre}",

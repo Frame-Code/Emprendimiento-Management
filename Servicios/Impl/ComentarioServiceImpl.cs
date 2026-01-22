@@ -1,4 +1,5 @@
 ﻿using Datos.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Modelo;
 using Servicios.Interfaces;
 using Shared;
@@ -8,33 +9,19 @@ namespace Servicios.Impl;
 public class ComentarioServiceImpl(
     IComentarioRepository repository,
     IEmprendimientoRepository emprendimientoRepository,
-    IUsuarioRepository usuarioRepository)
+    IUsuarioRepository usuarioRepository,
+    Datos.AppContext db)
     : IComentarioService
 {
     public async Task<ResponseDto> Save(Comentario comentario)
     {
-        var emprendimiento = await emprendimientoRepository.ObtenerPorIdAsync(comentario.IdEmprendimiento);
-        if (emprendimiento is null)
-            return new ResponseDto { IsSuccess = false, Message = "No se ha encontrado el emprendimiento seleccionado" };
-
-        var usuario = await usuarioRepository.ObtenerPorIdAsync(comentario.IdUsuario);
-        if (usuario is null)
-            return new ResponseDto { IsSuccess = false, Message = "Fatal error, no se encontró el usuario logeado" };
-
         await repository.CreateAsync(comentario);
-        return new ResponseDto { IsSuccess = true, Message = "Comentario creado correctamente" };
+        return new ResponseDto { IsSuccess = true, Message = "Comentario creado" };
     }
 
     public async Task<ResponseDto> Save(string content, string username, int idEmprendimiento)
     {
-        var emprendimiento = await emprendimientoRepository.ObtenerPorIdAsync(idEmprendimiento);
-        if (emprendimiento is null)
-            return new ResponseDto { IsSuccess = false, Message = "No se ha encontrado el emprendimiento seleccionado" };
-
         var usuario = await usuarioRepository.GetByUserName(username);
-        if (usuario is null)
-            return new ResponseDto { IsSuccess = false, Message = "Fatal error, no se encontró el usuario logeado" };
-
         var comentario = new Comentario
         {
             IdEmprendimiento = idEmprendimiento,
@@ -42,19 +29,28 @@ public class ComentarioServiceImpl(
             IdUsuario = usuario.Id,
             Texto = content
         };
-
         await repository.CreateAsync(comentario);
-        return new ResponseDto { IsSuccess = true, Message = "Comentario creado correctamente" };
+        return new ResponseDto { IsSuccess = true };
     }
 
-   
-    public async Task<List<Comentario>> ListarComentariosAsync(int idEmprendimiento)
+    public async Task<List<ComentarioDto>> ListarComentariosAsync(int idEmprendimiento)
     {
-        var todos = await repository.ListarAsync();
-
-        return todos
+        return await db.Comentarios
+            .AsNoTracking()
+            .Include(c => c.Usuario)
+            .Include(c => c.Emprendimiento)
             .Where(c => c.IdEmprendimiento == idEmprendimiento)
-            .OrderByDescending(c => c.HoraCreacion)
-            .ToList();
+            .Select(c => new ComentarioDto
+            {
+                Texto = c.Texto,
+                UsuarioNombre = c.Usuario.NombreUsuario,
+                HoraCreacion = c.HoraCreacion,
+                Facultad = c.Emprendimiento.Facultad.Nombre,
+                RubroNombre = c.Emprendimiento.RubroEmprendimiento.Nombre,
+
+                // MAPEAMOS EL NOMBRE DEL NEGOCIO AQUÍ
+                NombreEmprendimiento = c.Emprendimiento.Nombre
+            })
+            .ToListAsync();
     }
 }

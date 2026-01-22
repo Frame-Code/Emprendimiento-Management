@@ -12,40 +12,53 @@ namespace Servicios.Impl
 {
     public class FotoServiceImpl(Datos.AppContext db) : IFotoService
     {
-       
         public async Task<List<FotoDto>> ListarFotosAsync()
         {
-            return await db.Fotos
+          
+            var fotos = await db.Fotos.AsNoTracking().ToListAsync();
+
+           
+            return fotos
+                .Where(f => f.IdEmprendimiento > 0)
+                .GroupBy(f => f.IdEmprendimiento)
+                .Select(g => g.First())
                 .Select(f => new FotoDto
                 {
                     Id = f.Id,
                     ImageUrl = f.ImageUrl,
-                    EmprendimientoId = db.EmprendimientoFotos
-                        .Where(ef => ef.FotosId == f.Id)
-                        .Select(ef => ef.EmprendimientosId)
-                        .FirstOrDefault()
-                })
-                .ToListAsync();
+                    EmprendimientoId = f.IdEmprendimiento
+                }).ToList();
         }
 
         public async Task<ResponseDto> GuardarComentarioAsync(ComentarioDto comentario)
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(comentario.Texto))
+                    return new ResponseDto
+                    {
+                        IsSuccess = false,
+                        Message = "El comentario no puede estar vacío."
+                    };
+
                 db.Comentarios.Add(new Comentario
                 {
                     IdEmprendimiento = comentario.IdEmprendimiento,
                     Texto = comentario.Texto,
-                    HoraCreacion = comentario.HoraCreacion,
-                    IdUsuario = comentario.IdUsuario // <--- ESTO ES LO QUE SQL PIDE
+                    HoraCreacion = DateTime.Now,
+                    IdUsuario = comentario.IdUsuario
                 });
+
                 await db.SaveChangesAsync();
                 return new ResponseDto { IsSuccess = true };
             }
             catch (Exception ex)
             {
-                // Si hay error, captura el mensaje interno de SQL
-                return new ResponseDto { IsSuccess = false, Message = ex.InnerException?.Message ?? ex.Message };
+                return new ResponseDto
+                {
+                    IsSuccess = false,
+                    Message = ex.InnerException?.Message ?? ex.Message
+                };
             }
         }
     }

@@ -13,5 +13,6 @@ namespace Shared
         public string? Descripcion { get; set; }
         public string Facultad { get; set; } = null!;
         public string Rubro { get; set; } = null!;
+        public List<string> ImagenesUrls { get; set; } = new List<string>();
     }
 }

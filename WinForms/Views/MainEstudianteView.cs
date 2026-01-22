@@ -67,6 +67,7 @@ namespace WinForms.Views
         {
             pnlContenedorModuloEst.Controls.Clear();
             control.Dock = DockStyle.Fill;
+            pnlContenedorModuloEst.AutoScroll = true;
 
             pnlContenedorModuloEst.Controls.Add(control);
             control.BringToFront();
@@ -95,10 +96,11 @@ namespace WinForms.Views
             {
                 pnlContenedorModuloEst.Controls.Clear();
 
-                // AQUÍ ESTABA EL ERROR: Te faltaba pasar el _comentarioService
+              
                 var vistaGaleria = new GaleriaEmprendimientoView(_fotoService, _comentarioService);
 
                 vistaGaleria.Dock = DockStyle.Fill;
+                vistaGaleria.Height = pnlContenedorModuloEst.Height;
                 pnlContenedorModuloEst.Controls.Add(vistaGaleria);
                 vistaGaleria.BringToFront();
             }
@@ -130,5 +132,7 @@ namespace WinForms.Views
                 MessageBox.Show(@"Error al cargar el modulo de calendario: " + ex.Message);
             }
         }
+
+        
     }
 }

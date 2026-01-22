@@ -1,5 +1,6 @@
 ﻿using Datos;
 using System;
+using WinForms.Views.UserControls; 
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +17,6 @@ using Servicios.Interfaces;
 using Shared;
 
 
-
 namespace WinForms.Views
 {
     public partial class GaleriaEmprendimientoView : UserControl
@@ -24,8 +24,8 @@ namespace WinForms.Views
         private readonly IComentarioService _comentarioService;
         private readonly IFotoService _fotoService;
         private FotoDto _fotoSeleccionada;
+        private bool _isAlreadyLoading = false;
 
-        // Propiedad para el usuario que viene del Login (puedes setearla desde el Main)
         public string UsuarioActual { get; set; } = "estu";
 
         public GaleriaEmprendimientoView(IFotoService fotoService, IComentarioService comentarioService)
@@ -33,15 +33,31 @@ namespace WinForms.Views
             InitializeComponent();
             _fotoService = fotoService;
             _comentarioService = comentarioService;
+
+
+            flpFotos.WrapContents = true;
+            flpFotos.AutoScroll = true;
+
+           
+            flpFotos.HorizontalScroll.Enabled = false;
+            flpFotos.HorizontalScroll.Visible = false;
+            flpFotos.HorizontalScroll.Maximum = 0;
+
+
             CargarFotos();
         }
 
         private async void CargarFotos()
         {
+            if (_isAlreadyLoading) return;
+
             try
             {
+                _isAlreadyLoading = true;
                 flpFotos.Controls.Clear();
+
                 var fotos = await _fotoService.ListarFotosAsync();
+                if (fotos == null) return;
 
                 foreach (var foto in fotos)
                 {
@@ -52,23 +68,21 @@ namespace WinForms.Views
                         ImageLocation = foto.ImageUrl,
                         Margin = new Padding(10),
                         Cursor = Cursors.Hand,
-                        Tag = foto, // Guardamos el objeto completo aquí
+                        Tag = foto,
                         BorderStyle = BorderStyle.FixedSingle
                     };
-
-                    // Evento al hacer clic en cada miniatura
-                    pbThumbnail.Click += async (s, e) => {
+                    pbThumbnail.Click += async (s, e) =>
+                    {
                         var pic = (PictureBox)s;
-                        _fotoSeleccionada = (FotoDto)pic.Tag;
 
-                        pbFoto.Image = pic.Image;
+                        _fotoSeleccionada = (FotoDto)pic.Tag;
+                        if (pbFoto != null) pbFoto.Image = pic.Image;
+
                         txtComentario.Clear();
 
-                        // Resaltar la seleccionada
                         foreach (Control c in flpFotos.Controls) c.BackColor = Color.Transparent;
                         pic.BackColor = Color.LightBlue;
-
-                        // CARGAR COMENTARIOS REALES
+ 
                         await MostrarComentarios(_fotoSeleccionada.EmprendimientoId);
                     };
 
@@ -79,11 +93,13 @@ namespace WinForms.Views
             {
                 MessageBox.Show("Error al cargar fotos: " + ex.Message);
             }
+            finally
+            {
+                _isAlreadyLoading = false;
+            }
         }
-
         private async void btnGuardar_Click(object sender, EventArgs e)
         {
-            // Validaciones básicas
             if (_fotoSeleccionada == null)
             {
                 MessageBox.Show("Por favor, selecciona una foto primero.");
@@ -96,7 +112,6 @@ namespace WinForms.Views
                 return;
             }
 
-            // Llamamos al servicio de comentarios (no al de fotos)
             var respuesta = await _comentarioService.Save(
                 txtComentario.Text,
                 UsuarioActual,
@@ -106,7 +121,7 @@ namespace WinForms.Views
             if (respuesta.IsSuccess)
             {
                 txtComentario.Clear();
-                // REFRESCAR BURBUJAS AL INSTANTE
+               
                 await MostrarComentarios(_fotoSeleccionada.EmprendimientoId);
             }
             else
@@ -117,40 +132,38 @@ namespace WinForms.Views
 
         private async Task MostrarComentarios(int idEmprendimiento)
         {
-            // Limpiamos el FlowLayoutPanel antes de cargar
-            flpComentarios.Controls.Clear();
-
+            dgvComentarios.DataSource = null;
             var comentarios = await _comentarioService.ListarComentariosAsync(idEmprendimiento);
 
             if (comentarios == null || !comentarios.Any()) return;
 
-            foreach (var c in comentarios)
+            // Llenamos el DataGridView con el nuevo campo "Emprendimiento"
+            dgvComentarios.DataSource = comentarios.Select(c => new
+            {  
+                Usuario = c.UsuarioNombre,
+                Emprendimiento = c.NombreEmprendimiento,
+                Facultad = c.Facultad,
+                Rubro = c.RubroNombre,
+                Mensaje = c.Texto,
+                Hora = c.HoraCreacion.ToString("HH:mm")
+            }).ToList();
+
+            if (dgvComentarios.Columns.Count > 0)
             {
-                // Crear panel de burbuja
-                Panel pnlBurbuja = new Panel
-                {
-                    Width = flpComentarios.Width - 30,
-                    AutoSize = true,
-                    BackColor = Color.FromArgb(235, 235, 235),
-                    Padding = new Padding(8),
-                    Margin = new Padding(5)
-                };
+                dgvComentarios.ScrollBars = ScrollBars.Both;
 
-                Label lblTexto = new Label
-                {
-                    // Mostramos nombre del usuario y su comentario
-                    Text = $"{c.Usuario?.NombreUsuario ?? "Usuario"}: {c.Texto}\n({c.HoraCreacion:HH:mm})",
-                    AutoSize = true,
-                    MaximumSize = new Size(pnlBurbuja.Width - 20, 0),
-                    Font = new Font("Segoe UI", 9)
-                };
+                // Ajustamos anchos
+                dgvComentarios.Columns["Emprendimiento"].Width = 150;
+                dgvComentarios.Columns["Usuario"].Width = 100;
+                dgvComentarios.Columns["Facultad"].Width = 120;
 
-                pnlBurbuja.Controls.Add(lblTexto);
-                flpComentarios.Controls.Add(pnlBurbuja);
+                // El mensaje sigue siendo el que se estira (Fill)
+                dgvComentarios.Columns["Mensaje"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgvComentarios.Columns["Mensaje"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+                dgvComentarios.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                dgvComentarios.ReadOnly = true;
             }
-
-            // Hacer scroll hasta el final para ver el último comentario
-            flpComentarios.ScrollControlIntoView(flpComentarios.Controls.OfType<Control>().LastOrDefault());
         }
     }
 }

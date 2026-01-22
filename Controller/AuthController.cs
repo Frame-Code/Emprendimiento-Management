@@ -64,7 +64,7 @@ namespace Controller
             roleCode.Trim().ToUpper() switch
             {
                 "ADM" => ViewType.Administrador,
-                "ESTU" => ViewType.Estudiante, // <--- AGREGA LA 'U' AQUÍ
+                "ESTU" => ViewType.Estudiante, 
                 _ => null
             };
         public string GetRolCodeByViewType(ViewType viewType) =>

@@ -34,7 +34,7 @@ namespace Datos
         public DbSet<VotoPremiacion> VotoPremiacion { get; set; }
         public DbSet<ComentarioFoto> ComentariosFoto { get; set; }
         
-        public DbSet<EmprendimientoFotos> EmprendimientoFotos { get; set; }
+       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -68,6 +68,7 @@ namespace Datos
             modelBuilder.Entity<Emprendimiento>(b =>
             {
                 b.HasKey(x => x.Id);
+                b.ToTable("Emprendimientos");
                 b.Property(x => x.Nombre).IsRequired().HasMaxLength(300);
                 b.Property(x => x.Descripcion).HasMaxLength(2000);
 
@@ -253,22 +254,19 @@ namespace Datos
             //Foto
             modelBuilder.Entity<Foto>(b =>
             {
+                b.ToTable("Fotos");
                 b.HasKey(x => x.Id);
                 b.Property(x => x.ImageUrl).IsRequired().HasMaxLength(6000);
-                b.HasMany(x => x.Emprendimientos)
+
+                // Relación Uno a Muchos: Un Emprendimiento tiene muchas Fotos
+                b.HasOne(x => x.Emprendimiento)
                  .WithMany(x => x.Fotos)
-                
-               .UsingEntity<EmprendimientoFotos>(
-                            j => j.HasOne<Emprendimiento>().WithMany().HasForeignKey(e => e.EmprendimientosId),
-                            j => j.HasOne<Foto>().WithMany().HasForeignKey(e => e.FotosId),
-                            j =>
-               {
-                   j.ToTable("EmprendimientoFotos");
-                   j.HasKey(ef => ef.Id);
-               }
-);
-                //Premiacion
-                modelBuilder.Entity<Premiacion>(p =>
+                 .HasForeignKey(x => x.IdEmprendimiento) // Aquí ya está bien definido
+                 .OnDelete(DeleteBehavior.Cascade); 
+            });
+
+            //Premiacion
+            modelBuilder.Entity<Premiacion>(p =>
             {
                 p.HasKey(x => x.Id);
                 p.Property(x => x.Nombre).IsRequired().HasMaxLength(250);
@@ -310,9 +308,11 @@ namespace Datos
 
                 });
 
-                modelBuilder.Entity<EmprendimientoFotos>().HasKey(ef => ef.Id);
-            });
+               
     }
 }
 }
+
+
+
 

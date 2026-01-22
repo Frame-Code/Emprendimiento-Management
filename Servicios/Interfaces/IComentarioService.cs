@@ -8,6 +8,7 @@ public interface IComentarioService
     Task<ResponseDto> Save(string content, string username, int idEmprendimiento);
     Task<ResponseDto> Save(Comentario comentario);
 
-    Task<List<Comentario>> ListarComentariosAsync(int idEmprendimiento);
+    Task<List<ComentarioDto>> ListarComentariosAsync(int idEmprendimiento);
+
 
 }

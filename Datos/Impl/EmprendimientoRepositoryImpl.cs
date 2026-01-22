@@ -27,15 +27,20 @@ namespace Datos.Impl
             context.SaveChanges();
             return;
         }
-
         public async Task<List<Emprendimiento>> ListarAsync() =>
-            await context.Emprendimientos
-            .Include(e => e.Facultad)
-            .Include(e => e.RubroEmprendimiento)
-            .Include(e => e.Fotos)
-            .ToListAsync();
+         await context.Emprendimientos
+             .Include(e => e.Facultad)
+             .Include(e => e.RubroEmprendimiento)
+             .Include(e => e.Fotos)
+             .ToListAsync();
 
         public async Task<Emprendimiento?> ObtenerPorIdAsync(int id) =>
-            await context.Emprendimientos.FirstOrDefaultAsync(e => e.Id == id);
+            await context.Emprendimientos
+                .Include(e => e.Facultad)
+                .Include(e => e.RubroEmprendimiento)
+                .Include(e => e.Fotos)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+
     }
 }

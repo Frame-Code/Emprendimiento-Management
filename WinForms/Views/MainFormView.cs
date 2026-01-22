@@ -56,7 +56,15 @@ public partial class MainFormView : Form, IViewRolForm
 
     private void BtnEmprendimiento_Click(object sender, EventArgs e)
     {
-        CargarModulo(_emprendimientosUc);
+        try
+        {
+            CargarModulo(_emprendimientosUc);
+        }
+        catch (Exception ex)
+        {
+            // Esto te dirá si el error sigue siendo la columna o si es otra cosa
+            MessageBox.Show("Error al cargar el módulo de emprendimientos: " + ex.Message);
+        }
     }
 
     private void BtnParticipantes_Click(object sender, EventArgs e)

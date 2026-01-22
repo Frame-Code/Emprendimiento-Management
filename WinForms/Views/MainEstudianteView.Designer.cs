@@ -36,13 +36,9 @@
             panel1 = new Panel();
             roundedPanel2 = new WinForms.Views.Util.RoundedPanel();
             roundedPanel1 = new WinForms.Views.Util.RoundedPanel();
-
-
             btnGaleria = new Button();
-
-            BtnVotarView = new Button();
             BotonCalendario = new Button();
-
+            BtnVotarView = new Button();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             roundedPanel2.SuspendLayout();
@@ -63,7 +59,6 @@
             // 
             btnEmprendimientoReg.BackColor = Color.LightGray;
             btnEmprendimientoReg.Location = new Point(11, 16);
-
             btnEmprendimientoReg.Name = "btnEmprendimientoReg";
             btnEmprendimientoReg.Size = new Size(234, 39);
             btnEmprendimientoReg.TabIndex = 1;
@@ -76,8 +71,7 @@
             pnlContenedorModuloEst.BackColor = SystemColors.ButtonHighlight;
             pnlContenedorModuloEst.Location = new Point(279, 40);
             pnlContenedorModuloEst.Name = "pnlContenedorModuloEst";
-
-            pnlContenedorModuloEst.Size = new Size(1363, 640);
+            pnlContenedorModuloEst.Size = new Size(1363, 784);
             pnlContenedorModuloEst.TabIndex = 1;
             // 
             // label2
@@ -97,8 +91,7 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1642, 40);
-
+            panel3.Size = new Size(1404, 40);
             panel3.TabIndex = 2;
             // 
             // panel1
@@ -110,9 +103,7 @@
             panel1.Location = new Point(0, 40);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-
-            panel1.Size = new Size(280, 621);
-
+            panel1.Size = new Size(280, 784);
             panel1.TabIndex = 3;
             // 
             // roundedPanel2
@@ -123,9 +114,7 @@
             roundedPanel2.BorderSize = 1;
             roundedPanel2.Controls.Add(LblUserName);
             roundedPanel2.Dock = DockStyle.Bottom;
-
-            roundedPanel2.Location = new Point(0, 574);
-
+            roundedPanel2.Location = new Point(0, 737);
             roundedPanel2.Margin = new Padding(3, 2, 3, 2);
             roundedPanel2.Name = "roundedPanel2";
             roundedPanel2.Size = new Size(280, 47);
@@ -137,43 +126,26 @@
             roundedPanel1.BorderColor = Color.LightGray;
             roundedPanel1.BorderRadius = 20;
             roundedPanel1.BorderSize = 1;
-
             roundedPanel1.Controls.Add(btnGaleria);
-
             roundedPanel1.Controls.Add(BotonCalendario);
-
             roundedPanel1.Controls.Add(BtnVotarView);
-
             roundedPanel1.Controls.Add(btnEmprendimientoReg);
             roundedPanel1.Location = new Point(10, 5);
             roundedPanel1.Margin = new Padding(3, 2, 3, 2);
             roundedPanel1.Name = "roundedPanel1";
-            roundedPanel1.Size = new Size(263, 538);
+            roundedPanel1.Size = new Size(263, 657);
             roundedPanel1.TabIndex = 0;
             // 
-
             // btnGaleria
             // 
             btnGaleria.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnGaleria.Location = new Point(15, 81);
+            btnGaleria.Location = new Point(15, 198);
             btnGaleria.Name = "btnGaleria";
             btnGaleria.Size = new Size(234, 37);
             btnGaleria.TabIndex = 2;
             btnGaleria.Text = "ver galeria";
             btnGaleria.UseVisualStyleBackColor = true;
             btnGaleria.Click += btnGaleria_Click;
-
-            // BtnVotarView
-            // 
-            BtnVotarView.BackColor = Color.LightGray;
-            BtnVotarView.Location = new Point(11, 78);
-            BtnVotarView.Name = "BtnVotarView";
-            BtnVotarView.Size = new Size(234, 39);
-            BtnVotarView.TabIndex = 2;
-            BtnVotarView.Text = "Votar emprendimiento favorito";
-            BtnVotarView.UseVisualStyleBackColor = false;
-            BtnVotarView.Click += BtnVotarView_Click;
-
             // 
             // BotonCalendario
             // 
@@ -185,13 +157,22 @@
             BotonCalendario.UseVisualStyleBackColor = true;
             BotonCalendario.Click += BotonCalendario_Click;
             // 
+            // BtnVotarView
+            // 
+            BtnVotarView.BackColor = Color.LightGray;
+            BtnVotarView.Location = new Point(11, 78);
+            BtnVotarView.Name = "BtnVotarView";
+            BtnVotarView.Size = new Size(234, 39);
+            BtnVotarView.TabIndex = 2;
+            BtnVotarView.Text = "Votar emprendimiento favorito";
+            BtnVotarView.UseVisualStyleBackColor = false;
+            BtnVotarView.Click += BtnVotarView_Click;
+            // 
             // MainEstudianteView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-
-            ClientSize = new Size(1404, 661);
-
+            ClientSize = new Size(1404, 824);
             Controls.Add(panel1);
             Controls.Add(panel3);
             Controls.Add(pnlContenedorModuloEst);
