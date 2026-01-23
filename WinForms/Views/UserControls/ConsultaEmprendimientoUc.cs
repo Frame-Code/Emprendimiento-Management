@@ -70,7 +70,7 @@ namespace WinForms.Views.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al obtener el detalle: " + ex.Message);
+                MessageBox.Show(@"Error al obtener el detalle: " + ex.Message);
             }
         }
         private Panel CrearTarjetaEmprendimiento(Emprendimiento emp)
@@ -94,9 +94,9 @@ namespace WinForms.Views.UserControls
             };
 
             var fotoData = emp.Fotos.FirstOrDefault();
-            if (fotoData != null && File.Exists(fotoData.ImageUrl))
+            if (fotoData != null && File.Exists(fotoData.Foto.ImageUrl))
             {
-                pbFoto.ImageLocation = fotoData.ImageUrl;
+                pbFoto.ImageLocation = fotoData.Foto.ImageUrl;
             }
             panel.Controls.Add(pbFoto);
 
@@ -108,7 +108,7 @@ namespace WinForms.Views.UserControls
             
             var lblNombre = new Label
             {
-                Text = $"Nombre: {emp.Nombre}",
+                Text = @$"Nombre: {emp.Nombre}",
                 Location = new Point(textX, currentY),
                 AutoSize = true,
                 MaximumSize = new Size(maxTextWidth, 0),

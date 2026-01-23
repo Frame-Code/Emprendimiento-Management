@@ -12,7 +12,7 @@ namespace WinForms.Views
     {
         private readonly RegistroParticipanteController _miControlador;
         private readonly FileController _fileController;
-        private List<string> filesPath = new List<string>();
+        private string filepath =  string.Empty;
 
         public RegistroParticipantesView(
             RegistroParticipanteController controller,
@@ -37,7 +37,7 @@ namespace WinForms.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error cargando cargos: " + ex.Message);
+                MessageBox.Show(@"Error cargando cargos: " + ex.Message);
             }
         }
 
@@ -45,9 +45,9 @@ namespace WinForms.Views
         {
             using var ofd = new OpenFileDialog
             {
-                Title = "Selecciona una imagen",
-                Filter = "Imágenes|*.png;*.jpg;*.jpeg;*.bmp;*.gif;*.webp",
-                Multiselect = true
+                Title = @"Selecciona una imagen",
+                Filter = @"Imágenes|*.png;*.jpg;*.jpeg;*.bmp;*.gif;*.webp",
+                Multiselect = false
             };
 
             if (ofd.ShowDialog() != DialogResult.OK)
@@ -60,31 +60,22 @@ namespace WinForms.Views
             flowLayout.Dock = DockStyle.Fill;
 
             pnlFoto.Controls.Add(flowLayout);
-            var listPath = ofd.FileNames;
-
-            foreach (var file in ofd.FileNames)
+            var file = ofd.FileName;
+            var pb = new PictureBox
             {
-                var pb = new PictureBox
-                {
-                    Width = 120,
-                    Height = 120,
-                    SizeMode = PictureBoxSizeMode.Zoom,
-                    Margin = new Padding(6),
-                    BorderStyle = BorderStyle.FixedSingle
-                };
-
-                using var fs = new FileStream(file, FileMode.Open, FileAccess.Read);
-                using var imgTemp = Image.FromStream(fs);
-                pb.Image = new Bitmap(imgTemp);
-                pb.Tag = file;
-                filesPath.Add(file);
-                flowLayout.Controls.Add(pb);
-            }
+                Width = 120,
+                Height = 120,
+                SizeMode = PictureBoxSizeMode.Zoom,
+                Margin = new Padding(6),
+                BorderStyle = BorderStyle.FixedSingle
+            };
+            using var fs = new FileStream(file, FileMode.Open, FileAccess.Read);
+            using var imgTemp = Image.FromStream(fs);
+            pb.Image = new Bitmap(imgTemp);
+            pb.Tag = file;
+            flowLayout.Controls.Add(pb);
             flowLayout.ResumeLayout();
-
-            filesPath.Clear();
-            filesPath.Add(ofd.FileName);
-
+            filepath = file;
             pnlFoto.Image = Image.FromFile(ofd.FileName);
         }
         private async void btnRegistrar_Click(object sender, EventArgs e)
@@ -95,38 +86,27 @@ namespace WinForms.Views
                 txtNdeIdentificacion.Text,
                 txtNdeTelefono.Text))
             {
-                MessageBox.Show("Completa los espacios en blanco.");
+                MessageBox.Show(@"Completa los espacios en blanco.");
                 return;
             }
 
             if (cmbCargo.SelectedIndex == -1 || cmbCargo.SelectedValue is not int idCargo)
             {
-                MessageBox.Show("Selecciona un cargo.");
+                MessageBox.Show(@"Selecciona un cargo.");
                 return;
             }
-
-            var files = new List<FileDto>();
-
-            foreach (var path in filesPath)
+            
+            var responseFile = _fileController.CopyFile(filepath);
+            if (!responseFile.IsSuccess)
             {
-
-                var responseFile = _fileController.CopyFile(path);
-
-                if (!responseFile.IsSuccess)
-                {
-                    MessageBox.Show("Error copiando imagen: " + responseFile.Message);
-                    return;
-                }
-
-                if (responseFile.Data is not FileDto fileDto)
-                {
-                    MessageBox.Show("Error procesando imagen");
-                    return;
-                }
-
-                files.Add(fileDto);
+                MessageBox.Show(@"Error copiando imagen: " + responseFile.Message);
+                return;
             }
-
+            if (responseFile.Data is not FileDto fileDto)
+            {
+                MessageBox.Show(@"Error procesando imagen");
+                return;
+            }
             var nuevoDto = new ParticipanteDto
             {
                 Nombres = txtNombre.Text.Trim(),
@@ -134,7 +114,7 @@ namespace WinForms.Views
                 IdCargoParticipante = idCargo,
                 NoIdentificacion = txtNdeIdentificacion.Text.Trim(),
                 NoTelefono = txtNdeTelefono.Text.Trim(),
-                fotos = files
+                foto = fileDto
             };
 
             btnRegistrar.Enabled = false;
@@ -145,13 +125,13 @@ namespace WinForms.Views
 
             if (respuesta.IsSuccess)
             {
-                MessageBox.Show("¡Guardado correctamente!");
+                MessageBox.Show(@"¡Guardado correctamente!");
                 DialogResult = DialogResult.OK;
                 Close();
             }
             else
             {
-                MessageBox.Show("Error: " + respuesta.Message);
+                MessageBox.Show(@"Error: " + respuesta.Message);
             }
         }
     }

@@ -78,7 +78,7 @@ namespace Servicios.Impl
                 Descripcion = e.Descripcion,
                 FechaInicio = e.FechaInicio,
                 FechaFin = e.FechaFin,
-                Ubicacion = e.Ubicacion
+                Ubicacion = e.Ubicacion?? "-"
             }).ToList();
         }
         public async Task<List<ExpositorDto>> ListarEmprendimientosAsync()

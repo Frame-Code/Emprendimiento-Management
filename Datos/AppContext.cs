@@ -25,17 +25,13 @@ namespace Datos
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<RolUsuario> RolUsuarios { get; set; }
         public DbSet<CargoParticipante> CargosParticipante { get; set; }
-        public DbSet<Cronograma> Cronogramas { get; set; }
-        public DbSet<Presentacion> Presentaciones { get; set; } 
         public DbSet<MenuOpciones> MenuOpciones { get; set; }
         public DbSet<Foto> Fotos { get; set; }
         public DbSet<Premiacion> Premiacion { get; set; }
         public DbSet<EmprendimientoPremiacion> EmprendimientoPremiacion { get; set; }
-        public DbSet<VotoPremiacion> VotoPremiacion { get; set; }
-        public DbSet<ComentarioFoto> ComentariosFoto { get; set; }
+        //public DbSet<VotoPremiacion> VotoPremiacion { get; set; }
+        public DbSet<FotoEmprendimiento> FotoEmprendimientos { get; set; }
         
-       
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -82,6 +78,10 @@ namespace Datos
                     .WithMany()
                     .HasForeignKey(x => x.IdRubroEmprendimiento)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                b.HasMany(x => x.Fotos)
+                    .WithOne(x => x.Emprendimiento)
+                    .HasForeignKey(x => x.IdEmprendimiento);
             });
 
             // Participantes
@@ -203,7 +203,7 @@ namespace Datos
             // Votos
             modelBuilder.Entity<Voto>(b =>
             {
-                b.HasKey(x => x.Id);
+                b.HasKey(x => new {x.Id, x.IdUsuario, x.IdPremiacion});
                 b.Property(x => x.FechaCreacion).IsRequired();
 
                 b.HasOne(x => x.Emprendimiento)
@@ -257,12 +257,6 @@ namespace Datos
                 b.ToTable("Fotos");
                 b.HasKey(x => x.Id);
                 b.Property(x => x.ImageUrl).IsRequired().HasMaxLength(6000);
-
-                // Relación Uno a Muchos: Un Emprendimiento tiene muchas Fotos
-                b.HasOne(x => x.Emprendimiento)
-                 .WithMany(x => x.Fotos)
-                 .HasForeignKey(x => x.IdEmprendimiento) // Aquí ya está bien definido
-                 .OnDelete(DeleteBehavior.Cascade); 
             });
 
             //Premiacion
@@ -293,6 +287,7 @@ namespace Datos
                 });
 
                 //VotoPremiacion
+                /*
                 modelBuilder.Entity<VotoPremiacion>(p =>
                 {
                     p.HasKey(x => new { x.IdVoto, x.IdPremiacion });
@@ -303,13 +298,26 @@ namespace Datos
                         .WithMany(e => e.Votos)
                         .HasForeignKey(x => x.IdPremiacion);
 
-                    p.Property<DateTime>(x => x.FechaCreacion).IsRequired();
+                    p.Property(x => x.FechaCreacion).IsRequired();
+                });*/
 
-
+                //FotoEmprendimiento
+                modelBuilder.Entity<FotoEmprendimiento>(f =>
+                {
+                    f.HasKey(x => x.Id);
+                    f.HasOne(x => x.Foto)
+                        .WithOne()
+                        .HasForeignKey<FotoEmprendimiento>(x => x.IdFoto);
+                    
+                    f.HasOne(x => x.Emprendimiento)
+                        .WithMany(x => x.Fotos)
+                        .HasForeignKey(x => x.IdEmprendimiento)
+                        .OnDelete(DeleteBehavior.Cascade);
+                    
+                    f.HasIndex(x => x.IdFoto).IsUnique();
                 });
-
-               
-    }
+                
+        }
 }
 }
 

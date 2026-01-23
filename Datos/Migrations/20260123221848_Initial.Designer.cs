@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datos.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20251224015901_VotoEmprendimiento2")]
-    partial class VotoEmprendimiento2
+    [Migration("20260123221848_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,21 +24,6 @@ namespace Datos.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("EmprendimientoFoto", b =>
-                {
-                    b.Property<int>("EmprendimientosId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FotosId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EmprendimientosId", "FotosId");
-
-                    b.HasIndex("FotosId");
-
-                    b.ToTable("EmprendimientoFotos", (string)null);
-                });
 
             modelBuilder.Entity("Modelo.AgendaPresentacion", b =>
                 {
@@ -141,30 +126,6 @@ namespace Datos.Migrations
                     b.ToTable("Comentarios");
                 });
 
-            modelBuilder.Entity("Modelo.Cronograma", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Hora")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ubicacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cronogramas");
-                });
-
             modelBuilder.Entity("Modelo.Emprendimiento", b =>
                 {
                     b.Property<int>("Id")
@@ -194,7 +155,7 @@ namespace Datos.Migrations
 
                     b.HasIndex("IdRubroEmprendimiento");
 
-                    b.ToTable("Emprendimientos");
+                    b.ToTable("Emprendimientos", (string)null);
                 });
 
             modelBuilder.Entity("Modelo.EmprendimientoPremiacion", b =>
@@ -276,13 +237,11 @@ namespace Datos.Migrations
 
                     b.Property<string>("FileExtension")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FileName")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -291,7 +250,31 @@ namespace Datos.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Fotos");
+                    b.ToTable("Fotos", (string)null);
+                });
+
+            modelBuilder.Entity("Modelo.FotoEmprendimiento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("IdEmprendimiento")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdFoto")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdEmprendimiento");
+
+                    b.HasIndex("IdFoto")
+                        .IsUnique();
+
+                    b.ToTable("FotoEmprendimientos");
                 });
 
             modelBuilder.Entity("Modelo.Participante", b =>
@@ -314,6 +297,9 @@ namespace Datos.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("IdFoto")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdFotoParticipante")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombres")
@@ -379,37 +365,6 @@ namespace Datos.Migrations
                     b.HasIndex("FechaInicioPremiacion", "FechaFinPremiacion");
 
                     b.ToTable("Premiacion");
-                });
-
-            modelBuilder.Entity("Modelo.Presentacion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Expositor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Hora")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Orden")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Ubicacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Presentaciones");
                 });
 
             modelBuilder.Entity("Modelo.Properties.MenuOpciones", b =>
@@ -563,32 +518,9 @@ namespace Datos.Migrations
             modelBuilder.Entity("Modelo.Voto", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("IdEmprendimiento")
                         .HasColumnType("int");
 
                     b.Property<int>("IdUsuario")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdEmprendimiento");
-
-                    b.HasIndex("IdUsuario");
-
-                    b.ToTable("Votos");
-                });
-
-            modelBuilder.Entity("Modelo.VotoPremiacion", b =>
-                {
-                    b.Property<int>("IdVoto")
                         .HasColumnType("int");
 
                     b.Property<int>("IdPremiacion")
@@ -597,26 +529,21 @@ namespace Datos.Migrations
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("IdVoto", "IdPremiacion");
+                    b.Property<int>("IdEmprendimiento")
+                        .HasColumnType("int");
 
-                    b.HasIndex("IdPremiacion");
+                    b.Property<int>("PremiacionId")
+                        .HasColumnType("int");
 
-                    b.ToTable("VotoPremiacion");
-                });
+                    b.HasKey("Id", "IdUsuario", "IdPremiacion");
 
-            modelBuilder.Entity("EmprendimientoFoto", b =>
-                {
-                    b.HasOne("Modelo.Emprendimiento", null)
-                        .WithMany()
-                        .HasForeignKey("EmprendimientosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasIndex("IdEmprendimiento");
 
-                    b.HasOne("Modelo.Foto", null)
-                        .WithMany()
-                        .HasForeignKey("FotosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasIndex("IdUsuario");
+
+                    b.HasIndex("PremiacionId");
+
+                    b.ToTable("Votos");
                 });
 
             modelBuilder.Entity("Modelo.AgendaPresentacion", b =>
@@ -693,6 +620,25 @@ namespace Datos.Migrations
                     b.Navigation("Emprendimiento");
 
                     b.Navigation("Premiacion");
+                });
+
+            modelBuilder.Entity("Modelo.FotoEmprendimiento", b =>
+                {
+                    b.HasOne("Modelo.Emprendimiento", "Emprendimiento")
+                        .WithMany("Fotos")
+                        .HasForeignKey("IdEmprendimiento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Modelo.Foto", "Foto")
+                        .WithOne()
+                        .HasForeignKey("Modelo.FotoEmprendimiento", "IdFoto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Emprendimiento");
+
+                    b.Navigation("Foto");
                 });
 
             modelBuilder.Entity("Modelo.Participante", b =>
@@ -783,32 +729,23 @@ namespace Datos.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Modelo.Premiacion", "Premiacion")
+                        .WithMany("Votos")
+                        .HasForeignKey("PremiacionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Emprendimiento");
+
+                    b.Navigation("Premiacion");
 
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("Modelo.VotoPremiacion", b =>
-                {
-                    b.HasOne("Modelo.Premiacion", "Premiacion")
-                        .WithMany("Votos")
-                        .HasForeignKey("IdPremiacion")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Modelo.Voto", "Voto")
-                        .WithMany("Premiaciones")
-                        .HasForeignKey("IdVoto")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Premiacion");
-
-                    b.Navigation("Voto");
-                });
-
             modelBuilder.Entity("Modelo.Emprendimiento", b =>
                 {
+                    b.Navigation("Fotos");
+
                     b.Navigation("Participantes");
 
                     b.Navigation("Premicaciones");
@@ -819,11 +756,6 @@ namespace Datos.Migrations
                     b.Navigation("Emprendimientos");
 
                     b.Navigation("Votos");
-                });
-
-            modelBuilder.Entity("Modelo.Voto", b =>
-                {
-                    b.Navigation("Premiaciones");
                 });
 #pragma warning restore 612, 618
         }

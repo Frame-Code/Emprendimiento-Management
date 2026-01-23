@@ -8,7 +8,6 @@ namespace Servicios.Impl;
 
 public class ComentarioServiceImpl(
     IComentarioRepository repository,
-    IEmprendimientoRepository emprendimientoRepository,
     IUsuarioRepository usuarioRepository,
     Datos.AppContext db)
     : IComentarioService
@@ -22,6 +21,13 @@ public class ComentarioServiceImpl(
     public async Task<ResponseDto> Save(string content, string username, int idEmprendimiento)
     {
         var usuario = await usuarioRepository.GetByUserName(username);
+        if (usuario is null)
+            return new ResponseDto
+            {
+                IsSuccess = false,
+                Message = "Fatal error: Usuario no encontrado"
+            };
+            
         var comentario = new Comentario
         {
             IdEmprendimiento = idEmprendimiento,
@@ -46,12 +52,11 @@ public class ComentarioServiceImpl(
             .Select(c => new ComentarioDto
             {
                 Texto = c.Texto,
-                UsuarioNombre = c.Usuario != null ? c.Usuario.NombreUsuario : "Anónimo",
+                UsuarioNombre = c.Usuario.NombreUsuario,
                 HoraCreacion = c.HoraCreacion,
-
-                Facultad = c.Emprendimiento.Facultad != null ? c.Emprendimiento.Facultad.Nombre : "N/A",
-                RubroNombre = c.Emprendimiento.RubroEmprendimiento != null ? c.Emprendimiento.RubroEmprendimiento.Nombre : "N/A",
-                NombreEmprendimiento = c.Emprendimiento != null ? c.Emprendimiento.Nombre : "N/A"
+                Facultad = c.Emprendimiento.Facultad.Nombre,
+                RubroNombre = c.Emprendimiento.RubroEmprendimiento.Nombre,
+                NombreEmprendimiento = c.Emprendimiento.Nombre
             })
             .ToListAsync();
     }

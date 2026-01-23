@@ -40,30 +40,21 @@ namespace Servicios.Impl
                     response.Message = "Ya existe un participante con ese número de teléfono.";
                     return response;
                 }
-
+                
                 var participante = new Participante
                 {
                     Nombres = dto.Nombres,
                     Apellidos = dto.Apellidos,
                     NumeroIdentificacion = dto.NoIdentificacion,
                     NumeroTelefono = dto.NoTelefono,
-                    IdCargoParticipante = dto.IdCargoParticipante
-                };
-
-                if (dto.fotos != null && dto.fotos.Any())
-                {
-                    var f = dto.fotos.First();
-
-                    var foto = new Foto
+                    IdCargoParticipante = dto.IdCargoParticipante,
+                    Foto =  new Foto
                     {
-                        ImageUrl = f.Url,
-                        FileName = f.FileName,
-                        FileExtension = f.FileExtension
-                    };
-                    await _fotoRepo.CreateAsync(foto);
-
-                    participante.IdFoto = foto.Id;
-                }
+                        ImageUrl = dto.foto.Url,
+                        FileName = dto.foto.FileName,
+                        FileExtension = dto.foto.FileExtension
+                    }
+                };
 
                 await _participanteRepo.CreateAsync(participante);
 

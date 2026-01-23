@@ -28,10 +28,10 @@ namespace WinForms.Views
             _agendaController = agendaController;
             _eventoController = eventoController;
 
-            this.Load += GestionAgendaView_Load;
+            Load += GestionAgendaView_Load;
         }
 
-        private async void GestionAgendaView_Load(object sender, EventArgs e)
+        private async void GestionAgendaView_Load(object? sender, EventArgs e)
         {
             // Eventos
             cmbEvento.DataSource = await _eventoController.ListarEventosAsync();
@@ -50,7 +50,7 @@ namespace WinForms.Views
         {
             if (cmbEvento.SelectedIndex == -1) return;
 
-            int idEvento = (int)cmbEvento.SelectedValue;
+            int idEvento = (int)(cmbEvento.SelectedValue ?? -1);
             dgAgenda.DataSource =
                 await _agendaController.ListarAgendaPorEventoAsync(idEvento);
         }
@@ -59,14 +59,14 @@ namespace WinForms.Views
         {
             if (cmbEvento.SelectedIndex == -1 || cmbExpositor.SelectedIndex == -1)
             {
-                MessageBox.Show("Seleccione evento y expositor");
+                MessageBox.Show(@"Seleccione evento y expositor");
                 return;
             }
 
             var dto = new AgendaPresentacionDto
             {
-                IdEvento = (int)cmbEvento.SelectedValue,
-                IdEmprendimiento = (int)cmbExpositor.SelectedValue
+                IdEvento = (int)(cmbEvento.SelectedValue ?? -1),
+                IdEmprendimiento = (int)(cmbExpositor.SelectedValue ?? -1)
                 
             };
 

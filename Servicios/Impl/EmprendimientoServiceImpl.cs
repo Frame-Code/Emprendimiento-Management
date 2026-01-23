@@ -55,17 +55,19 @@ namespace Servicios.Impl
                     Message = "Rubro o Facultad no encontrados"
                 };
             }
-
-           
+            
             var fotos = dto.fotos
-                .Select(ft => new Foto
+                .Select(ft => new FotoEmprendimiento
                 {
-                    FileName = ft.FileName,
-                    FileExtension = ft.FileExtension,
-                    ImageUrl = ft.Url
+                    Foto = new Foto
+                    {
+                        FileName = ft.FileName,
+                        FileExtension = ft.FileExtension,
+                        ImageUrl = ft.Url    
+                    }
                 })
                 .ToList();
-
+    
             var emprendimiento = new Emprendimiento
             {
                 Nombre = dto.Nombre,
@@ -73,8 +75,8 @@ namespace Servicios.Impl
                 IdFacultad = facultad.Id,
                 IdRubroEmprendimiento = rubro.Id,
                 Fotos = fotos
-            };
-
+            }; 
+            
             await emprendimientoRepository.CreateAsync(emprendimiento);
 
             return new ResponseDto

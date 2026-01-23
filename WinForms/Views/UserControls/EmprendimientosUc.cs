@@ -83,13 +83,14 @@ namespace WinForms.Views.UserControls
                 using var scope = _serviceProvider.CreateScope();
                 var form = scope.ServiceProvider.GetRequiredService<DetalleEmprendimientoView>();
                 int idEmprendimiento = (int)GridEmprendimientos.Rows[e.RowIndex].Cells["Id"].Value;
-                EmprendimientoDto? emprendimientoDto = emprendimientos.FirstOrDefault(emp => emp.Id == idEmprendimiento);
-                if(emprendimientoDto == null)
+                var dto = emprendimientos.FirstOrDefault(emp => emp.Id == idEmprendimiento);
+                if(dto == null)
                 {
                     MessageBox.Show(@"Emprendimiento no encontrado");
                     return;
                 }
-                await form.Init(emprendimientoDto.Nombre, emprendimientoDto.Rubro, emprendimientoDto?.Descripcion, emprendimientoDto.Facultad, emprendimientoDto.Id);
+                var emprendimientoDto = dto;
+                await form.Init(emprendimientoDto.Nombre, emprendimientoDto.Rubro, emprendimientoDto.Descripcion, emprendimientoDto.Facultad, emprendimientoDto.Id);
                 form.FormClosed += Form_FormClosed;
                 form.ShowDialog();
                 return;

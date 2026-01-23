@@ -15,8 +15,7 @@ namespace Servicios.Impl
     public class ParticipanteServiceImpl(
         IParticipanteRepository participanteRepository,
         ICargoParticipanteRepository cargoParticipanteRepository,
-        IEmprendimientoRepository emprendimientoRepository,
-        IServiceProvider serviceProvider
+        IEmprendimientoRepository emprendimientoRepository
         ) : IParticipanteService
     {
         public async Task<ResponseDto> AgregarParticipante(int idParticipante, int idEmprendimiento)
