@@ -34,8 +34,6 @@ namespace Datos
         public DbSet<VotoPremiacion> VotoPremiacion { get; set; }
         public DbSet<ComentarioFoto> ComentariosFoto { get; set; }
         
-       
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -303,9 +301,7 @@ namespace Datos
                         .WithMany(e => e.Votos)
                         .HasForeignKey(x => x.IdPremiacion);
 
-                    p.Property<DateTime>(x => x.FechaCreacion).IsRequired();
-
-
+                    p.Property(x => x.FechaCreacion).IsRequired();
                 });
 
                

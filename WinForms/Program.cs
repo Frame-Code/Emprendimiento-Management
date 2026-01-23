@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WinForms.Config;
@@ -25,7 +26,7 @@ internal static class Program
         QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
         using var scope = services.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<AppContext>();
-        //db.Database.Migrate();
+        db.Database.Migrate();
         var view = scope.ServiceProvider.GetRequiredService<LogIn>();
         Application.Run(view);
     }

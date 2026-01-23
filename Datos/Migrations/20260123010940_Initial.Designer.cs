@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datos.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20251224015901_VotoEmprendimiento2")]
-    partial class VotoEmprendimiento2
+    [Migration("20260123010940_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,21 +24,6 @@ namespace Datos.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("EmprendimientoFoto", b =>
-                {
-                    b.Property<int>("EmprendimientosId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FotosId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EmprendimientosId", "FotosId");
-
-                    b.HasIndex("FotosId");
-
-                    b.ToTable("EmprendimientoFotos", (string)null);
-                });
 
             modelBuilder.Entity("Modelo.AgendaPresentacion", b =>
                 {
@@ -141,6 +126,31 @@ namespace Datos.Migrations
                     b.ToTable("Comentarios");
                 });
 
+            modelBuilder.Entity("Modelo.ComentarioFoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("FotoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Texto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FotoId");
+
+                    b.ToTable("ComentariosFoto");
+                });
+
             modelBuilder.Entity("Modelo.Cronograma", b =>
                 {
                     b.Property<int>("Id")
@@ -194,7 +204,7 @@ namespace Datos.Migrations
 
                     b.HasIndex("IdRubroEmprendimiento");
 
-                    b.ToTable("Emprendimientos");
+                    b.ToTable("Emprendimientos", (string)null);
                 });
 
             modelBuilder.Entity("Modelo.EmprendimientoPremiacion", b =>
@@ -276,13 +286,14 @@ namespace Datos.Migrations
 
                     b.Property<string>("FileExtension")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FileName")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdEmprendimiento")
+                        .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -291,7 +302,9 @@ namespace Datos.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Fotos");
+                    b.HasIndex("IdEmprendimiento");
+
+                    b.ToTable("Fotos", (string)null);
                 });
 
             modelBuilder.Entity("Modelo.Participante", b =>
@@ -604,21 +617,6 @@ namespace Datos.Migrations
                     b.ToTable("VotoPremiacion");
                 });
 
-            modelBuilder.Entity("EmprendimientoFoto", b =>
-                {
-                    b.HasOne("Modelo.Emprendimiento", null)
-                        .WithMany()
-                        .HasForeignKey("EmprendimientosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Modelo.Foto", null)
-                        .WithMany()
-                        .HasForeignKey("FotosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Modelo.AgendaPresentacion", b =>
                 {
                     b.HasOne("Modelo.Emprendimiento", "Emprendimiento")
@@ -657,6 +655,17 @@ namespace Datos.Migrations
                     b.Navigation("Usuario");
                 });
 
+            modelBuilder.Entity("Modelo.ComentarioFoto", b =>
+                {
+                    b.HasOne("Modelo.Foto", "Foto")
+                        .WithMany()
+                        .HasForeignKey("FotoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Foto");
+                });
+
             modelBuilder.Entity("Modelo.Emprendimiento", b =>
                 {
                     b.HasOne("Modelo.Facultad", "Facultad")
@@ -693,6 +702,17 @@ namespace Datos.Migrations
                     b.Navigation("Emprendimiento");
 
                     b.Navigation("Premiacion");
+                });
+
+            modelBuilder.Entity("Modelo.Foto", b =>
+                {
+                    b.HasOne("Modelo.Emprendimiento", "Emprendimiento")
+                        .WithMany("Fotos")
+                        .HasForeignKey("IdEmprendimiento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Emprendimiento");
                 });
 
             modelBuilder.Entity("Modelo.Participante", b =>
@@ -809,6 +829,8 @@ namespace Datos.Migrations
 
             modelBuilder.Entity("Modelo.Emprendimiento", b =>
                 {
+                    b.Navigation("Fotos");
+
                     b.Navigation("Participantes");
 
                     b.Navigation("Premicaciones");
