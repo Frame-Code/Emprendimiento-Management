@@ -27,6 +27,8 @@ namespace Modelo
         public Emprendimiento? Emprendimiento { get; set; }
         public int IdCargoParticipante { get; set; }
         public CargoParticipante CargoParticipante { get; set; } = null!;
+        public int IdFotoParticipante { get; set; }
+        public FotoParticipante FotoParticipante { get; set; } = null!;
 
     }
 }

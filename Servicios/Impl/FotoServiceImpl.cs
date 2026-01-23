@@ -15,17 +15,16 @@ namespace Servicios.Impl
         public async Task<List<FotoDto>> ListarFotosAsync()
         {
           
-            var fotos = await db.Fotos.AsNoTracking().ToListAsync();
-
-           
+            var fotos = await db.FotoEmprendimientos.AsNoTracking().ToListAsync();
+            
             return fotos
                 .Where(f => f.IdEmprendimiento > 0)
                 .GroupBy(f => f.IdEmprendimiento)
                 .Select(g => g.First())
                 .Select(f => new FotoDto
                 {
-                    Id = f.Id,
-                    ImageUrl = f.ImageUrl,
+                    Id = f.Foto.Id,
+                    ImageUrl = f.Foto.ImageUrl,
                     EmprendimientoId = f.IdEmprendimiento
                 }).ToList();
         }

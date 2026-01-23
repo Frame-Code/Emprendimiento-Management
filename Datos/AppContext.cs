@@ -25,14 +25,13 @@ namespace Datos
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<RolUsuario> RolUsuarios { get; set; }
         public DbSet<CargoParticipante> CargosParticipante { get; set; }
-        public DbSet<Cronograma> Cronogramas { get; set; }
-        public DbSet<Presentacion> Presentaciones { get; set; } 
         public DbSet<MenuOpciones> MenuOpciones { get; set; }
         public DbSet<Foto> Fotos { get; set; }
         public DbSet<Premiacion> Premiacion { get; set; }
         public DbSet<EmprendimientoPremiacion> EmprendimientoPremiacion { get; set; }
         public DbSet<VotoPremiacion> VotoPremiacion { get; set; }
-        public DbSet<ComentarioFoto> ComentariosFoto { get; set; }
+        public DbSet<FotoParticipante> FotoParticipantes { get; set; }
+        public DbSet<FotoEmprendimiento> FotoEmprendimientos { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -255,12 +254,6 @@ namespace Datos
                 b.ToTable("Fotos");
                 b.HasKey(x => x.Id);
                 b.Property(x => x.ImageUrl).IsRequired().HasMaxLength(6000);
-
-                // Relación Uno a Muchos: Un Emprendimiento tiene muchas Fotos
-                b.HasOne(x => x.Emprendimiento)
-                 .WithMany(x => x.Fotos)
-                 .HasForeignKey(x => x.IdEmprendimiento) // Aquí ya está bien definido
-                 .OnDelete(DeleteBehavior.Cascade); 
             });
 
             //Premiacion
@@ -304,8 +297,32 @@ namespace Datos
                     p.Property(x => x.FechaCreacion).IsRequired();
                 });
 
-               
-    }
+                //FotoEmprendimiento
+                modelBuilder.Entity<FotoEmprendimiento>(f =>
+                {
+                    f.HasKey(x => new { x.Id});
+                    f.HasOne(x => x.Foto)
+                        .WithOne()
+                        .HasForeignKey<Foto>(x => x.Id);
+                    f.HasOne(x => x.Emprendimiento)
+                        .WithMany(x => x.Fotos)
+                        .HasForeignKey(x => x.Id);
+                });
+
+                //FotoParticipante
+                modelBuilder.Entity<FotoParticipante>(f =>
+                {
+                    f.HasKey(x => new { x.Id, x.IdFoto, x.IdParticipante });
+                    f.HasOne(x => x.Foto)
+                        .WithOne()
+                        .HasForeignKey<Foto>(x => x.Id);
+
+                    f.HasOne(x => x.Participante)
+                        .WithOne()
+                        .HasForeignKey<Participante>(x => x.Id);
+                });
+                
+        }
 }
 }
 

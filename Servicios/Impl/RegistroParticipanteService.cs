@@ -41,29 +41,25 @@ namespace Servicios.Impl
                     return response;
                 }
 
+                var foto = new FotoParticipante
+                {
+                    Foto = new Foto
+                    {
+                        ImageUrl = dto.foto.Url,
+                        FileName = dto.foto.FileName,
+                        FileExtension = dto.foto.FileExtension    
+                    },
+                };
+                
                 var participante = new Participante
                 {
                     Nombres = dto.Nombres,
                     Apellidos = dto.Apellidos,
                     NumeroIdentificacion = dto.NoIdentificacion,
                     NumeroTelefono = dto.NoTelefono,
-                    IdCargoParticipante = dto.IdCargoParticipante
+                    IdCargoParticipante = dto.IdCargoParticipante,
+                    FotoParticipante = foto
                 };
-
-                if (dto.fotos != null && dto.fotos.Any())
-                {
-                    var f = dto.fotos.First();
-
-                    var foto = new Foto
-                    {
-                        ImageUrl = f.Url,
-                        FileName = f.FileName,
-                        FileExtension = f.FileExtension
-                    };
-                    await _fotoRepo.CreateAsync(foto);
-
-                    participante.IdFoto = foto.Id;
-                }
 
                 await _participanteRepo.CreateAsync(participante);
 

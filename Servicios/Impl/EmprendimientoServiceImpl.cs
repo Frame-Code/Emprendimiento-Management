@@ -58,11 +58,14 @@ namespace Servicios.Impl
 
            
             var fotos = dto.fotos
-                .Select(ft => new Foto
+                .Select(ft => new FotoEmprendimiento
                 {
-                    FileName = ft.FileName,
-                    FileExtension = ft.FileExtension,
-                    ImageUrl = ft.Url
+                    Foto = new Foto
+                    {
+                        FileName = ft.FileName,
+                        FileExtension = ft.FileExtension,
+                        ImageUrl = ft.Url    
+                    }
                 })
                 .ToList();
 

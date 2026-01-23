@@ -31,8 +31,6 @@ public static class ServicesExtensions
             services.AddScoped<IParticipanteRepository, ParticipanteRepositoryImpl>();
             services.AddScoped<ICargoParticipanteRepository, CargoParticipanteRepositoryImpl>();
             services.AddScoped<ICalendarioService, CalendarioServiceImpl>();
-            services.AddScoped<ICronogramaRepository, CronogramaRepositoryImpl>();
-            services.AddScoped<IPresentacionRepository, PresentacionRepositoryImpl>();
             services.AddScoped<IUsuarioRepository, UsuarioRepositoryImpl>();
             services.AddScoped<IRolUsuarioRepository, RolUsuarioRepositoryImpl>();
             services.AddScoped<IMenuOpcionesRepository, MenuOpcionesRepository>();
