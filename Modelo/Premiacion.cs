@@ -9,5 +9,5 @@ public class Premiacion
     public DateTime FechaFinPremiacion { get; set; }
     public DateTime FechaCreacion { get; set; } = DateTime.Now;
     public ICollection<EmprendimientoPremiacion> Emprendimientos = new List<EmprendimientoPremiacion>();
-    public ICollection<VotoPremiacion> Votos { get; set; } = new List<VotoPremiacion>();
+    public ICollection<Voto> Votos { get; set; } = new List<Voto>();
 }

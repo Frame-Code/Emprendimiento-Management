@@ -14,6 +14,7 @@ namespace Modelo
         public Emprendimiento Emprendimiento { get; set; } = null!;
         public int IdUsuario { get; set; }
         public Usuario Usuario { get; set; } = null!;
-        public ICollection<VotoPremiacion> Premiaciones { get; set; } = new List<VotoPremiacion>();
+        public int IdPremiacion { get; set; }
+        public Premiacion Premiacion { get; set; } = null!;
     }
 }

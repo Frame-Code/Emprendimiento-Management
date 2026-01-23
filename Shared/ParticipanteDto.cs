@@ -14,6 +14,6 @@ namespace Shared
         public string NoTelefono { get; set; } = null!;
         public int IdEmprendimiento { get; set; }
         public int IdCargoParticipante { get; set; }
-        public FileDto foto { get; set; }
+        public FileDto foto { get; set; } = null!;
     }
 }

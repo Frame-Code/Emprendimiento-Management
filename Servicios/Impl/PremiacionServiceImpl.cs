@@ -36,10 +36,10 @@ public class PremiacionServiceImpl(
                 Votos = p.Votos
                     .Select(v => new VotoDto
                     {
-                        FechaCreacion   = v.Voto.FechaCreacion,
-                        NombreEmprendimiento = v.Voto.Emprendimiento.Nombre,
-                        NombreUsuario = v.Voto.Usuario.NombreUsuario,
-                        NombreRol = v.Voto.Usuario.RolUsuario.Nombre
+                        FechaCreacion   = v.FechaCreacion,
+                        NombreEmprendimiento = v.Emprendimiento.Nombre,
+                        NombreUsuario = v.Usuario.NombreUsuario,
+                        NombreRol = v.Usuario.RolUsuario.Nombre
                     }).ToList()
             })
             .ToList();
@@ -53,7 +53,7 @@ public class PremiacionServiceImpl(
         
         var emprendimientoVotosDto = premiacion.Votos
             .ToList()
-            .GroupBy(p => p.Voto.Emprendimiento)
+            .GroupBy(p => p.Emprendimiento)
             .Select(p => new EmprendimientoVotoDto
             {
                 IdEmprendimiento = p.Key.Id,
@@ -101,10 +101,10 @@ public class PremiacionServiceImpl(
             Votos = premiacion.Votos
                 .Select(v => new VotoDto
                 {
-                    FechaCreacion = v.Voto.FechaCreacion,
-                    NombreEmprendimiento = v.Voto.Emprendimiento.Nombre,
-                    NombreUsuario = v.Voto.Usuario.NombreUsuario,
-                    NombreRol = v.Voto.Usuario.RolUsuario.Nombre
+                    FechaCreacion = v.FechaCreacion,
+                    NombreEmprendimiento = v.Emprendimiento.Nombre,
+                    NombreUsuario = v.Usuario.NombreUsuario,
+                    NombreRol = v.Usuario.RolUsuario.Nombre
                 }).ToList(),
             EmprendimientoVoto = emprendimientoVotosDto.ToList()
         };
@@ -225,10 +225,10 @@ public class PremiacionServiceImpl(
             Votos = premiacion.Votos
                 .Select(v => new VotoDto
                 {
-                    FechaCreacion = v.Voto.FechaCreacion,
-                    NombreEmprendimiento = v.Voto.Emprendimiento.Nombre,
-                    NombreUsuario = v.Voto.Usuario.NombreUsuario,
-                    NombreRol = v.Voto.Usuario.RolUsuario.Nombre
+                    FechaCreacion = v.FechaCreacion,
+                    NombreEmprendimiento = v.Emprendimiento.Nombre,
+                    NombreUsuario = v.Usuario.NombreUsuario,
+                    NombreRol = v.Usuario.RolUsuario.Nombre
                 }).ToList(),
         };
     }
@@ -266,15 +266,7 @@ public class PremiacionServiceImpl(
             IdEmprendimiento = idEmprendimiento,
             IdUsuario = user.Id
         };
-        
-        premiacion.Votos.Add(
-            new VotoPremiacion
-            {
-                FechaCreacion = DateTime.Now,
-                IdPremiacion = idPremiacion,
-                Premiacion = premiacion,
-                Voto = voto
-            });
+        premiacion.Votos.Add(voto);
 
         await repository.UpdatePremiacion(premiacion);
         return new ResponseDto()

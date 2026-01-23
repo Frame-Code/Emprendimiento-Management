@@ -55,8 +55,7 @@ namespace Servicios.Impl
                     Message = "Rubro o Facultad no encontrados"
                 };
             }
-
-           
+            
             var fotos = dto.fotos
                 .Select(ft => new FotoEmprendimiento
                 {
@@ -68,7 +67,7 @@ namespace Servicios.Impl
                     }
                 })
                 .ToList();
-
+    
             var emprendimiento = new Emprendimiento
             {
                 Nombre = dto.Nombre,
@@ -76,8 +75,8 @@ namespace Servicios.Impl
                 IdFacultad = facultad.Id,
                 IdRubroEmprendimiento = rubro.Id,
                 Fotos = fotos
-            };
-
+            }; 
+            
             await emprendimientoRepository.CreateAsync(emprendimiento);
 
             return new ResponseDto
