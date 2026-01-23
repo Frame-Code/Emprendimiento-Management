@@ -192,7 +192,7 @@ public class PremiacionServiceImpl(
             return new ResponseDto
             {
                 IsSuccess = false,
-                Message = "Se ha producido un error al generar el reporte, consulte a sistemas"
+                Message = "Se ha producido un error al generar el reporte, consulte a sistemas " + e.Message 
             };
         }
         

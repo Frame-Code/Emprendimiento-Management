@@ -1,55 +1,40 @@
-﻿using Datos;
-using System;
-using WinForms.Views.UserControls; 
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Modelo;
-using Microsoft.EntityFrameworkCore;
-using System.IO;
-using DbAppContext = Datos.AppContext;
-using Servicios.Interfaces; 
+﻿using Servicios.Interfaces;
 using Shared;
 
-
-namespace WinForms.Views
+namespace WinForms.Views.UserControls
 {
     public partial class GaleriaEmprendimientoView : UserControl
     {
         private readonly IComentarioService _comentarioService;
         private readonly IFotoService _fotoService;
-        private FotoDto _fotoSeleccionada;
-        private bool _isAlreadyLoading = false;
-
-        public string UsuarioActual { get; set; } = "estu";
-
+        private FotoDto? _fotoSeleccionada;
+        private bool _isAlreadyLoading;
+        private string _username;
+        
         public GaleriaEmprendimientoView(IFotoService fotoService, IComentarioService comentarioService)
         {
             InitializeComponent();
             _fotoService = fotoService;
             _comentarioService = comentarioService;
-
-
+            _username = "";
             flpFotos.WrapContents = true;
             flpFotos.AutoScroll = true;
-
-           
             flpFotos.HorizontalScroll.Enabled = false;
             flpFotos.HorizontalScroll.Visible = false;
             flpFotos.HorizontalScroll.Maximum = 0;
-
-
-            CargarFotos();
         }
 
-        private async void CargarFotos()
+        public async Task Init(string username)
         {
-            if (_isAlreadyLoading) return;
+            _username = username;
+            await CargarFotos();
+        }
+            
+        
+        private async Task CargarFotos()
+        {
+            if (_isAlreadyLoading) 
+                return;
 
             try
             {
@@ -57,8 +42,12 @@ namespace WinForms.Views
                 flpFotos.Controls.Clear();
 
                 var fotos = await _fotoService.ListarFotosAsync();
-                if (fotos == null) return;
-
+                if (fotos.Count == 0)
+                {
+                    MessageBox.Show(@"No se encontró fotos a mostrarse ");
+                    return;
+                }
+                
                 foreach (var foto in fotos)
                 {
                     var pbThumbnail = new PictureBox
@@ -73,9 +62,9 @@ namespace WinForms.Views
                     };
                     pbThumbnail.Click += async (s, e) =>
                     {
-                        var pic = (PictureBox)s;
+                        var pic = (PictureBox)s!;
 
-                        _fotoSeleccionada = (FotoDto)pic.Tag;
+                        _fotoSeleccionada = (FotoDto)pic.Tag!;
                         if (pbFoto != null) pbFoto.Image = pic.Image;
 
                         txtComentario.Clear();
@@ -91,7 +80,7 @@ namespace WinForms.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar fotos: " + ex.Message);
+                MessageBox.Show(@"Error al cargar fotos: " + ex.Message);
             }
             finally
             {
@@ -102,31 +91,30 @@ namespace WinForms.Views
         {
             if (_fotoSeleccionada == null)
             {
-                MessageBox.Show("Por favor, selecciona una foto primero.");
+                MessageBox.Show(@"Por favor, selecciona una foto primero.");
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(txtComentario.Text))
             {
-                MessageBox.Show("Escribe un comentario antes de guardar.");
+                MessageBox.Show(@"Escribe un comentario antes de guardar.");
                 return;
             }
 
             var respuesta = await _comentarioService.Save(
                 txtComentario.Text,
-                UsuarioActual,
+                _username,
                 _fotoSeleccionada.EmprendimientoId
             );
 
             if (respuesta.IsSuccess)
             {
                 txtComentario.Clear();
-               
                 await MostrarComentarios(_fotoSeleccionada.EmprendimientoId);
             }
             else
             {
-                MessageBox.Show("Error al guardar: " + respuesta.Message);
+                MessageBox.Show(@"Error al guardar: " + respuesta.Message);
             }
         }
 
@@ -135,14 +123,14 @@ namespace WinForms.Views
             dgvComentarios.DataSource = null;
             var comentarios = await _comentarioService.ListarComentariosAsync(idEmprendimiento);
 
-            if (comentarios == null || !comentarios.Any()) return;
-
-           
+            if (comentarios.Count == 0) 
+                return;
+            
             dgvComentarios.DataSource = comentarios.Select(c => new
             {  
                 Usuario = c.UsuarioNombre,
                 Emprendimiento = c.NombreEmprendimiento,
-                Facultad = c.Facultad,
+                c.Facultad,
                 Rubro = c.RubroNombre,
                 Mensaje = c.Texto,
                 Hora = c.HoraCreacion.ToString("HH:mm")
@@ -151,16 +139,11 @@ namespace WinForms.Views
             if (dgvComentarios.Columns.Count > 0)
             {
                 dgvComentarios.ScrollBars = ScrollBars.Both;
-
-               
-                dgvComentarios.Columns["Emprendimiento"].Width = 150;
-                dgvComentarios.Columns["Usuario"].Width = 100;
-                dgvComentarios.Columns["Facultad"].Width = 120;
-
-               
-                dgvComentarios.Columns["Mensaje"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dgvComentarios.Columns["Mensaje"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-
+                dgvComentarios.Columns["Emprendimiento"]!.Width = 150;
+                dgvComentarios.Columns["Usuario"]!.Width = 100;
+                dgvComentarios.Columns["Facultad"]!.Width = 120;
+                dgvComentarios.Columns["Mensaje"]!.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgvComentarios.Columns["Mensaje"]!.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                 dgvComentarios.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
                 dgvComentarios.ReadOnly = true;
             }

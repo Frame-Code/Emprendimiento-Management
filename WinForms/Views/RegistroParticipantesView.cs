@@ -95,13 +95,13 @@ namespace WinForms.Views
                 txtNdeIdentificacion.Text,
                 txtNdeTelefono.Text))
             {
-                MessageBox.Show("Completa los espacios en blanco.");
+                MessageBox.Show(@"Completa los espacios en blanco.");
                 return;
             }
 
             if (cmbCargo.SelectedIndex == -1 || cmbCargo.SelectedValue is not int idCargo)
             {
-                MessageBox.Show("Selecciona un cargo.");
+                MessageBox.Show(@"Selecciona un cargo.");
                 return;
             }
 
@@ -114,13 +114,13 @@ namespace WinForms.Views
 
                 if (!responseFile.IsSuccess)
                 {
-                    MessageBox.Show("Error copiando imagen: " + responseFile.Message);
+                    MessageBox.Show(@"Error copiando imagen: " + responseFile.Message);
                     return;
                 }
 
                 if (responseFile.Data is not FileDto fileDto)
                 {
-                    MessageBox.Show("Error procesando imagen");
+                    MessageBox.Show(@"Error procesando imagen");
                     return;
                 }
 

@@ -18,38 +18,27 @@ namespace WinForms.Views
 {
     public partial class MainEstudianteView : Form, IViewRolForm
     {
-        private readonly CalendariodeActividadesView _calendarioActividadesview;
+        private readonly CalendariodeActividadesView _calendarioActividadesView;
         private readonly ConsultaEmprendimientoUc _consultaUc;
-
-        private readonly IFotoService _fotoService;
-        private readonly IComentarioService _comentarioService;
-
+        private readonly GaleriaEmprendimientoView _galeriaEmprendimientoView;
         private readonly VotoEventoUc _votoEventoUc;
-
         public ViewType ViewType => ViewType.Estudiante;
-        public string UserName { get; set; } = "Usuario";
+        public string UserName { get; set; } = "";
         public IEnumerable<MenuOptionsDto> MenuOptionsDto { get; set; }
-        private FotoDto _fotoSeleccionada;
 
         public MainEstudianteView(ConsultaEmprendimientoUc consultaUc,
-               CalendariodeActividadesView calendarioActividadesview,
-               IComentarioService comentarioService,
-               IFotoService fotoService,
-
+               CalendariodeActividadesView calendarioActividadesView,
+               GaleriaEmprendimientoView galeriaEmprendimiento,
                VotoEventoUc votoEventoUc)
-
         {
             InitializeComponent();
             _consultaUc = consultaUc;
-            _calendarioActividadesview = calendarioActividadesview;
+            _calendarioActividadesView = calendarioActividadesView;
             _votoEventoUc = votoEventoUc;
+            MenuOptionsDto = new List<MenuOptionsDto>();
+            _galeriaEmprendimientoView = galeriaEmprendimiento;
             WindowState = FormWindowState.Maximized;
             Utils.ConfigureForm(this);
-            _comentarioService = comentarioService;
-            _fotoService = fotoService;
-
-
-
         }
 
         public void ShowForm(Action closeWindows)
@@ -77,11 +66,7 @@ namespace WinForms.Views
         {
             try
             {
-                pnlContenedorModuloEst.Controls.Clear();
-                CalendariodeActividadesView calendarioView = _calendarioActividadesview;
-                calendarioView.Dock = DockStyle.Fill;
-                pnlContenedorModuloEst.Controls.Add(calendarioView);
-                calendarioView.BringToFront();
+                NavegarA(_calendarioActividadesView);
             }
             catch (Exception ex)
             {
@@ -89,24 +74,16 @@ namespace WinForms.Views
             }
         }
 
-
-        private void btnGaleria_Click(object sender, EventArgs e)
+        private async void btnGaleria_Click(object sender, EventArgs e)
         {
             try
             {
-                pnlContenedorModuloEst.Controls.Clear();
-
-              
-                var vistaGaleria = new GaleriaEmprendimientoView(_fotoService, _comentarioService);
-
-                vistaGaleria.Dock = DockStyle.Fill;
-                vistaGaleria.Height = pnlContenedorModuloEst.Height;
-                pnlContenedorModuloEst.Controls.Add(vistaGaleria);
-                vistaGaleria.BringToFront();
+                await _galeriaEmprendimientoView.Init(UserName);
+                NavegarA(_galeriaEmprendimientoView);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar la galería: " + ex.Message);
+                MessageBox.Show(@"Error al cargar la galería: " + ex.Message);
             }
         }
 
@@ -121,19 +98,13 @@ namespace WinForms.Views
         {
             try
             {
-                pnlContenedorModuloEst.Controls.Clear();
-                CalendariodeActividadesView calendarioView = _calendarioActividadesview;
-                calendarioView.OcultarBotonCrear();
-                calendarioView.Dock = DockStyle.Fill;
-                pnlContenedorModuloEst.Controls.Add(calendarioView);
-                calendarioView.BringToFront();
+                NavegarA(_calendarioActividadesView);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(@"Error al cargar el modulo de calendario: " + ex.Message);
             }
         }
-
         
     }
 }

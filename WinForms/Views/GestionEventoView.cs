@@ -26,7 +26,7 @@ namespace WinForms.Views
 
 
 
-        private async void GestionEventoView_Load(object sender, EventArgs e)
+        private async void GestionEventoView_Load(object? sender, EventArgs e)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace WinForms.Views
                 FechaInicio = fechaInicio,
                 FechaFin = fechaFin,
                 Ubicacion = txtUbicacion.Text.Trim(),
-                IdEmprendimiento = (int)cmbEmprendimiento.SelectedValue
+                IdEmprendimiento = (int)(cmbEmprendimiento.SelectedValue ?? -1)
             };
 
             var result = await _controller.CrearEventoAsync(dto);

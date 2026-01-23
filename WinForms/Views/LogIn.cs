@@ -39,44 +39,38 @@ namespace WinForms.Views
             bool success = Utils.ValidateStrings(TxtUser.Text, TxtPassword.Text);
             if (!success)
             {
-                MessageBox.Show("Rellena los campos por favor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"Rellena los campos por favor", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             var responseDto = await _controller.ValidateCredentials(TxtUser.Text, TxtPassword.Text);
             if (!responseDto.IsSuccess)
             {
-                MessageBox.Show("Credenciales inválidas, vuelva a intentar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"Credenciales inválidas, vuelva a intentar", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             LoginUserDto? userDto = responseDto.Data as LoginUserDto;
             if (userDto == null)
             {
-                MessageBox.Show("Error al iniciar sesion, verifique con sistemas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"Error al iniciar sesion, verifique con sistemas", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             var response = await _controller.GetViewByRol(userDto.RoleCode);
-            if (!response.IsSuccess)
+            if (!response.IsSuccess || response.Data is not ViewType viewType)
             {
-                MessageBox.Show("Error al definir el rol de usuario: " + response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"Error al definir el rol de usuario: " + response.Message, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (response.Data is not ViewType viewType)
-            {
-                MessageBox.Show("Error al definir el rol de usuario: " + response.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            
             //Trae el formulario que coincide que tipo de vista que corresponde al rol del usuario logeado
             var mainForm = _serviceProvider.GetServices<IViewRolForm>()
                 .FirstOrDefault(type => type.ViewType == viewType);
             
             if (mainForm == null)
             {
-                MessageBox.Show("Error al cargar la vista principal", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"Error al cargar la vista principal", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             mainForm.UserName = userDto.Username;
@@ -92,7 +86,7 @@ namespace WinForms.Views
             var signUpForm = _serviceProvider.GetService<UserRegister>();
             if (signUpForm == null)
             {
-                MessageBox.Show("Error al cargar el formulario de registro", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"Error al cargar el formulario de registro", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
