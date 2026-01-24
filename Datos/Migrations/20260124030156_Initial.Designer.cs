@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datos.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20260124003558_Initial")]
+    [Migration("20260124030156_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -319,9 +319,6 @@ namespace Datos.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("IdFoto")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdFotoParticipante")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombres")
