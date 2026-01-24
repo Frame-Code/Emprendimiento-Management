@@ -40,6 +40,21 @@ namespace Datos.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Configs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ExecuteInit = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Configs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Eventos",
                 columns: table => new
                 {
@@ -556,6 +571,9 @@ namespace Datos.Migrations
 
             migrationBuilder.DropTable(
                 name: "Comentarios");
+
+            migrationBuilder.DropTable(
+                name: "Configs");
 
             migrationBuilder.DropTable(
                 name: "EmprendimientoPremiacion");

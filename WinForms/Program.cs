@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WinForms.Config;
+using WinForms.Config.Extensions;
 using WinForms.Views;
 using AppContext = Datos.AppContext;
 
@@ -11,7 +12,7 @@ internal static class Program
     private static IHost? AppHost { get; set; }
     
     [STAThread]
-    static void Main()
+    static async Task Main()
     {
         AppHost = Host.CreateDefaultBuilder()
             .InitializeServices()
@@ -26,7 +27,8 @@ internal static class Program
         QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
         using var scope = services.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<AppContext>();
-        db.Database.Migrate();
+        await db.Database.MigrateAsync();
+        await db.ExecuteSqlScriptAsync("Scripts\\init.sql");
         var view = scope.ServiceProvider.GetRequiredService<LogIn>();
         Application.Run(view);
     }

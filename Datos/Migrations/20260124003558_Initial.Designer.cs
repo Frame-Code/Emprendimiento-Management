@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datos.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20260123221848_Initial")]
+    [Migration("20260124003558_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -124,6 +124,28 @@ namespace Datos.Migrations
                     b.HasIndex("IdUsuario");
 
                     b.ToTable("Comentarios");
+                });
+
+            modelBuilder.Entity("Modelo.Config", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("ExecuteInit")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Configs");
                 });
 
             modelBuilder.Entity("Modelo.Emprendimiento", b =>

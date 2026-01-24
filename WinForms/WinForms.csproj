@@ -30,6 +30,12 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="Scripts\*.sql">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
     
     <ItemGroup>
       <Compile Update="Views\UserControls\CalendariodeActividadesView.cs">
