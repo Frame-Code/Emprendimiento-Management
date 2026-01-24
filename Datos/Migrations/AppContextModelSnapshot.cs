@@ -318,9 +318,6 @@ namespace Datos.Migrations
                     b.Property<int?>("IdFoto")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdFotoParticipante")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nombres")
                         .IsRequired()
                         .HasMaxLength(200)

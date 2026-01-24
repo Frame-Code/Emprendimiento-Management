@@ -332,8 +332,7 @@ namespace Datos.Migrations
                     NumeroTelefono = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     IdFoto = table.Column<int>(type: "int", nullable: true),
                     IdEmprendimiento = table.Column<int>(type: "int", nullable: true),
-                    IdCargoParticipante = table.Column<int>(type: "int", nullable: false),
-                    IdFotoParticipante = table.Column<int>(type: "int", nullable: false)
+                    IdCargoParticipante = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
