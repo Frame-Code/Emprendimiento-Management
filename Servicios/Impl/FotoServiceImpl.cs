@@ -12,15 +12,16 @@ namespace Servicios.Impl
 {
     public class FotoServiceImpl(Datos.AppContext db) : IFotoService
     {
-        public async Task<List<FotoDto>> ListarFotosAsync()
+        public async Task<List<FotoDto>> ListarFotosPorEmprendimientoAsync(int idEmprendimiento)
         {
           
-            var fotos = await db.FotoEmprendimientos.AsNoTracking().ToListAsync();
+            var fotos = await db.FotoEmprendimientos
+                .AsNoTracking()
+                .Include(x => x.Foto)
+                .Where(x => x.IdEmprendimiento == idEmprendimiento)
+                .ToListAsync();
             
             return fotos
-                .Where(f => f.IdEmprendimiento > 0)
-                .GroupBy(f => f.IdEmprendimiento)
-                .Select(g => g.First())
                 .Select(f => new FotoDto
                 {
                     Id = f.Foto.Id,

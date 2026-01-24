@@ -1,4 +1,5 @@
-﻿using Servicios.Interfaces;
+﻿using Controller;
+using Servicios.Interfaces;
 using Shared;
 
 namespace WinForms.Views.UserControls
@@ -7,15 +8,17 @@ namespace WinForms.Views.UserControls
     {
         private readonly IComentarioService _comentarioService;
         private readonly IFotoService _fotoService;
+        private readonly EmprendimientoController _emprendimientoController;
         private FotoDto? _fotoSeleccionada;
         private bool _isAlreadyLoading;
         private string _username;
         
-        public GaleriaEmprendimientoView(IFotoService fotoService, IComentarioService comentarioService)
+        public GaleriaEmprendimientoView(IFotoService fotoService, IComentarioService comentarioService, EmprendimientoController emprendimientoController)
         {
             InitializeComponent();
             _fotoService = fotoService;
             _comentarioService = comentarioService;
+            _emprendimientoController = emprendimientoController;
             _username = "";
             flpFotos.WrapContents = true;
             flpFotos.AutoScroll = true;
@@ -27,11 +30,10 @@ namespace WinForms.Views.UserControls
         public async Task Init(string username)
         {
             _username = username;
-            await CargarFotos();
         }
             
         
-        private async Task CargarFotos()
+        private async Task CargarFotosPorEmprendimiento(int idEmprendimiento)
         {
             if (_isAlreadyLoading) 
                 return;
@@ -41,10 +43,10 @@ namespace WinForms.Views.UserControls
                 _isAlreadyLoading = true;
                 flpFotos.Controls.Clear();
 
-                var fotos = await _fotoService.ListarFotosAsync();
+                var fotos = await _fotoService.ListarFotosPorEmprendimientoAsync(idEmprendimiento);
                 if (fotos.Count == 0)
                 {
-                    MessageBox.Show(@"No se encontró fotos a mostrarse ");
+                    MessageBox.Show(@"No se encontró fotos de este emprendimiento");
                     return;
                 }
                 
@@ -65,7 +67,7 @@ namespace WinForms.Views.UserControls
                         var pic = (PictureBox)s!;
 
                         _fotoSeleccionada = (FotoDto)pic.Tag!;
-                        if (pbFoto != null) pbFoto.Image = pic.Image;
+                        //if (pbFoto != null) pbFoto.Image = pic.Image;
 
                         txtComentario.Clear();
 
@@ -89,33 +91,6 @@ namespace WinForms.Views.UserControls
         }
         private async void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (_fotoSeleccionada == null)
-            {
-                MessageBox.Show(@"Por favor, selecciona una foto primero.");
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtComentario.Text))
-            {
-                MessageBox.Show(@"Escribe un comentario antes de guardar.");
-                return;
-            }
-
-            var respuesta = await _comentarioService.Save(
-                txtComentario.Text,
-                _username,
-                _fotoSeleccionada.EmprendimientoId
-            );
-
-            if (respuesta.IsSuccess)
-            {
-                txtComentario.Clear();
-                await MostrarComentarios(_fotoSeleccionada.EmprendimientoId);
-            }
-            else
-            {
-                MessageBox.Show(@"Error al guardar: " + respuesta.Message);
-            }
         }
 
         private async Task MostrarComentarios(int idEmprendimiento)
@@ -146,6 +121,57 @@ namespace WinForms.Views.UserControls
                 dgvComentarios.Columns["Mensaje"]!.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                 dgvComentarios.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
                 dgvComentarios.ReadOnly = true;
+            }
+        }
+
+        private async void GaleriaEmprendimientoView_Load(object sender, EventArgs e)
+        {
+            var emprendimientos = await _emprendimientoController.ListarEmprendimientosAsync();
+            CmbEmprendimientos.DropDownStyle = ComboBoxStyle.DropDownList;
+            CmbEmprendimientos.DataSource = emprendimientos;
+            CmbEmprendimientos.DisplayMember = "Nombre";
+            CmbEmprendimientos.ValueMember = "Id";
+        }
+
+        private async void BtnBuscarEmprendimiento_Click(object sender, EventArgs e)
+        {
+            if (CmbEmprendimientos.SelectedValue is not int idEmprendimiento)
+            {
+                MessageBox.Show(@"Selecciona un emprendimiento por favor");
+                return;
+            }
+
+            await CargarFotosPorEmprendimiento(idEmprendimiento);
+            await MostrarComentarios(idEmprendimiento);
+        }
+
+        private async void BtnComentar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtComentario.Text))
+            {
+                MessageBox.Show(@"Escribe un comentario antes de guardar.");
+                return;
+            }
+            if (CmbEmprendimientos.SelectedValue is not int idEmprendimiento)
+            {
+                MessageBox.Show(@"Selecciona un emprendimiento por favor");
+                return;
+            }
+
+            var respuesta = await _comentarioService.Save(
+                txtComentario.Text,
+                _username,
+                idEmprendimiento
+            );
+
+            if (respuesta.IsSuccess)
+            {
+                txtComentario.Clear();
+                await MostrarComentarios(idEmprendimiento);
+            }
+            else
+            {
+                MessageBox.Show(@"Error al guardar: " + respuesta.Message);
             }
         }
     }
