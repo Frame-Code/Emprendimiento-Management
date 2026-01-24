@@ -29,8 +29,8 @@ namespace Datos
         public DbSet<Foto> Fotos { get; set; }
         public DbSet<Premiacion> Premiacion { get; set; }
         public DbSet<EmprendimientoPremiacion> EmprendimientoPremiacion { get; set; }
-        //public DbSet<VotoPremiacion> VotoPremiacion { get; set; }
         public DbSet<FotoEmprendimiento> FotoEmprendimientos { get; set; }
+        public DbSet<Config> Configs { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -258,6 +258,12 @@ namespace Datos
                 b.HasKey(x => x.Id);
                 b.Property(x => x.ImageUrl).IsRequired().HasMaxLength(6000);
             });
+            
+            //Config
+            modelBuilder.Entity<Config>(b =>
+            {
+                b.HasKey(x => x.Id);
+            });
 
             //Premiacion
             modelBuilder.Entity<Premiacion>(p =>
@@ -285,22 +291,7 @@ namespace Datos
                         .WithMany(e => e.Emprendimientos)
                         .HasForeignKey(x => x.IdPremiacion);
                 });
-
-                //VotoPremiacion
-                /*
-                modelBuilder.Entity<VotoPremiacion>(p =>
-                {
-                    p.HasKey(x => new { x.IdVoto, x.IdPremiacion });
-                    p.HasOne(x => x.Voto)
-                        .WithMany(e => e.Premiaciones)
-                        .HasForeignKey(x => x.IdVoto);
-                    p.HasOne(x => x.Premiacion)
-                        .WithMany(e => e.Votos)
-                        .HasForeignKey(x => x.IdPremiacion);
-
-                    p.Property(x => x.FechaCreacion).IsRequired();
-                });*/
-
+                
                 //FotoEmprendimiento
                 modelBuilder.Entity<FotoEmprendimiento>(f =>
                 {
