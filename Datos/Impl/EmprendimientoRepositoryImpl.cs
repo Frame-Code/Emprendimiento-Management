@@ -39,8 +39,7 @@ namespace Datos.Impl
                 .Include(e => e.Facultad)
                 .Include(e => e.RubroEmprendimiento)
                 .Include(e => e.Fotos)
+                    .ThenInclude(e => e.Foto)
                 .FirstOrDefaultAsync(e => e.Id == id);
-
-
     }
 }

@@ -9,7 +9,7 @@ namespace Servicios.Interfaces
 {
     public interface IFotoService
     {
-        Task<List<FotoDto>> ListarFotosAsync(); 
+        Task<List<FotoDto>> ListarFotosPorEmprendimientoAsync(int idEmprendimiento); 
         Task<ResponseDto> GuardarComentarioAsync(ComentarioDto comentario);
     }
 }

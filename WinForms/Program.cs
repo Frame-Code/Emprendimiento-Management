@@ -12,7 +12,7 @@ internal static class Program
     private static IHost? AppHost { get; set; }
     
     [STAThread]
-    static async Task Main()
+    static void Main()
     {
         AppHost = Host.CreateDefaultBuilder()
             .InitializeServices()
@@ -22,13 +22,12 @@ internal static class Program
             throw new Exception("No se pudo iniciar el Host global de DI");
         
         ApplicationConfiguration.Initialize();
-
         var services = AppHost.Services;
         QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
         using var scope = services.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<AppContext>();
-        await db.Database.MigrateAsync();
-        await db.ExecuteSqlScriptAsync("Scripts\\init.sql");
+        db.Database.Migrate();
+        db.ExecuteSqlScriptAsync("Scripts\\init.sql");
         var view = scope.ServiceProvider.GetRequiredService<LogIn>();
         Application.Run(view);
     }
