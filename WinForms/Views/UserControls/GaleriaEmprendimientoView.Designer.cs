@@ -37,13 +37,14 @@
             BtnBuscarEmprendmiento = new System.Windows.Forms.Button();
             CmbEmprendimientos = new System.Windows.Forms.ComboBox();
             label3 = new System.Windows.Forms.Label();
+            BtnComentar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)dgvComentarios).BeginInit();
             SuspendLayout();
             // 
             // btnGuardar
             // 
             btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right));
-            btnGuardar.Location = new System.Drawing.Point(3287, 534);
+            btnGuardar.Location = new System.Drawing.Point(4470, 534);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new System.Drawing.Size(131, 34);
             btnGuardar.TabIndex = 2;
@@ -54,26 +55,26 @@
             // txtComentario
             // 
             txtComentario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right));
-            txtComentario.Location = new System.Drawing.Point(21, 476);
+            txtComentario.Location = new System.Drawing.Point(21, 431);
             txtComentario.Multiline = true;
             txtComentario.Name = "txtComentario";
-            txtComentario.PlaceholderText = "Agrega un comentario de este emprendimiento";
-            txtComentario.Size = new System.Drawing.Size(955, 37);
+            txtComentario.PlaceholderText = "Escribe un comentario de este emprendimiento";
+            txtComentario.Size = new System.Drawing.Size(1256, 37);
             txtComentario.TabIndex = 3;
             // 
             // flpFotos
             // 
             flpFotos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right));
             flpFotos.AutoScroll = true;
-            flpFotos.Location = new System.Drawing.Point(21, 96);
+            flpFotos.Location = new System.Drawing.Point(23, 93);
             flpFotos.Name = "flpFotos";
-            flpFotos.Size = new System.Drawing.Size(1258, 321);
+            flpFotos.Size = new System.Drawing.Size(1256, 321);
             flpFotos.TabIndex = 4;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(21, 441);
+            label1.Location = new System.Drawing.Point(21, 521);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(93, 20);
             label1.TabIndex = 6;
@@ -88,7 +89,7 @@
             dgvComentarios.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dgvComentarios.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             dgvComentarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvComentarios.Location = new System.Drawing.Point(23, 533);
+            dgvComentarios.Location = new System.Drawing.Point(21, 544);
             dgvComentarios.MultiSelect = false;
             dgvComentarios.Name = "dgvComentarios";
             dgvComentarios.ReadOnly = true;
@@ -96,7 +97,7 @@
             dgvComentarios.RowHeadersWidth = 51;
             dgvComentarios.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             dgvComentarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgvComentarios.Size = new System.Drawing.Size(1256, 246);
+            dgvComentarios.Size = new System.Drawing.Size(1258, 211);
             dgvComentarios.TabIndex = 7;
             // 
             // label2
@@ -104,7 +105,7 @@
             label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
-            label2.Location = new System.Drawing.Point(1606, 0);
+            label2.Location = new System.Drawing.Point(2197, 0);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(83, 27);
             label2.TabIndex = 8;
@@ -136,10 +137,21 @@
             label3.TabIndex = 12;
             label3.Text = "Selecciona un emprendimiento para ver su galeria de fotos";
             // 
+            // BtnComentar
+            // 
+            BtnComentar.Location = new System.Drawing.Point(224, 474);
+            BtnComentar.Name = "BtnComentar";
+            BtnComentar.Size = new System.Drawing.Size(861, 42);
+            BtnComentar.TabIndex = 13;
+            BtnComentar.Text = "Comentar";
+            BtnComentar.UseVisualStyleBackColor = true;
+            BtnComentar.Click += BtnComentar_Click;
+            // 
             // GaleriaEmprendimientoView
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(BtnComentar);
             Controls.Add(label3);
             Controls.Add(CmbEmprendimientos);
             Controls.Add(BtnBuscarEmprendmiento);
@@ -156,6 +168,8 @@
             ResumeLayout(false);
             PerformLayout();
         }
+
+        private System.Windows.Forms.Button BtnComentar;
 
         private System.Windows.Forms.Button BtnBuscarEmprendmiento;
         private System.Windows.Forms.ComboBox CmbEmprendimientos;

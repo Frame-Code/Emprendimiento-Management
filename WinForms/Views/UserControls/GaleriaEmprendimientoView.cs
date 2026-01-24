@@ -165,5 +165,10 @@ namespace WinForms.Views.UserControls
             await CargarFotosPorEmprendimiento(idEmprendimiento);
             await MostrarComentarios(idEmprendimiento);
         }
+
+        private void BtnComentar_Click(object sender, EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
