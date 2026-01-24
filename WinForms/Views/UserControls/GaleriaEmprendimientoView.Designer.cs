@@ -44,7 +44,7 @@
             // btnGuardar
             // 
             btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right));
-            btnGuardar.Location = new System.Drawing.Point(4470, 534);
+            btnGuardar.Location = new System.Drawing.Point(6836, 534);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new System.Drawing.Size(131, 34);
             btnGuardar.TabIndex = 2;
@@ -59,7 +59,7 @@
             txtComentario.Multiline = true;
             txtComentario.Name = "txtComentario";
             txtComentario.PlaceholderText = "Escribe un comentario de este emprendimiento";
-            txtComentario.Size = new System.Drawing.Size(1256, 37);
+            txtComentario.Size = new System.Drawing.Size(3622, 37);
             txtComentario.TabIndex = 3;
             // 
             // flpFotos
@@ -68,17 +68,18 @@
             flpFotos.AutoScroll = true;
             flpFotos.Location = new System.Drawing.Point(23, 93);
             flpFotos.Name = "flpFotos";
-            flpFotos.Size = new System.Drawing.Size(1256, 321);
+            flpFotos.Size = new System.Drawing.Size(3622, 321);
             flpFotos.TabIndex = 4;
             // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
             label1.Location = new System.Drawing.Point(21, 521);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(93, 20);
+            label1.Size = new System.Drawing.Size(560, 20);
             label1.TabIndex = 6;
-            label1.Text = "Comentarios";
+            label1.Text = ("Comentarios______________________________________________________________________" + "_______");
             // 
             // dgvComentarios
             // 
@@ -97,7 +98,7 @@
             dgvComentarios.RowHeadersWidth = 51;
             dgvComentarios.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             dgvComentarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgvComentarios.Size = new System.Drawing.Size(1258, 211);
+            dgvComentarios.Size = new System.Drawing.Size(3624, 1527);
             dgvComentarios.TabIndex = 7;
             // 
             // label2
@@ -105,7 +106,7 @@
             label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
-            label2.Location = new System.Drawing.Point(2197, 0);
+            label2.Location = new System.Drawing.Point(3379, 0);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(83, 27);
             label2.TabIndex = 8;
@@ -113,7 +114,7 @@
             // 
             // BtnBuscarEmprendmiento
             // 
-            BtnBuscarEmprendmiento.Location = new System.Drawing.Point(1100, 52);
+            BtnBuscarEmprendmiento.Location = new System.Drawing.Point(960, 52);
             BtnBuscarEmprendmiento.Name = "BtnBuscarEmprendmiento";
             BtnBuscarEmprendmiento.Size = new System.Drawing.Size(179, 35);
             BtnBuscarEmprendmiento.TabIndex = 10;

@@ -67,7 +67,7 @@ namespace WinForms.Views.UserControls
                         var pic = (PictureBox)s!;
 
                         _fotoSeleccionada = (FotoDto)pic.Tag!;
-                        if (pbFoto != null) pbFoto.Image = pic.Image;
+                        //if (pbFoto != null) pbFoto.Image = pic.Image;
 
                         txtComentario.Clear();
 
@@ -91,27 +91,6 @@ namespace WinForms.Views.UserControls
         }
         private async void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtComentario.Text))
-            {
-                MessageBox.Show(@"Escribe un comentario antes de guardar.");
-                return;
-            }
-
-            var respuesta = await _comentarioService.Save(
-                txtComentario.Text,
-                _username,
-                _fotoSeleccionada.EmprendimientoId
-            );
-
-            if (respuesta.IsSuccess)
-            {
-                txtComentario.Clear();
-                await MostrarComentarios(_fotoSeleccionada.EmprendimientoId);
-            }
-            else
-            {
-                MessageBox.Show(@"Error al guardar: " + respuesta.Message);
-            }
         }
 
         private async Task MostrarComentarios(int idEmprendimiento)
@@ -166,9 +145,34 @@ namespace WinForms.Views.UserControls
             await MostrarComentarios(idEmprendimiento);
         }
 
-        private void BtnComentar_Click(object sender, EventArgs e)
+        private async void BtnComentar_Click(object sender, EventArgs e)
         {
-            throw new System.NotImplementedException();
+            if (string.IsNullOrWhiteSpace(txtComentario.Text))
+            {
+                MessageBox.Show(@"Escribe un comentario antes de guardar.");
+                return;
+            }
+            if (CmbEmprendimientos.SelectedValue is not int idEmprendimiento)
+            {
+                MessageBox.Show(@"Selecciona un emprendimiento por favor");
+                return;
+            }
+
+            var respuesta = await _comentarioService.Save(
+                txtComentario.Text,
+                _username,
+                idEmprendimiento
+            );
+
+            if (respuesta.IsSuccess)
+            {
+                txtComentario.Clear();
+                await MostrarComentarios(idEmprendimiento);
+            }
+            else
+            {
+                MessageBox.Show(@"Error al guardar: " + respuesta.Message);
+            }
         }
     }
 }
