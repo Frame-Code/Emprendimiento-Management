@@ -28,7 +28,6 @@ internal static class Program
         var db = scope.ServiceProvider.GetRequiredService<AppContext>();
         db.Database.Migrate();
         db.ExecuteSqlScriptAsync("Scripts\\init.sql");
-        db.ExecuteSqlScriptAsync("Scripts\\init.sql");
         var view = scope.ServiceProvider.GetRequiredService<LogIn>();
         Application.Run(view);
     }
