@@ -10,10 +10,14 @@ using System.Threading.Tasks;
 
 namespace Servicios.Impl
 {
+    /// <summary>
+    /// Implementación del servicio de registro de usuarios.
+    /// </summary>
     public class SignUpServiceImpl(
         IUsuarioRepository usuarioRepository, 
         IRolUsuarioRepository rolUsuarioRepository) : ISignUpService
     {
+        /// <inheritdoc />
         public async Task<bool> IsAvailableUsername(string username)
         {
             var allUsers = await usuarioRepository.ListarAsync();
@@ -21,6 +25,7 @@ namespace Servicios.Impl
                 string.Equals(user.NombreUsuario, username.Trim(), StringComparison.CurrentCultureIgnoreCase));
         }
 
+        /// <inheritdoc />
         public async Task<ResponseDto> RegisterUser(string username, string plainPassword, string roleCode)
         {
             var rol = await rolUsuarioRepository.GetRolByCode(roleCode);

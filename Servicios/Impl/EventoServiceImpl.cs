@@ -11,6 +11,10 @@ using Servicios.Interfaces;
 
 namespace Servicios.Impl
 {
+    /// <summary>
+    /// Implementación de <see cref="IEventoService"/> para creación y consulta de eventos,
+    /// así como utilidades para listar expositores.
+    /// </summary>
     public class EventoServiceImpl : IEventoService
     {
         private readonly IEventoRepository _eventoRepository;
@@ -27,6 +31,11 @@ namespace Servicios.Impl
             _emprendimientoRepository = emprendimientoRepository;
         }
 
+        /// <summary>
+        /// Crea un evento y registra su primera presentación en la agenda.
+        /// </summary>
+        /// <param name="dto">Datos del evento y el emprendimiento expositor.</param>
+        /// <returns>Resultado de la operación.</returns>
         public async Task<ResponseDto> CrearEventoAsync(EventoDto dto)
         {
             var evento = new Evento
@@ -56,6 +65,10 @@ namespace Servicios.Impl
             };
         }
 
+        /// <summary>
+        /// Lista los emprendimientos disponibles como expositores.
+        /// </summary>
+        /// <returns>Listado de expositores.</returns>
         public async Task<List<ExpositorDto>> ListarExpositoresAsync()
         {
             var emprendimientos = await _emprendimientoRepository.ListarAsync();
@@ -67,6 +80,10 @@ namespace Servicios.Impl
             }).ToList();
         }
 
+        /// <summary>
+        /// Obtiene el listado de eventos.
+        /// </summary>
+        /// <returns>Listado de eventos en formato DTO.</returns>
         public async Task<List<EventoDto>> ListarEventosAsync()
         {
             var lista = await _eventoRepository.ListarAsync();
@@ -81,6 +98,10 @@ namespace Servicios.Impl
                 Ubicacion = e.Ubicacion?? "-"
             }).ToList();
         }
+        /// <summary>
+        /// Lista emprendimientos (alias de <see cref="ListarExpositoresAsync"/>).
+        /// </summary>
+        /// <returns>Listado de emprendimientos.</returns>
         public async Task<List<ExpositorDto>> ListarEmprendimientosAsync()
         {
             var emprendimientos = await _emprendimientoRepository.ListarAsync();

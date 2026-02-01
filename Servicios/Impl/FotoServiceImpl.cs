@@ -10,8 +10,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Servicios.Impl
 {
+    /// <summary>
+    /// Implementación del servicio de fotos y comentarios para emprendimientos.
+    /// </summary>
     public class FotoServiceImpl(Datos.AppContext db) : IFotoService
     {
+        /// <inheritdoc />
         public async Task<List<FotoDto>> ListarFotosPorEmprendimientoAsync(int idEmprendimiento)
         {
           
@@ -30,6 +34,7 @@ namespace Servicios.Impl
                 }).ToList();
         }
 
+        /// <inheritdoc />
         public async Task<ResponseDto> GuardarComentarioAsync(ComentarioDto comentario)
         {
             try

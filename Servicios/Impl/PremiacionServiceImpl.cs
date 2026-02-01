@@ -7,6 +7,10 @@ using Shared;
 
 namespace Servicios.Impl;
 
+/// <summary>
+/// Implementación de <see cref="IPremiacionService"/>: consulta de premiaciones, registro de votos
+/// y generación de reportes.
+/// </summary>
 public class PremiacionServiceImpl(
     IPremiacionRepository repository, 
     IEmprendimientoRepository emprendimientoRepository,
@@ -15,6 +19,7 @@ public class PremiacionServiceImpl(
     IServiceProvider serviceProvider
     ) : IPremiacionService
 {
+    /// <inheritdoc />
     public async Task<List<PremiacionDto>> ListarPremiacionesAsync()
     {
         var premiaciones = await repository.ListarAsync();
@@ -45,6 +50,7 @@ public class PremiacionServiceImpl(
             .ToList();
     }
 
+    /// <inheritdoc />
     public async Task<PremiacionDto?> ObtenerPremiacionPorIdAsync(int id)
     {
         var premiacion = await repository.ObtenerPorIdAsync(id);
@@ -152,6 +158,7 @@ public class PremiacionServiceImpl(
     }
 
 
+    /// <inheritdoc />
     public async Task<ResponseDto> GenerateReport(string reportName, TypeReport typeReport, int idPremiacion)
     {
         var premiacion = await ObtenerPremiacionPorIdAsync(idPremiacion);
@@ -200,6 +207,7 @@ public class PremiacionServiceImpl(
 
 
 
+    /// <inheritdoc />
     public async Task<PremiacionDto?> ObtenerPremiacionDisponible()
     {
         var premiacion = await repository.ObtenerPremiacionDisponible();
@@ -233,6 +241,7 @@ public class PremiacionServiceImpl(
         };
     }
 
+    /// <inheritdoc />
     public async Task<ResponseDto> Votar(int idPremiacion, int idEmprendimiento, string username)
     {
         var premiacion = await repository.ObtenerPorIdAsync(idPremiacion);

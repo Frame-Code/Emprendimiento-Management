@@ -9,8 +9,12 @@ using System.Threading.Tasks;
 
 namespace Servicios.Impl
 {
+    /// <summary>
+    /// Implementación del servicio de roles de usuario.
+    /// </summary>
     public class RolUsuarioServiceImpl(IRolUsuarioRepository repository) : IRolUsuarioService
     {
+        /// <inheritdoc />
         public async Task<RolUsuario?> GetRolByCode(string code) =>
             await repository.GetRolByCode(code);
     }

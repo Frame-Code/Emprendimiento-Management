@@ -9,8 +9,12 @@ using System.Threading.Tasks;
 
 namespace Servicios.Impl
 {
+    /// <summary>
+    /// Implementación de autenticación basada en comparación de contraseña en texto plano.
+    /// </summary>
     public class LogInServiceImpl(IUsuarioRepository usuarioRepository) : ILogInService
     {
+        /// <inheritdoc />
         public async Task<LoginUserDto> GetUserByUsername(string username)
         {
             var user = await usuarioRepository.GetByUserName(username);
@@ -25,6 +29,11 @@ namespace Servicios.Impl
             };
         }
 
+        /// <summary>
+        /// Valida credenciales realizando comparación no sensible a mayúsculas/minúsculas.
+        /// Nota: utiliza contraseña en texto plano; no apto para producción sin hashing.
+        /// </summary>
+        /// <inheritdoc />
         public async Task<bool> Validate(string username, string plainPassword)
         {
             //SOLO REVISA CONTRASEÑA PLANA, NO HASHEADA
