@@ -12,14 +12,19 @@ using System.Threading.Tasks;
 
 namespace Servicios.Impl
 {
+    /// <summary>
+    /// Implementación del servicio de emprendimientos: registro, consultas y catálogos.
+    /// </summary>
     public class EmprendimientoServiceImpl(
         IEmprendimientoRepository emprendimientoRepository,
         IRubroEmprendimientoRepository rubroEmprendimientoRepository,
         IFacultadRepository facultadRepository) : IEmprendimientoService
     {
+        /// <inheritdoc />
         public async Task DeleteByIdAsync(int id) =>
             await emprendimientoRepository.DeleteByIdAsync(id);
 
+        /// <inheritdoc />
         public async Task<List<EmprendimientoDto>> ListarEmprendimientosAsync()
         {
             var emprendimientos = await emprendimientoRepository.ListarAsync();
@@ -36,12 +41,15 @@ namespace Servicios.Impl
                 .ToList();
         }
 
+        /// <inheritdoc />
         public async Task<List<Facultad>> ListarFacultadesAsync() =>
             await facultadRepository.ListarAsync();
 
+        /// <inheritdoc />
         public async Task<List<RubroEmprendimiento>> ListarRubrosAsync() =>
             await rubroEmprendimientoRepository.ListarAsync();
 
+        /// <inheritdoc />
         public async Task<ResponseDto> RegistrarEmprendimientoAsync(RegistroEmprendimientoDto dto)
         {
             var rubro = await rubroEmprendimientoRepository.ObtenerPorIdAsync(dto.IdRubroEmprendimiento);
@@ -86,12 +94,14 @@ namespace Servicios.Impl
             };
         }
 
+        /// <inheritdoc />
         public async Task<List<Emprendimiento>> ListarEmprendimientosEstudiantesAsync()
         {
            
             return await emprendimientoRepository.ListarAsync();
         }
 
+        /// <inheritdoc />
         public async Task<Emprendimiento?> ObtenerPorIdAsync(int id)
         {
            

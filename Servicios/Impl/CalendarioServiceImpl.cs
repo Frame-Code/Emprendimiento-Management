@@ -12,11 +12,15 @@ using System.Threading.Tasks;
 
 namespace Servicios.Impl
 {
+    /// <summary>
+    /// Implementación del servicio de calendario de actividades.
+    /// </summary>
     public class CalendarioServiceImpl(
         IAgendaPresentacionRepository agendaPresentacionRepository,
         IFacultadRepository facultadRepository
     ) : ICalendarioService
     {
+        /// <inheritdoc />
         public async Task<List<CalendariodeActividadesDto>> ListarActividadesAsync()
         {
             var presentaciones = await agendaPresentacionRepository.ListarAsync();
@@ -30,6 +34,7 @@ namespace Servicios.Impl
             }).ToList();
         }
 
+        /// <inheritdoc />
         public async Task<List<CalendariodeActividadesDto>> FiltrarPorFacultadAsync(int idFacultad)
         {
             var presentaciones = await agendaPresentacionRepository.ListarAsync();
@@ -45,11 +50,13 @@ namespace Servicios.Impl
                 }).ToList();
         }
 
+        /// <inheritdoc />
         public async Task<List<Facultad>> ListarFacultadesAsync()
         {
             return await facultadRepository.ListarAsync();
         }
 
+        /// <inheritdoc />
         public async Task<List<CalendariodeActividadesDto>> FiltrarPorFechaAsync(DateTime fecha)
         {
             var presentaciones = await agendaPresentacionRepository.ListarAsync();

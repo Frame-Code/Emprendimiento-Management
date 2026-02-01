@@ -4,6 +4,9 @@ using Shared;
 
 namespace Servicios.Impl;
 
+/// <summary>
+/// Implementación de utilidades de archivos: lectura de metadatos y copia segura al almacén local.
+/// </summary>
 public class FileServiceImpl : IFileService
 {
     private readonly string _imagesRoot;
@@ -16,6 +19,7 @@ public class FileServiceImpl : IFileService
         _imagesRoot = Path.Combine(appRoot, "Images");
     }
 
+    /// <inheritdoc />
     public ResponseDto GetFileInfo(string path)
     {
         if (string.IsNullOrWhiteSpace(path))
@@ -46,6 +50,7 @@ public class FileServiceImpl : IFileService
         };
     }
 
+    /// <inheritdoc />
     public ResponseDto CopyFile(string path)
     {
         if (string.IsNullOrWhiteSpace(path))

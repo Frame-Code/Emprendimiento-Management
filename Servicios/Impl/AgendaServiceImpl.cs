@@ -5,6 +5,9 @@ using Shared;
 
 namespace Servicios.Impl
 {
+    /// <summary>
+    /// Implementación del servicio de agenda de presentaciones.
+    /// </summary>
     public class AgendaServiceImpl : IAgendaService
     {
         private readonly IAgendaPresentacionRepository _agendaRepository;
@@ -19,6 +22,7 @@ namespace Servicios.Impl
         }
 
     
+        /// <inheritdoc />
         public async Task<ResponseDto> RegistrarAgendaPresentacionAsync(AgendaPresentacionDto dto)
         {
            
@@ -41,6 +45,7 @@ namespace Servicios.Impl
         }
 
        
+        /// <inheritdoc />
         public async Task<List<AgendaPresentacionDto>> ListarAgendaPorEventoAsync(int idEvento)
         {
             var lista = await _agendaRepository.ListarPorEventoAsync(idEvento);
@@ -56,6 +61,7 @@ namespace Servicios.Impl
                 .ToList();
         }
 
+        /// <inheritdoc />
         public async Task<List<ExpositorDto>> ListarExpositoresAsync()
         {
             var emprendimientos = await _emprendimientoRepository.ListarAsync();

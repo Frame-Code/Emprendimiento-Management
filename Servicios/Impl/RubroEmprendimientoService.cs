@@ -5,11 +5,16 @@ using Shared;
 
 namespace Servicios.Impl;
 
+/// <summary>
+/// Implementación del servicio de rubros de emprendimiento.
+/// </summary>
 public class RubroEmprendimientoService(IRubroEmprendimientoRepository repository) : IRubroEmprendimientoService
 {
+    /// <inheritdoc />
     public async Task<List<RubroEmprendimiento>> ListarAsync() =>
         await repository.ListarAsync();
 
+    /// <inheritdoc />
     public async Task CreateAsync(RubroEmprendimientoDto emprendimiento)
     {
         var rubro = new RubroEmprendimiento

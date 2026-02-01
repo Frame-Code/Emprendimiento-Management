@@ -9,6 +9,9 @@ using Servicios.Interfaces;
 namespace Servicios.Impl
 {
 
+    /// <summary>
+    /// Implementación del servicio de registro de participantes.
+    /// </summary>
     public class RegistroParticipanteService : IRegistroParticipanteService
     {
 
@@ -23,6 +26,7 @@ namespace Servicios.Impl
             _fotoRepo = fotoRepo;
         }
 
+        /// <inheritdoc />
         public async Task<ResponseDto> RegistrarNuevoParticipante(ParticipanteDto dto)
         {
             var response = new ResponseDto();
@@ -69,11 +73,13 @@ namespace Servicios.Impl
             return response;
         }
 
+        /// <inheritdoc />
         public async Task<List<Participante>> ObtenerTodos()
         {          
             return await _participanteRepo.ListarAsync();
         }
 
+        /// <inheritdoc />
         public async Task<List<CargoParticipante>> ObtenerListaCargos()
         {
             return await _cargoRepo.ListarAsync();

@@ -12,12 +12,16 @@ using AppContext = Datos.AppContext;
 
 namespace Servicios.Impl
 {
+    /// <summary>
+    /// Implementación del servicio de participantes: asociación a emprendimientos y listados.
+    /// </summary>
     public class ParticipanteServiceImpl(
         IParticipanteRepository participanteRepository,
         ICargoParticipanteRepository cargoParticipanteRepository,
         IEmprendimientoRepository emprendimientoRepository
         ) : IParticipanteService
     {
+        /// <inheritdoc />
         public async Task<ResponseDto> AgregarParticipante(int idParticipante, int idEmprendimiento)
         {
             var participantes = await participanteRepository.ListarAsync();
@@ -51,9 +55,11 @@ namespace Servicios.Impl
             };
         }
 
+        /// <inheritdoc />
         public async Task<List<CargoParticipante>> ListarCargos() =>
             await cargoParticipanteRepository.ListarAsync();
 
+        /// <inheritdoc />
         public async Task<List<VerParticipantesDto>> ListarParticipantes()
         {
             var list = await participanteRepository.ListarAsync();
@@ -69,6 +75,7 @@ namespace Servicios.Impl
             return participantes.ToList();
         }
 
+        /// <inheritdoc />
         public async Task<List<string>> ObtenerNombresParticipantes(int idEmprendimiento)
         {
             var list = await participanteRepository.ListarAsync();

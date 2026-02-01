@@ -6,18 +6,23 @@ using Shared;
 
 namespace Servicios.Impl;
 
+/// <summary>
+/// Implementación del servicio de comentarios: creación y consulta por emprendimiento.
+/// </summary>
 public class ComentarioServiceImpl(
     IComentarioRepository repository,
     IUsuarioRepository usuarioRepository,
     Datos.AppContext db)
     : IComentarioService
 {
+    /// <inheritdoc />
     public async Task<ResponseDto> Save(Comentario comentario)
     {
         await repository.CreateAsync(comentario);
         return new ResponseDto { IsSuccess = true, Message = "Comentario creado" };
     }
 
+    /// <inheritdoc />
     public async Task<ResponseDto> Save(string content, string username, int idEmprendimiento)
     {
         var usuario = await usuarioRepository.GetByUserName(username);
@@ -39,6 +44,7 @@ public class ComentarioServiceImpl(
         return new ResponseDto { IsSuccess = true };
     }
 
+    /// <inheritdoc />
     public async Task<List<ComentarioDto>> ListarComentariosAsync(int idEmprendimiento)
     {
         return await db.Comentarios
