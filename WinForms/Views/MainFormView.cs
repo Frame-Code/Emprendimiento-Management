@@ -83,6 +83,7 @@ public partial class MainFormView : Form, IViewRolForm
     {
         try
         {
+            _calendarioActividadesView.Init(true);
             CargarModulo(_calendarioActividadesView);
         }
         catch (Exception ex)

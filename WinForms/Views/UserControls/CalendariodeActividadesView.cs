@@ -23,9 +23,10 @@ namespace WinForms.Views.UserControls
             await CargarDatosAsync();
         }
 
+        public void Init(bool habilitarBotonCrear) => BtnCrearEvento.Visible = habilitarBotonCrear;
+
         private async Task CargarDatosAsync()
         {
-            
             var facultades = await _controller.ListarFacultadesAsync();
 
             var opcionDefault = new Modelo.Facultad();

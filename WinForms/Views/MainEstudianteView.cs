@@ -98,6 +98,7 @@ namespace WinForms.Views
         {
             try
             {
+                _calendarioActividadesView.Init(false);
                 NavegarA(_calendarioActividadesView);
             }
             catch (Exception ex)
